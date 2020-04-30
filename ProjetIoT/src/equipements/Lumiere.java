@@ -4,7 +4,7 @@ import main.Equipement;
 
 public class Lumiere extends Equipement {
 
-	protected Lumiere(boolean etatCourant, String nom) {
+	public Lumiere(String nom, boolean etatCourant) {
 		super(etatCourant, nom);
 	}
 

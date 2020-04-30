@@ -1,11 +1,12 @@
 package main;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Maison {
 
 	private String nom;
-	protected static List<Piece> pieces;
+	protected static List<Piece> pieces = new LinkedList<Piece>();
 
 	public Maison(String nom) {
 		this.setNom(nom);
@@ -38,7 +39,7 @@ public class Maison {
 		this.nom = nom;
 	}
 
-	public static List<Piece> getPieces() {
+	public List<Piece> getPieces() {
 		return pieces;
 	}
 
@@ -48,9 +49,7 @@ public class Maison {
 	
 	public static void main(String[] args) {
 		Maison house = new Maison("MyHouse");
-		Piece salon = new Piece("Salon");
 		Piece cuisine = new Piece("Cuisine");
-		house.ajouterPiece(salon);
 		house.ajouterPiece(cuisine);
 		System.out.println(house.toString());
 	}
