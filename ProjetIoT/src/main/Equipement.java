@@ -2,18 +2,18 @@ package main;
 
 public abstract class Equipement {
 
-	private boolean etatCourant;
-	private String nom;
+	protected boolean etatCourant;
+	protected String nom;
 
 	protected Equipement(boolean etatCourant, String nom) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
 	}
-	
+
 	public void setEtatCourant(boolean etatCourant) {
 		this.etatCourant = etatCourant;
 	}
-	
+
 	public boolean isEtatCourant() {
 		return etatCourant;
 	}
@@ -27,13 +27,13 @@ public abstract class Equipement {
 	}
 
 	public void allumer() {
-		if(!isEtatCourant()) {
+		if (!isEtatCourant()) {
 			setEtatCourant(true);
 		}
 	}
 
 	public void eteindre() {
-		if(isEtatCourant()) {
+		if (isEtatCourant()) {
 			setEtatCourant(false);
 		}
 	}
