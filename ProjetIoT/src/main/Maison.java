@@ -5,10 +5,11 @@ import java.util.List;
 public class Maison {
 
 	private String nom;
-	private List<Piece> pieces;
+	protected static List<Piece> pieces;
 
 	public Maison(String nom) {
 		this.setNom(nom);
+		ajouterPiece(new Piece("Salon")); // Créé un salon par défaut si on ne précise aucune pièce
 	}
 
 	public Maison(String nom, Piece piece) {
@@ -22,16 +23,11 @@ public class Maison {
 	}
 
 	public void ajouterPiece(Piece p) {
-		pieces.add(p);
+		getPieces().add(p);
 	}
 
 	public String toString() {
 		return getNom() + " : " + getPieces();
-	}
-
-	public static void main(String[] args) {
-		Maison house = new Maison("MyHouse");
-		System.out.println(house.toString());
 	}
 
 	public String getNom() {
@@ -42,12 +38,21 @@ public class Maison {
 		this.nom = nom;
 	}
 
-	public List<Piece> getPieces() {
+	public static List<Piece> getPieces() {
 		return pieces;
 	}
 
 	public void setPieces(List<Piece> pieces) {
-		this.pieces = pieces;
+		Maison.pieces = pieces;
+	}
+	
+	public static void main(String[] args) {
+		Maison house = new Maison("MyHouse");
+		Piece salon = new Piece("Salon");
+		Piece cuisine = new Piece("Cuisine");
+		house.ajouterPiece(salon);
+		house.ajouterPiece(cuisine);
+		System.out.println(house.toString());
 	}
 
 }

@@ -24,7 +24,7 @@ public class Piece {
 	}
 
 	public String toString() {
-		return nom + " : " + getPiecesAdj();
+		return nom;
 	}
 
 	public String getNom() {
