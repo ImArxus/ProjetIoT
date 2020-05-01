@@ -1,6 +1,5 @@
 package main;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,10 +26,10 @@ public class Main {
 		Piece cuisine = new Piece("Cuisine");
 		maison.ajouterPiece(cuisine);
 		getPosition().ajouterPieceAdj(cuisine);
-		Equipement lumiere = new Lumiere("Lumière1", false); // PROBLEME : ajoute Lumière1 dans toutes les pièces
+		Equipement lumiere = new Lumiere("Lumière1", false);
 		cuisine.ajouterEquipement(lumiere);
-
-		while (!stop) {
+		
+		while (!stop) { // Boucle d'intervention utilisateur
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println("-> Pour changer de pièce, tapez 'move'");

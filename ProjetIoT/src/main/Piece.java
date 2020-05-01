@@ -7,7 +7,7 @@ public class Piece {
 
 	private String nom;
 	private List<Piece> piecesAdj = new LinkedList<Piece>();
-	private static List<Equipement> equipements = new LinkedList<Equipement>();
+	private List<Equipement> equipements = new LinkedList<Equipement>();
 
 	public Piece(String nom) {
 		this.setNom(nom);
@@ -57,7 +57,7 @@ public class Piece {
 	}
 
 	public void setEquipements(List<Equipement> equipements) {
-		Piece.equipements = equipements;
+		this.equipements = equipements;
 	}
 	
 	public static void main(String[] args) {
