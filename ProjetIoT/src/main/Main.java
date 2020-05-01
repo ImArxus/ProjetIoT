@@ -25,7 +25,7 @@ public class Main {
 		// Créé une cuisine adjacente à notre position avec une lumière
 		Piece cuisine = new Piece("Cuisine");
 		maison.ajouterPiece(cuisine);
-		getPosition().ajouterPieceAdj(cuisine);
+		maison.sontAdjacents(getPosition(), cuisine);
 		Equipement lumiere = new Lumiere("Lumière1", false);
 		cuisine.ajouterEquipement(lumiere);
 		

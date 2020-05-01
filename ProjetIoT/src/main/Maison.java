@@ -26,6 +26,11 @@ public class Maison {
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
 	}
+	
+	public void sontAdjacents(Piece piece1, Piece piece2) {
+		piece1.ajouterPieceAdj(piece2);
+		piece2.ajouterPieceAdj(piece1);
+	}
 
 	public String toString() {
 		return getNom() + " : " + getPieces();
