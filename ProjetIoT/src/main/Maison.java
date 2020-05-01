@@ -26,7 +26,7 @@ public class Maison {
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
 	}
-	
+
 	public void sontAdjacents(Piece piece1, Piece piece2) {
 		piece1.ajouterPieceAdj(piece2);
 		piece2.ajouterPieceAdj(piece1);
@@ -51,7 +51,7 @@ public class Maison {
 	public void setPieces(List<Piece> pieces) {
 		Maison.pieces = pieces;
 	}
-	
+
 	public static void main(String[] args) {
 		Maison house = new Maison("MyHouse");
 		Piece cuisine = new Piece("Cuisine");

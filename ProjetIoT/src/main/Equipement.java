@@ -10,9 +10,13 @@ public abstract class Equipement {
 		setEtatCourant(false);
 	}
 
-	protected Equipement(boolean etatCourant, String nom) {
+	protected Equipement(String nom, boolean etatCourant) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
+	}
+	
+	public String actionsPossibles() {
+		return "-> Allumer\n-> Eteindre";
 	}
 
 	public String toString() {

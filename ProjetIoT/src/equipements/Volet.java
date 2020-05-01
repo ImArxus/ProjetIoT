@@ -7,8 +7,13 @@ public class Volet extends Equipement {
 	private double position;
 
 	public Volet(String nom, boolean etatCourant, double position) {
-		super(etatCourant, nom);
+		super(nom, etatCourant);
 		this.setPosition(position);
+	}
+
+	@Override
+	public String actionsPossibles() {
+		return super.actionsPossibles() + "\n-> Monter volet\n-> Descendre volet\n-> Choisir position";
 	}
 
 	public double getPosition() {
@@ -20,23 +25,35 @@ public class Volet extends Equipement {
 	}
 
 	public void monterVolet() {
-		if (getPosition() < 100 && etatCourant) {
-			position++;
+		if (super.isEtatCourant()) {
+			if (getPosition() < 100) {
+				position++;
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
 	public void descendreVolet() {
-		if (getPosition() > 0 && etatCourant) {
-			position--;
+		if (super.isEtatCourant()) {
+			if (getPosition() > 0) {
+				position--;
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
-	public void choisirPositio(double position) {
-		if (etatCourant && position <= 100 && position >= 0) {
-			setPosition(position);
+	public void choisirPosition(double position) {
+		if (super.isEtatCourant()) {
+			if (position <= 100 && position >= 0) {
+				setPosition(position);
+			} else {
+				System.out.println("Position non-valide");
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteint, on ne peut pas changer de position");
 		}
 	}
 
-	public static void main(String[] args) {
-	}
 }
