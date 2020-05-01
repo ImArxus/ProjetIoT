@@ -30,19 +30,19 @@ public class TV extends Equipement {
 	}
 
 	public void augmenterVolume() {
-		if (getVolume() != 100) {
+		if (getVolume() != 100 && etatCourant) {
 			volume++;
 		}
 	}
 
 	public void diminuerVolume() {
-		if (getVolume() != 0) {
+		if (getVolume() != 0 && etatCourant) {
 			volume--;
 		}
 	}
 
 	public void augmenterNuméroChaine() {
-		if (etatCourant == true) {
+		if (etatCourant) {
 			if (getNumeroChaine() != 100) {
 				numeroChaine++;
 			} else {
@@ -52,7 +52,7 @@ public class TV extends Equipement {
 	}
 
 	public void diminuerNuméroChaine() {
-		if (etatCourant == true) {
+		if (etatCourant) {
 			if (getNumeroChaine() != 100) {
 				numeroChaine++;
 			} else {
@@ -76,5 +76,8 @@ public class TV extends Equipement {
 		System.out.println(a.getNumeroChaine());
 		a.mettreChaine(10);
 		System.out.println(a.getNumeroChaine());
+		a.eteindre();
+		a.augmenterVolume();
+		System.out.println(a.getVolume());
 	}
 }
