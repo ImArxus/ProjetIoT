@@ -64,6 +64,7 @@ public class TV extends Equipement {
 	public void augmenterNumeroChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() < 100) {
+
 				numeroChaine++;
 			} else {
 				numeroChaine = 1;
@@ -106,5 +107,8 @@ public class TV extends Equipement {
 		System.out.println(a.getNumeroChaine());
 		a.mettreChaine(10);
 		System.out.println(a.getNumeroChaine());
+		a.eteindre();
+		a.augmenterVolume();
+		System.out.println(a.getVolume());
 	}
 }

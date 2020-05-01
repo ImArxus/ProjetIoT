@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import equipements.Lumiere;
@@ -89,13 +90,29 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		Scanner s = new Scanner(System.in);
+		
+		//Fin de parcours
 		boolean stop = false;
 
+		//Creation des pièces
 		// Créé une cuisine adjacente à notre position avec une lumière
 		Piece cuisine = new Piece("Cuisine");
+		Piece salleaManger = new Piece("Salle a manger");
+		
+		//Ajout de pièce dans la maison
 		maison.ajouterPiece(cuisine);
+		maison.ajouterPiece(salleaManger);
+		
+		
+		//Ajout de pièce adjacentes
 		maison.sontAdjacents(getPosition(), cuisine);
+		maison.sontAdjacents(getPosition(), salleaManger);
+		
+		
+		//Création des equipement
 		Equipement lumiere = new Lumiere("Lumière1", false);
+		
+		//Ajout des equipements dans les pièces
 		cuisine.ajouterEquipement(lumiere);
 
 		// Créé une TV dans le salon
