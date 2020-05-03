@@ -38,7 +38,7 @@ public class Main {
 		maison.sontAdjacents(getPosition(), salleaManger);
 
 		// Création des équipements
-		Equipement lumiere = new Lumiere("Lumière1", false);
+		Equipement lumiere = new Lumiere("Lumière1");
 		Equipement TV = new TV("TV1");
 
 		// Ajout des équipements dans les pièces

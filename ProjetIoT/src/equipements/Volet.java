@@ -4,9 +4,9 @@ import main.Equipement;
 
 public class Volet extends Equipement {
 
-	private double position;
+	private int position;
 
-	public Volet(String nom, boolean etatCourant, double position) {
+	public Volet(String nom, boolean etatCourant, int position) {
 		super(nom, etatCourant);
 		this.setPosition(position);
 	}
@@ -20,7 +20,7 @@ public class Volet extends Equipement {
 		return position;
 	}
 
-	public void setPosition(double position) {
+	public void setPosition(int position) {
 		this.position = position;
 	}
 
@@ -44,7 +44,7 @@ public class Volet extends Equipement {
 		}
 	}
 
-	public void choisirPosition(double position) {
+	public void choisirPosition(int position) {
 		if (super.isEtatCourant()) {
 			if (position <= 100 && position >= 0) {
 				setPosition(position);

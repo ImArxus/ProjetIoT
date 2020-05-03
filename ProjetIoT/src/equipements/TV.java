@@ -22,7 +22,7 @@ public class TV extends Equipement {
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles()
-				+ "\n-> Augmenter volume\n-> Diminuer volume\n-> Augmenter numéro chaine\n-> Diminuer numéro chaine\n-> Mettre chaine";
+				+ "\n-> Augmenter volume\n-> Diminuer volume\n-> Augmenter chaine\n-> Diminuer chaine\n-> Mettre chaine";
 	}
 
 	public int getNumeroChaine() {

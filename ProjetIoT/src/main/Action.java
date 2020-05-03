@@ -39,6 +39,21 @@ public class Action {
 
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
 		switch (requete) {
+		case "Augmenter intensité":
+			l.augmenterIntensite();
+			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
+			break;
+		case "Diminuer intensité":
+			l.diminuerIntensite();
+			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
+			break;
+		case "Choisir intensité":
+			System.out.println("Quelle intensité (entre 0 et 100) ?");
+			int thermostat = s.nextInt();
+			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			l.choisirIntensite(thermostat);
+			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
+			break;
 		default:
 			System.out.println("Commande non-valide");
 			break;
