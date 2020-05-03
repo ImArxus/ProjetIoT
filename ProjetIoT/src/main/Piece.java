@@ -33,7 +33,7 @@ public class Piece {
 	}
 
 	public String toString() {
-		return getNom() + " : " + getEquipements();
+		return getNom() + " qui est équipé(e) de " + getEquipements();
 	}
 
 	public String getNom() {

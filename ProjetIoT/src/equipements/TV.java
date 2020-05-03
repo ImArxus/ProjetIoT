@@ -61,7 +61,7 @@ public class TV extends Equipement {
 		}
 	}
 
-	public void augmenterNumeroChaine() {
+	public void augmenterChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() < 100) {
 
@@ -74,7 +74,7 @@ public class TV extends Equipement {
 		}
 	}
 
-	public void diminuerNumeroChaine() {
+	public void diminuerChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() > 1) {
 				numeroChaine--;
@@ -98,17 +98,4 @@ public class TV extends Equipement {
 		}
 	}
 
-	public static void main(String[] args) {
-		TV a = new TV("tele", false, 98, 98);
-		a.allumer();
-		a.augmenterNumeroChaine();
-		a.augmenterNumeroChaine();
-		a.augmenterNumeroChaine();
-		System.out.println(a.getNumeroChaine());
-		a.mettreChaine(10);
-		System.out.println(a.getNumeroChaine());
-		a.eteindre();
-		a.augmenterVolume();
-		System.out.println(a.getVolume());
-	}
 }

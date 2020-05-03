@@ -1,6 +1,5 @@
 package main;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import equipements.Lumiere;
@@ -22,101 +21,126 @@ public class Main {
 		Main.position = position;
 	}
 
-	private static String actionEquipement(Equipement objet, Scanner s) {
+	private static boolean actionEquipement(Equipement objet, Scanner s) {
 		String requete = s.nextLine();
 		switch (requete) {
+		case "Quitter":
+			System.out.println("Vous n'utilisez plus " + objet.getNom()); // Ne fait aucune action
+			return true;
 		case "Allumer":
 			objet.allumer();
-			return objet.getNom() + " est allumé";
+			System.out.println(objet.getNom() + " est allumé(e)");
+			break;
 		case "Eteindre":
 			objet.eteindre();
-			return objet.getNom() + " est éteint";
+			System.out.println(objet.getNom() + " est éteint(e)");
+			break;
 		default:
+			if (objet instanceof Radiateur) { // Si l'objet est un radiateur
+				switch (requete) {
+				case "Augmenter température":
+					((Radiateur) objet).augmenterTemperature();
+					System.out.println("Le thermostat de " + objet.getNom() + " est réglé sur "
+							+ ((Radiateur) objet).getThermostat());
+					break;
+				case "Diminuer température":
+					((Radiateur) objet).diminuerTemperature();
+					System.out.println("Le thermostat de " + objet.getNom() + " est réglé sur "
+							+ ((Radiateur) objet).getThermostat());
+					break;
+				case "Choisir thermostat":
+					System.out.println("Quelle thermostat (entre 0 et 5) ?");
+					int thermostat = s.nextInt();
+					((Radiateur) objet).choisirThermostat(thermostat);
+					System.out.println("Le thermostat de " + objet.getNom() + " est réglé sur "
+							+ ((Radiateur) objet).getThermostat());
+					break;
+				default:
+					System.out.println("Commande non-valide");
+					break;
+				}
+			} else if (objet instanceof TV) { // Si l'objet est une TV
+				switch (requete) {
+				case "Augmenter volume":
+					((TV) objet).augmenterVolume();
+					System.out.println("Le volume de " + objet.getNom() + " est de " + ((TV) objet).getVolume());
+					break;
+				case "Diminuer volume":
+					((TV) objet).diminuerVolume();
+					System.out.println("Le volume de " + objet.getNom() + " est de " + ((TV) objet).getVolume());
+					break;
+				case "Augmenter chaine":
+					((TV) objet).augmenterChaine();
+					System.out.println(objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine());
+					break;
+				case "Diminuer chaine":
+					((TV) objet).diminuerChaine();
+					System.out.println(objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine());
+					break;
+				case "Mettre chaine":
+					System.out.println("Quelle chaine (entre 0 et 100) ?");
+					int chaine = s.nextInt();
+					s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+					((TV) objet).mettreChaine(chaine);
+					System.out.println(objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine());
+					break;
+				default:
+					System.out.println("Commande non-valide");
+					break;
+				}
+			} else if (objet instanceof Volet) { // Si l'objet est un volet
+				switch (requete) {
+				case "Monter volet":
+					((Volet) objet).monterVolet();
+					System.out.println(
+							"La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition());
+					break;
+				case "Descendre volet":
+					((Volet) objet).descendreVolet();
+					System.out.println(
+							"La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition());
+					break;
+				case "Choisir position":
+					System.out.println("Quelle position (entre 0 et 100) ?");
+					int position = s.nextInt();
+					((Volet) objet).choisirPosition(position);
+					System.out.println(
+							"La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition());
+					break;
+				default:
+					System.out.println("Commande non-valide");
+					break;
+				}
+			}
 			break;
 		}
-		if (objet instanceof Radiateur) { // Si l'objet est un radiateur
-			switch (requete) {
-			case "Augmenter température":
-				((Radiateur) objet).augmenterTemperature();
-				return "Le thermostat de " + objet.getNom() + " est réglé sur " + ((Radiateur) objet).getThermostat();
-			case "Diminuer température":
-				((Radiateur) objet).diminuerTemperature();
-				return "Le thermostat de " + objet.getNom() + " est réglé sur " + ((Radiateur) objet).getThermostat();
-			case "Choisir thermostat":
-				System.out.println("Quelle thermostat (entre 0 et 5) ?");
-				int thermostat = s.nextInt();
-				((Radiateur) objet).choisirThermostat(thermostat);
-				return "Le thermostat de " + objet.getNom() + " est réglé sur " + ((Radiateur) objet).getThermostat();
-			}
-		}
-		if (objet instanceof TV) { // Si l'objet est une TV
-			switch (requete) {
-			case "Augmenter volume":
-				((TV) objet).augmenterVolume();
-				return "Le volume de " + objet.getNom() + " est de " + ((TV) objet).getVolume();
-			case "Diminuer volume":
-				((TV) objet).diminuerVolume();
-				return "Le volume de " + objet.getNom() + " est de " + ((TV) objet).getVolume();
-			case "Augmenter numéro chaine":
-				((TV) objet).augmenterNumeroChaine();
-				return objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine();
-			case "Diminuer numéro chaine":
-				((TV) objet).diminuerNumeroChaine();
-				return objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine();
-			case "Mettre chaine":
-				System.out.println("Quelle chaine (entre 0 et 100) ?");
-				int chaine = s.nextInt();
-				((TV) objet).mettreChaine(chaine);
-				return objet.getNom() + " est réglé sur la chaine " + ((TV) objet).getNumeroChaine();
-			}
-		}
-		if (objet instanceof Volet) { // Si l'objet est un volet
-			switch (requete) {
-			case "Monter volet":
-				((Volet) objet).monterVolet();
-				return "La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition();
-			case "Descendre volet":
-				((Volet) objet).descendreVolet();
-				return "La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition();
-			case "Choisir position":
-				System.out.println("Quelle position (entre 0 et 100) ?");
-				int position = s.nextInt();
-				((Volet) objet).choisirPosition(position);
-				return "La position du store " + objet.getNom() + " est de " + ((Volet) objet).getPosition();
-			}
-		}
-		return "";
+		return false;
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		Scanner s = new Scanner(System.in);
-		
-		//Fin de parcours
+		Scanner s = new Scanner(System.in); // Ouverture du scanner
+
+		// Fin de parcours
 		boolean stop = false;
 
-		//Creation des pièces
-		// Créé une cuisine adjacente à notre position avec une lumière
+		// Creation des pièces
 		Piece cuisine = new Piece("Cuisine");
-		Piece salleaManger = new Piece("Salle a manger");
-		
-		//Ajout de pièce dans la maison
+		Piece salleaManger = new Piece("Salle à manger");
+
+		// Ajout de pièces dans la maison
 		maison.ajouterPiece(cuisine);
 		maison.ajouterPiece(salleaManger);
-		
-		
-		//Ajout de pièce adjacentes
+
+		// Ajout de pièces adjacentes
 		maison.sontAdjacents(getPosition(), cuisine);
 		maison.sontAdjacents(getPosition(), salleaManger);
-		
-		
-		//Création des equipement
-		Equipement lumiere = new Lumiere("Lumière1", false);
-		
-		//Ajout des equipements dans les pièces
-		cuisine.ajouterEquipement(lumiere);
 
-		// Créé une TV dans le salon
+		// Création des équipements
+		Equipement lumiere = new Lumiere("Lumière1", false);
 		Equipement TV = new TV("TV1");
+
+		// Ajout des équipements dans les pièces
+		cuisine.ajouterEquipement(lumiere);
 		salon.ajouterEquipement(TV);
 
 		while (!stop) { // Boucle d'intervention utilisateur
@@ -134,14 +158,22 @@ public class Main {
 			if (requete.equals("move")) {
 				System.out.println("\nDans quelle pièce souhaitez-vous aller ?");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
-				System.out.println("-> " + piecesAdj + "\n"); // Affiche la liste des pièces adjacentes
-				String newPiece = s.nextLine();
 				for (int i = 0; i < piecesAdj.size(); i++) {
+					System.out.println("-> " + piecesAdj.get(i)); // Affiche la liste des pièces adjacentes
+				}
+				String newPiece = s.nextLine();
+				int i = 0;
+				boolean trouve = false;
+				while (i < piecesAdj.size() && !trouve) {
 					if (newPiece.equals(piecesAdj.get(i).getNom())) { // Vérifie que la pièce existe
+						trouve = true;
 						setPosition(piecesAdj.get(i)); // Déplacement dans la pièce choisie
 					} else {
-						System.out.println("La pièce que vous souhaitez rejoindre n'existe pas ou est inaccessible");
+						i++;
 					}
+				}
+				if (!trouve) {
+					System.out.println("La pièce que vous souhaitez rejoindre n'existe pas ou est inaccessible");
 				}
 			}
 
@@ -151,18 +183,32 @@ public class Main {
 			else if (requete.equals("use")) {
 				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
 				List<Equipement> equip = getPosition().getEquipements();
-				System.out.println("-> " + equip); // Affiche la liste des équipements disponibles
-				String newObjet = s.nextLine();
 				for (int i = 0; i < equip.size(); i++) {
+					System.out.println("-> " + equip.get(i)); // Affiche la liste des pièces adjacentes
+				}
+				System.out.println();
+				String newObjet = s.nextLine();
+				int i = 0;
+				boolean trouve = false;
+				boolean exit = false;
+				while (i < equip.size() && !trouve) {
 					if (newObjet.equals(equip.get(i).getNom())) { // Vérifie que l'objet existe
+						trouve = true;
 						Equipement objet = equip.get(i);
-						System.out.println("Que souhaitez-vous faire avec " + objet + " ?");
-						System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
-						System.out.println(actionEquipement(objet, s)); // Agit avec la commande entrée
+						while (!exit) {
+							System.out.println("\nQue souhaitez-vous faire avec " + objet + " ?");
+							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
+							exit = actionEquipement(objet, s); // Agit avec la commande entrée
+							Thread.sleep(2000); // Delai de 2 secondes
+						}
 					} else {
-						System.out.println("L'équipement que vous souhaitez utiliser n'existe pas ou est inaccessible");
+						i++;
 					}
 				}
+				if (!trouve) {
+					System.out.println("L'équipement que vous souhaitez utiliser n'existe pas ou est inaccessible");
+				}
+
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
@@ -173,9 +219,13 @@ public class Main {
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
+			
+			else {
+				System.out.println("Commande non-valide");
+			}
 
 		}
-		s.close();
+		s.close(); // Fermeture du scanner
 	}
 
 }

@@ -14,13 +14,17 @@ public abstract class Equipement {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
 	}
-	
+
 	public String actionsPossibles() {
-		return "-> Allumer\n-> Eteindre";
+		return "-> Quitter\n-> Allumer\n-> Eteindre";
 	}
 
 	public String toString() {
-		return getNom() + " : " + isEtatCourant();
+		String etat = "éteint(e)";
+		if(isEtatCourant()) {
+			etat = "allumé(e)";
+		}
+		return getNom() + " (" + etat + ")";
 	}
 
 	public void setEtatCourant(boolean etatCourant) {
@@ -50,5 +54,5 @@ public abstract class Equipement {
 			setEtatCourant(false);
 		}
 	}
-
+	
 }
