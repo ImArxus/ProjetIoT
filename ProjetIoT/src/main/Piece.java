@@ -23,11 +23,11 @@ public class Piece {
 		this.setPiecesAdj(piecesAdj);
 		this.setEquipements(equipements);
 	}
-	
+
 	public void ajouterEquipement(Equipement equip) {
 		getEquipements().add(equip);
 	}
-	
+
 	public void ajouterPieceAdj(Piece piece) {
 		getPiecesAdj().add(piece);
 	}
@@ -59,11 +59,11 @@ public class Piece {
 	public void setEquipements(List<Equipement> equipements) {
 		this.equipements = equipements;
 	}
-	
+
 	public static void main(String[] args) {
 		List<Equipement> equip = new LinkedList<Equipement>();
-		//Equipement TV = new Equipement("TV");
-		//ajouterEquipement(TV);
+		// Equipement TV = new Equipement("TV");
+		// ajouterEquipement(TV);
 		Piece salon = new Piece("Salon", equip);
 		System.out.println(salon.toString());
 	}
