@@ -23,11 +23,13 @@ public class Action {
 			System.out.println(objet.getNom() + " est éteint(e)");
 			break;
 		default:
-			if (objet instanceof Radiateur) { // Si l'objet est un radiateur
+			if(objet instanceof Lumiere) { 
+				actionLumiere((Lumiere) objet, requete, s);
+			} else if (objet instanceof Radiateur) {
 				actionRadiateur((Radiateur) objet, requete, s);
-			} else if (objet instanceof TV) { // Si l'objet est une TV
+			} else if (objet instanceof TV) {
 				actionTV((TV) objet, requete, s);
-			} else if (objet instanceof Volet) { // Si l'objet est un volet
+			} else if (objet instanceof Volet) {
 				actionVolet((Volet) objet, requete, s);
 			}
 			break;
@@ -35,7 +37,7 @@ public class Action {
 		return false;
 	}
 
-	public void actionLumiere(Lumiere l, String requete, Scanner s) {
+	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
 		switch (requete) {
 		default:
 			System.out.println("Commande non-valide");
