@@ -1,7 +1,5 @@
 package equipements;
 
-import java.util.Scanner;
-
 import main.Equipement;
 
 public class Lumiere extends Equipement {
@@ -44,16 +42,13 @@ public class Lumiere extends Equipement {
 				|| (couleur.equals("jaune")) || (couleur.equals("vert"))) {
 			this.couleur = couleur;
 		} else {
-			this.couleur = "blanc";
+			System.out.println("Couleur non-valide");
 		}
 	}
 
-	public void changerCouleur() {
+	public void changerCouleur(String couleur) {
 		if (super.isEtatCourant()) {
-			System.out.println("Veuillez entrer la couleur choisie parmis les suivantes : blanc bleu rouge jaune vert");
-			Scanner s = new Scanner(System.in);
-			String requete = s.nextLine();
-			setCouleur(requete);
+			setCouleur(couleur);
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de couleur");
 		}

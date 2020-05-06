@@ -107,6 +107,12 @@ public class Action {
 			l.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
 			break;
+		case "Choisir couleur":
+			System.out.println("Quelle couleur parmis les suivantes : blanc, bleu, rouge, jaune, vert");
+			String couleur = s.nextLine();
+			l.changerCouleur(couleur);
+			System.out.println("La couleur de " + l.getNom() + " est réglé sur " + l.getCouleur());
+			break;
 		default:
 			System.out.println("Commande non-valide");
 			break;
