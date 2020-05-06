@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-	
-	private static Maison maison = BarryHouse.creerMaison();
+
+	private static Maison maison = BarryHouse.creerMaison(); // Maison définie dans la classe BarryHouse
 	private static Piece position = maison.getPieces().get(0); // Position initiale dans la premère pièce ajoutée
 
 	public static Piece getPosition() {

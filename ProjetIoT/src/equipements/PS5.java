@@ -17,7 +17,7 @@ public class PS5 extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Lancer disque";
+		return super.actionsPossibles() + "\n-> Lancer jeu";
 	}
 
 	public String getJeu() {
