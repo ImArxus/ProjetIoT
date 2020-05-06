@@ -86,6 +86,7 @@ public class Main {
 		Equipement lumiere4 = new Lumiere("Lumière4");
 		Equipement lumiere5 = new Lumiere("Lumière5");
 		Equipement lumiere6 = new Lumiere("Lumière6");
+		Equipement lumiere7 = new Lumiere("Lumière7");
 		Equipement TV1 = new TV("TV1");
 		Equipement TV2 = new TV("TV2");
 		Equipement TV3 = new TV("TV3");
@@ -132,6 +133,8 @@ public class Main {
 		palier.ajouterEquipement(volet6);
 		palier.ajouterEquipement(lumiere6);
 		palier.ajouterEquipement(Radiateur6);
+		//ajout escalier
+		escalier.ajouterEquipement(lumiere7);
 		
 
 		while (!stop) { // Boucle d'intervention utilisateur
