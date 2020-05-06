@@ -13,7 +13,7 @@ import equipements.Volet;
 
 public class Action {
 
-	public static boolean actionEquipement(Equipement objet, Scanner s) {
+	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
 		String requete = s.nextLine();
 		switch (requete) {
 		case "Quitter":
@@ -121,25 +121,29 @@ public class Action {
 		}
 	}
 
-	public static void actionPS5(PS5 c, String requete, Scanner s) {
-		switch (requete) {
-		case "Lancer disque":
-			System.out.println("Quel jeu voulez vous lancer ?");
-			for (int i = 0; i < c.getJeux().size(); i++) {
-				System.out.println("-> " + c.getJeux().get(i)); // Affiche la liste des jeux
+	public static void actionPS5(PS5 c, String requete, Scanner s) throws InterruptedException {
+		if (c.etatCourant) {
+			switch (requete) {
+			case "Lancer jeu":
+				System.out.println("Quel jeu voulez vous lancer ?");
+				System.out.println("Votre collection : " + c.getJeux().keySet()); // Affiche la liste des jeux
+				String jeu = s.nextLine();
+				c.choisirJeu(jeu);
+				if (c.getJeux().containsKey(jeu)) {
+					System.out.println("Lancement de " + c.getJeu() + " sur votre " + c.getNom());
+					System.out.println("...");
+					Thread.sleep(2000);
+					System.out.println(c.getJeux().get(jeu));
+				}
+				break;
+			default:
+				System.out.println("Commande non-valide");
+				break;
 			}
-			String jeu = s.nextLine();
-			c.choisirJeu(jeu);
-			if (jeu.equals("rien")) {
-				System.out.println("aucun jeu n'est sélectionné sur votre "+ c.getNom());
-			} else {
-				System.out.println("Lancement de " + c.getJeu() + " sur votre " + c.getNom());
-			}
-			break;
-		default:
-			System.out.println("Commande non-valide");
-			break;
+		} else {
+			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
+	
 	}
 
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {

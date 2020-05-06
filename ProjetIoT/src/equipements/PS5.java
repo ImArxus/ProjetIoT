@@ -1,21 +1,23 @@
 package equipements;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import main.Equipement;
 
 public class PS5 extends Equipement {
 
 	private String jeu;
-	private List<String> jeux = new LinkedList<String>();
+	private Map<String,String> jeux = new HashMap<String,String>();
 	
 	public PS5(String nom) {
 		super(nom, false);
-		jeux.add("FIFA 2021");
-		jeux.add("Call of Duty Modern Warfare V");
-		jeux.add("Mario Kart X");
-		jeux.add("Just Dance 8");
+		jeux.put("FIFA 2021","It's in the game");
+		jeux.put("Call of Duty Modern Warfare V","bam bam bam");
+		jeux.put("Mario Kart X","Mariooooo");
+		jeux.put("Just Dance 8","La la la la");
 		this.setJeu(getJeux().get(0));
 	}
 	public PS5(String nom, boolean etatCourant, String jeu) {
@@ -33,7 +35,7 @@ public class PS5 extends Equipement {
 	}
 
 	public void setJeu(String jeu) {
-		if (jeux.contains(jeu)) {
+		if (jeux.containsKey(jeu)) {
 			this.jeu = jeu;
 		} else {
 			System.out.println("Votre collection de jeu vidéos ne possède pas ce titre");
@@ -47,11 +49,11 @@ public class PS5 extends Equipement {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
 	}
-	public List<String> getJeux() {
+	public Map<String, String> getJeux() {
 		return jeux;
 	}
 
-	public void setJeux(List<String> jeux) {
+	public void setJeux(Map<String, String> jeux) {
 		this.jeux = jeux;
 	}
 }
