@@ -12,11 +12,11 @@ public class PS5 extends Equipement {
 	
 	public PS5(String nom) {
 		super(nom, false);
-		this.setJeu("aucun");
 		jeux.add("FIFA 2021");
 		jeux.add("Call of Duty Modern Warfare V");
 		jeux.add("Mario Kart X");
 		jeux.add("Just Dance 8");
+		this.setJeu(getJeux().get(0));
 	}
 	public PS5(String nom, boolean etatCourant, String jeu) {
 		super(nom, etatCourant);
@@ -33,8 +33,7 @@ public class PS5 extends Equipement {
 	}
 
 	public void setJeu(String jeu) {
-		if ((jeu.equals("rien")) || (jeu.equals("FIFA 2021")) || (jeu.equals("Call of Duty Modern Warfare V"))
-				|| (jeu.equals("GTA VII")) || (jeu.equals("Just Dance 8")) || (jeu.equals("Mario Kart X"))) {
+		if (jeux.contains(jeu)) {
 			this.jeu = jeu;
 		} else {
 			System.out.println("Votre collection de jeu vidéos ne possède pas ce titre");
