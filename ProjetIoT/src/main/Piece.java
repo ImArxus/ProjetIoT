@@ -42,7 +42,7 @@ public class Piece {
 		String fin = "\n";
 		while (it.hasNext()) {
 			Equipement b = it.next();
-			fin = fin +"      -> "+ b.toString() + "\n";
+			fin = fin +"       -> "+ b.toString() + "\n";
 		}
 		return fin;
 	}
