@@ -10,6 +10,11 @@ public class Cheminee extends Equipement {
 		super(nom, etatCourant);
 		this.setIntensite(intensite);
 	}
+	
+	public Cheminee(String nom) {
+		super(nom);
+		this.setIntensite(intensite);
+	}
 
 	@Override
 	public String actionsPossibles() {
