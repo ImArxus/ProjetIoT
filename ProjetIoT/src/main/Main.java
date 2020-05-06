@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import equipements.Lumiere;
 import equipements.TV;
+import equipements.Volet;
 
 public class Main {
 
@@ -20,6 +21,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
+		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		// Fin de parcours
@@ -28,19 +30,56 @@ public class Main {
 		// Creation des pièces
 		Piece cuisine = new Piece("Cuisine");
 		Piece salleaManger = new Piece("Salle à manger");
+		Piece salon = new Piece("Salon");
+		Piece chambre = new Piece("Chambre1");
+		Piece salleDeBain = new Piece("Salle de bain");
+		Piece palier = new Piece("Palier");
+		Piece escalier = new Piece("Escalier");
+		Piece dressing = new Piece("Dressing");
+		Piece buandrie = new Piece("Buandrie");
+		Piece jardin = new Piece("Jardin");
+		Piece bureau = new Piece("Bureau");
+		Piece mezzanine = new Piece("Mezzanine");
 
 		// Ajout de pièces dans la maison
 		maison.ajouterPiece(cuisine);
 		maison.ajouterPiece(salleaManger);
-
+		maison.ajouterPiece(salon);
+		maison.ajouterPiece(chambre);
+		maison.ajouterPiece(salleDeBain);
+		maison.ajouterPiece(palier);
+		maison.ajouterPiece(escalier);
+		maison.ajouterPiece(dressing);
+		maison.ajouterPiece(buandrie);
+		maison.ajouterPiece(jardin);
+		maison.ajouterPiece(bureau);
+		maison.ajouterPiece(mezzanine);
 		// Ajout de pièces adjacentes
+		
+		//Adjacent salon
 		maison.sontAdjacents(getPosition(), cuisine);
 		maison.sontAdjacents(getPosition(), salleaManger);
+		maison.sontAdjacents(getPosition(), palier);
+		//adjacent salle a manger
+		maison.sontAdjacents(salleaManger, dressing);
+		maison.sontAdjacents(salleaManger, buandrie);
+		maison.sontAdjacents(salleaManger, jardin);
+		maison.sontAdjacents(salleaManger, escalier);
+		//adjacent salle de bain
+		maison.sontAdjacents(salleDeBain, palier);
+		//adjacent chambre
+		maison.sontAdjacents(chambre, palier);
+		maison.sontAdjacents(chambre, bureau);
+		//adjacent bureau
+		maison.sontAdjacents(bureau, mezzanine);
+		//adjacent Palier
+		maison.sontAdjacents(palier, mezzanine);
 
+				
 		// Création des équipements
 		Equipement lumiere = new Lumiere("Lumière1");
 		Equipement TV = new TV("TV1");
-
+		
 		// Ajout des équipements dans les pièces
 		cuisine.ajouterEquipement(lumiere);
 		salon.ajouterEquipement(TV);
