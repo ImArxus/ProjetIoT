@@ -27,7 +27,7 @@ public class Volet extends Equipement {
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
 			if (getPosition() < 100) {
-				position++;
+				position+=10;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
@@ -37,7 +37,7 @@ public class Volet extends Equipement {
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
 			if (getPosition() > 0) {
-				position--;
+				position-=10;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
