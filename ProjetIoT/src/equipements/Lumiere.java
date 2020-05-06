@@ -55,7 +55,7 @@ public class Lumiere extends Equipement {
 			String requete = s.nextLine();
 			setCouleur(requete);
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la couleur");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de couleur");
 		}
 	}
 
