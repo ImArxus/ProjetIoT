@@ -31,7 +31,7 @@ public class Volet extends Equipement {
 
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() < 100) {
+			if (getPosition() < 91) {
 				position+=10;
 			}
 		} else {
@@ -41,7 +41,7 @@ public class Volet extends Equipement {
 
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() > 0) {
+			if (getPosition() > 9) {
 				position-=10;
 			}
 		} else {
