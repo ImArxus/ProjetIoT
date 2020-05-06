@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +24,27 @@ public class Main {
 	public static void setPosition(Piece position) {
 		Main.position = position;
 	}
-
+	
+	public static List<Equipement> getLumiere(){
+	List<Equipement> Lumieres = new LinkedList<Equipement>();
+		List<Equipement> l = getPosition().getEquipements();
+	Iterator<Equipement> it = l.iterator();
+	while(it.hasNext()) {
+		Equipement e = it.next();
+		String tmp = e.getClass().getSimpleName();
+		
+		
+		if (tmp.equals("Lumiere")) {
+			Lumieres.add(e);
+			
+			
+		}
+	}
+	return Lumieres;
+		
+	}
+	
+	
 	public static void main(String[] args) throws InterruptedException {
 		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
@@ -161,7 +183,21 @@ public class Main {
 				while (i < piecesAdj.size() && !trouve) {
 					if (newPiece.equals(piecesAdj.get(i).getNom())) { // Vérifie que la pièce existe
 						trouve = true;
+						
+						List<Equipement> lumieres = getLumiere();
+						for (Equipement lum : lumieres) {   ////Eteindre les lumieres
+						    lum.eteindre();; 
+						}
+						
 						setPosition(piecesAdj.get(i)); // Déplacement dans la pièce choisie
+						
+						
+						lumieres = getLumiere();
+						if(lumieres.isEmpty()) {System.out.println("il n'y a pas de lumiere");}
+						for (Equipement lum : lumieres) {   ////Allumer
+							lum.allumer();; 
+						}
+						
 					} else {
 						i++;
 					}
@@ -174,7 +210,9 @@ public class Main {
 			/***************************************************************
 			 ************************* Utilisation *************************
 			 ***************************************************************/
-			else if (requete.equals("use")) {
+			else if (requete.equals("use")) { 
+				
+				
 				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
 				List<Equipement> equip = getPosition().getEquipements();
 				for (int i = 0; i < equip.size(); i++) {
@@ -209,6 +247,9 @@ public class Main {
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
 			else if (requete.equals("exit")) {
+				
+			
+				
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
