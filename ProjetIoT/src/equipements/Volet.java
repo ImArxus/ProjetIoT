@@ -30,7 +30,7 @@ public class Volet extends Equipement {
 				position++;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
 		}
 	}
 
@@ -40,7 +40,7 @@ public class Volet extends Equipement {
 				position--;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
 		}
 	}
 
