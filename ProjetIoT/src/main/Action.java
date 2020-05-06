@@ -6,6 +6,7 @@ import equipements.Cheminee;
 import equipements.Electrolyseur;
 import equipements.Enceinte;
 import equipements.Lumiere;
+import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Volet;
@@ -41,12 +42,14 @@ public class Action {
 				actionElectrolyseur((Electrolyseur) objet, requete, s);
 			} else if (objet instanceof Enceinte) {
 				actionEnceinte((Enceinte) objet, requete, s);
+			} else if (objet instanceof PS5) {
+				actionPS5((PS5) objet, requete, s);
 			}
 			break;
 		}
 		return false;
 	}
-	
+
 	public static void actionEnceinte(Enceinte e, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter volume":
@@ -69,9 +72,9 @@ public class Action {
 		default:
 			System.out.println("Commande non-valide");
 			break;
-		} 
+		}
 	}
-	
+
 	public static void actionElectrolyseur(Electrolyseur e, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter température":
@@ -111,6 +114,27 @@ public class Action {
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			c.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
+
+	public static void actionPS5(PS5 c, String requete, Scanner s) {
+		switch (requete) {
+		case "Lancer disque":
+			System.out.println("Quel jeu voulez vous lancer ?");
+			for (int i = 0; i < c.getJeux().size(); i++) {
+				System.out.println("-> " + c.getJeux().get(i)); // Affiche la liste des jeux
+			}
+			String jeu = s.nextLine();
+			c.choisirJeu(jeu);
+			if (jeu.equals("rien")) {
+				System.out.println("aucun jeu n'est sélectionné sur votre "+ c.getNom());
+			} else {
+				System.out.println("Lancement de " + c.getJeu() + " sur votre " + c.getNom());
+			}
 			break;
 		default:
 			System.out.println("Commande non-valide");
