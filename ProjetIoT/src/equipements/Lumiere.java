@@ -10,7 +10,7 @@ public class Lumiere extends Equipement {
 	public Lumiere(String nom) {
 		super(nom, false);
 		setIntensite(100);
-		couleur = "blanc";
+		setCouleur("blanc");
 	}
 
 	public Lumiere(String nom, boolean etatCourant, int intensite, String couleur) {
