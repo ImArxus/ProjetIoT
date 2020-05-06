@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,17 @@ public class Piece {
 	}
 
 	public String toString() {
-		return getNom() + " qui est équipé(e) de " + getEquipements();
+		return getNom() + " qui est équipé(e) de " + afficher(equipements);
+	}
+	
+	public String afficher(List<Equipement> a) {
+		Iterator<Equipement> it = a.iterator();
+		String fin = "\n";
+		while (it.hasNext()) {
+			Equipement b = it.next();
+			fin = fin +"      -> "+ b.toString() + "\n";
+		}
+		return fin;
 	}
 
 	public String getNom() {
