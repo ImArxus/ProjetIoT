@@ -21,7 +21,7 @@ public class Volet extends Equipement {
 		return super.actionsPossibles() + "\n-> Monter volet\n-> Descendre volet\n-> Choisir position";
 	}
 
-	public double getPosition() {
+	public int getPosition() {
 		return position;
 	}
 

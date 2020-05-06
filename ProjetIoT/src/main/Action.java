@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import equipements.Cheminee;
 import equipements.Electrolyseur;
+import equipements.Enceinte;
 import equipements.Lumiere;
 import equipements.Radiateur;
 import equipements.TV;
@@ -38,10 +39,37 @@ public class Action {
 				actionCheminee((Cheminee) objet, requete, s);
 			} else if (objet instanceof Electrolyseur) {
 				actionElectrolyseur((Electrolyseur) objet, requete, s);
+			} else if (objet instanceof Enceinte) {
+				actionEnceinte((Enceinte) objet, requete, s);
 			}
 			break;
 		}
 		return false;
+	}
+	
+	public static void actionEnceinte(Enceinte e, String requete, Scanner s) {
+		switch (requete) {
+		case "Augmenter volume":
+			e.augmenterVolume();
+			System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
+			break;
+		case "Diminuer volume":
+			e.diminuerVolume();
+			System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
+			break;
+		case "Jouer musique":
+			System.out.println("Quelle musique souhaitez-vous jouer ?");
+			for (int i = 0; i < e.getMusiques().size(); i++) {
+				System.out.println("-> " + e.getMusiques().get(i)); // Affiche la liste des musiques
+			}
+			String musique = s.nextLine();
+			e.jouerMusique(musique);
+			System.out.println(e.getNom() + " joue " + e.getEnEcoute());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		} 
 	}
 	
 	public static void actionElectrolyseur(Electrolyseur e, String requete, Scanner s) {

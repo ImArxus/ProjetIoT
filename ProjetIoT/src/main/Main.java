@@ -5,16 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import equipements.Cheminee;
-import equipements.Lumiere;
-import equipements.Radiateur;
-import equipements.TV;
-import equipements.Volet;
-
 public class Main {
-
-	static Piece salon = new Piece("Salon");
-	private static Maison maison = new Maison("MyHouse", salon); // Créé une maison avec un salon
+	
+	private static Maison maison = BarryHouse.creerMaison();
 	private static Piece position = maison.getPieces().get(0); // Position initiale dans la premère pièce ajoutée
 
 	public static Piece getPosition() {
@@ -24,140 +17,27 @@ public class Main {
 	public static void setPosition(Piece position) {
 		Main.position = position;
 	}
-	
-	public static List<Equipement> getLumiere(){
-	List<Equipement> Lumieres = new LinkedList<Equipement>();
+
+	public static List<Equipement> getLumiere() {
+		List<Equipement> Lumieres = new LinkedList<Equipement>();
 		List<Equipement> l = getPosition().getEquipements();
-	Iterator<Equipement> it = l.iterator();
-	while(it.hasNext()) {
-		Equipement e = it.next();
-		String tmp = e.getClass().getSimpleName();
-		
-		
-		if (tmp.equals("Lumiere")) {
-			Lumieres.add(e);
-			
-			
+		Iterator<Equipement> it = l.iterator();
+		while (it.hasNext()) {
+			Equipement e = it.next();
+			String tmp = e.getClass().getSimpleName();
+			if (tmp.equals("Lumiere")) {
+				Lumieres.add(e);
+			}
 		}
+		return Lumieres;
 	}
-	return Lumieres;
-		
-	}
-	
-	
+
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		// Fin de parcours
 		boolean stop = false;
-
-		// Creation des pièces
-		Piece cuisine = new Piece("Cuisine");
-		Piece salleaManger = new Piece("Salle à manger");
-		Piece salon = new Piece("Salon");
-		Piece chambre = new Piece("Chambre1");
-		Piece salleDeBain = new Piece("Salle de bain");
-		Piece palier = new Piece("Palier");
-		Piece escalier = new Piece("Escalier");
-		Piece dressing = new Piece("Dressing");
-		Piece buandrie = new Piece("Buandrie");
-		Piece jardin = new Piece("Jardin");
-		Piece bureau = new Piece("Bureau");
-		Piece mezzanine = new Piece("Mezzanine");
-
-		// Ajout de pièces dans la maison
-		maison.ajouterPiece(cuisine);
-		maison.ajouterPiece(salleaManger);
-		maison.ajouterPiece(salon);
-		maison.ajouterPiece(chambre);
-		maison.ajouterPiece(salleDeBain);
-		maison.ajouterPiece(palier);
-		maison.ajouterPiece(escalier);
-		maison.ajouterPiece(dressing);
-		maison.ajouterPiece(buandrie);
-		maison.ajouterPiece(jardin);
-		maison.ajouterPiece(bureau);
-		maison.ajouterPiece(mezzanine);
-		
-		// Ajout de pièces adjacentes
-		//Adjacent salon
-		maison.sontAdjacents(getPosition(), cuisine);
-		maison.sontAdjacents(getPosition(), salleaManger);
-		maison.sontAdjacents(getPosition(), palier);
-		//adjacent salle a manger
-		maison.sontAdjacents(salleaManger, dressing);
-		maison.sontAdjacents(salleaManger, buandrie);
-		maison.sontAdjacents(salleaManger, jardin);
-		maison.sontAdjacents(salleaManger, escalier);
-		//adjacent salle de bain
-		maison.sontAdjacents(salleDeBain, palier);
-		//adjacent chambre
-		maison.sontAdjacents(chambre, palier);
-		maison.sontAdjacents(chambre, bureau);
-		//adjacent bureau
-		maison.sontAdjacents(bureau, mezzanine);
-		//adjacent Palier
-		maison.sontAdjacents(palier, mezzanine);
-
-				
-		// Création des équipements
-		Equipement lumiere1 = new Lumiere("Lumière1");
-		Equipement lumiere2 = new Lumiere("Lumière2");
-		Equipement lumiere3 = new Lumiere("Lumière3");
-		Equipement lumiere4 = new Lumiere("Lumière4");
-		Equipement lumiere5 = new Lumiere("Lumière5");
-		Equipement lumiere6 = new Lumiere("Lumière6");
-		Equipement lumiere7 = new Lumiere("Lumière7");
-		Equipement TV1 = new TV("TV1");
-		Equipement TV2 = new TV("TV2");
-		Equipement TV3 = new TV("TV3");
-		Equipement volet1 = new Volet("Volet1");
-		Equipement volet2 = new Volet("Volet2");
-		Equipement volet3 = new Volet("Volet3");
-		Equipement volet4 = new Volet("Volet4");
-		Equipement volet5 = new Volet("Volet5");
-		Equipement volet6 = new Volet("Volet6");
-		Equipement Radiateur1 = new Radiateur("Radiateur1");
-		Equipement Radiateur2 = new Radiateur("Radiateur2");
-		Equipement Radiateur3 = new Radiateur("Radiateur3");
-		Equipement Radiateur4 = new Radiateur("Radiateur4");
-		Equipement Radiateur5 = new Radiateur("Radiateur5");
-		Equipement Radiateur6 = new Radiateur("Radiateur6");
-		Equipement cheminee1 = new Cheminee("Cheminee");
-		
-		// Ajout des équipements dans les pièces
-		//Ajout cuisine
-		cuisine.ajouterEquipement(lumiere1);
-		cuisine.ajouterEquipement(volet1);
-		cuisine.ajouterEquipement(TV1);
-		cuisine.ajouterEquipement(Radiateur1);
-		//Ajout salle a manger
-		salleaManger.ajouterEquipement(lumiere2);
-		salleaManger.ajouterEquipement(Radiateur2);
-		salleaManger.ajouterEquipement(volet2);
-		//Ajout salon
-		salon.ajouterEquipement(TV2);
-		salon.ajouterEquipement(cheminee1);
-		salon.ajouterEquipement(lumiere3);
-		salon.ajouterEquipement(Radiateur3);
-		salon.ajouterEquipement(volet3);
-		//Ajout Chambre
-		chambre.ajouterEquipement(lumiere4);
-		chambre.ajouterEquipement(Radiateur4);
-		chambre.ajouterEquipement(TV3);
-		chambre.ajouterEquipement(volet4);
-		//ajout salle de bain
-		salleDeBain.ajouterEquipement(lumiere5);
-		salleDeBain.ajouterEquipement(volet5);
-		salleDeBain.ajouterEquipement(Radiateur5);
-		//ajout palier
-		palier.ajouterEquipement(volet6);
-		palier.ajouterEquipement(lumiere6);
-		palier.ajouterEquipement(Radiateur6);
-		//ajout escalier
-		escalier.ajouterEquipement(lumiere7);
-		
 
 		while (!stop) { // Boucle d'intervention utilisateur
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -183,21 +63,20 @@ public class Main {
 				while (i < piecesAdj.size() && !trouve) {
 					if (newPiece.equals(piecesAdj.get(i).getNom())) { // Vérifie que la pièce existe
 						trouve = true;
-						
+
 						List<Equipement> lumieres = getLumiere();
-						for (Equipement lum : lumieres) {   ////Eteindre les lumieres
-						    lum.eteindre();; 
+						for (Equipement lum : lumieres) { //// Eteindre les lumieres
+							lum.eteindre();
 						}
-						
 						setPosition(piecesAdj.get(i)); // Déplacement dans la pièce choisie
-						
-						
 						lumieres = getLumiere();
-						if(lumieres.isEmpty()) {System.out.println("il n'y a pas de lumiere");}
-						for (Equipement lum : lumieres) {   ////Allumer
-							lum.allumer();; 
+						if (lumieres.isEmpty()) {
+							System.out.println("Il n'y a pas de lumière");
 						}
-						
+						for (Equipement lum : lumieres) { //// Allumer
+							lum.allumer();
+						}
+
 					} else {
 						i++;
 					}
@@ -210,9 +89,8 @@ public class Main {
 			/***************************************************************
 			 ************************* Utilisation *************************
 			 ***************************************************************/
-			else if (requete.equals("use")) { 
-				
-				
+			else if (requete.equals("use")) {
+
 				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
 				List<Equipement> equip = getPosition().getEquipements();
 				for (int i = 0; i < equip.size(); i++) {
@@ -247,9 +125,6 @@ public class Main {
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
 			else if (requete.equals("exit")) {
-				
-			
-				
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}

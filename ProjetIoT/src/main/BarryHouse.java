@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Scanner;
-
 import equipements.Cheminee;
 import equipements.Lumiere;
 import equipements.Radiateur;
@@ -24,7 +22,6 @@ public class BarryHouse {
 	static Piece mezzanine = new Piece("Mezzanine");
 
 	static Maison maison = new Maison("MyHouse", salon); // Créé une maison avec un salon
-	private static Piece position = maison.getPieces().get(0); // Position initiale dans la premère pièce ajoutée
 
 	// Création des équipements
 	static Equipement lumiere1 = new Lumiere("Lumière1");
@@ -103,7 +100,7 @@ public class BarryHouse {
 
 	public static void ajoutPiecesAdjacentes() {
 		// Ajout de pièces adjacentes
-		// Adjacent salon
+		// adjacent salon
 		maison.sontAdjacents(salon, cuisine);
 		maison.sontAdjacents(salon, salleaManger);
 		maison.sontAdjacents(salon, palier);
@@ -121,13 +118,13 @@ public class BarryHouse {
 		maison.sontAdjacents(palier, mezzanine);
 		// adjacent bureau
 		maison.sontAdjacents(bureau, mezzanine);
-
+	}
+	
+	public static Maison creerMaison() {
+		ajoutPiece();
+		ajoutEquipement();
+		ajoutPiecesAdjacentes();
+		return maison;
 	}
 
-	public static void main(String[] args) {
-		BarryHouse a = new BarryHouse();
-		a.ajoutPiece();
-		a.ajoutEquipement();
-		a.ajoutPiecesAdjacentes();
-	}
 }
