@@ -32,20 +32,20 @@ public class Lumiere extends Equipement {
 	public void augmenterIntensite() {
 		if (super.isEtatCourant()) {
 			if (getIntensite() < 100) {
-				intensite++;
+				intensite+=10;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer d'intensité");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l'intensité");
 		}
 	}
 
 	public void diminuerIntensite() {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 0) {
-				intensite--;
+				intensite-=10;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer d'intensité");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas diminuer l'intensité");
 		}
 	}
 
@@ -57,7 +57,7 @@ public class Lumiere extends Equipement {
 				System.out.println("Intensité non-valide");
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas changer d'intensité");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer d'intensité");
 		}
 	}
 
