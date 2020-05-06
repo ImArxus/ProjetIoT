@@ -2,7 +2,10 @@ package main;
 
 import java.util.List;
 import java.util.Scanner;
+
+import equipements.Cheminee;
 import equipements.Lumiere;
+import equipements.Radiateur;
 import equipements.TV;
 import equipements.Volet;
 
@@ -54,8 +57,8 @@ public class Main {
 		maison.ajouterPiece(jardin);
 		maison.ajouterPiece(bureau);
 		maison.ajouterPiece(mezzanine);
-		// Ajout de pièces adjacentes
 		
+		// Ajout de pièces adjacentes
 		//Adjacent salon
 		maison.sontAdjacents(getPosition(), cuisine);
 		maison.sontAdjacents(getPosition(), salleaManger);
@@ -77,12 +80,59 @@ public class Main {
 
 				
 		// Création des équipements
-		Equipement lumiere = new Lumiere("Lumière1");
-		Equipement TV = new TV("TV1");
+		Equipement lumiere1 = new Lumiere("Lumière1");
+		Equipement lumiere2 = new Lumiere("Lumière2");
+		Equipement lumiere3 = new Lumiere("Lumière3");
+		Equipement lumiere4 = new Lumiere("Lumière4");
+		Equipement lumiere5 = new Lumiere("Lumière5");
+		Equipement lumiere6 = new Lumiere("Lumière6");
+		Equipement TV1 = new TV("TV1");
+		Equipement TV2 = new TV("TV2");
+		Equipement TV3 = new TV("TV3");
+		Equipement volet1 = new Volet("Volet1");
+		Equipement volet2 = new Volet("Volet2");
+		Equipement volet3 = new Volet("Volet3");
+		Equipement volet4 = new Volet("Volet4");
+		Equipement volet5 = new Volet("Volet5");
+		Equipement volet6 = new Volet("Volet6");
+		Equipement Radiateur1 = new Radiateur("Radiateur1");
+		Equipement Radiateur2 = new Radiateur("Radiateur2");
+		Equipement Radiateur3 = new Radiateur("Radiateur3");
+		Equipement Radiateur4 = new Radiateur("Radiateur4");
+		Equipement Radiateur5 = new Radiateur("Radiateur5");
+		Equipement Radiateur6 = new Radiateur("Radiateur6");
+		Equipement cheminee1 = new Cheminee("Cheminee");
 		
 		// Ajout des équipements dans les pièces
-		cuisine.ajouterEquipement(lumiere);
-		salon.ajouterEquipement(TV);
+		//Ajout cuisine
+		cuisine.ajouterEquipement(lumiere1);
+		cuisine.ajouterEquipement(volet1);
+		cuisine.ajouterEquipement(TV1);
+		cuisine.ajouterEquipement(Radiateur1);
+		//Ajout salle a manger
+		salleaManger.ajouterEquipement(lumiere2);
+		salleaManger.ajouterEquipement(Radiateur2);
+		salleaManger.ajouterEquipement(volet2);
+		//Ajout salon
+		salon.ajouterEquipement(TV2);
+		salon.ajouterEquipement(cheminee1);
+		salon.ajouterEquipement(lumiere3);
+		salon.ajouterEquipement(Radiateur3);
+		salon.ajouterEquipement(volet3);
+		//Ajout Chambre
+		chambre.ajouterEquipement(lumiere4);
+		chambre.ajouterEquipement(Radiateur4);
+		chambre.ajouterEquipement(TV3);
+		chambre.ajouterEquipement(volet4);
+		//ajout salle de bain
+		salleDeBain.ajouterEquipement(lumiere5);
+		salleDeBain.ajouterEquipement(volet5);
+		salleDeBain.ajouterEquipement(Radiateur5);
+		//ajout palier
+		palier.ajouterEquipement(volet6);
+		palier.ajouterEquipement(lumiere6);
+		palier.ajouterEquipement(Radiateur6);
+		
 
 		while (!stop) { // Boucle d'intervention utilisateur
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");

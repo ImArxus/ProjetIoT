@@ -10,6 +10,11 @@ public class Volet extends Equipement {
 		super(nom, etatCourant);
 		this.setPosition(position);
 	}
+	
+	public Volet(String nom) {
+		super(nom);
+		this.setPosition(position);
+	}
 
 	@Override
 	public String actionsPossibles() {
