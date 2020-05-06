@@ -50,31 +50,6 @@ public class Action {
 		return false;
 	}
 
-	public static void actionEnceinte(Enceinte e, String requete, Scanner s) {
-		switch (requete) {
-		case "Augmenter volume":
-			e.augmenterVolume();
-			System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
-			break;
-		case "Diminuer volume":
-			e.diminuerVolume();
-			System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
-			break;
-		case "Jouer musique":
-			System.out.println("Quelle musique souhaitez-vous jouer ?");
-			for (int i = 0; i < e.getMusiques().size(); i++) {
-				System.out.println("-> " + e.getMusiques().get(i)); // Affiche la liste des musiques
-			}
-			String musique = s.nextLine();
-			e.jouerMusique(musique);
-			System.out.println(e.getNom() + " joue " + e.getEnEcoute());
-			break;
-		default:
-			System.out.println("Commande non-valide");
-			break;
-		}
-	}
-
 	public static void actionElectrolyseur(Electrolyseur e, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter température":
@@ -121,6 +96,40 @@ public class Action {
 		}
 	}
 
+	public static void actionEnceinte(Enceinte e, String requete, Scanner s) throws InterruptedException {
+		if (e.etatCourant) {
+			switch (requete) {
+			case "Augmenter volume":
+				e.augmenterVolume();
+				System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
+				break;
+			case "Diminuer volume":
+				e.diminuerVolume();
+				System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
+				break;
+			case "Jouer musique":
+				System.out.println("Quelle musique souhaitez-vous jouer ?");			
+				System.out.println("Votre collection : " + e.getMusiques().keySet()); // Affiche la liste des musiques
+
+				String musique = s.nextLine();
+				e.jouerMusique(musique);
+				if (e.getMusiques().containsKey(musique)) {
+					System.out.println("Lancement de " + e.getEnEcoute() + " sur votre " + e.getNom());
+					System.out.println("...");
+					Thread.sleep(2000);
+					System.out.println(e.getMusiques().get(musique));
+				}
+				
+				break;
+			default:
+				System.out.println("Commande non-valide");
+				break;
+			}
+		} else {
+			System.out.println(e.getNom() + " est éteinte, on ne peut pas l'utiliser");
+		}
+	}
+
 	public static void actionPS5(PS5 c, String requete, Scanner s) throws InterruptedException {
 		if (c.etatCourant) {
 			switch (requete) {
@@ -143,7 +152,7 @@ public class Action {
 		} else {
 			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
-	
+
 	}
 
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {

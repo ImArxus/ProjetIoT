@@ -1,27 +1,29 @@
 package equipements;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import main.Equipement;
 
 public class Enceinte extends Equipement {
 
 	private int volume;
-	private List<String> musiques = new LinkedList<String>();
+	private Map<String,String> musiques = new HashMap<String,String>();
 	private String enEcoute;
 
 	public Enceinte(String nom) {
 		super(nom, false);
 		this.setVolume(100);
-		musiques.add("Bim Bam Toi - Carla");
-		musiques.add("Dance Monkey - Tones and I");
-		musiques.add("Allez les gros - Marwa Loud ft Naza");
-		musiques.add("Allumer le feu - Johnny Hallyday");
+		musiques.put("Bim Bam Toi - Carla","Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
+		musiques.put("Dance Monkey - Tones and I","Dance for me, dance for me, dance for me, oh, oh, oh");
+		musiques.put("Allez les gros - Marwa Loud ft Naza","Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
+		musiques.put("Allumer le feu - Johnny Hallyday","Il suffira d'une étincelle");
 		this.setEnEcoute(getMusiques().get(0));
 	}
 
-	public Enceinte(String nom, boolean etatCourant, int volume, List<String> musiques, String enEcoute) {
+	public Enceinte(String nom, boolean etatCourant, int volume, Map<String, String> musiques, String enEcoute) {
 		super(nom, etatCourant);
 		this.setVolume(volume);
 		this.setMusiques(musiques);
@@ -42,7 +44,7 @@ public class Enceinte extends Equipement {
 	}
 
 	public void setEnEcoute(String enEcoute) {
-		if (getMusiques().contains(enEcoute)) {
+		if (getMusiques().containsKey(enEcoute)) {
 			this.enEcoute = enEcoute;
 		} else {
 			System.out.println("Votre collection musicale ne possède pas ce titre");
@@ -85,11 +87,11 @@ public class Enceinte extends Equipement {
 		}
 	}
 
-	public List<String> getMusiques() {
+	public Map<String, String> getMusiques() {
 		return musiques;
 	}
 
-	public void setMusiques(List<String> musiques) {
+	public void setMusiques(Map<String, String> musiques) {
 		this.musiques = musiques;
 	}
 
