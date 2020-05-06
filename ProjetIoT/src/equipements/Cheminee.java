@@ -10,6 +10,11 @@ public class Cheminee extends Equipement {
 		super(nom, etatCourant);
 		this.setIntensite(intensite);
 	}
+	
+	public Cheminee(String nom) {
+		super(nom);
+		this.setIntensite(intensite);
+	}
 
 	@Override
 	public String actionsPossibles() {
@@ -30,7 +35,7 @@ public class Cheminee extends Equipement {
 				intensite+=10;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l intensité");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l'intensité");
 		}
 	}
 
@@ -40,7 +45,7 @@ public class Cheminee extends Equipement {
 				intensite-=10;
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas baisser l intensite");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas baisser l'intensite");
 		}
 	}
 
@@ -52,7 +57,7 @@ public class Cheminee extends Equipement {
 				System.out.println("Intensite non-valide");
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l intensité");
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
 		}
 	}
 
