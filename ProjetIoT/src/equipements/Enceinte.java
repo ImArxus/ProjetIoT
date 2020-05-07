@@ -1,8 +1,6 @@
 package equipements;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import main.Equipement;
@@ -10,17 +8,18 @@ import main.Equipement;
 public class Enceinte extends Equipement {
 
 	private int volume;
-	private Map<String,String> musiques = new HashMap<String,String>();
+	private Map<String, String> musiques = new HashMap<String, String>();
 	private String enEcoute;
 
 	public Enceinte(String nom) {
 		super(nom, false);
 		this.setVolume(100);
-		musiques.put("Bim Bam Toi - Carla","Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
-		musiques.put("Dance Monkey - Tones and I","Dance for me, dance for me, dance for me, oh, oh, oh");
-		musiques.put("Allez les gros - Marwa Loud ft Naza","Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
-		musiques.put("Allumer le feu - Johnny Hallyday","Il suffira d'une étincelle");
-		this.setEnEcoute(getMusiques().get(0));
+		musiques.put("Bim Bam Toi - Carla", "Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
+		musiques.put("Dance Monkey - Tones and I", "Dance for me, dance for me, dance for me, oh, oh, oh");
+		musiques.put("Allez les gros - Marwa Loud ft Naza",
+				"Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
+		musiques.put("Allumer le feu - Johnny Hallyday", "Il suffira d'une étincelle");
+		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
 	}
 
 	public Enceinte(String nom, boolean etatCourant, int volume, Map<String, String> musiques, String enEcoute) {

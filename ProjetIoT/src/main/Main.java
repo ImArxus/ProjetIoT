@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import equipements.Alarme;
+
 public class Main {
 
 	private static Maison maison = BarryHouse.creerMaison(); // Maison définie dans la classe BarryHouse
@@ -40,6 +42,23 @@ public class Main {
 		boolean stop = false;
 
 		while (!stop) { // Boucle d'intervention utilisateur
+
+			// Demande action pour l'alarme si il y en a une dans la pièce
+			List<Equipement> equip = getPosition().getEquipements();
+			for (int i = 0; i < equip.size(); i++) {
+				Equipement objet = equip.get(i);
+				if (objet instanceof Alarme) {
+					System.out.println("Désactiver l'alarme (oui/non) ?");
+					String requete = s.nextLine();
+					if (requete.equals("oui")) {
+						objet.eteindre();
+					} else {
+						((Alarme) objet).sonner();
+						stop = false;
+					}
+				}
+			}
+
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println("-> Pour changer de pièce, tapez 'move'");
@@ -92,7 +111,6 @@ public class Main {
 			else if (requete.equals("use")) {
 
 				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
-				List<Equipement> equip = getPosition().getEquipements();
 				for (int i = 0; i < equip.size(); i++) {
 					System.out.println("-> " + equip.get(i)); // Affiche la liste des pièces adjacentes
 				}
