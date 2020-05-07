@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import users.Utilisateur;
 
 public class Main {
 
@@ -75,6 +76,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
+				
+		Utilisateur user = new Utilisateur("admin");
 
 		chargement(s); // Choix de la maison
 
@@ -85,9 +88,7 @@ public class Main {
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
-			System.out.println("-> Pour changer de pièce, tapez 'move'");
-			System.out.println("-> Pour utiliser un équipement, tapez 'use'");
-			System.out.println("-> Pour quitter, tapez 'exit'\n");
+			System.out.println(user.actionsPossibles());
 
 			String requete = s.nextLine();
 
