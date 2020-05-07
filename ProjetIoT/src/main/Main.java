@@ -76,7 +76,7 @@ public class Main {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
-		chargement(s);
+		chargement(s); // Choix de la maison
 
 		// Fin de parcours
 		boolean stop = false;

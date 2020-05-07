@@ -134,7 +134,7 @@ public class Action {
 	}
 
 	public static void actionEnceinte(Enceinte e, String requete, Scanner s) throws InterruptedException {
-		if (e.etatCourant) {
+		if (e.isEtatCourant()) {
 			switch (requete) {
 			case "Augmenter volume":
 				e.augmenterVolume();
@@ -166,7 +166,7 @@ public class Action {
 	}
 
 	public static void actionPS5(PS5 c, String requete, Scanner s) throws InterruptedException {
-		if (c.etatCourant) {
+		if (c.isEtatCourant()) {
 			switch (requete) {
 			case "Lancer jeu":
 				System.out.println("Quel jeu voulez vous lancer ?");
@@ -191,7 +191,7 @@ public class Action {
 	}
 
 	public static void actionBalance(Balance b, String requete, Scanner s) throws InterruptedException {
-		if (b.etatCourant) {
+		if (b.isEtatCourant()) {
 			switch (requete) {
 			case "Peser":
 				System.out.println("Mesure ...");
