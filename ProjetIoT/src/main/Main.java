@@ -54,23 +54,24 @@ public class Main {
 		}
 		return false;
 	}
+
 	public static void chargement(Scanner s) throws InterruptedException {
-		System.out.println("Quelle maison voulez vous charger ?");
-		System.out.println("1 : Barry's House");
-		System.out.println("2 : Maison Vide");
+		System.out.println("Bienvenue ! Quelle maison voulez-vous charger ?");
+		System.out.println("-> 1 : Barry's House");
+		System.out.println("-> 2 : Maison Vide\n");
 		int requete = s.nextInt();
-		if(requete==1) {
-			 maison = BarryHouse.creerMaison();
-			 System.out.println("Bienvenue dans la maison de Barry !");
+		s.nextLine();
+		if (requete == 1) {
+			maison = BarryHouse.creerMaison();
+			System.out.println("\nBienvenue dans la maison de Barry !\n");
+		} else {
+			maison = BarryHouse.creerMaisonVide();
+			System.out.println("\nVotre maison de rêve n'attend que vous !");
 		}
-		else  {
-			 maison = BarryHouse.creerMaisonVide();
-			 System.out.println("Votre maison de rêve n'attend que vous !");
-		}	
 		setPosition(maison.getPieces().get(0));
 		Thread.sleep(2000);
 	}
-	
+
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner

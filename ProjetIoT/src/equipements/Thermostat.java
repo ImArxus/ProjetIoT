@@ -1,10 +1,5 @@
 package equipements;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import main.Equipement;
 
 public class Thermostat extends Equipement {
