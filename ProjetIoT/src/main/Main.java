@@ -107,10 +107,12 @@ public class Main {
 			listeUtilisateurs.comptes.put(pseudo, mdp);
 			listeUtilisateurs.estAdmin.put(pseudo, false);
 		}
+		System.out.println("----------------------------------------------");
 		System.out.println("identifiant : " + pseudo);
 		System.out.println("mdp : " + mdp);
 		droits = listeUtilisateurs.estAdmin.get(pseudo);
 		System.out.println("activation du mode administrateur : " + droits);
+		System.out.println("----------------------------------------------");
 		Thread.sleep(1000);
 		System.out.println("\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("-> 1 : Barry's House");
