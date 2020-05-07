@@ -18,7 +18,7 @@ public class Volet extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Monter volet\n-> Descendre volet\n-> Choisir position";
+		return super.actionsPossibles() + "\n➡️ 4 : Monter volet\n➡️ 5 : Descendre volet\n➡️ 6 : Choisir position";
 	}
 
 	public int getPosition() {

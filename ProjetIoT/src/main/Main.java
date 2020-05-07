@@ -86,14 +86,11 @@ public class Main {
 	public static void traitementIntensiteLumineuseNaturelle() {
 		if ((heure == 8) || (heure == 21)) {
 			intensiteLumineuseNaturelle = 20;
-		} 
-		else if ((heure == 9) || (heure == 20)) {
+		} else if ((heure == 9) || (heure == 20)) {
 			intensiteLumineuseNaturelle = 40;
-		}
-		else if ((heure==10) || ((heure >= 18) && (heure < 20))) {
+		} else if ((heure == 10) || ((heure >= 18) && (heure < 20))) {
 			intensiteLumineuseNaturelle = 60;
-		}
-		else if ((heure >= 11) && (heure < 18)) {
+		} else if ((heure >= 11) && (heure < 18)) {
 			intensiteLumineuseNaturelle = 100;
 		} else {
 			intensiteLumineuseNaturelle = 0;
@@ -165,8 +162,8 @@ public class Main {
 		System.out.println("----------------------------------------------");
 		Thread.sleep(1000);
 		System.out.println("\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
-		System.out.println("-> 1 : Barry's House");
-		System.out.println("-> 2 : Maison Vide\n");
+		System.out.println("➡️ 1 : Barry's House");
+		System.out.println("➡️ 2 : Maison Vide\n");
 		int requete = s.nextInt();
 		s.nextLine();
 		if (requete == 1) {
@@ -196,87 +193,67 @@ public class Main {
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
-			System.out.println("Que souhaitez-vous faire ?");
+			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
 
-			String requete = s.nextLine();
+			int requete = s.nextInt();
 
 			/***************************************************************
 			 ************************* Déplacement *************************
 			 ***************************************************************/
-			if (requete.equals("move")) {
-				System.out.println("\nDans quelle pièce souhaitez-vous aller ?");
+			if (requete == 1) {
+				System.out.println("\nTapez la commande correspondant à la destination souhaitée");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				for (int i = 0; i < piecesAdj.size(); i++) {
-					System.out.println("-> " + piecesAdj.get(i)); // Affiche la liste des pièces adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Affiche la liste des pièces
+					// adjacentes
 				}
-				String newPiece = s.nextLine();
-				int i = 0;
-				boolean trouve = false;
-				while (i < piecesAdj.size() && !trouve) {
-					if (newPiece.equals(piecesAdj.get(i).getNom())) { // Vérifie que la pièce existe
-						trouve = true;
-
-						List<Equipement> lumieres = getLumiere();
-						for (Equipement lum : lumieres) { //// Eteindre les lumieres
-							lum.eteindre();
-						}
-						setPosition(piecesAdj.get(i)); // Déplacement dans la pièce choisie
-						lumieres = getLumiere();
-						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumière");
-						}
-						for (Equipement lum : lumieres) { //// Allumer
-							lum.allumer();
-						}
-
-					} else {
-						i++;
+				int req = s.nextInt() - 1;
+				if (req >= 0 && req < piecesAdj.size()) {
+					setPosition(piecesAdj.get(req));
+					List<Equipement> lumieres = getLumiere();
+					if (lumieres.isEmpty()) {
+						System.out.println("Il n'y a pas de lumière");
 					}
-				}
-				if (!trouve) {
-					System.out.println("La pièce que vous souhaitez rejoindre n'existe pas ou est inaccessible");
+					for (Equipement lum : lumieres) { //// Allumer
+						lum.allumer();
+					}
+				} else {
+					System.out.println("Mauvaise commande");
 				}
 			}
 
 			/***************************************************************
 			 ************************* Utilisation *************************
 			 ***************************************************************/
-			else if (requete.equals("use")) {
+			else if (requete == 2) {
 				List<Equipement> equip = getPosition().getEquipements();
-				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
+				System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("-> " + equip.get(i)); // Affiche la liste des pièces adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des pièces
+																				// adjacentes
 				}
 				System.out.println();
-				String newObjet = s.nextLine();
-				int i = 0;
-				boolean trouve = false;
+				int req = s.nextInt() - 1;
 				boolean exit = false;
-				while (i < equip.size() && !trouve) {
-					if (newObjet.equals(equip.get(i).getNom())) { // Vérifie que l'objet existe
-						trouve = true;
-						Equipement objet = equip.get(i);
-						while (!exit) {
-							System.out.println("\nQue souhaitez-vous faire avec " + objet + " ?");
-							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
-							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
-							Thread.sleep(2000); // Delai de 2 secondes
-						}
-					} else {
-						i++;
+				if (req >= 0 && req < equip.size()) {
+					Equipement objet = equip.get(req);
+					while (!exit) {
+						System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet );
+						System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
+						exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
+						Thread.sleep(2000); // Delai de 2 secondes
 					}
+				} else {
+					System.out.println("Mauvaise Commande");
 				}
-				if (!trouve) {
-					System.out.println("L'équipement que vous souhaitez utiliser n'existe pas ou est inaccessible");
-					Thread.sleep(3000); // Delai de 3 secondes
-				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
-			else if (requete.equals("exit")) {
+			else if (requete == 3) {
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}

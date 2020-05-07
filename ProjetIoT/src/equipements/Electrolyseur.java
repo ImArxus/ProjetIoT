@@ -22,6 +22,12 @@ public class Electrolyseur extends Equipement {
 		setTemperature(temperature);
 	}
 
+	@Override
+	public String actionsPossibles() {
+		return super.actionsPossibles()
+				+ "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir température ";
+	}
+
 	public double getPh() {
 		return ph;
 	}

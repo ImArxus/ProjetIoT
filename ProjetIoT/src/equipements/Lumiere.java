@@ -22,7 +22,7 @@ public class Lumiere extends Equipement {
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles()
-				+ "\n-> Augmenter intensité\n-> Diminuer intensité\n-> Choisir intensité\n-> Choisir couleur";
+				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité\n➡️ 7 : Choisir couleur";
 	}
 
 	public int getIntensite() {

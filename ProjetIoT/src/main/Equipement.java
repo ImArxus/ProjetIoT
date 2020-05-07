@@ -16,7 +16,7 @@ public class Equipement {
 	}
 
 	public String actionsPossibles() {
-		return "-> Quitter\n-> Allumer\n-> Eteindre";
+		return "➡️ 1 :Quitter\n➡️ 2 : Allumer\n➡️ 3 : Eteindre";
 	}
 
 	public String toString() {

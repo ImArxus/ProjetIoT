@@ -29,7 +29,7 @@ public class Frigo extends Equipement {
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles()
-				+ "\n-> Baisser temperature\n-> Augmenter temperature\n-> Lister produits\n-> Commander";
+				+ "\n➡️ 4 : Baisser temperature\n➡️ 5 : Augmenter temperature\n➡️ 6 : Lister produits\n➡️ 7 : Commander";
 	}
 
 	@Override

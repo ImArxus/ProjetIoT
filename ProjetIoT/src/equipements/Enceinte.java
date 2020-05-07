@@ -31,7 +31,7 @@ public class Enceinte extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Augmenter volume\n-> Diminuer volume\n-> Jouer musique ";
+		return super.actionsPossibles() + "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Jouer musique ";
 	}
 
 	public int getVolume() {

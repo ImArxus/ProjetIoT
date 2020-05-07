@@ -20,12 +20,12 @@ public class Action {
 	private static Piece position = Main.getPosition();
 
 	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
-		String requete = s.nextLine();
+		int requete = s.nextInt();
 		switch (requete) {
-		case "Quitter":
+		case 1:
 			System.out.println("Vous n'utilisez plus " + objet.getNom()); // Ne fait aucune action
 			return true;
-		case "Allumer":
+		case 2:
 			objet.allumer();
 			if (objet instanceof Alarme) { // Si l'objet est une alarme on sort de la boucle utilisateur
 				System.out.println(objet.getNom() + " est allumée");
@@ -33,7 +33,7 @@ public class Action {
 			}
 			System.out.println(objet.getNom() + " est allumé(e)");
 			break;
-		case "Eteindre":
+		case 3:
 			objet.eteindre();
 			System.out.println(objet.getNom() + " est éteint(e)");
 			break;
@@ -66,17 +66,17 @@ public class Action {
 		return false;
 	}
 
-	public static void actionElectrolyseur(Electrolyseur e, String requete, Scanner s) {
+	public static void actionElectrolyseur(Electrolyseur e, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter température":
+		case 4:
 			e.augmenterTemperature();
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
-		case "Diminuer température":
+		case 5:
 			e.diminuerTemperature();
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
-		case "Choisir thermostat":
+		case 6:
 			System.out.println("Quelle température (entre 1 et 30) en °C ?");
 			int temperature = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
@@ -89,22 +89,22 @@ public class Action {
 		}
 	}
 
-	public static void actionCheminee(Cheminee c, String requete, Scanner s) {
+	public static void actionCheminee(Cheminee c, int requete, Scanner s) {
 		int intensite;
 		switch (requete) {
-		case "Augmenter intensité":
+		case 4:
 			intensite = (int) c.getIntensite();
 			position.setTemperature((int) (15 + (intensite * 0.15)));
 			c.augmenterIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
-		case "Diminuer intensité":
+		case 5:
 			intensite = (int) c.getIntensite();
 			position.setTemperature((int) (15 + (intensite * 0.15)));
 			c.diminuerIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
-		case "Choisir intensité":
+		case 6:
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
 			intensite = s.nextInt();
 			position.setTemperature((int) (15 + (intensite * 0.15)));
@@ -118,19 +118,19 @@ public class Action {
 		}
 	}
 
-	public static void actionThermostat(Thermostat t, String requete, Scanner s) {
+	public static void actionThermostat(Thermostat t, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter température":
+		case 4:
 			t.augmenterTemperature();
 			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
-		case "Diminuer température":
+		case 5:
 			t.diminuerTemperature();
 			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
-		case "Choisir température":
+		case 6:
 			System.out.println("Quelle température (entre 15 et 30) ?");
 			int temp = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
@@ -144,18 +144,18 @@ public class Action {
 		}
 	}
 
-	public static void actionEnceinte(Enceinte e, String requete, Scanner s) throws InterruptedException {
+	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
 		if (e.isEtatCourant()) {
 			switch (requete) {
-			case "Augmenter volume":
+			case 4:
 				e.augmenterVolume();
 				System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
 				break;
-			case "Diminuer volume":
+			case 5:
 				e.diminuerVolume();
 				System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
 				break;
-			case "Jouer musique":
+			case 6:
 				System.out.println("Quelle musique souhaitez-vous jouer ?");
 				System.out.println("Votre collection : " + e.getMusiques().keySet()); // Affiche la liste des musiques
 				String musique = s.nextLine();
@@ -176,10 +176,10 @@ public class Action {
 		}
 	}
 
-	public static void actionPS5(PS5 c, String requete, Scanner s) throws InterruptedException {
+	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
 		if (c.isEtatCourant()) {
 			switch (requete) {
-			case "Lancer jeu":
+			case 4:
 				System.out.println("Quel jeu voulez vous lancer ?");
 				System.out.println("Votre collection : " + c.getJeux().keySet()); // Affiche la liste des jeux
 				String jeu = s.nextLine();
@@ -201,10 +201,10 @@ public class Action {
 
 	}
 
-	public static void actionBalance(Balance b, String requete, Scanner s) throws InterruptedException {
+	public static void actionBalance(Balance b, int requete, Scanner s) throws InterruptedException {
 		if (b.isEtatCourant()) {
 			switch (requete) {
-			case "Peser":
+			case 4:
 				System.out.println("Mesure ...");
 				Thread.sleep(2000);
 				b.peser();
@@ -219,24 +219,24 @@ public class Action {
 		}
 	}
 
-	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
+	public static void actionLumiere(Lumiere l, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter intensité":
+		case 4:
 			l.augmenterIntensite();
 			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
 			break;
-		case "Diminuer intensité":
+		case 5:
 			l.diminuerIntensite();
 			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
 			break;
-		case "Choisir intensité":
+		case 6:
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
 			int intensite = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			l.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
 			break;
-		case "Choisir couleur":
+		case 7:
 			System.out.println("Quelle couleur parmis les suivantes : blanc, bleu, rouge, jaune, vert");
 			String couleur = s.nextLine();
 			l.changerCouleur(couleur);
@@ -248,19 +248,19 @@ public class Action {
 		}
 	}
 
-	public static void actionRadiateur(Radiateur r, String requete, Scanner s) {
+	public static void actionRadiateur(Radiateur r, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter température":
+		case 4:
 			r.augmenterTemperature();
 			position.setTemperature(15+3*r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
-		case "Diminuer température":
+		case 5:
 			r.diminuerTemperature();
 			position.setTemperature(15+3*r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
-		case "Choisir thermostat":
+		case 6:
 			System.out.println("Quelle thermostat (entre 0 et 5) ?");
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
@@ -274,25 +274,25 @@ public class Action {
 		}
 	}
 
-	public static void actionTV(TV tv, String requete, Scanner s) {
+	public static void actionTV(TV tv, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter volume":
+		case 4:
 			tv.augmenterVolume();
 			System.out.println("Le volume de " + tv.getNom() + " est de " + tv.getVolume());
 			break;
-		case "Diminuer volume":
+		case 5:
 			tv.diminuerVolume();
 			System.out.println("Le volume de " + tv.getNom() + " est de " + tv.getVolume());
 			break;
-		case "Augmenter chaine":
+		case 6:
 			tv.augmenterChaine();
 			System.out.println(tv.getNom() + " est réglé sur la chaine " + tv.getNumeroChaine());
 			break;
-		case "Diminuer chaine":
+		case 7:
 			tv.diminuerChaine();
 			System.out.println(tv.getNom() + " est réglé sur la chaine " + tv.getNumeroChaine());
 			break;
-		case "Mettre chaine":
+		case 8:
 			System.out.println("Quelle chaine (entre 0 et 100) ?");
 			int chaine = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
@@ -305,17 +305,17 @@ public class Action {
 		}
 	}
 
-	public static void actionVolet(Volet v, String requete, Scanner s) {
+	public static void actionVolet(Volet v, int requete, Scanner s) {
 		switch (requete) {
-		case "Monter volet":
+		case 4:
 			v.monterVolet();
 			System.out.println("La position du store " + v.getNom() + " est de " + v.getPosition());
 			break;
-		case "Descendre volet":
+		case 5:
 			v.descendreVolet();
 			System.out.println("La position du store " + v.getNom() + " est de " + v.getPosition());
 			break;
-		case "Choisir position":
+		case 6:
 			System.out.println("Quelle position (entre 0 et 100) ?");
 			int position = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
@@ -328,17 +328,17 @@ public class Action {
 		}
 	}
 
-	public static void actionFrigo(Frigo f, String requete, Scanner s) {
+	public static void actionFrigo(Frigo f, int requete, Scanner s) {
 		switch (requete) {
-		case "Augmenter temperature":
+		case 4:
 			f.augmenterTemperature();
 			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
 			break;
-		case "Baisser temperature":
+		case 5:
 			f.diminuerTemperature();
 			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
 			break;
-		case "Commander":
+		case 6:
 			System.out.println("Que voulez vous commander ?");
 			String requete1 = s.nextLine();
 			System.out.println("En quelle quantitée ?");
@@ -347,7 +347,7 @@ public class Action {
 			f.commander(requete1, requete2);
 			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;
-		case "Lister produits":
+		case 7:
 			System.out.println("Dans " + f.getNom() + ", il y a " + f.getDispo());
 			break;
 		default:

@@ -18,7 +18,7 @@ public class Radiateur extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Augmenter température\n-> Diminuer température\n-> Choisir thermostat";
+		return super.actionsPossibles() + "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir thermostat";
 	}
 
 	public int getThermostat() {

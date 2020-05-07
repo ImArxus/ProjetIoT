@@ -18,7 +18,7 @@ public class Cheminee extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Augmenter intensité\n-> Diminuer intensité\n-> Choisir intensité";
+		return super.actionsPossibles() + "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité";
 	}
 
 	public double getIntensite() {

@@ -28,7 +28,7 @@ public class PS5 extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Lancer jeu";
+		return super.actionsPossibles() + "\n➡️ 4 : Lancer jeu";
 	}
 
 	public String getJeu() {

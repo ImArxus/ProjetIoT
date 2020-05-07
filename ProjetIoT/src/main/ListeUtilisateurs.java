@@ -31,9 +31,9 @@ public class ListeUtilisateurs {
 		estAdmin.put("guest", false);
 	}
 	public String actionsPossibles(String pseudo) {
-		String reponse ="-> Pour changer de pièce, tapez 'move'\n-> Pour utiliser un équipement, tapez 'use'\n-> Pour quitter, tapez 'exit'";;		
+		String reponse ="➡️ 1 : Changement de pièce\n➡️ 2 : Utilisation d'un équipement\n➡️ 3 : Quitter la simulation\n";;		
 		if(estAdmin.get(pseudo)) {
-			reponse+= "-> Créer pièce\n-> Supprimer pièce\n-> Créer équipement\n-> Supprimer équipement";
+			reponse+= "➡️ 4 : Création d'une pièce\n➡️ 5 : Suppression d'une pièce\n➡️ 6 : Création d'un équipement\n➡️ 7 : Suppression d'un équipement\n";
 		}
 		return reponse;
 	}

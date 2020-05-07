@@ -19,7 +19,7 @@ public class Thermostat extends Equipement {
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles()
-				+ "\n-> Augmenter température\n-> Diminuer température\n-> Choisir température ";
+				+ "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir température ";
 	}
 
 	public int getTemperature() {

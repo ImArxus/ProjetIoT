@@ -27,7 +27,7 @@ public class Balance extends Equipement {
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Peser ";
+		return super.actionsPossibles() + "\n➡️ 4 : Peser ";
 	}
 
 	public int getPoids() {
