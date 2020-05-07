@@ -1,5 +1,6 @@
 package main;
 
+import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Enceinte;
 import equipements.Lumiere;
@@ -66,6 +67,7 @@ public class BarryHouse {
 	static Equipement PS51= new PS5("PS5");
 	static Equipement enceinte1=new Enceinte("Enceinte");
 	static Equipement Electrolyseur = new Electrolyseur("Electrolyseur");
+	static Equipement balance1 = new Balance("Balance1");
 
 	public static void ajoutPiece() {
 		// Ajout de pièces dans la maison
@@ -112,6 +114,7 @@ public class BarryHouse {
 		salleDeBain.ajouterEquipement(lumiere5);
 		salleDeBain.ajouterEquipement(volet5);
 		salleDeBain.ajouterEquipement(Radiateur5);
+		salleDeBain.ajouterEquipement(balance1);
 		// ajout palier
 		palier.ajouterEquipement(volet6);
 		palier.ajouterEquipement(lumiere6);
