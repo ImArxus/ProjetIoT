@@ -15,6 +15,8 @@ public class Main {
 	private static String pseudo;
 	private static String mdp;
 	private static Utilisateur user;
+	private static Boolean droits;
+	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 
 	public static Piece getPosition() {
 		return position;
@@ -59,16 +61,15 @@ public class Main {
 		return false;
 	}
 
-	public static void jourNuit(){
+	public static void jourNuit() {
 		double a = Math.random();
-		if(a>0.5) {
-			System.out.println("C'est actuellement la nuit !");	
-		}
-		else {
-			System.out.println("C'est actuellement le jour !");	
+		if (a > 0.5) {
+			System.out.println("C'est actuellement la nuit !");
+		} else {
+			System.out.println("C'est actuellement le jour !");
 		}
 	}
-	
+
 	public static void chargement(Scanner s) throws InterruptedException {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
@@ -80,18 +81,38 @@ public class Main {
 				System.out.print("⬜️");
 			}
 
-			System.out.print("\n "+i*10+"%");
+			System.out.print("\n " + i * 10 + "%");
 			Thread.sleep(500);
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
 		}
 		System.out.println("Veuillez saisir votre identifiant");
 		pseudo = s.nextLine();
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVeuillez saisir votre mdp");
-		mdp = s.nextLine();
-		//user = new Utilisateur(pseudo,mdp);
+		if (listeUtilisateurs.comptes.containsKey(pseudo)) {
+			System.out.println("identifiant détecté");
+			System.out.println("Veuillez saisir votre mdp");
+			mdp = s.nextLine();
+			if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
+				System.out.println("mot de passe correct");
+			} else {
+				System.out.println("mot de passe incorrect");
+				pseudo = "guest";
+				mdp = listeUtilisateurs.comptes.get(pseudo);
+				System.out.println("Connexion automatique sur le compte guest");
+			}
+		} else {
+			System.out.println("identifiant inconnu");
+			System.out.println("\nNouveau compte crée, Veuillez chosir votre mdp");
+			mdp = s.nextLine();
+			listeUtilisateurs.comptes.put(pseudo, mdp);
+			listeUtilisateurs.estAdmin.put(pseudo, false);
+		}
+		System.out.println("identifiant : " + pseudo);
+		System.out.println("mdp : " + mdp);
+		droits = listeUtilisateurs.estAdmin.get(pseudo);
+		System.out.println("activation du mode administrateur : " + droits);
 		Thread.sleep(1000);
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
+		System.out.println("\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("-> 1 : Barry's House");
 		System.out.println("-> 2 : Maison Vide\n");
 		int requete = s.nextInt();
@@ -111,11 +132,10 @@ public class Main {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
-
 		chargement(s); // Choix de la maison
-		
+
 		jourNuit();
-		
+
 		// Fin de parcours
 		boolean stop = false;
 
@@ -123,7 +143,7 @@ public class Main {
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
-			System.out.println(user.actionsPossibles());
+			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
 
 			String requete = s.nextLine();
 
