@@ -17,6 +17,8 @@ import equipements.Volet;
 
 public class Action {
 
+	private static Piece position = Main.getPosition();
+
 	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
 		String requete = s.nextLine();
 		switch (requete) {
@@ -56,7 +58,7 @@ public class Action {
 				actionBalance((Balance) objet, requete, s);
 			} else if (objet instanceof Thermostat) {
 				actionThermostat((Thermostat) objet, requete, s);
-			}else if (objet instanceof Frigo) {
+			} else if (objet instanceof Frigo) {
 				actionFrigo((Frigo) objet, requete, s);
 			}
 			break;
@@ -88,18 +90,24 @@ public class Action {
 	}
 
 	public static void actionCheminee(Cheminee c, String requete, Scanner s) {
+		int intensite;
 		switch (requete) {
 		case "Augmenter intensité":
+			intensite = (int) c.getIntensite();
+			position.setTemperature((int) (15 + (intensite * 0.15)));
 			c.augmenterIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
 		case "Diminuer intensité":
+			intensite = (int) c.getIntensite();
+			position.setTemperature((int) (15 + (intensite * 0.15)));
 			c.diminuerIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
 		case "Choisir intensité":
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
-			int intensite = s.nextInt();
+			intensite = s.nextInt();
+			position.setTemperature((int) (15 + (intensite * 0.15)));
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			c.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
@@ -114,10 +122,12 @@ public class Action {
 		switch (requete) {
 		case "Augmenter température":
 			t.augmenterTemperature();
+			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
-		case "Diminuer temperature":
+		case "Diminuer température":
 			t.diminuerTemperature();
+			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
 		case "Choisir température":
@@ -125,6 +135,7 @@ public class Action {
 			int temp = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			t.choisirTemperature(temp);
+			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
 		default:
@@ -241,10 +252,12 @@ public class Action {
 		switch (requete) {
 		case "Augmenter température":
 			r.augmenterTemperature();
+			position.setTemperature(15+3*r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case "Diminuer température":
 			r.diminuerTemperature();
+			position.setTemperature(15+3*r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case "Choisir thermostat":
@@ -252,6 +265,7 @@ public class Action {
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			r.choisirThermostat(thermostat);
+			position.setTemperature(15+3*r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		default:

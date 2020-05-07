@@ -76,6 +76,11 @@ public class Main {
 		heure++;
 	}
 
+	public static void affichageTemperature() {
+		System.out.println("La temperature ambiante de la piece " + position.getNom() + " est de "
+				+ position.getTemperature() + "°C.");
+	}
+
 	public static void chargement(Scanner s) throws InterruptedException {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
@@ -115,9 +120,9 @@ public class Main {
 		}
 		System.out.println("----------------------------------------------");
 		System.out.println("identifiant : " + pseudo);
-		System.out.print("mdp : " );
+		System.out.print("mdp : ");
 		for (int v = 0; v < mdp.length(); v++) {
-			System.out.print("*️");//masquage mot de passe
+			System.out.print("*️");// masquage mot de passe
 		}
 		droits = listeUtilisateurs.estAdmin.get(pseudo);
 		System.out.println("\nactivation du mode administrateur : " + droits);
@@ -149,6 +154,8 @@ public class Main {
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires();// calcul heure du jour
+			affichageTemperature();// affichage temperature pièce
+			Thread.sleep(2000);
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));

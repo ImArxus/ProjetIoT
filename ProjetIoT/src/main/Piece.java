@@ -7,22 +7,26 @@ import java.util.List;
 public class Piece {
 
 	private String nom;
+	private int temperature;
 	private List<Piece> piecesAdj = new LinkedList<Piece>();
 	private List<Equipement> equipements = new LinkedList<Equipement>();
 
 	public Piece(String nom) {
 		this.setNom(nom);
+		this.temperature=21;
 	}
 
 	public Piece(String nom, List<Equipement> equipements) {
 		this.setNom(nom);
 		this.setEquipements(equipements);
+		this.temperature=21;
 	}
 
 	public Piece(String nom, List<Piece> piecesAdj, List<Equipement> equipements) {
 		this.setNom(nom);
 		this.setPiecesAdj(piecesAdj);
 		this.setEquipements(equipements);
+		this.temperature=21;
 	}
 
 	public void ajouterEquipement(Equipement equip) {
@@ -54,6 +58,15 @@ public class Piece {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	public int getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
+	}
+
 
 	public List<Piece> getPiecesAdj() {
 		return piecesAdj;
