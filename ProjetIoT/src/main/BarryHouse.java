@@ -29,7 +29,7 @@ public class BarryHouse {
 	static Piece mezzanine = new Piece("Mezzanine");
 	static Piece piscine = new Piece("Piscine");
 
-	static Maison maison = new Maison("MyHouse", salon); // Créé une maison avec un salon
+	static Maison maison = new Maison("MyHouse", cuisine); // Créé une maison avec un salon
 
 	// Création des équipements
 	static Equipement lumiere1 = new Lumiere("Lumière1");

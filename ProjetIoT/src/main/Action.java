@@ -330,11 +330,12 @@ public class Action {
 			System.out.println("En quelle quantitée ?");
 			int requete2 = s.nextInt();
 			s.nextLine();
-			f.Commander(requete1, requete2);
+			f.commander(requete1, requete2);
 			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;
 		case "Lister produits":
 			System.out.println("Dans " + f.getNom() + ", il y a " + f.getDispo());
+			break;
 		default:
 			System.out.println("Commande non-valide");
 			break;
