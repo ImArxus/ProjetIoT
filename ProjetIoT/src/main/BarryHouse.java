@@ -8,6 +8,7 @@ import equipements.Radiateur;
 import equipements.TV;
 import equipements.Volet;
 import equipements.Electrolyseur;
+import equipements.Alarme;
 
 public class BarryHouse {
 
@@ -51,9 +52,10 @@ public class BarryHouse {
 	static Equipement Radiateur5 = new Radiateur("Radiateur5");
 	static Equipement Radiateur6 = new Radiateur("Radiateur6");
 	static Equipement cheminee1 = new Cheminee("Cheminee");
-	static Equipement PS51= new PS5("PS5");
-	static Equipement enceinte1=new Enceinte("Enceinte");
+	static Equipement PS51 = new PS5("PS5");
+	static Equipement enceinte1 = new Enceinte("Enceinte");
 	static Equipement Electrolyseur = new Electrolyseur("Electrolyseur");
+	static Equipement Alarme = new Alarme("Alarme");
 
 	public static void ajoutPiece() {
 		// Ajout de pièces dans la maison
@@ -79,6 +81,7 @@ public class BarryHouse {
 		cuisine.ajouterEquipement(volet1);
 		cuisine.ajouterEquipement(TV1);
 		cuisine.ajouterEquipement(Radiateur1);
+		cuisine.ajouterEquipement(Alarme);
 		// Ajout salle a manger
 		salleaManger.ajouterEquipement(lumiere2);
 		salleaManger.ajouterEquipement(Radiateur2);
@@ -91,6 +94,7 @@ public class BarryHouse {
 		salon.ajouterEquipement(volet3);
 		salon.ajouterEquipement(PS51);
 		salon.ajouterEquipement(enceinte1);
+		salon.ajouterEquipement(Alarme);
 		// Ajout Chambre
 		chambre.ajouterEquipement(lumiere4);
 		chambre.ajouterEquipement(Radiateur4);
@@ -106,8 +110,11 @@ public class BarryHouse {
 		palier.ajouterEquipement(Radiateur6);
 		// ajout escalier
 		escalier.ajouterEquipement(lumiere7);
+		// ajout jardin
+		jardin.ajouterEquipement(Alarme);
 		// ajout piscine
 		piscine.ajouterEquipement(Electrolyseur);
+		piscine.ajouterEquipement(Alarme);
 	}
 
 	public static void ajoutPiecesAdjacentes() {
@@ -133,7 +140,7 @@ public class BarryHouse {
 		// adjacent piscine
 		maison.sontAdjacents(jardin, piscine);
 	}
-	
+
 	public static Maison creerMaison() {
 		ajoutPiece();
 		ajoutEquipement();
