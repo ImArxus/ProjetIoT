@@ -14,6 +14,7 @@ public class Main {
 	private static Piece position; // Position initiale dans la premère pièce ajoutée
 	private static String pseudo;
 	private static String mdp;
+	private static Utilisateur user;
 
 	public static Piece getPosition() {
 		return position;
@@ -88,6 +89,7 @@ public class Main {
 		pseudo = s.nextLine();
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVeuillez saisir votre mdp");
 		mdp = s.nextLine();
+		//user = new Utilisateur(pseudo,mdp);
 		Thread.sleep(1000);
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("-> 1 : Barry's House");
@@ -109,7 +111,6 @@ public class Main {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
-		Utilisateur user = new Utilisateur("root", "root");
 
 		chargement(s); // Choix de la maison
 		
