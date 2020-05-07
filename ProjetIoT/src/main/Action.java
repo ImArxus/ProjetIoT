@@ -2,6 +2,7 @@ package main;
 
 import java.util.Scanner;
 
+import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
 import equipements.Enceinte;
@@ -44,6 +45,8 @@ public class Action {
 				actionEnceinte((Enceinte) objet, requete, s);
 			} else if (objet instanceof PS5) {
 				actionPS5((PS5) objet, requete, s);
+			}else if (objet instanceof Balance) {
+				actionBalance((Balance) objet, requete, s);
 			}
 			break;
 		}
@@ -148,11 +151,28 @@ public class Action {
 				break;
 			}
 		} else {
-			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
+			System.out.println(c.getNom() + " est éteinte, on ne peut pas l'utiliser");
 		}
 
 	}
+	public static void actionBalance(Balance b, String requete, Scanner s) throws InterruptedException {
+		if (b.etatCourant) {
+			switch (requete) {
+			case "Peser":
+				System.out.println("Mesure ...");
+				Thread.sleep(2000);
+				b.peser();
+				System.out.println("Votre poids est de "+b.getPoids()+" kilos.");
+				break;
+			default:
+				System.out.println("Commande non-valide");
+				break;
+			}
+		} else {
+			System.out.println(b.getNom() + " est éteinte, on ne peut pas l'utiliser");
+		}
 
+	}
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter intensité":
