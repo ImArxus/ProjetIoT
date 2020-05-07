@@ -1,10 +1,7 @@
 package equipements;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import main.Equipement;
 
@@ -38,8 +35,8 @@ public class Balance extends Equipement {
 	}
 
 	public void setPoids() {
-		int nombreAleatoire = (int)(Math.random() * (getListePoids().size() + 1));
-		int valeur=getListePoids().get(nombreAleatoire);
+		int nombreAleatoire = (int) (Math.random() * (getListePoids().size()));
+		int valeur = getListePoids().get(nombreAleatoire);
 		if (getListePoids().contains(valeur)) {
 			this.poids = valeur;
 		} else {

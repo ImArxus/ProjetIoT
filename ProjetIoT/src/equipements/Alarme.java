@@ -13,7 +13,7 @@ public class Alarme extends Equipement {
 	}
 
 	public void sonner() {
-		System.out.println("Bip !!! Bip !!! Bip !!!");
+		System.out.println("\nBip !!! Bip !!! Bip !!!");
 		System.out.println("Vous devez sortir de la maison...");
 	}
 

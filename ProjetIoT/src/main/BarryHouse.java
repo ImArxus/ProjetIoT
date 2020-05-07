@@ -68,7 +68,7 @@ public class BarryHouse {
 	static Equipement PS51 = new PS5("PS5");
 	static Equipement enceinte1 = new Enceinte("Enceinte");
 	static Equipement Electrolyseur = new Electrolyseur("Electrolyseur");
-	static Equipement Alarme = new Alarme("Alarme");
+	static Equipement Alarme = new Alarme("Alarme", true);
 	static Equipement balance1 = new Balance("Balance1");
 
 	public static void ajoutPiece() {

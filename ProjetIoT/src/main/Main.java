@@ -34,6 +34,27 @@ public class Main {
 		return Lumieres;
 	}
 
+	public static boolean alarme(Scanner s) {
+		// Demande action pour l'alarme si il y en a une dans la pièce
+		List<Equipement> equip = getPosition().getEquipements();
+		for (int i = 0; i < equip.size(); i++) {
+			Equipement objet = equip.get(i);
+			if (objet instanceof Alarme) {
+				if (((Alarme) objet).isEtatCourant()) {
+					System.out.println("Désactiver l'alarme (oui/non) ?\n");
+					String requete = s.nextLine();
+					if (requete.equals("oui")) {
+						objet.eteindre();
+					} else {
+						((Alarme) objet).sonner();
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
@@ -41,23 +62,7 @@ public class Main {
 		// Fin de parcours
 		boolean stop = false;
 
-		while (!stop) { // Boucle d'intervention utilisateur
-
-			// Demande action pour l'alarme si il y en a une dans la pièce
-			List<Equipement> equip = getPosition().getEquipements();
-			for (int i = 0; i < equip.size(); i++) {
-				Equipement objet = equip.get(i);
-				if (objet instanceof Alarme) {
-					System.out.println("Désactiver l'alarme (oui/non) ?");
-					String requete = s.nextLine();
-					if (requete.equals("oui")) {
-						objet.eteindre();
-					} else {
-						((Alarme) objet).sonner();
-						stop = false;
-					}
-				}
-			}
+		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
@@ -109,7 +114,7 @@ public class Main {
 			 ************************* Utilisation *************************
 			 ***************************************************************/
 			else if (requete.equals("use")) {
-
+				List<Equipement> equip = getPosition().getEquipements();
 				System.out.println("\nQuel équipement souhaitez-vous utiliser ?");
 				for (int i = 0; i < equip.size(); i++) {
 					System.out.println("-> " + equip.get(i)); // Affiche la liste des pièces adjacentes
