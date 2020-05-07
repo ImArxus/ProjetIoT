@@ -6,6 +6,7 @@ import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
 import equipements.Enceinte;
+import equipements.Frigo;
 import equipements.Lumiere;
 import equipements.PS5;
 import equipements.Radiateur;
@@ -272,6 +273,30 @@ public class Action {
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			v.choisirPosition(position);
 			System.out.println("La position du store " + v.getNom() + " est de " + v.getPosition());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
+	
+	public static void actionFrigo(Frigo f, String requete, Scanner s) {
+		switch(requete) {
+		case "Augmenter temperature":
+			f.augmenterTemperature();
+			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
+			break;
+		case "Diminuer temperature":
+			f.diminuerTemperature();
+			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
+			break;
+		case "Commander":
+			System.out.println("Que voulez vous commander ?");
+			String requete1 = s.nextLine();
+			System.out.println("En quelle quantitée ?");
+			int requete2 = s.nextInt();
+			f.Commander(requete1, requete2);
+			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;
 		default:
 			System.out.println("Commande non-valide");

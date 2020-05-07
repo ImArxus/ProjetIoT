@@ -11,8 +11,8 @@ public class Frigo extends Equipement {
 	private int temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
 
-	protected Frigo(String nom) {
-		super(nom,false);
+	public Frigo(String nom) {
+		super(nom, false);
 		setTemperature(5);
 		dispo.put("Banane", 3);
 		dispo.put("Yaourt", 1);
@@ -21,16 +21,26 @@ public class Frigo extends Equipement {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected Frigo(String nom, boolean etatCourant, int temperature, Map<String, Integer> dispo ) {
+	protected Frigo(String nom, boolean etatCourant, int temperature, Map<String, Integer> dispo) {
 		super(nom, etatCourant);
 		setTemperature(temperature);
 	}
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n-> Baisser temperature\n-> Augmenter temperature\n-> Lister produits\n->Commander";
+		return super.actionsPossibles()
+				+ "\n-> Baisser temperature\n-> Augmenter temperature\n-> Lister produits\n-> Commander";
 	}
-	
+
+	@Override
+	public String toString() {
+		String etat = "fermé";
+		if (isEtatCourant()) {
+			etat = "ouvert";
+		}
+		return getNom() + " (" + etat + ")";
+	}
+
 	public int getTemperature() {
 		return temperature;
 	}
@@ -38,54 +48,52 @@ public class Frigo extends Equipement {
 	public void setTemperature(int temperature) {
 		this.temperature = temperature;
 	}
-	
-	public  Map<String, Integer> getDispo() {
+
+	public Map<String, Integer> getDispo() {
 		return dispo;
 	}
 
 	public void setDispo(Map<String, Integer> dispo) {
 		this.dispo = dispo;
 	}
-	
+
 	public void augmenterTemperature() {
-		if(super.etatCourant) {
-			if(getTemperature()<10) {
-				temperature++;
-			}
+		if (getTemperature() < 10) {
+			temperature++;
 		}
 		else {
-			System.out.println(this.getNom() + " est pas ouvert, on ne peut pas augmenter la temperature");
+			System.out.println(this.getNom() + "La temperature est au max, on ne peut pas l'augmenter");
 		}
 	}
-	
-	
+
 	public void diminuerTemperature() {
-		if(super.etatCourant) {
-			if(getTemperature()>-5) {
-				temperature--;
-			}
+		if (getTemperature() > -5) {
+			temperature--;
 		}
 		else {
-			System.out.println(this.getNom() + " est pas ouvert, on ne peut pas diminuer la temperature");
+			System.out.println(this.getNom() + "La temperature est au min, on ne peut pas la diminuer");
 		}
 	}
-	
-	public void Commander(String a,int b) {
-		for (Entry<String, Integer> e : dispo.entrySet()){
-			if(e.getKey()==a) {
+
+	public void Commander(String a, int b) {
+		boolean trouve = false;
+		for (Entry<String, Integer> e : dispo.entrySet()) {
+			if (e.getKey() == a) {
 				e.setValue(b);
+				trouve = true;
 			}
+		}	
+		if(trouve==false) {
+			dispo.put(a, b);
 		}
 	}
-	
-	
+
 	public static void main(String[] args) {
 		Frigo a = new Frigo("yo");
 		a.allumer();
 		System.out.println(a.getDispo());
-		a.Commander("Yaourt", 3);
+		a.Commander("Bonjour", 3);
 		System.out.println(a.getDispo());
 	}
-
 
 }
