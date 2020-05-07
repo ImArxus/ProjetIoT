@@ -335,6 +335,7 @@ public class Action {
 			break;
 		case "Lister produits":
 			System.out.println("Dans " + f.getNom() + ", il y a " + f.getDispo());
+			break;
 		default:
 			System.out.println("Commande non-valide");
 			break;
