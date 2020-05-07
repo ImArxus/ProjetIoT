@@ -56,7 +56,7 @@ public class Main {
 		}
 		return false;
 	}
-	
+
 	public static void jourNuit(){
 		double a = Math.random();
 		if(a>0.5) {
@@ -107,7 +107,7 @@ public class Main {
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s);
-
+		jourNuit();
 		// Fin de parcours
 		boolean stop = false;
 
