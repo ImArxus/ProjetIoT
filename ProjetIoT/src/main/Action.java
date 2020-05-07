@@ -110,7 +110,6 @@ public class Action {
 			case "Jouer musique":
 				System.out.println("Quelle musique souhaitez-vous jouer ?");			
 				System.out.println("Votre collection : " + e.getMusiques().keySet()); // Affiche la liste des musiques
-
 				String musique = s.nextLine();
 				e.jouerMusique(musique);
 				if (e.getMusiques().containsKey(musique)) {
@@ -119,7 +118,6 @@ public class Action {
 					Thread.sleep(2000);
 					System.out.println(e.getMusiques().get(musique));
 				}
-				
 				break;
 			default:
 				System.out.println("Commande non-valide");
