@@ -2,6 +2,7 @@ package main;
 
 import java.util.Scanner;
 
+import equipements.Alarme;
 import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
@@ -24,6 +25,10 @@ public class Action {
 			return true;
 		case "Allumer":
 			objet.allumer();
+			if (objet instanceof Alarme) { // Si l'objet est une alarme on sort de la boucle utilisateur
+				System.out.println(objet.getNom() + " est allumée");
+				return true;
+			}
 			System.out.println(objet.getNom() + " est allumé(e)");
 			break;
 		case "Eteindre":
@@ -47,9 +52,9 @@ public class Action {
 				actionEnceinte((Enceinte) objet, requete, s);
 			} else if (objet instanceof PS5) {
 				actionPS5((PS5) objet, requete, s);
-			}else if (objet instanceof Balance) {
+			} else if (objet instanceof Balance) {
 				actionBalance((Balance) objet, requete, s);
-			}else if (objet instanceof Thermostat) {
+			} else if (objet instanceof Thermostat) {
 				actionThermostat((Thermostat) objet, requete, s);
 			}else if (objet instanceof Frigo) {
 				actionFrigo((Frigo) objet, requete, s);
@@ -104,6 +109,7 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionThermostat(Thermostat t, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter température":
@@ -126,6 +132,7 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionEnceinte(Enceinte e, String requete, Scanner s) throws InterruptedException {
 		if (e.etatCourant) {
 			switch (requete) {
@@ -138,7 +145,7 @@ public class Action {
 				System.out.println("Le volume de " + e.getNom() + " est réglé sur " + e.getVolume());
 				break;
 			case "Jouer musique":
-				System.out.println("Quelle musique souhaitez-vous jouer ?");			
+				System.out.println("Quelle musique souhaitez-vous jouer ?");
 				System.out.println("Votre collection : " + e.getMusiques().keySet()); // Affiche la liste des musiques
 				String musique = s.nextLine();
 				e.jouerMusique(musique);
@@ -178,10 +185,11 @@ public class Action {
 				break;
 			}
 		} else {
-			System.out.println(c.getNom() + " est éteinte, on ne peut pas l'utiliser");
+			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
 
 	}
+
 	public static void actionBalance(Balance b, String requete, Scanner s) throws InterruptedException {
 		if (b.etatCourant) {
 			switch (requete) {
@@ -189,7 +197,7 @@ public class Action {
 				System.out.println("Mesure ...");
 				Thread.sleep(2000);
 				b.peser();
-				System.out.println("Votre poids est de "+b.getPoids()+" kilos.");
+				System.out.println("Votre poids est de " + b.getPoids() + " kilos.");
 				break;
 			default:
 				System.out.println("Commande non-valide");
@@ -198,8 +206,8 @@ public class Action {
 		} else {
 			System.out.println(b.getNom() + " est éteinte, on ne peut pas l'utiliser");
 		}
-
 	}
+
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
 		switch (requete) {
 		case "Augmenter intensité":
@@ -305,9 +313,9 @@ public class Action {
 			break;
 		}
 	}
-	
+
 	public static void actionFrigo(Frigo f, String requete, Scanner s) {
-		switch(requete) {
+		switch (requete) {
 		case "Augmenter temperature":
 			f.augmenterTemperature();
 			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());

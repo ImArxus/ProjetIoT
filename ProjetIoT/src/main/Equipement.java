@@ -1,6 +1,6 @@
 package main;
 
-public abstract class Equipement {
+public class Equipement {
 
 	protected boolean etatCourant;
 	protected String nom;
@@ -21,7 +21,7 @@ public abstract class Equipement {
 
 	public String toString() {
 		String etat = "éteint(e)";
-		if(isEtatCourant()) {
+		if (isEtatCourant()) {
 			etat = "allumé(e)";
 		}
 		return getNom() + " (" + etat + ")";
@@ -54,5 +54,5 @@ public abstract class Equipement {
 			setEtatCourant(false);
 		}
 	}
-	
+
 }
