@@ -62,13 +62,13 @@ public class Main {
 		System.out.print("\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
 			System.out.println("Chargement de Barry's House™️");
-			for (int j = 0; j <=i; j++) {
+			for (int j = 0; j <= i; j++) {
 				System.out.print("✅️️️️️️");
 			}
-			for (int k = 10; k >i; k--) {
+			for (int k = 10; k > i; k--) {
 				System.out.print("⬜️");
 			}
-			System.out.print("\n "+i*10+"%");
+			System.out.print("\n " + i * 10 + "%");
 			Thread.sleep(1000);
 			System.out.print("\n\n\n\n\n");
 		}
@@ -96,8 +96,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
-				
-		Utilisateur user = new Utilisateur("admin");
+
+		Utilisateur user = new Utilisateur("root", "root");
 
 		chargement(s); // Choix de la maison
 

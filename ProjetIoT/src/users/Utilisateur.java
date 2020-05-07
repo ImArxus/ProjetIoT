@@ -1,20 +1,15 @@
 package users;
 
+import java.util.Map;
+
 public class Utilisateur {
 
-	protected String nom;
+	protected Map<String, String> user;
 	protected int droits;
 
-	public Utilisateur(String nom) {
-		setNom(nom);
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
+	public Utilisateur(String pseudo, String mdp) {
+		user.put(pseudo, mdp);
+		setDroits(3); // Aucun droit
 	}
 
 	public int getDroits() {
