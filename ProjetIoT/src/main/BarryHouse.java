@@ -3,10 +3,12 @@ package main;
 import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Enceinte;
+import equipements.Frigo;
 import equipements.Lumiere;
 import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
+import equipements.Thermostat;
 import equipements.Volet;
 import equipements.Electrolyseur;
 import equipements.Alarme;
@@ -70,6 +72,8 @@ public class BarryHouse {
 	static Equipement Electrolyseur = new Electrolyseur("Electrolyseur");
 	static Equipement Alarme = new Alarme("Alarme", true);
 	static Equipement balance1 = new Balance("Balance1");
+	static Equipement frigo1 = new Frigo("Frigo1");
+	static Equipement thermostat1=new Thermostat("Thermostat1");
 
 	public static void ajoutPiece() {
 		// Ajout de pièces dans la maison
@@ -95,11 +99,13 @@ public class BarryHouse {
 		cuisine.ajouterEquipement(volet1);
 		cuisine.ajouterEquipement(TV1);
 		cuisine.ajouterEquipement(Radiateur1);
+		cuisine.ajouterEquipement(frigo1);
 		cuisine.ajouterEquipement(Alarme);
 		// Ajout salle a manger
 		salleaManger.ajouterEquipement(lumiere2);
 		salleaManger.ajouterEquipement(Radiateur2);
 		salleaManger.ajouterEquipement(volet2);
+		salleaManger.ajouterEquipement(thermostat1);
 		// Ajout salon
 		salon.ajouterEquipement(TV2);
 		salon.ajouterEquipement(cheminee1);

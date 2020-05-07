@@ -12,11 +12,13 @@ public class PS5 extends Equipement {
 
 	public PS5(String nom) {
 		super(nom, false);
+
 		jeux.put("FIFA 2021", "It's in the game");
 		jeux.put("Call of Duty Modern Warfare V", "bam bam bam");
 		jeux.put("Mario Kart X", "Mariooooo");
 		jeux.put("Just Dance 8", "La la la la");
 		this.setJeu((String) getJeux().keySet().toArray()[0]);
+
 	}
 
 	public PS5(String nom, boolean etatCourant, String jeu) {

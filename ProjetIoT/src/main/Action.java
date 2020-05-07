@@ -3,13 +3,16 @@ package main;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
 import equipements.Enceinte;
+import equipements.Frigo;
 import equipements.Lumiere;
 import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
+import equipements.Thermostat;
 import equipements.Volet;
 
 public class Action {
@@ -49,6 +52,10 @@ public class Action {
 				actionEnceinte((Enceinte) objet, requete, s);
 			} else if (objet instanceof PS5) {
 				actionPS5((PS5) objet, requete, s);
+			} else if (objet instanceof Balance) {
+				actionBalance((Balance) objet, requete, s);
+			} else if (objet instanceof Thermostat) {
+				actionThermostat((Thermostat) objet, requete, s);
 			}
 			break;
 		}
@@ -94,6 +101,29 @@ public class Action {
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			c.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
+
+	public static void actionThermostat(Thermostat t, String requete, Scanner s) {
+		switch (requete) {
+		case "Augmenter température":
+			t.augmenterTemperature();
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
+			break;
+		case "Diminuer temperature":
+			t.diminuerTemperature();
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
+			break;
+		case "Choisir température":
+			System.out.println("Quelle température (entre 15 et 30) ?");
+			int temp = s.nextInt();
+			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			t.choisirTemperature(temp);
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
 			break;
 		default:
 			System.out.println("Commande non-valide");
@@ -156,6 +186,24 @@ public class Action {
 			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
 
+	}
+
+	public static void actionBalance(Balance b, String requete, Scanner s) throws InterruptedException {
+		if (b.etatCourant) {
+			switch (requete) {
+			case "Peser":
+				System.out.println("Mesure ...");
+				Thread.sleep(2000);
+				b.peser();
+				System.out.println("Votre poids est de " + b.getPoids() + " kilos.");
+				break;
+			default:
+				System.out.println("Commande non-valide");
+				break;
+			}
+		} else {
+			System.out.println(b.getNom() + " est éteinte, on ne peut pas l'utiliser");
+		}
 	}
 
 	public static void actionLumiere(Lumiere l, String requete, Scanner s) {
@@ -257,6 +305,30 @@ public class Action {
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			v.choisirPosition(position);
 			System.out.println("La position du store " + v.getNom() + " est de " + v.getPosition());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
+
+	public static void actionFrigo(Frigo f, String requete, Scanner s) {
+		switch (requete) {
+		case "Augmenter temperature":
+			f.augmenterTemperature();
+			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
+			break;
+		case "Diminuer temperature":
+			f.diminuerTemperature();
+			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
+			break;
+		case "Commander":
+			System.out.println("Que voulez vous commander ?");
+			String requete1 = s.nextLine();
+			System.out.println("En quelle quantitée ?");
+			int requete2 = s.nextInt();
+			f.Commander(requete1, requete2);
+			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;
 		default:
 			System.out.println("Commande non-valide");
