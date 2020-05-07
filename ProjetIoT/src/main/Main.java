@@ -58,7 +58,7 @@ public class Main {
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
-		System.out.print("\n\n\n\n\n");
+		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
 			System.out.println("Chargement de Barry's House™️");
 			for (int j = 0; j <=i; j++) {
@@ -68,15 +68,15 @@ public class Main {
 				System.out.print("⬜️");
 			}
 			System.out.print("\n "+i*10+"%");
-			Thread.sleep(1000);
-			System.out.print("\n\n\n\n\n");
+			Thread.sleep(500);
+			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		}
 		System.out.println("Veuillez saisir votre identifiant");
 		pseudo = s.nextLine();
-		System.out.println("\n\n\n\n\nVeuillez saisir votre mdp");
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVeuillez saisir votre mdp");
 		mdp = s.nextLine();
-		Thread.sleep(2000);
-		System.out.println("\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
+		Thread.sleep(1000);
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("-> 1 : Barry's House");
 		System.out.println("-> 2 : Maison Vide\n");
 		int requete = s.nextInt();
