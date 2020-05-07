@@ -10,6 +10,7 @@ import equipements.Lumiere;
 import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
+import equipements.Thermostat;
 import equipements.Volet;
 
 public class Action {
@@ -47,6 +48,8 @@ public class Action {
 				actionPS5((PS5) objet, requete, s);
 			}else if (objet instanceof Balance) {
 				actionBalance((Balance) objet, requete, s);
+			}else if (objet instanceof Thermostat) {
+				actionThermostat((Thermostat) objet, requete, s);
 			}
 			break;
 		}
@@ -98,7 +101,28 @@ public class Action {
 			break;
 		}
 	}
-
+	public static void actionThermostat(Thermostat t, String requete, Scanner s) {
+		switch (requete) {
+		case "Augmenter température":
+			t.augmenterTemperature();
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
+			break;
+		case "Diminuer temperature":
+			t.diminuerTemperature();
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
+			break;
+		case "Choisir température":
+			System.out.println("Quelle température (entre 15 et 30) ?");
+			int temp = s.nextInt();
+			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			t.choisirTemperature(temp);
+			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
 	public static void actionEnceinte(Enceinte e, String requete, Scanner s) throws InterruptedException {
 		if (e.etatCourant) {
 			switch (requete) {
