@@ -77,7 +77,6 @@ public class Main {
 			for (int k = 10; k > i; k--) {
 				System.out.print("⬜️");
 			}
-
 			System.out.print("\n "+i*10+"%");
 			Thread.sleep(500);
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
