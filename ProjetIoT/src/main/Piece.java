@@ -8,25 +8,29 @@ public class Piece {
 
 	private String nom;
 	private int temperature;
+	private int intensiteLumineuse;//intensité totale
 	private List<Piece> piecesAdj = new LinkedList<Piece>();
 	private List<Equipement> equipements = new LinkedList<Equipement>();
 
 	public Piece(String nom) {
 		this.setNom(nom);
-		this.temperature=21;
+		this.temperature = 21;
+		this.intensiteLumineuse = 50;
 	}
 
 	public Piece(String nom, List<Equipement> equipements) {
 		this.setNom(nom);
 		this.setEquipements(equipements);
-		this.temperature=21;
+		this.temperature = 21;
+		this.intensiteLumineuse = 50;
 	}
 
 	public Piece(String nom, List<Piece> piecesAdj, List<Equipement> equipements) {
 		this.setNom(nom);
 		this.setPiecesAdj(piecesAdj);
 		this.setEquipements(equipements);
-		this.temperature=21;
+		this.temperature = 21;
+		this.intensiteLumineuse = 0;
 	}
 
 	public void ajouterEquipement(Equipement equip) {
@@ -40,13 +44,13 @@ public class Piece {
 	public String toString() {
 		return getNom() + " qui est équipé(e) de " + afficher(equipements);
 	}
-	
+
 	public String afficher(List<Equipement> a) {
 		Iterator<Equipement> it = a.iterator();
 		String fin = "\n";
 		while (it.hasNext()) {
 			Equipement b = it.next();
-			fin = fin +"       -> "+ b.toString() + "\n";
+			fin = fin + "       -> " + b.toString() + "\n";
 		}
 		return fin;
 	}
@@ -58,7 +62,7 @@ public class Piece {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public int getTemperature() {
 		return temperature;
 	}
@@ -67,6 +71,19 @@ public class Piece {
 		this.temperature = temperature;
 	}
 
+	public int getIntensiteLumineuse() {
+		return intensiteLumineuse;
+	}
+
+	public void setIntensiteLumineuse(int intensiteLumineuse) {
+		if ((intensiteLumineuse >= 0) && (intensiteLumineuse <= 100)) {
+			this.intensiteLumineuse = intensiteLumineuse;
+		} else if (intensiteLumineuse > 100) {
+			this.intensiteLumineuse = 100;
+		} else {
+			this.intensiteLumineuse = 0;
+		}
+	}
 
 	public List<Piece> getPiecesAdj() {
 		return piecesAdj;

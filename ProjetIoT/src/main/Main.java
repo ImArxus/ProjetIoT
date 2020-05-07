@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Lumiere;
 
 public class Main {
 
@@ -14,6 +15,7 @@ public class Main {
 	private static String pseudo;
 	private static String mdp;
 	private static Boolean droits;
+	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 
@@ -61,6 +63,7 @@ public class Main {
 	}
 
 	public static void calculHoraires() {
+		heure++;
 		if ((heure > 22) || (heure < 8)) {
 			if (heure == 24) {
 				heure = 0;
@@ -73,12 +76,45 @@ public class Main {
 		} else {
 			System.out.println("C'est actuellement le jour !, il est " + heure + "h!");
 		}
-		heure++;
 	}
 
 	public static void affichageTemperature() {
 		System.out.println("La temperature ambiante de la piece " + position.getNom() + " est de "
 				+ position.getTemperature() + "°C.");
+	}
+
+	public static void traitementIntensiteLumineuseNaturelle() {
+		if ((heure == 8) || (heure == 21)) {
+			intensiteLumineuseNaturelle = 20;
+		} 
+		else if ((heure == 9) || (heure == 20)) {
+			intensiteLumineuseNaturelle = 40;
+		}
+		else if ((heure==10) || ((heure >= 18) && (heure < 20))) {
+			intensiteLumineuseNaturelle = 60;
+		}
+		else if ((heure >= 11) && (heure < 18)) {
+			intensiteLumineuseNaturelle = 100;
+		} else {
+			intensiteLumineuseNaturelle = 0;
+		}
+	}
+
+	public static void traitementIntensiteLumineuse() {
+		List<Equipement> lumieresPieces = getLumiere();
+		int sommeILobjets = 0;
+		for (int i = 0; i < lumieresPieces.size(); i++) {
+			Equipement objet = lumieresPieces.get(i);
+			if (objet instanceof Lumiere) {
+				if (((Lumiere) objet).isEtatCourant()) {
+					sommeILobjets += ((Lumiere) objet).getIntensite();
+				}
+			}
+		}
+		position.setIntensiteLumineuse(intensiteLumineuseNaturelle + sommeILobjets);
+		System.out.println("L'intensité lumineuse de la piece " + position.getNom() + " est de "
+				+ position.getIntensiteLumineuse() + "%. (dont = " + intensiteLumineuseNaturelle + "% naturelle et  "
+				+ sommeILobjets + "% artificielle).");
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
@@ -155,7 +191,10 @@ public class Main {
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires();// calcul heure du jour
 			affichageTemperature();// affichage temperature pièce
+			traitementIntensiteLumineuseNaturelle();// traitement ILN
+			traitementIntensiteLumineuse();// traitement&affichage IL totale
 			Thread.sleep(2000);
+
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
