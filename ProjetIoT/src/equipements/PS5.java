@@ -18,7 +18,8 @@ public class PS5 extends Equipement {
 		jeux.put("Call of Duty Modern Warfare V","bam bam bam");
 		jeux.put("Mario Kart X","Mariooooo");
 		jeux.put("Just Dance 8","La la la la");
-		this.setJeu(getJeux().get(0));
+		this.setJeu((String) jeux.keySet().toArray()[0]);
+		
 	}
 	public PS5(String nom, boolean etatCourant, String jeu) {
 		super(nom, etatCourant);
