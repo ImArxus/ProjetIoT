@@ -28,6 +28,7 @@ public class BarryHouse {
 	static Piece bureau = new Piece("Bureau");
 	static Piece mezzanine = new Piece("Mezzanine");
 	static Piece piscine = new Piece("Piscine");
+	static Piece salonVide = new Piece("Salon");
 
 	static Maison maison = new Maison("MyHouse", cuisine); // Créé une maison avec un salon
 
@@ -91,7 +92,9 @@ public class BarryHouse {
 		maison.ajouterPiece(mezzanine);
 		maison.ajouterPiece(piscine);
 	}
-
+	public static void ajoutPieceVide() {
+		maison.ajouterPiece(salonVide);
+	}
 	public static void ajoutEquipement() {
 		// Ajout des équipements dans les pièces
 		// Ajout cuisine
@@ -182,6 +185,10 @@ public class BarryHouse {
 		ajoutPiece();
 		ajoutEquipement();
 		ajoutPiecesAdjacentes();
+		return maison;
+	}
+	public static Maison creerMaisonVide() {
+		ajoutPieceVide();
 		return maison;
 	}
 

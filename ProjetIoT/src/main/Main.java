@@ -9,8 +9,8 @@ import equipements.Alarme;
 
 public class Main {
 
-	private static Maison maison = BarryHouse.creerMaison(); // Maison définie dans la classe BarryHouse
-	private static Piece position = maison.getPieces().get(0); // Position initiale dans la premère pièce ajoutée
+	private static Maison maison; // Maison définie dans la classe BarryHouse
+	private static Piece position; // Position initiale dans la premère pièce ajoutée
 
 	public static Piece getPosition() {
 		return position;
@@ -55,9 +55,28 @@ public class Main {
 		return false;
 	}
 
+	public static void chargement(Scanner s) throws InterruptedException {
+		System.out.println("Bienvenue ! Quelle maison voulez-vous charger ?");
+		System.out.println("-> 1 : Barry's House");
+		System.out.println("-> 2 : Maison Vide\n");
+		int requete = s.nextInt();
+		s.nextLine();
+		if (requete == 1) {
+			maison = BarryHouse.creerMaison();
+			System.out.println("\nBienvenue dans la maison de Barry !\n");
+		} else {
+			maison = BarryHouse.creerMaisonVide();
+			System.out.println("\nVotre maison de rêve n'attend que vous !");
+		}
+		setPosition(maison.getPieces().get(0));
+		Thread.sleep(2000);
+	}
+
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
+
+		chargement(s);
 
 		// Fin de parcours
 		boolean stop = false;

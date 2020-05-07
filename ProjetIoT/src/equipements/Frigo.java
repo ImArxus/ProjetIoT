@@ -20,7 +20,6 @@ public class Frigo extends Equipement {
 		dispo.put("Yaourt", 1);
 		dispo.put("Salade", 1);
 		dispo.put("tomates", 3);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected Frigo(String nom, boolean etatCourant, int temperature, Map<String, Integer> dispo) {
@@ -62,8 +61,7 @@ public class Frigo extends Equipement {
 	public void augmenterTemperature() {
 		if (getTemperature() < 10) {
 			temperature++;
-		}
-		else {
+		} else {
 			System.out.println(this.getNom() + "La temperature est au max, on ne peut pas l'augmenter");
 		}
 	}
@@ -71,8 +69,7 @@ public class Frigo extends Equipement {
 	public void diminuerTemperature() {
 		if (getTemperature() > -5) {
 			temperature--;
-		}
-		else {
+		} else {
 			System.out.println(this.getNom() + "La temperature est au min, on ne peut pas la diminuer");
 		}
 	}
