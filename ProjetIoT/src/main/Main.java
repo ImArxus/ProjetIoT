@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import users.Utilisateur;
 
 public class Main {
 
@@ -56,7 +57,7 @@ public class Main {
 		}
 		return false;
 	}
-	
+
 	public static void jourNuit(){
 		double a = Math.random();
 		if(a>0.5) {
@@ -77,9 +78,11 @@ public class Main {
 			for (int k = 10; k > i; k--) {
 				System.out.print("⬜️");
 			}
+
 			System.out.print("\n "+i*10+"%");
 			Thread.sleep(500);
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
 		}
 		System.out.println("Veuillez saisir votre identifiant");
 		pseudo = s.nextLine();
@@ -106,8 +109,12 @@ public class Main {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
-		chargement(s);
+		Utilisateur user = new Utilisateur("root", "root");
 
+		chargement(s); // Choix de la maison
+		
+		jourNuit();
+		
 		// Fin de parcours
 		boolean stop = false;
 
@@ -115,9 +122,7 @@ public class Main {
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
-			System.out.println("-> Pour changer de pièce, tapez 'move'");
-			System.out.println("-> Pour utiliser un équipement, tapez 'use'");
-			System.out.println("-> Pour quitter, tapez 'exit'\n");
+			System.out.println(user.actionsPossibles());
 
 			String requete = s.nextLine();
 

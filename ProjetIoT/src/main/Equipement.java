@@ -21,7 +21,7 @@ public class Equipement {
 
 	public String toString() {
 		String etat = "éteint(e)";
-		if (isEtatCourant()) {
+		if(isEtatCourant()) {
 			etat = "allumé(e)";
 		}
 		return getNom() + " (" + etat + ")";
@@ -54,5 +54,5 @@ public class Equipement {
 			setEtatCourant(false);
 		}
 	}
-
+	
 }

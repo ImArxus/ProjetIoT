@@ -3,7 +3,6 @@ package equipements;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import main.Equipement;
@@ -78,26 +77,18 @@ public class Frigo extends Equipement {
 		boolean trouve = false;
 		Map<String, Integer> test = dispo;
 		Set<String> cles = test.keySet();
-		Iterator it = cles.iterator();
-		while (it.hasNext()){
-		   String cle = (String) it.next(); 
-		   int valeur = test.get(cle); 
-		   if(cle.equals(a)) {
-			   test.put(cle, valeur+b);
-			   trouve = true;
-		   }
+		Iterator<String> it = cles.iterator();
+		while (it.hasNext()) {
+			String cle = it.next();
+			int valeur = test.get(cle);
+			if (cle.equals(a)) {
+				test.put(cle, valeur + b);
+				trouve = true;
+			}
 		}
-		if(trouve==false) {
+		if (trouve == false) {
 			test.put(a, b);
 		}
-	}
-
-	public static void main(String[] args) {
-		Frigo a = new Frigo("yo");
-		a.allumer();
-		System.out.println(a.getDispo());
-		a.commander("Bonjour", 3);
-		System.out.println(a.getDispo());
 	}
 
 }
