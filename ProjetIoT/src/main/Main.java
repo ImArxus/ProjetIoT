@@ -14,7 +14,7 @@ public class Main {
 	private static String pseudo;
 	private static String mdp;
 	private static Boolean droits;
-	private static int heure;
+	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 
 	public static Piece getPosition() {
@@ -60,13 +60,20 @@ public class Main {
 		return false;
 	}
 
-	public static void jourNuitDéfaut() {
-		heure = (int) (Math.random() * 24);;
-		if ((heure >= 22) || (heure<8)) {
-			System.out.println("C'est actuellement la nuit !, il est "+heure+"h!");
-		} else {	
-			System.out.println("C'est actuellement le jour !, il est "+heure+"h!");
+	public static void calculHoraires() {
+		if ((heure > 22) || (heure < 8)) {
+			if (heure == 24) {
+				heure = 0;
+			}
+			System.out.println("C'est actuellement la nuit !, il est " + heure + "h!");
+		} else if (heure == 8) {
+			System.out.println("Le soleil se lève !, il est " + heure + "h!");
+		} else if (heure == 22) {
+			System.out.println("Le soleil se couche, il est " + heure + "h!");
+		} else {
+			System.out.println("C'est actuellement le jour !, il est " + heure + "h!");
 		}
+		heure++;
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
@@ -108,9 +115,12 @@ public class Main {
 		}
 		System.out.println("----------------------------------------------");
 		System.out.println("identifiant : " + pseudo);
-		System.out.println("mdp : " + mdp);
+		System.out.print("mdp : " );
+		for (int v = 0; v < mdp.length(); v++) {
+			System.out.print("*️");//masquage mot de passe
+		}
 		droits = listeUtilisateurs.estAdmin.get(pseudo);
-		System.out.println("activation du mode administrateur : " + droits);
+		System.out.println("\nactivation du mode administrateur : " + droits);
 		System.out.println("----------------------------------------------");
 		Thread.sleep(1000);
 		System.out.println("\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
@@ -135,13 +145,10 @@ public class Main {
 
 		chargement(s); // Choix de la maison et de l'utilisateur
 
-		jourNuitDéfaut();
-
-		// Fin de parcours
-		boolean stop = false;
+		boolean stop = false;// Fin de parcours
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-			
+			calculHoraires();// calcul heure du jour
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
