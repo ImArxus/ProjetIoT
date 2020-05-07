@@ -58,8 +58,18 @@ public class Main {
 		return false;
 	}
 
+	public static void jourNuit(){
+		double a = Math.random();
+		if(a>0.5) {
+			System.out.println("C'est actuellement la nuit !");	
+		}
+		else {
+			System.out.println("C'est actuellement le jour !");	
+		}
+	}
+	
 	public static void chargement(Scanner s) throws InterruptedException {
-		System.out.print("\n\n\n\n\n");
+		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
 			System.out.println("Chargement de Barry's House™️");
 			for (int j = 0; j <= i; j++) {
@@ -74,10 +84,10 @@ public class Main {
 		}
 		System.out.println("Veuillez saisir votre identifiant");
 		pseudo = s.nextLine();
-		System.out.println("\n\n\n\n\nVeuillez saisir votre mdp");
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVeuillez saisir votre mdp");
 		mdp = s.nextLine();
-		Thread.sleep(2000);
-		System.out.println("\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
+		Thread.sleep(1000);
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("-> 1 : Barry's House");
 		System.out.println("-> 2 : Maison Vide\n");
 		int requete = s.nextInt();
@@ -100,7 +110,9 @@ public class Main {
 		Utilisateur user = new Utilisateur("root", "root");
 
 		chargement(s); // Choix de la maison
-
+		
+		jourNuit();
+		
 		// Fin de parcours
 		boolean stop = false;
 
