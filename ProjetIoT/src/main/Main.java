@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
-import users.Utilisateur;
 
 public class Main {
 
@@ -14,8 +13,8 @@ public class Main {
 	private static Piece position; // Position initiale dans la premère pièce ajoutée
 	private static String pseudo;
 	private static String mdp;
-	private static Utilisateur user;
 	private static Boolean droits;
+	private static int heure;
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 
 	public static Piece getPosition() {
@@ -61,12 +60,12 @@ public class Main {
 		return false;
 	}
 
-	public static void jourNuit() {
-		double a = Math.random();
-		if (a > 0.5) {
-			System.out.println("C'est actuellement la nuit !");
-		} else {
-			System.out.println("C'est actuellement le jour !");
+	public static void jourNuitDéfaut() {
+		heure = (int) (Math.random() * 24);;
+		if ((heure >= 22) || (heure<8)) {
+			System.out.println("C'est actuellement la nuit !, il est "+heure+"h!");
+		} else {	
+			System.out.println("C'est actuellement le jour !, il est "+heure+"h!");
 		}
 	}
 
@@ -134,15 +133,15 @@ public class Main {
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
-		chargement(s); // Choix de la maison
+		chargement(s); // Choix de la maison et de l'utilisateur
 
-		jourNuit();
+		jourNuitDéfaut();
 
 		// Fin de parcours
 		boolean stop = false;
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-
+			
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Que souhaitez-vous faire ?");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
