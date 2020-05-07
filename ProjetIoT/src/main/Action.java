@@ -51,6 +51,8 @@ public class Action {
 				actionBalance((Balance) objet, requete, s);
 			}else if (objet instanceof Thermostat) {
 				actionThermostat((Thermostat) objet, requete, s);
+			}else if (objet instanceof Frigo) {
+				actionFrigo((Frigo) objet, requete, s);
 			}
 			break;
 		}
@@ -310,7 +312,7 @@ public class Action {
 			f.augmenterTemperature();
 			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
 			break;
-		case "Diminuer temperature":
+		case "Baisser temperature":
 			f.diminuerTemperature();
 			System.out.println("La temperature du frigo " + f.getNom() + " est de " + f.getTemperature());
 			break;
@@ -319,9 +321,12 @@ public class Action {
 			String requete1 = s.nextLine();
 			System.out.println("En quelle quantitée ?");
 			int requete2 = s.nextInt();
+			s.nextLine();
 			f.Commander(requete1, requete2);
 			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;
+		case "Lister produits":
+			System.out.println("Dans " + f.getNom() + ", il y a " + f.getDispo());
 		default:
 			System.out.println("Commande non-valide");
 			break;

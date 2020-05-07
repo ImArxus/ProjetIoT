@@ -79,7 +79,7 @@ public class Frigo extends Equipement {
 		boolean trouve = false;
 		for (Entry<String, Integer> e : dispo.entrySet()) {
 			if (e.getKey() == a) {
-				e.setValue(b);
+				e.setValue(b+e.getValue());
 				trouve = true;
 			}
 		}	
