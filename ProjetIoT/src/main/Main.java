@@ -56,18 +56,28 @@ public class Main {
 		}
 		return false;
 	}
-
+	
+	public static void jourNuit(){
+		double a = Math.random();
+		if(a>0.5) {
+			System.out.println("C'est actuellement la nuit !");	
+		}
+		else {
+			System.out.println("C'est actuellement le jour !");	
+		}
+	}
+	
 	public static void chargement(Scanner s) throws InterruptedException {
 		System.out.print("\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
 			System.out.println("Chargement de Barry's House™️");
-			for (int j = 0; j <=i; j++) {
+			for (int j = 0; j <= i; j++) {
 				System.out.print("✅️️️️️️");
 			}
-			for (int k = 10; k >i; k--) {
+			for (int k = 10; k > i; k--) {
 				System.out.print("⬜️");
 			}
-			System.out.print("\n "+i*10+"%");
+			System.out.print("\n " + i * 10 + "%");
 			Thread.sleep(1000);
 			System.out.print("\n\n\n\n\n");
 		}
