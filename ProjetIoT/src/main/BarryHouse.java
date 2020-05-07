@@ -35,6 +35,10 @@ public class BarryHouse {
 	static Equipement lumiere5 = new Lumiere("Lumière5");
 	static Equipement lumiere6 = new Lumiere("Lumière6");
 	static Equipement lumiere7 = new Lumiere("Lumière7");
+	static Equipement lumiere8 = new Lumiere("Lumière8");
+	static Equipement lumiere9 = new Lumiere("Lumière9");
+	static Equipement lumiere10 = new Lumiere("Lumière10");
+	static Equipement lumiere11 = new Lumiere("Lumière11");
 	static Equipement TV1 = new TV("TV1");
 	static Equipement TV2 = new TV("TV2");
 	static Equipement TV3 = new TV("TV3");
@@ -44,12 +48,20 @@ public class BarryHouse {
 	static Equipement volet4 = new Volet("Volet4");
 	static Equipement volet5 = new Volet("Volet5");
 	static Equipement volet6 = new Volet("Volet6");
+	static Equipement volet7 = new Volet("Volet7");
+	static Equipement volet8 = new Volet("Volet8");
+	static Equipement volet9 = new Volet("Volet9");
+	static Equipement volet10 = new Volet("Volet10");
 	static Equipement Radiateur1 = new Radiateur("Radiateur1");
 	static Equipement Radiateur2 = new Radiateur("Radiateur2");
 	static Equipement Radiateur3 = new Radiateur("Radiateur3");
 	static Equipement Radiateur4 = new Radiateur("Radiateur4");
 	static Equipement Radiateur5 = new Radiateur("Radiateur5");
 	static Equipement Radiateur6 = new Radiateur("Radiateur6");
+	static Equipement Radiateur7 = new Radiateur("Radiateur7");
+	static Equipement Radiateur8 = new Radiateur("Radiateur8");
+	static Equipement Radiateur9 = new Radiateur("Radiateur9");
+	static Equipement Radiateur10 = new Radiateur("Radiateur10");
 	static Equipement cheminee1 = new Cheminee("Cheminee");
 	static Equipement PS51= new PS5("PS5");
 	static Equipement enceinte1=new Enceinte("Enceinte");
@@ -106,6 +118,23 @@ public class BarryHouse {
 		palier.ajouterEquipement(Radiateur6);
 		// ajout escalier
 		escalier.ajouterEquipement(lumiere7);
+		//Ajout dressing 
+		dressing.ajouterEquipement(lumiere8);
+		dressing.ajouterEquipement(Radiateur7);
+		dressing.ajouterEquipement(volet7);
+		//ajout buanderie
+		buanderie.ajouterEquipement(volet8);
+		buanderie.ajouterEquipement(lumiere9);
+		buanderie.ajouterEquipement(Radiateur8);
+		//ajout jardin rien
+		//ajout bureau
+		bureau.ajouterEquipement(lumiere10);
+		bureau.ajouterEquipement(volet9);
+		bureau.ajouterEquipement(Radiateur9);
+		//ajout mezzanine
+		mezzanine.ajouterEquipement(lumiere11);
+		mezzanine.ajouterEquipement(volet10);
+		mezzanine.ajouterEquipement(Radiateur10);
 		// ajout piscine
 		piscine.ajouterEquipement(Electrolyseur);
 	}
