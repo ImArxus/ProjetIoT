@@ -145,6 +145,7 @@ public class Action {
 	}
 
 	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
+		s.nextLine();//nécessaire pour enlever la mémoire en tampon
 		if (e.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -177,6 +178,7 @@ public class Action {
 	}
 
 	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
+		s.nextLine();//nécessaire pour enlever la mémoire en tampon
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
