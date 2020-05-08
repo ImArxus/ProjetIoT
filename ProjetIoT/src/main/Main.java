@@ -271,7 +271,13 @@ public class Main {
 			 ************************ Création d'une pièce ******************
 			 ***************************************************************/
 			else if (requete == 4 && droits) {
-				System.out.println("\nCréation d'une pièce, mode en création");
+				s.nextLine();
+				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
+				String name =s.nextLine();
+				Piece aCreer = new Piece(name);
+				maison.ajouterPiece(aCreer);
+				maison.sontAdjacents(aCreer, getPosition());
+				setPosition(aCreer);
 			}
 			/***************************************************************
 			 ********************* Suppression d'une pièce ******************
