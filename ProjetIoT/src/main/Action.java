@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Alexa;
 import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
@@ -65,6 +66,9 @@ public class Action {
 			else if (objet instanceof Ventilateur) {
 				actionVentilateur((Ventilateur) objet, requete, s);
 			}
+			else if (objet instanceof Alexa) {
+				actionAlexa((Alexa) objet, requete, s);
+			}
 			break;
 		}
 		return false;
@@ -92,7 +96,16 @@ public class Action {
 			break;
 		}
 	}
-
+	public static void actionAlexa(Alexa a, int requete, Scanner s) {
+		switch (requete) {
+		case 4:
+			a.reponseHeure();
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
 	public static void actionCheminee(Cheminee c, int requete, Scanner s) {
 		int intensite;
 		switch (requete) {

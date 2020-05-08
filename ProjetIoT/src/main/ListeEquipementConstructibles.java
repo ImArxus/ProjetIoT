@@ -9,6 +9,7 @@ public class ListeEquipementConstructibles {
 	
 	public ListeEquipementConstructibles() {
 		liste.add("Alarme");
+		liste.add("Alexa");
 		liste.add("Balance");
 		liste.add("Cheminee");
 		liste.add("Electrolyseur");
@@ -20,7 +21,7 @@ public class ListeEquipementConstructibles {
 		liste.add("Thermostat");
 		liste.add("TV");	
 		liste.add("Ventilateur");
-		liste.add("Volet");
+		liste.add("Volet");		
 	}
 	
 	public static List<String> getListe() {
