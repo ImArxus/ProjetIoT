@@ -221,12 +221,15 @@ public class Main {
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
 					setPosition(piecesAdj.get(req));
-					List<Equipement> lumieres = getLumiere();
-					if (lumieres.isEmpty()) {
-						System.out.println("Il n'y a pas de lumière");
-					}
-					for (Equipement lum : lumieres) { //// Allumer
-						lum.allumer();
+					if (intensiteLumineuseNaturelle==0) {
+						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
+						List<Equipement> lumieres = getLumiere();
+						if (lumieres.isEmpty()) {
+							System.out.println("Il n'y a pas de lumières");
+						}
+						for (Equipement lum : lumieres) { //// Allumer
+							lum.allumer();
+						}
 					}
 				} else {
 					System.out.println("Mauvaise commande");
@@ -300,12 +303,15 @@ public class Main {
 					maison.suppressionPiece(getPosition());// suppresion pièce
 					System.out.println("\nSuppression effectuée");
 					setPosition(destination);
-					List<Equipement> lumieres = getLumiere();
-					if (lumieres.isEmpty()) {
-						System.out.println("Il n'y a pas de lumière");
-					}
-					for (Equipement lum : lumieres) { //// Allumer
-						lum.allumer();
+					if (intensiteLumineuseNaturelle==0) {
+						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
+						List<Equipement> lumieres = getLumiere();
+						if (lumieres.isEmpty()) {
+							System.out.println("Il n'y a pas de lumières");
+						}
+						for (Equipement lum : lumieres) { //// Allumer
+							lum.allumer();
+						}
 					}
 				} else {
 					System.out.println("Mauvaise commande");
