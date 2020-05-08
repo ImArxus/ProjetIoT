@@ -136,7 +136,7 @@ public class Main {
 			}
 
 			System.out.print("\n " + i * 10 + "%");
-			Thread.sleep(500);
+			Thread.sleep(100);
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
 		}
