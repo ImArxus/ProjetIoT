@@ -405,6 +405,14 @@ public class Main {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
+			 ***********Suppression de tous les equipements*****************
+			 ***************************************************************/
+			else if (requete == 8 && droits) {
+				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
+				System.out.println("Suppression effectuée");
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+			/***************************************************************
 			 ******************** Commande non valide********* **************
 			 ***************************************************************/
 			else {
