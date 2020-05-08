@@ -33,7 +33,7 @@ public class ListeUtilisateurs {
 	public String actionsPossibles(String pseudo) {
 		String reponse ="➡️ 1 : Changement de pièce\n➡️ 2 : Utilisation d'un équipement\n➡️ 3 : Quitter la simulation\n";;		
 		if(estAdmin.get(pseudo)) {
-			reponse+= "➡️ 4 : Création d'une pièce ( mode en cours de création)\n➡️ 5 : Suppression d'une pièce ( mode en cours de création)\n➡️ 6 : Création d'un équipement ( mode en cours de création)\n➡️ 7 : Suppression d'un équipement\n";
+			reponse+= "➡️ 4 : Création d'une pièce ( mode en cours de création)\n➡️ 5 : Suppression d'une pièce ( mode en cours de création)\n➡️ 6 : Création d'un équipement\n➡️ 7 : Suppression d'un équipement\n";
 		}
 		return reponse;
 	}

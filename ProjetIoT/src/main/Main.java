@@ -6,7 +6,17 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Balance;
+import equipements.Cheminee;
+import equipements.Electrolyseur;
+import equipements.Enceinte;
+import equipements.Frigo;
 import equipements.Lumiere;
+import equipements.PS5;
+import equipements.Radiateur;
+import equipements.TV;
+import equipements.Thermostat;
+import equipements.Volet;
 
 public class Main {
 
@@ -239,7 +249,7 @@ public class Main {
 				if (req >= 0 && req < equip.size()) {
 					Equipement objet = equip.get(req);
 					while (!exit) {
-						System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet );
+						System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet);
 						System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
 						exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
 						Thread.sleep(2000); // Delai de 2 secondes
@@ -258,32 +268,92 @@ public class Main {
 				stop = true;
 			}
 			/***************************************************************
-			 ************************Création d'une pièce ******************
+			 ************************ Création d'une pièce ******************
 			 ***************************************************************/
 			else if (requete == 4 && droits) {
 				System.out.println("\nCréation d'une pièce, mode en création");
 			}
 			/***************************************************************
-			 *********************Suppression d'une pièce ******************
+			 ********************* Suppression d'une pièce ******************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
 				System.out.println("\nSuppression d'une pièce");
 			}
 			/***************************************************************
-			 ************************Création d'un équipement***************
+			 ************************ Création d'un équipement***************
 			 ***************************************************************/
 			else if (requete == 6 && droits) {
-				System.out.println("\nCréation d'un equipement, mode en création");
+				System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
+				ListeEquipementConstructibles LEC = new ListeEquipementConstructibles();
+				List<String> possibilites = LEC.getListe();
+				for (int i = 0; i < possibilites.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Affiche la liste des
+																						// equipements
+
+				}
+				System.out.println();
+				int req = s.nextInt();
+				s.nextLine();
+				if (req >= 0 && req < possibilites.size()) {
+					System.out.println("\nTapez le nom de ce nouvel équipement");
+					String name = s.nextLine();
+					Equipement objet = null;
+					switch (req) {
+					case 1:
+						 objet = new Alarme(name);
+						break;
+					case 2:
+						objet = new Balance(name);
+						break;
+					case 3:
+						objet = new Cheminee(name);
+						break;
+					case 4:
+						objet = new Electrolyseur(name);
+						break;
+					case 5:
+						objet = new Enceinte(name);
+						break;
+					case 6:
+						objet = new Frigo(name);
+						break;
+					case 7:
+						objet = new Lumiere(name);
+						break;
+					case 8:
+						objet = new PS5(name);
+						break;
+					case 9:
+						objet = new Radiateur(name);
+						break;
+					case 10:
+						objet = new Thermostat(name);
+						break;
+					case 11:
+						objet = new TV(name);
+						break;
+					default:
+						objet = new Volet(name);
+						break;
+					}
+					getPosition().ajouterEquipement(objet);
+					;
+					System.out.println("Ajout effectué");
+				} else {
+					System.out.println("Mauvaise Commande");
+				}
+				Thread.sleep(3000); // Delai de 3 secondes
+
 			}
 			/***************************************************************
-			 *********************Suppression d'un équipement **************
+			 ********************* Suppression d'un équipement **************
 			 ***************************************************************/
 			else if (requete == 7 && droits) {
 				List<Equipement> equip = getPosition().getEquipements();
 				System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
 				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des pièces
-																				// adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des equipements
+
 				}
 				System.out.println();
 				int req = s.nextInt() - 1;
@@ -297,7 +367,7 @@ public class Main {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
-			 ********************Commande non valide********* **************
+			 ******************** Commande non valide********* **************
 			 ***************************************************************/
 			else {
 				System.out.println("Commande non-valide");
