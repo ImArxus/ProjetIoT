@@ -257,7 +257,48 @@ public class Main {
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
-
+			/***************************************************************
+			 ************************Création d'une pièce ******************
+			 ***************************************************************/
+			else if (requete == 4 && droits) {
+				System.out.println("\nCréation d'une pièce, mode en création");
+			}
+			/***************************************************************
+			 *********************Suppression d'une pièce ******************
+			 ***************************************************************/
+			else if (requete == 5 && droits) {
+				System.out.println("\nSuppression d'une pièce");
+			}
+			/***************************************************************
+			 ************************Création d'un équipement***************
+			 ***************************************************************/
+			else if (requete == 6 && droits) {
+				System.out.println("\nCréation d'un equipement, mode en création");
+			}
+			/***************************************************************
+			 *********************Suppression d'un équipement **************
+			 ***************************************************************/
+			else if (requete == 7 && droits) {
+				List<Equipement> equip = getPosition().getEquipements();
+				System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
+				for (int i = 0; i < equip.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des pièces
+																				// adjacentes
+				}
+				System.out.println();
+				int req = s.nextInt() - 1;
+				if (req >= 0 && req < equip.size()) {
+					Equipement objet = equip.get(req);
+					getPosition().supprimerEquipement(objet);
+					System.out.println("Suppression effectuée");
+				} else {
+					System.out.println("Mauvaise Commande");
+				}
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+			/***************************************************************
+			 ********************Commande non valide********* **************
+			 ***************************************************************/
 			else {
 				System.out.println("Commande non-valide");
 			}

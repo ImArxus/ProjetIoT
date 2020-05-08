@@ -36,7 +36,9 @@ public class Piece {
 	public void ajouterEquipement(Equipement equip) {
 		getEquipements().add(equip);
 	}
-
+	public void supprimerEquipement(Equipement equip) {
+		getEquipements().remove(equip);
+	}
 	public void ajouterPieceAdj(Piece piece) {
 		getPiecesAdj().add(piece);
 	}
