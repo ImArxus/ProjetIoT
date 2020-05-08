@@ -42,6 +42,9 @@ public class Piece {
 	public void ajouterPieceAdj(Piece piece) {
 		getPiecesAdj().add(piece);
 	}
+	public void suppressionPieceAdj(Piece piece) {
+		getPiecesAdj().remove(piece);
+	}
 
 	public String toString() {
 		return getNom() + " qui est équipé(e) de " + afficher(equipements);

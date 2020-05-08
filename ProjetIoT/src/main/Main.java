@@ -273,7 +273,7 @@ public class Main {
 			else if (requete == 4 && droits) {
 				s.nextLine();
 				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
-				String name =s.nextLine();
+				String name = s.nextLine();
 				Piece aCreer = new Piece(name);
 				maison.ajouterPiece(aCreer);
 				maison.sontAdjacents(aCreer, getPosition());
@@ -283,7 +283,33 @@ public class Main {
 			 ********************* Suppression d'une pièce ******************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
-				System.out.println("\nSuppression d'une pièce");
+				System.out.println(
+						"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
+				List<Piece> piecesAdj = getPosition().getPiecesAdj();
+				for (int i = 0; i < piecesAdj.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Affiche la liste des pièces
+					// adjacentes
+				}
+				int req = s.nextInt() - 1;
+				if (req >= 0 && req < piecesAdj.size()) {
+					Piece destination = piecesAdj.get(req);
+					getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
+					for (int i = 0; i < piecesAdj.size(); i++) {// suppression de toutes les pieces adj
+						maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
+					}
+					maison.suppressionPiece(getPosition());// suppresion pièce
+					System.out.println("\nSuppression effectuée");
+					setPosition(destination);
+					List<Equipement> lumieres = getLumiere();
+					if (lumieres.isEmpty()) {
+						System.out.println("Il n'y a pas de lumière");
+					}
+					for (Equipement lum : lumieres) { //// Allumer
+						lum.allumer();
+					}
+				} else {
+					System.out.println("Mauvaise commande");
+				}
 			}
 			/***************************************************************
 			 ************************ Création d'un équipement***************
@@ -306,7 +332,7 @@ public class Main {
 					Equipement objet = null;
 					switch (req) {
 					case 1:
-						 objet = new Alarme(name);
+						objet = new Alarme(name);
 						break;
 					case 2:
 						objet = new Balance(name);
