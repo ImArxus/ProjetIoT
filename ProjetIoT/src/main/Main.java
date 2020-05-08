@@ -16,6 +16,7 @@ import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
+import equipements.Ventilateur;
 import equipements.Volet;
 
 public class Main {
@@ -124,6 +125,19 @@ public class Main {
 				+ sommeILobjets + "% artificielle).");
 	}
 
+	public static void allumageAutoLumieres() {// allume les lumières de la pièce s'il fait nuit
+		if (intensiteLumineuseNaturelle == 0) {
+			System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
+			List<Equipement> lumieres = getLumiere();
+			if (lumieres.isEmpty()) {
+				System.out.println("Il n'y a pas de lumières");
+			}
+			for (Equipement lum : lumieres) { //// Allumer
+				lum.allumer();
+			}
+		}
+	}
+	
 	public static void chargement(Scanner s) throws InterruptedException {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
@@ -192,6 +206,7 @@ public class Main {
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
+		allumageAutoLumieres();// on allume les lumières s'il fait nuit
 
 		boolean stop = false;// Fin de parcours
 
@@ -221,16 +236,7 @@ public class Main {
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
 					setPosition(piecesAdj.get(req));
-					if (intensiteLumineuseNaturelle==0) {
-						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-						List<Equipement> lumieres = getLumiere();
-						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumières");
-						}
-						for (Equipement lum : lumieres) { //// Allumer
-							lum.allumer();
-						}
-					}
+					allumageAutoLumieres();
 				} else {
 					System.out.println("Mauvaise commande");
 				}
@@ -303,16 +309,7 @@ public class Main {
 					maison.suppressionPiece(getPosition());// suppresion pièce
 					System.out.println("\nSuppression effectuée");
 					setPosition(destination);
-					if (intensiteLumineuseNaturelle==0) {
-						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-						List<Equipement> lumieres = getLumiere();
-						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumières");
-						}
-						for (Equipement lum : lumieres) { //// Allumer
-							lum.allumer();
-						}
-					}
+					allumageAutoLumieres();
 				} else {
 					System.out.println("Mauvaise commande");
 				}
@@ -370,6 +367,9 @@ public class Main {
 					case 11:
 						objet = new TV(name);
 						break;
+					case 12:
+						objet = new Ventilateur(name);
+						break;
 					default:
 						objet = new Volet(name);
 						break;
@@ -405,7 +405,7 @@ public class Main {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
-			 ***********Suppression de tous les equipements*****************
+			 *********** Suppression de tous les equipements*****************
 			 ***************************************************************/
 			else if (requete == 8 && droits) {
 				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce

@@ -13,6 +13,7 @@ import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
+import equipements.Ventilateur;
 import equipements.Volet;
 
 public class Action {
@@ -61,6 +62,9 @@ public class Action {
 			} else if (objet instanceof Frigo) {
 				actionFrigo((Frigo) objet, requete, s);
 			}
+			else if (objet instanceof Ventilateur) {
+				actionVentilateur((Ventilateur) objet, requete, s);
+			}
 			break;
 		}
 		return false;
@@ -94,20 +98,20 @@ public class Action {
 		switch (requete) {
 		case 4:
 			intensite = (int) c.getIntensite();
-			position.setTemperature((int) (15 + (intensite * 0.15)));
+			position.setTemperature((int) (position.getTemperature() + (intensite * 0.05)));
 			c.augmenterIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
 		case 5:
 			intensite = (int) c.getIntensite();
-			position.setTemperature((int) (15 + (intensite * 0.15)));
+			position.setTemperature((int) (position.getTemperature() + (intensite * 0.05)));
 			c.diminuerIntensite();
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
 		case 6:
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
 			intensite = s.nextInt();
-			position.setTemperature((int) (15 + (intensite * 0.15)));
+			position.setTemperature((int) (position.getTemperature() + (intensite * 0.05)));
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			c.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
@@ -254,12 +258,12 @@ public class Action {
 		switch (requete) {
 		case 4:
 			r.augmenterTemperature();
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(position.getTemperature()+r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 5:
 			r.diminuerTemperature();
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(position.getTemperature()+r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 6:
@@ -267,7 +271,7 @@ public class Action {
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			r.choisirThermostat(thermostat);
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(position.getTemperature()+r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		default:
@@ -275,7 +279,31 @@ public class Action {
 			break;
 		}
 	}
-
+	public static void actionVentilateur(Ventilateur v, int requete, Scanner s) {
+		switch (requete) {
+		case 4:
+			v.augmenterIntensite();
+			position.setTemperature(position.getTemperature()-v.getIntensite());
+			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
+			break;
+		case 5:
+			v.diminuerIntensite();
+			position.setTemperature(position.getTemperature()-v.getIntensite());
+			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
+			break;
+		case 6:
+			System.out.println("Quelle thermostat (entre 0 et 5) ?");
+			int thermostat = s.nextInt();
+			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			v.choisirIntensite(thermostat);
+			position.setTemperature(position.getTemperature()-v.getIntensite());
+			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
+			break;
+		default:
+			System.out.println("Commande non-valide");
+			break;
+		}
+	}
 	public static void actionTV(TV tv, int requete, Scanner s) {
 		switch (requete) {
 		case 4:

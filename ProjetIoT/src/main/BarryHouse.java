@@ -9,6 +9,7 @@ import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
+import equipements.Ventilateur;
 import equipements.Volet;
 import equipements.Electrolyseur;
 import equipements.Alarme;
@@ -75,6 +76,7 @@ public class BarryHouse {
 	static Equipement balance1 = new Balance("Balance1");
 	static Equipement frigo1 = new Frigo("Frigo1");
 	static Equipement thermostat1=new Thermostat("Thermostat1");
+	static Equipement ventilateur1=new Ventilateur("Ventilateur1");
 
 	public static void ajoutPiece() {
 		// Ajout de pièces dans la maison
@@ -118,6 +120,7 @@ public class BarryHouse {
 		salon.ajouterEquipement(PS51);
 		salon.ajouterEquipement(enceinte1);
 		salon.ajouterEquipement(Alarme);
+		salon.ajouterEquipement(ventilateur1);
 		// Ajout Chambre
 		chambre.ajouterEquipement(lumiere4);
 		chambre.ajouterEquipement(Radiateur4);

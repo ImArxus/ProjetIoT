@@ -73,7 +73,14 @@ public class Piece {
 	}
 
 	public void setTemperature(int temperature) {
-		this.temperature = temperature;
+		if ((temperature >= 15) && (temperature <= 30)) {
+			this.temperature = temperature;
+		} else if (temperature > 30) {
+			this.temperature = 30;
+		} else {
+			this.temperature = 15;
+		}
+
 	}
 
 	public int getIntensiteLumineuse() {

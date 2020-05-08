@@ -19,6 +19,7 @@ public class ListeEquipementConstructibles {
 		liste.add("Radiateur");
 		liste.add("Thermostat");
 		liste.add("TV");	
+		liste.add("Ventilateur");
 		liste.add("Volet");
 	}
 	
