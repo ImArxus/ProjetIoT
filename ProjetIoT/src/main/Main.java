@@ -221,7 +221,7 @@ public class Main {
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
 					setPosition(piecesAdj.get(req));
-					if (intensiteLumineuseNaturelle==0) {
+					if (intensiteLumineuseNaturelle == 0) {
 						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
 						List<Equipement> lumieres = getLumiere();
 						if (lumieres.isEmpty()) {
@@ -303,7 +303,7 @@ public class Main {
 					maison.suppressionPiece(getPosition());// suppresion pièce
 					System.out.println("\nSuppression effectuée");
 					setPosition(destination);
-					if (intensiteLumineuseNaturelle==0) {
+					if (intensiteLumineuseNaturelle == 0) {
 						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
 						List<Equipement> lumieres = getLumiere();
 						if (lumieres.isEmpty()) {
@@ -322,12 +322,10 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 6 && droits) {
 				System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
-				ListeEquipementConstructibles LEC = new ListeEquipementConstructibles();
-				List<String> possibilites = LEC.getListe();
+				List<String> possibilites = ListeEquipementConstructibles.getListe();
 				for (int i = 0; i < possibilites.size(); i++) {
 					System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Affiche la liste des
 																						// equipements
-
 				}
 				System.out.println();
 				int req = s.nextInt();
@@ -406,7 +404,7 @@ public class Main {
 			}
 			/***************************************************************
 			 ******************** Commande non valide********* **************
-			 ***************************************************************/
+			 ****************ale***********************************************/
 			else {
 				System.out.println("Commande non-valide");
 			}
