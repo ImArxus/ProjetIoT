@@ -68,9 +68,9 @@ public class Main {
 			Equipement objet = equip.get(i);
 			if (objet instanceof Alarme) {
 				if (((Alarme) objet).isEtatCourant()) {
-					System.out.println("Désactiver l'alarme (oui/non) ?\n");
-					String requete = s.nextLine();
-					if (requete.equals("oui")) {
+					System.out.println("Désactiver l'alarme (oui/non) ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
+					int requete = s.nextInt();
+					if (requete==1) {
 						objet.eteindre();
 					} else {
 						((Alarme) objet).sonner();
@@ -148,21 +148,6 @@ public class Main {
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
-		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		for (int i = 0; i < 11; i++) {
-			System.out.println("Chargement de Barry's House™️");
-			for (int j = 0; j <= i; j++) {
-				System.out.print("✅️️️️️️");
-			}
-			for (int k = 10; k > i; k--) {
-				System.out.print("⬜️");
-			}
-
-			System.out.print("\n " + i * 10 + "%");
-			Thread.sleep(100);
-			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-		}
 		System.out.println("Veuillez saisir votre identifiant");
 		pseudo = s.nextLine();
 		if (listeUtilisateurs.comptes.containsKey(pseudo)) {
