@@ -34,12 +34,15 @@ public class Main {
 	public static int getHeure() {
 		return heure;
 	}
+
 	public static Piece getPosition() {
 		return position;
 	}
+
 	public static String getPseudo() {
 		return pseudo;
 	}
+
 	public static void setPosition(Piece position) {
 		Main.position = position;
 	}
@@ -143,7 +146,7 @@ public class Main {
 			}
 		}
 	}
-	
+
 	public static void chargement(Scanner s) throws InterruptedException {
 		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		for (int i = 0; i < 11; i++) {
@@ -419,6 +422,16 @@ public class Main {
 			else if (requete == 8 && droits) {
 				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
 				System.out.println("Suppression effectuée");
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+			/***************************************************************
+			 ******* Affichages de toutes les pièces et equipements**********
+			 ***************************************************************/
+			else if (requete == 9 && droits) {
+				List<Piece> pieces = Maison.getPieces();
+				for (int i = 0; i < pieces.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
+				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
