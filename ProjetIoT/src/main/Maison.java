@@ -53,7 +53,7 @@ public class Maison {
 		this.nom = nom;
 	}
 
-	public List<Piece> getPieces() {
+	public static List<Piece> getPieces() {
 		return pieces;
 	}
 

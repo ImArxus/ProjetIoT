@@ -101,6 +101,9 @@ public class Action {
 		case 4:
 			a.reponseHeure();
 			break;
+		case 5:
+			a.reponseTemperature();
+			break;
 		default:
 			System.out.println("Commande non-valide");
 			break;
