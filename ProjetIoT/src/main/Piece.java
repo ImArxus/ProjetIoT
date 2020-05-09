@@ -47,6 +47,9 @@ public class Piece {
 	}
 
 	public String toString() {
+		if (getEquipements().isEmpty()) {
+			return getNom() + " qui est sans équipement...";
+		}
 		return getNom() + " qui est équipé(e) de " + afficher(equipements);
 	}
 

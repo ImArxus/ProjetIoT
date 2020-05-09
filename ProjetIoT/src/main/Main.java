@@ -78,19 +78,19 @@ public class Main {
 			if (heure == 24) {
 				heure = 0;
 			}
-			System.out.println("C'est actuellement la nuit !, il est " + heure + "h!");
+			System.out.println("C'est actuellement la nuit, il est " + heure + "h !");
 		} else if (heure == 8) {
-			System.out.println("Le soleil se lève !, il est " + heure + "h!");
+			System.out.println("Le soleil se lève, il est " + heure + "h !");
 		} else if (heure == 22) {
-			System.out.println("Le soleil se couche, il est " + heure + "h!");
+			System.out.println("Le soleil se couche, il est " + heure + "h !");
 		} else {
-			System.out.println("C'est actuellement le jour !, il est " + heure + "h!");
+			System.out.println("C'est actuellement le jour, il est " + heure + "h !");
 		}
 	}
 
 	public static void affichageTemperature() {
-		System.out.println("La temperature ambiante de la piece " + position.getNom() + " est de "
-				+ position.getTemperature() + "°C.");
+		System.out.println(
+				"La temperature ambiante de " + position.getNom() + " est de " + position.getTemperature() + "°C");
 	}
 
 	public static void traitementIntensiteLumineuseNaturelle() {
@@ -119,59 +119,65 @@ public class Main {
 			}
 		}
 		position.setIntensiteLumineuse(intensiteLumineuseNaturelle + sommeILobjets);
-		System.out.println("L'intensité lumineuse de la piece " + position.getNom() + " est de "
-				+ position.getIntensiteLumineuse() + "%. (dont = " + intensiteLumineuseNaturelle + "% naturelle et  "
-				+ sommeILobjets + "% artificielle).");
+		System.out.println("L'intensité lumineuse de " + position.getNom() + " est de "
+				+ position.getIntensiteLumineuse() + "% (dont = " + intensiteLumineuseNaturelle + "% naturelle et  "
+				+ sommeILobjets + "% artificielle)");
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
-		System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		for (int i = 0; i < 11; i++) {
-			System.out.println("Chargement de Barry's House™️");
-			for (int j = 0; j <= i; j++) {
-				System.out.print("✅️️️️️️");
-			}
-			for (int k = 10; k > i; k--) {
-				System.out.print("⬜️");
-			}
-
-			System.out.print("\n " + i * 10 + "%");
-			Thread.sleep(500);
-			System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-		}
-		System.out.println("Veuillez saisir votre identifiant");
-		pseudo = s.nextLine();
-		if (listeUtilisateurs.comptes.containsKey(pseudo)) {
-			System.out.println("identifiant détecté");
-			System.out.println("Veuillez saisir votre mdp");
-			mdp = s.nextLine();
-			if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
-				System.out.println("mot de passe correct");
+		boolean connecte = false;
+		while (!connecte) {
+			System.out.print("Identifiant : ");
+			pseudo = s.nextLine();
+			if (listeUtilisateurs.comptes.containsKey(pseudo)) {
+				System.out.println("Identifiant détecté");
+				System.out.println("------------------------------------------------------------------");
+				System.out.print("Mot de passe : ");
+				mdp = s.nextLine();
+				if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
+					System.out.println("Mot de passe correct");
+					connecte = true;
+				} else {
+					System.out.println("Mot de passe incorrect");
+					System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Réessayer");
+					int requete = s.nextInt();
+					s.nextLine();
+					if (requete == 1) {
+						pseudo = "guest";
+						mdp = listeUtilisateurs.comptes.get(pseudo);
+						System.out.println("Connexion automatique en tant qu'invité");
+						connecte = true;
+					}
+				}
 			} else {
-				System.out.println("mot de passe incorrect");
-				pseudo = "guest";
-				mdp = listeUtilisateurs.comptes.get(pseudo);
-				System.out.println("Connexion automatique sur le compte guest");
+				System.out.println("Identifiant inconnu");
+				System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Créer un compte\n➡️ 3 : Réessayer");
+				int requete = s.nextInt();
+				s.nextLine();
+				if (requete == 1) {
+					pseudo = "guest";
+					mdp = listeUtilisateurs.comptes.get(pseudo);
+					System.out.println("Connexion automatique en tant qu'invité");
+					connecte = true;
+				} else if (requete == 2) {
+					System.out.println("Identifiant : " + pseudo);
+					System.out.print("Veuillez choisir un mot de passe : ");
+					mdp = s.nextLine();
+					listeUtilisateurs.comptes.put(pseudo, mdp);
+					listeUtilisateurs.estAdmin.put(pseudo, false);
+					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
+					connecte = true;
+				}
 			}
-		} else {
-			System.out.println("identifiant inconnu");
-			System.out.println("\nNouveau compte crée, Veuillez chosir votre mdp");
-			mdp = s.nextLine();
-			listeUtilisateurs.comptes.put(pseudo, mdp);
-			listeUtilisateurs.estAdmin.put(pseudo, false);
+			System.out.println("------------------------------------------------------------------");
 		}
-		System.out.println("----------------------------------------------");
-		System.out.println("identifiant : " + pseudo);
-		System.out.print("mdp : ");
-		for (int v = 0; v < mdp.length(); v++) {
-			System.out.print("*️");// masquage mot de passe
-		}
+
+		System.out.println("Identifiant : " + pseudo);
 		droits = listeUtilisateurs.estAdmin.get(pseudo);
-		System.out.println("\nactivation du mode administrateur : " + droits);
-		System.out.println("----------------------------------------------");
+		System.out.println("Activation du mode administrateur : " + droits);
+		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);
-		System.out.println("\n\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
+		System.out.println("\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("➡️ 1 : Barry's House");
 		System.out.println("➡️ 2 : Maison Vide\n");
 		int requete = s.nextInt();
@@ -181,7 +187,7 @@ public class Main {
 			System.out.println("\nBienvenue dans la maison de Barry !\n");
 		} else {
 			maison = BarryHouse.creerMaisonVide();
-			System.out.println("\nVotre maison de rêve n'attend que vous !");
+			System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 		}
 		setPosition(maison.getPieces().get(0));
 		Thread.sleep(2000);
@@ -196,10 +202,10 @@ public class Main {
 		boolean stop = false;// Fin de parcours
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-			calculHoraires();// calcul heure du jour
-			affichageTemperature();// affichage temperature pièce
-			traitementIntensiteLumineuseNaturelle();// traitement ILN
-			traitementIntensiteLumineuse();// traitement&affichage IL totale
+			calculHoraires(); // Calcul heure du jour
+			affichageTemperature(); // Affichage temperature pièce
+			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
+			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -212,11 +218,10 @@ public class Main {
 			 ************************* Déplacement *************************
 			 ***************************************************************/
 			if (requete == 1) {
-				System.out.println("\nTapez la commande correspondant à la destination souhaitée");
+				System.out.println("Tapez la commande correspondant à la destination souhaitée");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				for (int i = 0; i < piecesAdj.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Affiche la liste des pièces
-					// adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
 				}
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
@@ -227,7 +232,7 @@ public class Main {
 						if (lumieres.isEmpty()) {
 							System.out.println("Il n'y a pas de lumières");
 						}
-						for (Equipement lum : lumieres) { //// Allumer
+						for (Equipement lum : lumieres) { // Allumer
 							lum.allumer();
 						}
 					}
@@ -243,8 +248,7 @@ public class Main {
 				List<Equipement> equip = getPosition().getEquipements();
 				System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des pièces
-																				// adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
 				}
 				System.out.println();
 				int req = s.nextInt() - 1;
@@ -296,11 +300,11 @@ public class Main {
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
 					Piece destination = piecesAdj.get(req);
-					getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
-					for (int i = 0; i < piecesAdj.size(); i++) {// suppression de toutes les pieces adj
+					getPosition().getEquipements().clear(); // Suppression de tous les équipements de la pièce
+					for (int i = 0; i < piecesAdj.size(); i++) { // Suppression de toutes les pieces adj
 						maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
 					}
-					maison.suppressionPiece(getPosition());// suppresion pièce
+					maison.suppressionPiece(getPosition()); // Suppresion pièce
 					System.out.println("\nSuppression effectuée");
 					setPosition(destination);
 					if (intensiteLumineuseNaturelle == 0) {
@@ -309,7 +313,7 @@ public class Main {
 						if (lumieres.isEmpty()) {
 							System.out.println("Il n'y a pas de lumières");
 						}
-						for (Equipement lum : lumieres) { //// Allumer
+						for (Equipement lum : lumieres) { // Allumer
 							lum.allumer();
 						}
 					}
@@ -324,8 +328,7 @@ public class Main {
 				System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
 				List<String> possibilites = ListeEquipementConstructibles.getListe();
 				for (int i = 0; i < possibilites.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Affiche la liste des
-																						// equipements
+					System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Liste des équipements
 				}
 				System.out.println();
 				int req = s.nextInt();
@@ -378,7 +381,7 @@ public class Main {
 				} else {
 					System.out.println("Mauvaise Commande");
 				}
-				Thread.sleep(3000); // Delai de 3 secondes
+				Thread.sleep(3000); // Délai de 3 secondes
 
 			}
 			/***************************************************************
@@ -388,7 +391,7 @@ public class Main {
 				List<Equipement> equip = getPosition().getEquipements();
 				System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
 				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Affiche la liste des equipements
+					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des équipements
 
 				}
 				System.out.println();
@@ -400,11 +403,11 @@ public class Main {
 				} else {
 					System.out.println("Mauvaise Commande");
 				}
-				Thread.sleep(3000); // Delai de 3 secondes
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 			/***************************************************************
-			 ******************** Commande non valide********* **************
-			 ****************ale***********************************************/
+			 ******************** Commande non valide ***********************
+			 ***********************************************/
 			else {
 				System.out.println("Commande non-valide");
 			}
