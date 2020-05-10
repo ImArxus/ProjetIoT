@@ -45,7 +45,7 @@ public class Piece {
 		getPiecesAdj().add(piece);
 	}
 
-	public void suppressionPieceAdj(Piece piece) {
+	public void supprimerPieceAdj(Piece piece) {
 		getPiecesAdj().remove(piece);
 	}
 

@@ -37,8 +37,8 @@ public class Maison {
 	}
 
 	public void sontPlusAdjacents(Piece piece1, Piece piece2) {
-		piece1.suppressionPieceAdj(piece2);
-		piece2.suppressionPieceAdj(piece1);
+		piece1.supprimerPieceAdj(piece2);
+		piece2.supprimerPieceAdj(piece1);
 	}
 
 	public String toString() {

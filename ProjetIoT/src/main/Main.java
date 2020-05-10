@@ -6,17 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
-import equipements.Balance;
-import equipements.Cheminee;
-import equipements.Electrolyseur;
-import equipements.Enceinte;
-import equipements.Frigo;
 import equipements.Lumiere;
-import equipements.PS5;
-import equipements.Radiateur;
-import equipements.TV;
-import equipements.Thermostat;
-import equipements.Volet;
 
 public class Main {
 
@@ -219,12 +209,12 @@ public class Main {
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
 
-			int requete = s.nextInt();
+			String requete = s.nextLine();
 
 			/***************************************************************
 			 ************************* Déplacement *************************
 			 ***************************************************************/
-			if (requete == 1) {
+			if (requete.equals("1")) {
 				System.out.println("Tapez la commande correspondant à la destination souhaitée");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				for (int i = 0; i < piecesAdj.size(); i++) {
@@ -252,7 +242,7 @@ public class Main {
 			/***************************************************************
 			 ************************* Utilisation *************************
 			 ***************************************************************/
-			else if (requete == 2) {
+			else if (requete.equals("2")) {
 				List<Equipement> equip = getPosition().getEquipements();
 				System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 				for (int i = 0; i < equip.size(); i++) {
@@ -278,14 +268,14 @@ public class Main {
 			/***************************************************************
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
-			else if (requete == 3) {
+			else if (requete.equals("3")) {
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
 			/***************************************************************
 			 ************************ Création d'une pièce ******************
 			 ***************************************************************/
-			else if (requete == 4 && droits) {
+			else if (requete.equals("4") && droits) {
 				s.nextLine();
 				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
 				String name = s.nextLine();
@@ -297,7 +287,7 @@ public class Main {
 			/***************************************************************
 			 ********************* Suppression d'une pièce ******************
 			 ***************************************************************/
-			else if (requete == 5 && droits) {
+			else if (requete.equals("5") && droits) {
 				System.out.println(
 						"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
@@ -328,90 +318,23 @@ public class Main {
 					System.out.println("Mauvaise commande");
 				}
 			}
+			
 			/***************************************************************
 			 ************************ Création d'un équipement***************
 			 ***************************************************************/
-			else if (requete == 6 && droits) {
-				System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
-				List<String> possibilites = ListeEquipementConstructibles.getListe();
-				for (int i = 0; i < possibilites.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Liste des équipements
-				}
-				System.out.println();
-				int req = s.nextInt();
-				s.nextLine();
-				if (req >= 0 && req < possibilites.size()) {
-					System.out.println("\nTapez le nom de ce nouvel équipement");
-					String name = s.nextLine();
-					Equipement objet = null;
-					switch (req) {
-					case 1:
-						objet = new Alarme(name);
-						break;
-					case 2:
-						objet = new Balance(name);
-						break;
-					case 3:
-						objet = new Cheminee(name);
-						break;
-					case 4:
-						objet = new Electrolyseur(name);
-						break;
-					case 5:
-						objet = new Enceinte(name);
-						break;
-					case 6:
-						objet = new Frigo(name);
-						break;
-					case 7:
-						objet = new Lumiere(name);
-						break;
-					case 8:
-						objet = new PS5(name);
-						break;
-					case 9:
-						objet = new Radiateur(name);
-						break;
-					case 10:
-						objet = new Thermostat(name);
-						break;
-					case 11:
-						objet = new TV(name);
-						break;
-					default:
-						objet = new Volet(name);
-						break;
-					}
-					getPosition().ajouterEquipement(objet);
-					;
-					System.out.println("Ajout effectué");
-				} else {
-					System.out.println("Mauvaise Commande");
-				}
+			else if (requete.equals("6") && droits) {
+				Equipement.creerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
-
 			}
+			
 			/***************************************************************
 			 ********************* Suppression d'un équipement **************
 			 ***************************************************************/
-			else if (requete == 7 && droits) {
-				List<Equipement> equip = getPosition().getEquipements();
-				System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
-				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des équipements
-
-				}
-				System.out.println();
-				int req = s.nextInt() - 1;
-				if (req >= 0 && req < equip.size()) {
-					Equipement objet = equip.get(req);
-					getPosition().supprimerEquipement(objet);
-					System.out.println("Suppression effectuée");
-				} else {
-					System.out.println("Mauvaise Commande");
-				}
+			else if (requete.equals("7") && droits) {
+				Equipement.supprimerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
+			
 			/***************************************************************
 			 ******************** Commande non valide ***********************
 			 ***********************************************/
