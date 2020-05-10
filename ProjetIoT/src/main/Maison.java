@@ -26,7 +26,7 @@ public class Maison {
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
 	}
-	
+
 	public void suppressionPiece(Piece p) {
 		getPieces().remove(p);
 	}
@@ -35,12 +35,12 @@ public class Maison {
 		piece1.ajouterPieceAdj(piece2);
 		piece2.ajouterPieceAdj(piece1);
 	}
-	
+
 	public void sontPlusAdjacents(Piece piece1, Piece piece2) {
 		piece1.suppressionPieceAdj(piece2);
 		piece2.suppressionPieceAdj(piece1);
 	}
-	
+
 	public String toString() {
 		return getNom() + " : " + getPieces();
 	}

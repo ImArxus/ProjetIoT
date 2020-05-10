@@ -145,7 +145,7 @@ public class Action {
 	}
 
 	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();//nécessaire pour enlever la mémoire en tampon
+		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (e.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -178,7 +178,7 @@ public class Action {
 	}
 
 	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();//nécessaire pour enlever la mémoire en tampon
+		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -254,12 +254,12 @@ public class Action {
 		switch (requete) {
 		case 4:
 			r.augmenterTemperature();
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(15 + 3 * r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 5:
 			r.diminuerTemperature();
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(15 + 3 * r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 6:
@@ -267,7 +267,7 @@ public class Action {
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			r.choisirThermostat(thermostat);
-			position.setTemperature(15+3*r.getThermostat());
+			position.setTemperature(15 + 3 * r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		default:

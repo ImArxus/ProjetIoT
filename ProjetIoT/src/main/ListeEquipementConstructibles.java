@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ListeEquipementConstructibles {
 
-	private static List<String> liste= new LinkedList<String>();
-	
+	private static List<String> liste = new LinkedList<String>();
+
 	public ListeEquipementConstructibles() {
 		liste.add("Alarme");
 		liste.add("Balance");
@@ -18,11 +18,11 @@ public class ListeEquipementConstructibles {
 		liste.add("PS5");
 		liste.add("Radiateur");
 		liste.add("Thermostat");
-		liste.add("TV");	
+		liste.add("TV");
 		liste.add("Volet");
 	}
-	
+
 	public static List<String> getListe() {
 		return liste;
-	}	
+	}
 }

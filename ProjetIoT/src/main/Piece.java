@@ -8,7 +8,7 @@ public class Piece {
 
 	private String nom;
 	private int temperature;
-	private int intensiteLumineuse;//intensité totale
+	private int intensiteLumineuse; // Intensité totale
 	private List<Piece> piecesAdj = new LinkedList<Piece>();
 	private List<Equipement> equipements = new LinkedList<Equipement>();
 
@@ -36,12 +36,15 @@ public class Piece {
 	public void ajouterEquipement(Equipement equip) {
 		getEquipements().add(equip);
 	}
+
 	public void supprimerEquipement(Equipement equip) {
 		getEquipements().remove(equip);
 	}
+
 	public void ajouterPieceAdj(Piece piece) {
 		getPiecesAdj().add(piece);
 	}
+
 	public void suppressionPieceAdj(Piece piece) {
 		getPiecesAdj().remove(piece);
 	}
@@ -58,7 +61,7 @@ public class Piece {
 		String fin = "\n";
 		while (it.hasNext()) {
 			Equipement b = it.next();
-			fin = fin + "       -> " + b.toString() + "\n";
+			fin = fin + "       ->️ " + b.toString() + "\n";
 		}
 		return fin;
 	}
@@ -107,14 +110,6 @@ public class Piece {
 
 	public void setEquipements(List<Equipement> equipements) {
 		this.equipements = equipements;
-	}
-
-	public static void main(String[] args) {
-		List<Equipement> equip = new LinkedList<Equipement>();
-		// Equipement TV = new Equipement("TV");
-		// ajouterEquipement(TV);
-		Piece salon = new Piece("Salon", equip);
-		System.out.println(salon.toString());
 	}
 
 }

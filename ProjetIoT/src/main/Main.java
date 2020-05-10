@@ -130,8 +130,6 @@ public class Main {
 			System.out.print("Identifiant : ");
 			pseudo = s.nextLine();
 			if (listeUtilisateurs.comptes.containsKey(pseudo)) {
-				System.out.println("Identifiant détecté");
-				System.out.println("------------------------------------------------------------------");
 				System.out.print("Mot de passe : ");
 				mdp = s.nextLine();
 				if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
@@ -201,12 +199,21 @@ public class Main {
 
 		boolean stop = false;// Fin de parcours
 
+		List<Equipement> lumieres = getLumiere();
+		if (lumieres.isEmpty()) {
+			System.out.println("Il n'y a pas de lumière");
+		}
+		for (Equipement lum : lumieres) { // Allumer
+			System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
+			lum.allumer();
+		}
+
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
@@ -227,12 +234,13 @@ public class Main {
 				if (req >= 0 && req < piecesAdj.size()) {
 					setPosition(piecesAdj.get(req));
 					if (intensiteLumineuseNaturelle == 0) {
-						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-						List<Equipement> lumieres = getLumiere();
+						lumieres = getLumiere();
 						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumières");
+							System.out.println("Il n'y a pas de lumière");
 						}
 						for (Equipement lum : lumieres) { // Allumer
+							System.out
+									.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
 							lum.allumer();
 						}
 					}
@@ -294,8 +302,7 @@ public class Main {
 						"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				for (int i = 0; i < piecesAdj.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Affiche la liste des pièces
-					// adjacentes
+					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
 				}
 				int req = s.nextInt() - 1;
 				if (req >= 0 && req < piecesAdj.size()) {
@@ -309,7 +316,7 @@ public class Main {
 					setPosition(destination);
 					if (intensiteLumineuseNaturelle == 0) {
 						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-						List<Equipement> lumieres = getLumiere();
+						lumieres = getLumiere();
 						if (lumieres.isEmpty()) {
 							System.out.println("Il n'y a pas de lumières");
 						}
