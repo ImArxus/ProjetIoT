@@ -42,8 +42,7 @@ public class Equipement {
 			System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Liste des équipements
 		}
 		System.out.println();
-		int req = s.nextInt();
-		s.nextLine();
+		int req = Main.toInt(s.nextLine());
 		if (req >= 0 && req < possibilites.size()) {
 			System.out.println("\nTapez le nom de ce nouvel équipement");
 			String name = s.nextLine();
@@ -95,18 +94,22 @@ public class Equipement {
 
 	public static void supprimerEquipement(Piece p, Scanner s) {
 		List<Equipement> equip = p.getEquipements();
-		System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
-		for (int i = 0; i < equip.size(); i++) {
-			System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des équipements
-		}
-		System.out.println();
-		int req = s.nextInt() - 1;
-		if (req >= 0 && req < equip.size()) {
-			Equipement objet = equip.get(req);
-			p.supprimerEquipement(objet);
-			System.out.println("Suppression effectuée");
+		if (equip.isEmpty()) {
+			System.out.println("Il n'y a pas d'équipement à supprimer");
 		} else {
-			System.out.println("Mauvaise Commande");
+			System.out.println("\nTapez la commande correspondant à l'équipement à supprimer");
+			for (int i = 0; i < equip.size(); i++) {
+				System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des équipements
+			}
+			System.out.println();
+			int req = Main.toInt(s.nextLine()) - 1;
+			if (req >= 0 && req < equip.size()) {
+				Equipement objet = equip.get(req);
+				p.supprimerEquipement(objet);
+				System.out.println("Suppression effectuée");
+			} else {
+				System.out.println("Mauvaise Commande");
+			}
 		}
 	}
 

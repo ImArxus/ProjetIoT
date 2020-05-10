@@ -44,28 +44,31 @@ public class Main {
 			 ************************* Déplacement *************************
 			 ***************************************************************/
 			if (requete == 1) {
-				System.out.println("Tapez la commande correspondant à la destination souhaitée");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
-				for (int i = 0; i < piecesAdj.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-				}
-				int req = s.nextInt() - 1;
-				s.nextLine();
-				if (req >= 0 && req < piecesAdj.size()) {
-					setPosition(piecesAdj.get(req));
-					if (intensiteLumineuseNaturelle == 0) {
-						lumieres = getLumiere();
-						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumière");
-						}
-						for (Equipement lum : lumieres) { // Allumer
-							System.out
-									.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
-							lum.allumer();
-						}
-					}
+				if (piecesAdj.isEmpty()) {
+					System.out.println("\nIl n'y a pas de pièces dans laquelle se déplacer\n");
 				} else {
-					System.out.println("Mauvaise commande");
+					System.out.println("Tapez la commande correspondant à la destination souhaitée");
+					for (int i = 0; i < piecesAdj.size(); i++) {
+						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
+					}
+					int req = toInt(s.nextLine()) - 1;
+					if (req >= 0 && req < piecesAdj.size()) {
+						setPosition(piecesAdj.get(req));
+						if (intensiteLumineuseNaturelle == 0) {
+							lumieres = getLumiere();
+							if (lumieres.isEmpty()) {
+								System.out.println("Il n'y a pas de lumière");
+							}
+							for (Equipement lum : lumieres) { // Allumer
+								System.out.println(
+										"Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
+								lum.allumer();
+							}
+						}
+					} else {
+						System.out.println("Mauvaise commande");
+					}
 				}
 			}
 
@@ -74,32 +77,36 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 2) {
 				List<Equipement> equip = getPosition().getEquipements();
-				System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
-				for (int i = 0; i < equip.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
-				}
-				System.out.println();
-				int req = s.nextInt() - 1;
-				s.nextLine();
-				boolean exit = false;
-				if (req >= 0 && req < equip.size()) {
-					Equipement objet = equip.get(req);
-					while (!exit) {
-						System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet);
-						System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
-						exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
-						Thread.sleep(2000); // Delai de 2 secondes
-					}
+				if (equip.isEmpty()) {
+					System.out.println("\nIl n'y a pas d'équipement à utiliser ici\n");
 				} else {
-					System.out.println("Mauvaise Commande");
+					System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
+					for (int i = 0; i < equip.size(); i++) {
+						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
+					}
+					System.out.println();
+					int req = toInt(s.nextLine()) - 1;
+					boolean exit = false;
+					if (req >= 0 && req < equip.size()) {
+						Equipement objet = equip.get(req);
+						while (!exit) {
+							System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet);
+							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
+							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
+							Thread.sleep(2000); // Delai de 2 secondes
+						}
+					} else {
+						System.out.println("Mauvaise Commande");
+					}
+					Thread.sleep(3000); // Delai de 3 secondes
 				}
-				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
 			else if (requete == 3) {
+				Sauvegarde.sauvegarder();
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
@@ -120,35 +127,38 @@ public class Main {
 			 ******************* Suppression d'une pièce *******************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
-				System.out.println(
-						"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
-				for (int i = 0; i < piecesAdj.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-				}
-				int req = s.nextInt() - 1;
-				s.nextLine();
-				if (req >= 0 && req < piecesAdj.size()) {
-					Piece destination = piecesAdj.get(req);
-					getPosition().getEquipements().clear(); // Suppression de tous les équipements de la pièce
-					for (int i = 0; i < piecesAdj.size(); i++) { // Suppression de toutes les pieces adj
-						maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
-					}
-					maison.suppressionPiece(getPosition()); // Suppresion pièce
-					System.out.println("\nSuppression effectuée");
-					setPosition(destination);
-					if (intensiteLumineuseNaturelle == 0) {
-						System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-						lumieres = getLumiere();
-						if (lumieres.isEmpty()) {
-							System.out.println("Il n'y a pas de lumières");
-						}
-						for (Equipement lum : lumieres) { // Allumer
-							lum.allumer();
-						}
-					}
+				if (piecesAdj.isEmpty()) {
+					System.out.println("Il n'y a pas de pièce à supprimer");
 				} else {
-					System.out.println("Mauvaise commande");
+					System.out.println(
+							"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
+					for (int i = 0; i < piecesAdj.size(); i++) {
+						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
+					}
+					int req = toInt(s.nextLine()) - 1;
+					if (req >= 0 && req < piecesAdj.size()) {
+						Piece destination = piecesAdj.get(req);
+						getPosition().getEquipements().clear(); // Suppression de tous les équipements de la pièce
+						for (int i = 0; i < piecesAdj.size(); i++) { // Suppression de toutes les pieces adj
+							maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
+						}
+						maison.suppressionPiece(getPosition()); // Suppresion pièce
+						System.out.println("\nSuppression effectuée");
+						setPosition(destination);
+						if (intensiteLumineuseNaturelle == 0) {
+							System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
+							lumieres = getLumiere();
+							if (lumieres.isEmpty()) {
+								System.out.println("Il n'y a pas de lumières");
+							}
+							for (Equipement lum : lumieres) { // Allumer
+								lum.allumer();
+							}
+						}
+					} else {
+						System.out.println("Mauvaise commande");
+					}
 				}
 			}
 
@@ -187,6 +197,14 @@ public class Main {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
+
+	public static Maison getMaison() {
+		return maison;
+	}
+
+	public static String getPseudo() {
+		return pseudo;
+	}
 
 	public static Piece getPosition() {
 		return position;

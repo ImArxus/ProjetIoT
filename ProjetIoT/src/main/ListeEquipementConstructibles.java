@@ -7,7 +7,7 @@ public class ListeEquipementConstructibles {
 
 	private static List<String> liste = new LinkedList<String>();
 
-	public ListeEquipementConstructibles() {
+	public static void ajoutEquipementConstructibles() {
 		liste.add("Alarme");
 		liste.add("Balance");
 		liste.add("Cheminee");
@@ -23,6 +23,9 @@ public class ListeEquipementConstructibles {
 	}
 
 	public static List<String> getListe() {
+		liste.clear();
+		ajoutEquipementConstructibles();
 		return liste;
 	}
+	
 }
