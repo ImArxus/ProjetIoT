@@ -9,9 +9,11 @@ import equipements.Alarme;
 import equipements.Lumiere;
 
 public class Main {
-	private static Interface a;
+
 	public static void main(String[] args) throws InterruptedException {
-		a.creation();
+		StdDraw.setCanvasSize(1000, 1000);
+		StdDraw.picture(0.5, 0.5,"images/welcomBarryHouse.png");
+		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
