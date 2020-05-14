@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Alexa;
 import equipements.Balance;
 import equipements.Cheminee;
 import equipements.Electrolyseur;
@@ -14,6 +15,7 @@ import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
+import equipements.Ventilateur;
 import equipements.Volet;
 
 public class Equipement {
@@ -52,34 +54,40 @@ public class Equipement {
 				objet = new Alarme(name);
 				break;
 			case 2:
-				objet = new Balance(name);
+				objet = new Alexa(name);
 				break;
 			case 3:
-				objet = new Cheminee(name);
+				objet = new Balance(name);
 				break;
 			case 4:
-				objet = new Electrolyseur(name);
+				objet = new Cheminee(name);
 				break;
 			case 5:
-				objet = new Enceinte(name);
+				objet = new Electrolyseur(name);
 				break;
 			case 6:
-				objet = new Frigo(name);
+				objet = new Enceinte(name);
 				break;
 			case 7:
-				objet = new Lumiere(name);
+				objet = new Frigo(name);
 				break;
 			case 8:
-				objet = new PS5(name);
+				objet = new Lumiere(name);
 				break;
 			case 9:
-				objet = new Radiateur(name);
+				objet = new PS5(name);
 				break;
 			case 10:
-				objet = new Thermostat(name);
+				objet = new Radiateur(name);
 				break;
 			case 11:
+				objet = new Thermostat(name);
+				break;
+			case 12:
 				objet = new TV(name);
+				break;
+			case 13:
+				objet = new Ventilateur(name);
 				break;
 			default:
 				objet = new Volet(name);
