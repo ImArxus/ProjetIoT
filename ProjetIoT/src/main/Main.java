@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		StdDraw.setCanvasSize(1000, 700);
-		StdDraw.picture(0.5, 0.35,"images/welcomBarryHouse.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil.png");
 		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
@@ -33,6 +33,7 @@ public class Main {
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
+			StdDraw.text(0.13, 0.03, pseudo);
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
