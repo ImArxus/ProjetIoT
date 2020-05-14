@@ -12,14 +12,14 @@ public class Sauvegarde {
 
 	// https://forum.hardware.fr/hfr/Programmation/Java/sauvegarde-sujet_129577_1.htm
 
-	public static void sauvegarder() {
+	public static void sauvegarder(String nom) {
 		// Map d'une maison associée à un pseudo
 		Map<String, Maison> maMaison = new HashMap<String, Maison>();
 		maMaison.put(Main.getPseudo(), Main.getMaison());
 
 		// Crée un fichier texte
 		try {
-			PrintWriter ecrit = new PrintWriter(new FileWriter("sauvegarde" + Main.getPseudo() + ".txt"));
+			PrintWriter ecrit = new PrintWriter(new FileWriter("sauvegarde_" + Main.getPseudo() +"_"+nom+ ".txt"));
 			ecrit.print(maMaison);
 			ecrit.flush();
 			ecrit.close();

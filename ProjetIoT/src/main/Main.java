@@ -419,7 +419,7 @@ public class Main {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
-			Sauvegarde.sauvegarder();
+			Sauvegarde.sauvegarder(maison.getNom());
 			System.out.println("\nSauvegarde effectuée");
 		}	
 		else {
