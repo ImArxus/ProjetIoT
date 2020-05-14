@@ -9,9 +9,13 @@ import equipements.Alarme;
 import equipements.Lumiere;
 
 public class Main {
-	private static Interface a;
+
+	private static Interface IF;
+	
 	public static void main(String[] args) throws InterruptedException {
-		a.creation();
+		
+		Interface.creation(); // Création de l'interface
+		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
@@ -415,15 +419,23 @@ public class Main {
 		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
+
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
 			Sauvegarde.sauvegarder(maison.getNom());
 			System.out.println("\nSauvegarde effectuée");
-		}	
-		else {
+		} else {
 			System.out.println("\nMaison non sauvegardée");
 		}
-	}	
+	}
+
+	public static Interface getIF() {
+		return IF;
+	}
+
+	public static void setIF(Interface iF) {
+		IF = iF;
+	}
 }

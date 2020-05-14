@@ -4,10 +4,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.*;
 import javax.swing.BoxLayout;
 
 public class Interface extends JFrame {
+
+	private static final long serialVersionUID = -5961323340170422114L; // Default
 
 	public Interface() {
 
