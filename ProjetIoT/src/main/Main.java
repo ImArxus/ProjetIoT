@@ -11,6 +11,7 @@ import equipements.Lumiere;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
+
 		StdDraw.setCanvasSize(1000, 1000);
 		StdDraw.picture(0.5, 0.5,"images/welcomBarryHouse.png");
 		
@@ -417,15 +418,16 @@ public class Main {
 		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
+
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
 			Sauvegarde.sauvegarder(maison.getNom());
 			System.out.println("\nSauvegarde effectuée");
-		}	
-		else {
+		} else {
 			System.out.println("\nMaison non sauvegardée");
 		}
-	}	
+	}
+	
 }
