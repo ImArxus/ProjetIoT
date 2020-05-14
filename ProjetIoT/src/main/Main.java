@@ -10,11 +10,10 @@ import equipements.Lumiere;
 
 public class Main {
 
-	private static Interface IF;
-	
 	public static void main(String[] args) throws InterruptedException {
-		
-		Interface.creation(); // Création de l'interface
+
+		StdDraw.setCanvasSize(1000, 1000);
+		StdDraw.picture(0.5, 0.5,"images/welcomBarryHouse.png");
 		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
@@ -430,12 +429,5 @@ public class Main {
 			System.out.println("\nMaison non sauvegardée");
 		}
 	}
-
-	public static Interface getIF() {
-		return IF;
-	}
-
-	public static void setIF(Interface iF) {
-		IF = iF;
-	}
+	
 }
