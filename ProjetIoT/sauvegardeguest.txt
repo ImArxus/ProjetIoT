@@ -1,0 +1,72 @@
+{guest=MyHouse : [Salon qui est équipé(e) de 
+       ->️ TV2 (éteint(e))
+       ->️ Cheminee (éteint(e))
+       ->️ Lumière3 (éteint(e))
+       ->️ Radiateur3 (allumé(e))
+       ->️ Volet3 (éteint(e))
+       ->️ PS5 (éteint(e))
+       ->️ Enceinte (éteint(e))
+       ->️ Alarme (éteint(e))
+       ->️ Ventilateur1 (éteint(e))
+       ->️ Alexa1 (éteint(e))
+, Cuisine qui est équipé(e) de 
+       ->️ Lumière1 (éteint(e))
+       ->️ Volet1 (éteint(e))
+       ->️ TV1 (éteint(e))
+       ->️ Radiateur1 (éteint(e))
+       ->️ Frigo1 (fermé)
+       ->️ Alarme (éteint(e))
+, Salle à manger qui est équipé(e) de 
+       ->️ Lumière2 (éteint(e))
+       ->️ Radiateur2 (éteint(e))
+       ->️ Volet2 (éteint(e))
+       ->️ Thermostat1 (éteint(e))
+, Salon qui est équipé(e) de 
+       ->️ TV2 (éteint(e))
+       ->️ Cheminee (éteint(e))
+       ->️ Lumière3 (éteint(e))
+       ->️ Radiateur3 (allumé(e))
+       ->️ Volet3 (éteint(e))
+       ->️ PS5 (éteint(e))
+       ->️ Enceinte (éteint(e))
+       ->️ Alarme (éteint(e))
+       ->️ Ventilateur1 (éteint(e))
+       ->️ Alexa1 (éteint(e))
+, Chambre1 qui est équipé(e) de 
+       ->️ Lumière4 (éteint(e))
+       ->️ Radiateur4 (éteint(e))
+       ->️ TV3 (éteint(e))
+       ->️ Volet4 (éteint(e))
+, Salle de bain qui est équipé(e) de 
+       ->️ Lumière5 (éteint(e))
+       ->️ Volet5 (éteint(e))
+       ->️ Radiateur5 (éteint(e))
+       ->️ Balance1 (éteint(e))
+, Palier qui est équipé(e) de 
+       ->️ Volet6 (éteint(e))
+       ->️ Lumière6 (éteint(e))
+       ->️ Radiateur6 (éteint(e))
+, Escalier qui est équipé(e) de 
+       ->️ Lumière7 (éteint(e))
+, Dressing qui est équipé(e) de 
+       ->️ Lumière8 (éteint(e))
+       ->️ Radiateur7 (éteint(e))
+       ->️ Volet7 (éteint(e))
+, Buanderie qui est équipé(e) de 
+       ->️ Volet8 (éteint(e))
+       ->️ Lumière9 (éteint(e))
+       ->️ Radiateur8 (éteint(e))
+, Jardin qui est équipé(e) de 
+       ->️ Alarme (éteint(e))
+, Bureau qui est équipé(e) de 
+       ->️ Lumière10 (éteint(e))
+       ->️ Volet9 (éteint(e))
+       ->️ Radiateur9 (éteint(e))
+, Mezzanine qui est équipé(e) de 
+       ->️ Lumière11 (éteint(e))
+       ->️ Volet10 (éteint(e))
+       ->️ Radiateur10 (éteint(e))
+, Piscine qui est équipé(e) de 
+       ->️ Electrolyseur (éteint(e))
+       ->️ Alarme (éteint(e))
+]}
