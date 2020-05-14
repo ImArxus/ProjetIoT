@@ -177,7 +177,24 @@ public class Main {
 				Equipement.supprimerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
-
+			/***************************************************************
+			 ******* Suppression de tous les equipements de la pièce********
+			 ***************************************************************/
+			else if (requete == 8 && droits) {
+				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
+				System.out.println("Suppression effectuée");
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+			/***************************************************************
+			 ******* Affichages de toutes les pièces et equipements**********
+			 ***************************************************************/
+			else if (requete == 9 && droits) {
+				List<Piece> pieces = Maison.getPieces();
+				for (int i = 0; i < pieces.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
+				}
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
 			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
