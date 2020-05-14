@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(1000, 700);
-		StdDraw.picture(0.5, 0.35,"images/welcomBarryHouse.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil.png");
 		StdDraw.rectangle(0.21, 0.91, 0.2, 0.08);
 		StdDraw.text(0.085, 0.95, "Identifiant :");
 		StdDraw.text(0.075, 0.90, "Mot de passe :");
@@ -20,6 +20,7 @@ public class Main {
 		StdDraw.rectangle(0.25, 0.90, 0.1, 0.02);	
 		StdDraw.text(0.24, 0.95, "Dans la console");
 		StdDraw.text(0.24, 0.90, "Dans la console");
+
 		
 	
 		
@@ -47,6 +48,7 @@ public class Main {
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
+			StdDraw.text(0.13, 0.03, pseudo);
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
@@ -432,15 +434,16 @@ public class Main {
 		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
+
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
 			Sauvegarde.sauvegarder(maison.getNom());
 			System.out.println("\nSauvegarde effectuée");
-		}	
-		else {
+		} else {
 			System.out.println("\nMaison non sauvegardée");
 		}
-	}	
+	}
+	
 }
