@@ -34,7 +34,7 @@ public class Main {
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			Thread.sleep(6000);
+			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
