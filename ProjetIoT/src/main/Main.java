@@ -110,6 +110,7 @@ public class Main {
 			 ************************* Utilisation *************************
 			 ***************************************************************/
 			else if (requete == 2) {
+				List<String> listeChoix = new LinkedList<String>();
 				List<Equipement> equip = getPosition().getEquipements();
 				if (equip.isEmpty()) {
 					afficherMessageBoucle("Il n'y a pas d'équipement à utiliser ici");
@@ -117,8 +118,10 @@ public class Main {
 				} else {
 					System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 					for (int i = 0; i < equip.size(); i++) {
+						listeChoix.add((i+1)+" : "+equip.get(i).getNom());
 						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
 					}
+					afficherMessageChoix(listeChoix);
 					System.out.println();
 					int req = toInt(s.nextLine()) - 1;
 					boolean exit = false;
@@ -175,11 +178,13 @@ public class Main {
 					afficherMessageBoucle("Il n'y a pas de pièce à supprimer");
 					System.out.println("Il n'y a pas de pièce à supprimer");
 				} else {
-					System.out.println(
-							"\nTapez la commande correspondant à la pièce dans laquelle vous voulez vous déplacer");
+					List<String> listeChoix = new LinkedList<String>();
+					System.out.println("Tapez la commande correspondant à la destination souhaitée");
 					for (int i = 0; i < piecesAdj.size(); i++) {
 						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
+						listeChoix.add((i+1)+" : "+piecesAdj.get(i).getNom());
 					}
+					afficherMessageChoix(listeChoix);
 					int req = toInt(s.nextLine()) - 1;
 					if (req >= 0 && req < piecesAdj.size()) {
 						Piece destination = piecesAdj.get(req);
