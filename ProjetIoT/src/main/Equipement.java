@@ -36,7 +36,7 @@ public class Equipement {
 	public String actionsPossibles() {
 		return "➡️ 1 : Quitter\n➡️ 2 : Allumer\n➡️ 3 : Eteindre";
 	}
-	
+
 	public static String actionsPossibles(String pseudo) {
 		String reponse = "➡️ 1 : Changer de pièce\n➡️ 2 : Utiliser d'un équipement\n➡️ 3 : Quitter la simulation\n➡️ 4 : Sauvegarder ma maison\n";
 		if (ListeUtilisateurs.getAdmin().get(pseudo)) {
@@ -136,7 +136,7 @@ public class Equipement {
 		if (isEtatCourant()) {
 			etat = "allumé(e)";
 		}
-		return  (getClass().getSimpleName()+ " (" +getNom() +", "+ etat + ")");
+		return (getClass().getSimpleName() + " (" + getNom() + ", " + etat + ")");
 	}
 
 	public void setEtatCourant(boolean etatCourant) {

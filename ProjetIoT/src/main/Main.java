@@ -92,7 +92,7 @@ public class Main {
 					if (req >= 0 && req < equip.size()) {
 						Equipement objet = equip.get(req);
 						while (!exit) {
-							System.out.println("\n Tapez la commande correspondant à l'action souhaitée pour " + objet);
+							System.out.println("\nTapez la commande correspondant à l'action souhaitée pour " + objet);
 							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
 							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
 							Thread.sleep(2000); // Delai de 2 secondes
@@ -335,7 +335,7 @@ public class Main {
 		}
 		position.setIntensiteLumineuse(intensiteLumineuseNaturelle + sommeILobjets);
 		System.out.println("L'intensité lumineuse de " + position.getNom() + " est de "
-				+ position.getIntensiteLumineuse() + "% (dont = " + intensiteLumineuseNaturelle + "% naturelle et  "
+				+ position.getIntensiteLumineuse() + "% (dont = " + intensiteLumineuseNaturelle + "% naturelle et "
 				+ sommeILobjets + "% artificielle)");
 	}
 
