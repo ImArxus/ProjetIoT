@@ -10,7 +10,7 @@
        ->️ Ventilateur (Ventilateur1, éteint(e))
        ->️ Alexa (Alexa1, éteint(e))
 , Cuisine qui est équipé(e) de 
-       ->️ Lumiere (Lumière1, éteint(e))
+       ->️ Lumiere (Lumière1, allumé(e))
        ->️ Volet (Volet1, éteint(e))
        ->️ TV (TV1, éteint(e))
        ->️ Radiateur (Radiateur1, éteint(e))
