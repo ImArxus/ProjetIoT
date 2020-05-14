@@ -19,12 +19,14 @@ public class Main {
 		boolean stop = false; // Fin de parcours
 
 		List<Equipement> lumieres = getLumiere();
-		if (lumieres.isEmpty()) {
-			System.out.println("Il n'y a pas de lumière dans cette pièce");
-		}
-		for (Equipement lum : lumieres) { // Allumer
-			System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
-			lum.allumer();
+		if (intensiteLumineuseNaturelle==0) {
+			if (lumieres.isEmpty()) {
+				System.out.println("Il n'y a pas de lumière dans cette pièce");
+			}
+			for (Equipement lum : lumieres) { // Allumer
+				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
+				lum.allumer();
+			}
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
