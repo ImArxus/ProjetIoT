@@ -396,7 +396,6 @@ public class Main {
 			System.out.println("➡️ 2 : Maison Vide\n");
 			int requete = toInt(s.nextLine());
 			if (requete == 1) {
-
 				maison = BarryHouse.creerMaison();
 				System.out.println("\nBienvenue dans la maison de Barry !\n");
 				maisonChoisie = true;
@@ -405,7 +404,6 @@ public class Main {
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				maisonChoisie = true;
 			}
-
 		}
 		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
