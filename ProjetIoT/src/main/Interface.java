@@ -6,11 +6,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
+
 public class Interface extends JFrame {
 
 	private static final long serialVersionUID = -5961323340170422114L; // Default
 
 	public Interface() {
+		
+		
+		
+		// reglage de la taille de la fenetre de jeu, en pixels (nb: un écran fullHD = 1980x1050 pixels)
 
 		this.setTitle("Maison de Barry");
 		this.setSize(600, 600);
