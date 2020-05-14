@@ -62,11 +62,9 @@ public class Action {
 				actionThermostat((Thermostat) objet, requete, s);
 			} else if (objet instanceof Frigo) {
 				actionFrigo((Frigo) objet, requete, s);
-			}
-			else if (objet instanceof Ventilateur) {
+			} else if (objet instanceof Ventilateur) {
 				actionVentilateur((Ventilateur) objet, requete, s);
-			}
-			else if (objet instanceof Alexa) {
+			} else if (objet instanceof Alexa) {
 				actionAlexa((Alexa) objet, requete, s);
 			}
 			break;
@@ -96,6 +94,7 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionAlexa(Alexa a, int requete, Scanner s) {
 		switch (requete) {
 		case 4:
@@ -112,6 +111,7 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionCheminee(Cheminee c, int requete, Scanner s) {
 		int intensite;
 		switch (requete) {
@@ -168,7 +168,7 @@ public class Action {
 	}
 
 	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();//nécessaire pour enlever la mémoire en tampon
+		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (e.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -201,7 +201,7 @@ public class Action {
 	}
 
 	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();//nécessaire pour enlever la mémoire en tampon
+		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -277,12 +277,12 @@ public class Action {
 		switch (requete) {
 		case 4:
 			r.augmenterTemperature();
-			position.setTemperature(position.getTemperature()+r.getThermostat());
+			position.setTemperature(position.getTemperature() + r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 5:
 			r.diminuerTemperature();
-			position.setTemperature(position.getTemperature()+r.getThermostat());
+			position.setTemperature(position.getTemperature() + r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		case 6:
@@ -290,7 +290,7 @@ public class Action {
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			r.choisirThermostat(thermostat);
-			position.setTemperature(position.getTemperature()+r.getThermostat());
+			position.setTemperature(position.getTemperature() + r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
 			break;
 		default:
@@ -298,16 +298,17 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionVentilateur(Ventilateur v, int requete, Scanner s) {
 		switch (requete) {
 		case 4:
 			v.augmenterIntensite();
-			position.setTemperature(position.getTemperature()-v.getIntensite());
+			position.setTemperature(position.getTemperature() - v.getIntensite());
 			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
 			break;
 		case 5:
 			v.diminuerIntensite();
-			position.setTemperature(position.getTemperature()-v.getIntensite());
+			position.setTemperature(position.getTemperature() - v.getIntensite());
 			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
 			break;
 		case 6:
@@ -315,7 +316,7 @@ public class Action {
 			int thermostat = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			v.choisirIntensite(thermostat);
-			position.setTemperature(position.getTemperature()-v.getIntensite());
+			position.setTemperature(position.getTemperature() - v.getIntensite());
 			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
 			break;
 		default:
@@ -323,6 +324,7 @@ public class Action {
 			break;
 		}
 	}
+
 	public static void actionTV(TV tv, int requete, Scanner s) {
 		switch (requete) {
 		case 4:

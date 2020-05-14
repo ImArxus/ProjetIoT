@@ -54,7 +54,9 @@ public class Alexa extends Equipement {
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas l'utiliser");
 		}
+		s.close();
 	}
+
 	public void reponseEquipement() {
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 		if (super.isEtatCourant()) {
@@ -73,5 +75,6 @@ public class Alexa extends Equipement {
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas l'utiliser");
 		}
+		s.close();
 	}
 }

@@ -76,10 +76,10 @@ public class BarryHouse {
 	static Equipement Alarme = new Alarme("Alarme", true);
 	static Equipement balance1 = new Balance("Balance1");
 	static Equipement frigo1 = new Frigo("Frigo1");
-	static Equipement thermostat1=new Thermostat("Thermostat1");
-	static Equipement ventilateur1=new Ventilateur("Ventilateur1");
-	static Equipement alexa1=new Alexa("Alexa1");
-	
+	static Equipement thermostat1 = new Thermostat("Thermostat1");
+	static Equipement ventilateur1 = new Ventilateur("Ventilateur1");
+	static Equipement alexa1 = new Alexa("Alexa1");
+
 	public static void ajoutPiece() {
 		// Ajout de pièces dans la maison
 		maison.ajouterPiece(cuisine);
@@ -96,9 +96,11 @@ public class BarryHouse {
 		maison.ajouterPiece(mezzanine);
 		maison.ajouterPiece(piscine);
 	}
+
 	public static void ajoutPieceVide() {
 		maison.ajouterPiece(salonVide);
 	}
+
 	public static void ajoutEquipement() {
 		// Ajout des équipements dans les pièces
 		// Ajout cuisine
@@ -140,21 +142,21 @@ public class BarryHouse {
 		palier.ajouterEquipement(Radiateur6);
 		// ajout escalier
 		escalier.ajouterEquipement(lumiere7);
-		//Ajout dressing 
+		// Ajout dressing
 		dressing.ajouterEquipement(lumiere8);
 		dressing.ajouterEquipement(Radiateur7);
 		dressing.ajouterEquipement(volet7);
-		//ajout buanderie
+		// ajout buanderie
 		buanderie.ajouterEquipement(volet8);
 		buanderie.ajouterEquipement(lumiere9);
 		buanderie.ajouterEquipement(Radiateur8);
-		//ajout jardin
+		// ajout jardin
 		jardin.ajouterEquipement(Alarme);
-		//ajout bureau
+		// ajout bureau
 		bureau.ajouterEquipement(lumiere10);
 		bureau.ajouterEquipement(volet9);
 		bureau.ajouterEquipement(Radiateur9);
-		//ajout mezzanine
+		// ajout mezzanine
 		mezzanine.ajouterEquipement(lumiere11);
 		mezzanine.ajouterEquipement(volet10);
 		mezzanine.ajouterEquipement(Radiateur10);
@@ -193,6 +195,7 @@ public class BarryHouse {
 		ajoutPiecesAdjacentes();
 		return maison;
 	}
+
 	public static Maison creerMaisonVide() {
 		ajoutPieceVide();
 		return maison;

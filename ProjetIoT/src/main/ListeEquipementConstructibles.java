@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ListeEquipementConstructibles {
 
-	private static List<String> liste= new LinkedList<String>();
-	
-	public ListeEquipementConstructibles() {
+	private static List<String> liste = new LinkedList<String>();
+
+	public static void ajoutEquipementConstructibles() {
 		liste.add("Alarme");
 		liste.add("Alexa");
 		liste.add("Balance");
@@ -19,12 +19,15 @@ public class ListeEquipementConstructibles {
 		liste.add("PS5");
 		liste.add("Radiateur");
 		liste.add("Thermostat");
-		liste.add("TV");	
+		liste.add("TV");
 		liste.add("Ventilateur");
-		liste.add("Volet");		
+		liste.add("Volet");
 	}
-	
+
 	public static List<String> getListe() {
+		liste.clear();
+		ajoutEquipementConstructibles();
 		return liste;
-	}	
+	}
+
 }
