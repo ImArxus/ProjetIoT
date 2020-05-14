@@ -13,7 +13,7 @@ public class Main {
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(800,600);
-		StdDraw.picture(0.5, 0.5,"images/accueilBH.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
 /*
 		StdDraw.rectangle(0.21, 0.91, 0.2, 0.08);
 		StdDraw.text(0.085, 0.95, "Identifiant :");
@@ -63,6 +63,7 @@ public class Main {
 				liste.add("8 : Supprimer un équipement");
 				liste.add("9 : Supprimer tous les équipements de la pièce");
 				liste.add("10 : Afficher toutes les pièces et équipements");
+				liste.add("11 : Choisir couleur des paramètres");
 			}
 			afficherMessageChoix(liste);
 			int requete = toInt(s.nextLine());
@@ -250,6 +251,36 @@ public class Main {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
+			 *************** Choix couleur des parametres*******************
+			 ***************************************************************/
+			else if (requete == 11 && droits) {
+				List<String> couleurs = new LinkedList<String>();
+				couleurs.add("1 : vert");
+				couleurs.add("2 : orange");
+				couleurs.add("3 : rouge");
+				couleurs.add("4 : bleu");
+				afficherMessageChoix(couleurs);
+				System.out.println("Choissisez votre couleur parmis bleu, orange, rouge et vert");
+				int req = Main.toInt(s.nextLine());
+				switch (req) {
+				case 1:
+					couleur="vert";
+					break;
+				case 2:
+					couleur="orange";
+					break;
+				case 3:
+					couleur="rouge";
+					break;
+				default:
+					couleur="bleu";
+					break;
+				}
+				afficherMessageBoucle("Nouvelle couleur validée");
+				System.out.println("Nouvelle couleur validée");
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
 			else {
@@ -269,7 +300,8 @@ public class Main {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
-
+	private static String couleur ="bleu";
+	
 	public static Maison getMaison() {
 		return maison;
 	}
@@ -485,19 +517,19 @@ public class Main {
 	}
 	public static void MiseNiveauGraphique() {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueilBH.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
 		StdDraw.text(0.13, 0.97, pseudo);
 		StdDraw.text(0.58, 0.97, position.getNom());
 		StdDraw.text(0.95, 0.97, String.valueOf(heure+1)+"h");
 	}
 	public static void afficherMessageChargement(String message) {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueilBH.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
 		StdDraw.text(0.5, 0.5, message);
 	}
 	public static void afficherMessageBoucle(String message) {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueilBH.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
 		StdDraw.text(0.5, 0.5, message);
 		StdDraw.text(0.13, 0.97, pseudo);
 		StdDraw.text(0.58, 0.97, position.getNom());
@@ -505,7 +537,7 @@ public class Main {
 	}
 	public static void afficherMessageChoix(List<String> liste) {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueilBH.png");
+		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
 		StdDraw.text(0.13, 0.97, pseudo);
 		StdDraw.text(0.58, 0.97, position.getNom());
 		StdDraw.text(0.95, 0.97, String.valueOf(heure+1)+"h");
