@@ -84,10 +84,12 @@ public class Action {
 		switch (requete) {
 		case 4:
 			e.augmenterTemperature();
+			position.setTemperature((int) (position.getTemperature() + 1));
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		case 5:
 			e.diminuerTemperature();
+			position.setTemperature((int) (position.getTemperature() - 1));
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		case 6:
@@ -95,6 +97,7 @@ public class Action {
 			int temperature = s.nextInt();
 			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			e.choisirTemperature(temperature);
+			position.setTemperature(temperature);
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		default:
