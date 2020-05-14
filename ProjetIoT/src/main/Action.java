@@ -20,6 +20,14 @@ import equipements.Volet;
 public class Action {
 
 	private static Piece position = Main.getPosition();
+	
+	public static String actionsPossibles(String pseudo) {
+		String reponse = "➡️ 1 : Changer de pièce\n➡️ 2 : Utiliser d'un équipement\n➡️ 3 : Quitter la simulation\n";
+		if (ListeUtilisateurs.getAdmin().get(pseudo)) {
+			reponse += "➡️ 4 : Créer d'une pièce\n➡️ 5 : Supprimer de la pièce actuelle\n➡️ 6 : Créer d'un équipement\n➡️ 7 : Supprimer d'un équipement\n➡️ 8 : Supprimer de tous les équipements de la pièce\n➡️ 9 : Afficher de toutes les pièces et équipements\n";
+		}
+		return reponse;
+	}
 
 	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
 		int requete = s.nextInt();

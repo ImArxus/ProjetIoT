@@ -36,7 +36,7 @@ public class Main {
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
-			System.out.println(listeUtilisateurs.actionsPossibles(pseudo));
+			System.out.println(Action.actionsPossibles(pseudo));
 
 			int requete = toInt(s.nextLine());
 
@@ -178,7 +178,7 @@ public class Main {
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
 			/***************************************************************
-			 ******* Suppression de tous les equipements de la pièce********
+			 ******* Suppression de tous les equipements de la pièce *******
 			 ***************************************************************/
 			else if (requete == 8 && droits) {
 				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
@@ -186,7 +186,7 @@ public class Main {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
-			 ******* Affichages de toutes les pièces et equipements**********
+			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
 			else if (requete == 9 && droits) {
 				List<Piece> pieces = Maison.getPieces();
@@ -267,7 +267,7 @@ public class Main {
 			if (objet instanceof Alarme) {
 				if (((Alarme) objet).isEtatCourant()) {
 					System.out.println("Désactiver l'alarme (oui/non) ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
-					int requete = s.nextInt();
+					int requete = toInt(s.nextLine());
 					if (requete == 1) {
 						objet.eteindre();
 					} else {
@@ -372,7 +372,7 @@ public class Main {
 					System.out.print("Veuillez choisir un mot de passe : ");
 					mdp = s.nextLine();
 					listeUtilisateurs.comptes.put(pseudo, mdp);
-					listeUtilisateurs.estAdmin.put(pseudo, false);
+					ListeUtilisateurs.estAdmin.put(pseudo, false);
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
 					connecte = true;
 				}
@@ -384,7 +384,7 @@ public class Main {
 		 ********************* Choix de la maison **********************
 		 ***************************************************************/
 		System.out.println("Identifiant : " + pseudo);
-		droits = listeUtilisateurs.estAdmin.get(pseudo);
+		droits = ListeUtilisateurs.getAdmin().get(pseudo);
 		System.out.println("Activation du mode administrateur : " + droits);
 		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);
