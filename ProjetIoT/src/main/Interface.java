@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.event.*;
 import javax.swing.BoxLayout;
 
+
 public class Interface extends JFrame {
 
 	public Interface() {
+		
+		// reglage de la taille de la fenetre de jeu, en pixels (nb: un écran fullHD = 1980x1050 pixels)
 
 		this.setTitle("Maison de Barry");
 		this.setSize(600, 600);
