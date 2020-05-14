@@ -12,8 +12,8 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		StdDraw.setCanvasSize(1000, 1000);
-		StdDraw.picture(0.5, 0.5,"images/welcomBarryHouse.png");
+		StdDraw.setCanvasSize(1000, 700);
+		StdDraw.picture(0.5, 0.35,"images/welcomBarryHouse.png");
 		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
