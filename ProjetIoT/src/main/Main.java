@@ -14,11 +14,10 @@ public class Main {
 
 		StdDraw.setCanvasSize(1000, 700);
 		StdDraw.picture(0.5, 0.5,"images/accueil.png");
-		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
-
+		StdDraw.text(0.13, 0.03, pseudo);
 		boolean stop = false; // Fin de parcours
 
 		List<Equipement> lumieres = getLumiere();
@@ -33,7 +32,7 @@ public class Main {
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-			StdDraw.text(0.13, 0.03, pseudo);
+			MiseNiveauGraphique();
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
@@ -429,6 +428,12 @@ public class Main {
 		} else {
 			System.out.println("\nMaison non sauvegardée");
 		}
+	}
+	public static void MiseNiveauGraphique() {
+		StdDraw.clear();
+		StdDraw.picture(0.5, 0.5,"images/accueil.png");
+		StdDraw.text(0.13, 0.03, pseudo);
+		StdDraw.text(0.58, 0.03, position.getNom());
 	}
 	
 }
