@@ -38,9 +38,9 @@ public class Equipement {
 	}
 	
 	public static String actionsPossibles(String pseudo) {
-		String reponse = "➡️ 1 : Changer de pièce\n➡️ 2 : Utiliser d'un équipement\n➡️ 3 : Quitter la simulation\n";
+		String reponse = "➡️ 1 : Changer de pièce\n➡️ 2 : Utiliser d'un équipement\n➡️ 3 : Quitter la simulation\n➡️ 4 : Sauvegarder ma maison\n";
 		if (ListeUtilisateurs.getAdmin().get(pseudo)) {
-			reponse += "➡️ 4 : Créer d'une pièce\n➡️ 5 : Supprimer de la pièce actuelle\n➡️ 6 : Créer d'un équipement\n➡️ 7 : Supprimer d'un équipement\n➡️ 8 : Supprimer de tous les équipements de la pièce\n➡️ 9 : Afficher de toutes les pièces et équipements\n";
+			reponse += "➡️ 5 : Créer d'une pièce\n➡️ 6 : Supprimer de la pièce actuelle\n➡️ 7 : Créer d'un équipement\n➡️ 8 : Supprimer d'un équipement\n➡️ 9 : Supprimer de tous les équipements de la pièce\n➡️ 10 : Afficher de toutes les pièces et équipements\n";
 		}
 		return reponse;
 	}

@@ -19,7 +19,7 @@ public class Main {
 		boolean stop = false; // Fin de parcours
 
 		List<Equipement> lumieres = getLumiere();
-		if (intensiteLumineuseNaturelle==0) {
+		if (intensiteLumineuseNaturelle == 0) {
 			if (lumieres.isEmpty()) {
 				System.out.println("Il n'y a pas de lumière dans cette pièce");
 			}
@@ -108,15 +108,20 @@ public class Main {
 			 **************************** Arrêt ****************************
 			 ***************************************************************/
 			else if (requete == 3) {
-				Sauvegarde.sauvegarder();
+				choixSauvegarde(s);
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
-
+			/***************************************************************
+			 ************************** Sauvegarde *************************
+			 ***************************************************************/
+			else if (requete == 4) {
+				choixSauvegarde(s);
+			}
 			/***************************************************************
 			 ********************* Création d'une pièce ********************
 			 ***************************************************************/
-			else if (requete == 4 && droits) {
+			else if (requete == 5 && droits) {
 				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
 				String name = s.nextLine();
 				Piece aCreer = new Piece(name);
@@ -128,7 +133,7 @@ public class Main {
 			/***************************************************************
 			 ******************* Suppression d'une pièce *******************
 			 ***************************************************************/
-			else if (requete == 5 && droits) {
+			else if (requete == 6 && droits) {
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				if (piecesAdj.isEmpty()) {
 					System.out.println("Il n'y a pas de pièce à supprimer");
@@ -167,7 +172,7 @@ public class Main {
 			/***************************************************************
 			 ******************** Création d'un équipement *****************
 			 ***************************************************************/
-			else if (requete == 6 && droits) {
+			else if (requete == 7 && droits) {
 				Equipement.creerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
@@ -175,14 +180,14 @@ public class Main {
 			/***************************************************************
 			 ***************** Suppression d'un équipement *****************
 			 ***************************************************************/
-			else if (requete == 7 && droits) {
+			else if (requete == 8 && droits) {
 				Equipement.supprimerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
 			/***************************************************************
 			 ******* Suppression de tous les equipements de la pièce *******
 			 ***************************************************************/
-			else if (requete == 8 && droits) {
+			else if (requete == 9 && droits) {
 				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
 				System.out.println("Suppression effectuée");
 				Thread.sleep(3000); // Delai de 3 secondes
@@ -190,7 +195,7 @@ public class Main {
 			/***************************************************************
 			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
-			else if (requete == 9 && droits) {
+			else if (requete == 10 && droits) {
 				List<Piece> pieces = Maison.getPieces();
 				for (int i = 0; i < pieces.size(); i++) {
 					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
@@ -410,5 +415,15 @@ public class Main {
 		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
-
+	public static void choixSauvegarde(Scanner s) throws InterruptedException {
+		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
+		int req = toInt(s.nextLine());
+		if (req == 1) {
+			Sauvegarde.sauvegarder();
+			System.out.println("\nSauvegarde effectuée");
+		}	
+		else {
+			System.out.println("\nMaison non sauvegardée");
+		}
+	}	
 }
