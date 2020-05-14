@@ -9,9 +9,9 @@ import equipements.Alarme;
 import equipements.Lumiere;
 
 public class Main {
-
+	private static Interface a;
 	public static void main(String[] args) throws InterruptedException {
-
+		a.creation();
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
