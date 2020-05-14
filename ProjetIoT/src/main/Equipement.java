@@ -53,7 +53,7 @@ public class Equipement {
 		}
 		System.out.println();
 		int req = Main.toInt(s.nextLine());
-		if (req >= 0 && req < possibilites.size()) {
+		if (req >= 0 && req <= possibilites.size()) {
 			System.out.println("\nTapez le nom de ce nouvel équipement");
 			String name = s.nextLine();
 			Equipement objet = null;
@@ -97,8 +97,10 @@ public class Equipement {
 			case 13:
 				objet = new Ventilateur(name);
 				break;
-			default:
+			case 14:
 				objet = new Volet(name);
+				break;
+			default:
 				break;
 			}
 			p.ajouterEquipement(objet);
@@ -134,7 +136,7 @@ public class Equipement {
 		if (isEtatCourant()) {
 			etat = "allumé(e)";
 		}
-		return getNom() + " (" + etat + ")";
+		return  (getClass().getSimpleName()+ " (" +getNom() +", "+ etat + ")");
 	}
 
 	public void setEtatCourant(boolean etatCourant) {
