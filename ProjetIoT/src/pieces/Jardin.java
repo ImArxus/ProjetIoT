@@ -3,6 +3,17 @@ package pieces;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import equipements.Alarme;
+import equipements.Alexa;
+import equipements.Cheminee;
+import equipements.Enceinte;
+import equipements.Lumiere;
+import equipements.PS5;
+import equipements.Radiateur;
+import equipements.TV;
+import equipements.Thermostat;
+import equipements.Ventilateur;
+import equipements.Volet;
 import main.Equipement;
 import main.Main;
 import main.Piece;
@@ -27,6 +38,19 @@ public class Jardin extends Piece implements Serializable {
 		equip.add("Lumiere");
 		equip.add("Volet");
 		return equip;
+	}
+	@Override
+	public Equipement creationEquipement(String name, int nb) {
+		switch (nb) {
+		case 1:
+			return new Alarme(name);
+		case 2:
+			return new Enceinte(name);
+		case 3:
+			return new Lumiere(name);
+		default:
+			return new Volet(name);
+		}
 	}
 
 	@Override

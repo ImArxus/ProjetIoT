@@ -3,6 +3,17 @@ package pieces;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import equipements.Alarme;
+import equipements.Alexa;
+import equipements.Cheminee;
+import equipements.Enceinte;
+import equipements.Lumiere;
+import equipements.PS5;
+import equipements.Radiateur;
+import equipements.TV;
+import equipements.Thermostat;
+import equipements.Ventilateur;
+import equipements.Volet;
 import main.Equipement;
 import main.Main;
 import main.Piece;
@@ -26,7 +37,15 @@ public class Escalier extends Piece implements Serializable {
 		equip.add("Lumiere");
 		return equip;
 	}
-
+	@Override
+	public Equipement creationEquipement(String name, int nb) {
+		switch (nb) {
+		case 1:
+			return new Alarme(name);
+		default:
+			return new Lumiere(name);
+		}
+	}
 	@Override
 	public void imagePiece() {
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + Main.couleur + ".png");

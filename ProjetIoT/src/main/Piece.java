@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import equipements.Alarme;
 import pieces.Buanderie;
 import pieces.Bureau;
 import pieces.Chambre;
@@ -140,7 +141,9 @@ public class Piece implements Serializable {
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 		StdDraw.picture(0.5, 0.5, "images/piece.png");
 	}
-
+	public Equipement creationEquipement(String name,int nb) {
+		return new Alarme(name);
+	}
 	public LinkedList<String> equipementsAutorises() {
 		LinkedList<String> equip = new LinkedList<String>();
 		equip.add("Alarme");
