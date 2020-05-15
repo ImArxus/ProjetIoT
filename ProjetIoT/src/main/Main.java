@@ -3,11 +3,12 @@ package main;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-
+import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import pieces.Salon;
 
 public class Main implements Serializable {
 
@@ -32,7 +33,15 @@ public class Main implements Serializable {
 				lum.allumer();
 			}
 		}
-
+		avatars.add("plongeur");
+		avatars.add("animalcrossing");
+		avatars.add("happyman");
+		avatars.add("hulk");
+		avatars.add("neymar");
+		avatars.add("pokemon");
+		avatars.add("princesse");
+		avatars.add("spiderman");
+		avatars.add("valorant");
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
@@ -237,6 +246,26 @@ public class Main implements Serializable {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
+			 ******** Affichage de toutes les pièces et équipements ********
+			 ***************************************************************/
+
+			else if (requete == 12 && droits) {
+				System.out.println("Tapez la commande correspondant à votre avatar désiré");
+				for (int i = 0; i < avatars.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + avatars.get(i)); // Affiche la liste des pièces
+				}
+				int req = Main.toInt(s.nextLine());
+				if (req > 0 && req <= avatars.size()) {
+					avatar = avatars.get(req - 1);
+					System.out.println("Nouvelle avatar validé");
+				} 
+				else {
+					System.out.println("Mauvaise commande");
+					Thread.sleep(3000); // Delai de 3 secondes
+				}
+			}
+
+			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
 			else {
@@ -255,8 +284,9 @@ public class Main implements Serializable {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
+	private static List<String> avatars = new LinkedList<String>();
 	public static String couleur = "BLUE";
-	static Piece salon = new Piece("Salon");
+	private static String avatar = "plongeur";
 
 	public static Maison getMaison() {
 		return maison;
@@ -445,7 +475,7 @@ public class Main implements Serializable {
 			} else if (requete == 2) {
 				System.out.println("\nQuel nom voulez vous donner à votre maison?");
 				String name = s.nextLine();
-				maison = new Maison(name, salon);
+				maison = new Maison(name, new Salon("Salon"));
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
@@ -483,6 +513,7 @@ public class Main implements Serializable {
 		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
 		StdDraw.text(0.9, 0.9, String.valueOf(getHeure()) + "h");
 		miseNiveauGraphiqueObjets();
+		StdDraw.picture(0.5, 0.2, "images/avatar/" + avatar + ".png");
 	}
 
 	public static void choixCouleurLegende() {
