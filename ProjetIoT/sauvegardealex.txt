@@ -1,3 +1,0 @@
-{alex=MyHouse : [Salon qui est sans équipement..., Salon qui est sans équipement..., Cuisine qui est équipé(e) de 
-       ->️ Balibalance (éteint(e))
-]}

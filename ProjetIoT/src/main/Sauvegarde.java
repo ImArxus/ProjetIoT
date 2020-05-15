@@ -25,7 +25,7 @@ public class Sauvegarde implements Serializable {
 			p.flush();
 			ostream.close(); // close the file.
 
-			System.out.println("votre maison a ete enregistre");
+			System.out.println("\nVotre maison a bien été enregistré !\n");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class Sauvegarde implements Serializable {
 			System.out.println(m.toString());
 			return m;
 		} catch (Exception ex) {
-			System.out.println("vous n'avez pas de maison sauvegarde");
+			System.out.println("Vous n'avez pas de maison sauvegardée...");
 			// ex.printStackTrace();
 			return null;
 		}
