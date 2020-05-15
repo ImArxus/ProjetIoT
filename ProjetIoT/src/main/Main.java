@@ -510,12 +510,12 @@ public class Main implements Serializable{
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 		StdDraw.picture(0.5, 0.5, "images/piece.png");
-		StdDraw.text(0.15, 0.93, pseudo);
-		StdDraw.text(0.38, 0.93, maison.getNom());
-		StdDraw.text(0.63, 0.93, position.getNom());
-		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
-		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.97, 0.93, String.valueOf(heure) + "h");
+		StdDraw.text(0.15, 0.96, pseudo);
+		StdDraw.text(0.45, 0.96, maison.getNom());
+		StdDraw.text(0.75, 0.96, position.getNom());
+		StdDraw.text(0.27, 0.9, String.valueOf(position.getTemperature()));
+		StdDraw.text(0.75, 0.9, String.valueOf(position.getIntensiteLumineuse()));
+		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
 		MiseNiveauGraphiqueObjets();
 	}
 
