@@ -5,7 +5,6 @@ import java.util.LinkedList;
 
 import equipements.Alarme;
 import equipements.Alexa;
-import equipements.Cheminee;
 import equipements.Enceinte;
 import equipements.Lumiere;
 import equipements.PS5;

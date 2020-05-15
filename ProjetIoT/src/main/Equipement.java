@@ -5,21 +5,6 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
-import equipements.Alarme;
-import equipements.Alexa;
-import equipements.Balance;
-import equipements.Cheminee;
-import equipements.Electrolyseur;
-import equipements.Enceinte;
-import equipements.Frigo;
-import equipements.Lumiere;
-import equipements.PS5;
-import equipements.Radiateur;
-import equipements.TV;
-import equipements.Thermostat;
-import equipements.Ventilateur;
-import equipements.Volet;
-
 public class Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3L;

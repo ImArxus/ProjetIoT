@@ -4,16 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 import equipements.Alarme;
-import equipements.Alexa;
-import equipements.Cheminee;
-import equipements.Enceinte;
 import equipements.Lumiere;
-import equipements.PS5;
 import equipements.Radiateur;
-import equipements.TV;
-import equipements.Thermostat;
-import equipements.Ventilateur;
-import equipements.Volet;
 import main.Equipement;
 import main.Piece;
 
