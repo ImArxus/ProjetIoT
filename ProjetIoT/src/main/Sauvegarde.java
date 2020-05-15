@@ -1,5 +1,6 @@
 package main;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 
 
@@ -31,6 +32,7 @@ public class Sauvegarde implements Serializable{
 	
 	
 
+
 	public static void sauvegarder() {
 		
 		 try {
@@ -52,6 +54,7 @@ public class Sauvegarde implements Serializable{
 	} catch (Exception ex) {
         ex.printStackTrace();
     }}
+
 
 	
 	

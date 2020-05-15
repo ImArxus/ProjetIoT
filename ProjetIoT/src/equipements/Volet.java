@@ -12,14 +12,16 @@ public class Volet extends Equipement implements Serializable{
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
 
-	public Volet(String nom, boolean etatCourant, int position) {
-		super(nom, etatCourant);
+	public Volet(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int position) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setPosition(position);
 	}
 	
 	public Volet(String nom) {
 		super(nom);
 		this.setPosition(position);
+		this.setPositionHorizontale(0.95);
+		this.setPositionVerticale(0.4);
 	}
 
 	@Override

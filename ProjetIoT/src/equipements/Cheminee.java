@@ -12,8 +12,8 @@ public class Cheminee extends Equipement implements Serializable{
 	private static final long serialVersionUID = 7169763608942128813L;
 	private int intensite;
 
-	public Cheminee(String nom, boolean etatCourant, int intensite) {
-		super(nom, etatCourant);
+	public Cheminee(String nom, boolean etatCourant, int intensite,double positionHorizontale,double positionVerticale) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
 	}
 	

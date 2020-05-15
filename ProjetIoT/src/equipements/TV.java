@@ -14,13 +14,15 @@ public class TV extends Equipement implements Serializable{
 	private int numeroChaine;
 
 	public TV(String nom) {
-		super(nom, false);
+		super(nom);
 		setVolume(50);
 		setNumeroChaine(1);
+		this.setPositionHorizontale(0.5);
+		this.setPositionVerticale(0.41);
 	}
 
-	public TV(String nom, boolean etatCourant, int volume, int numeroChaine) {
-		super(nom, etatCourant);
+	public TV(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int volume, int numeroChaine) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;
 	}
@@ -28,7 +30,7 @@ public class TV extends Equipement implements Serializable{
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter volume\n➡️ 5 :Diminuer volume\n➡️ 6 : Augmenter chaine\n➡️ 7 : Diminuer chaine\n➡️ 8 : Mettre chaine";
+				+ "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Augmenter chaine\n➡️ 7 : Diminuer chaine\n➡️ 8 : Mettre chaine";
 	}
 
 	public int getNumeroChaine() {

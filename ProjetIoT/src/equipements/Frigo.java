@@ -18,7 +18,7 @@ public class Frigo extends Equipement implements Serializable{
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
 
 	public Frigo(String nom) {
-		super(nom, false);
+		super(nom);
 		setTemperature(5);
 		dispo.put("Banane", 3);
 		dispo.put("Yaourt", 1);
@@ -26,8 +26,8 @@ public class Frigo extends Equipement implements Serializable{
 		dispo.put("tomates", 3);
 	}
 
-	protected Frigo(String nom, boolean etatCourant, int temperature, Map<String, Integer> dispo) {
-		super(nom, etatCourant);
+	protected Frigo(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int temperature, Map<String, Integer> dispo) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		setTemperature(temperature);
 	}
 

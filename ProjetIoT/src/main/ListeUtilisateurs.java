@@ -12,7 +12,7 @@ public class ListeUtilisateurs implements Serializable{
 	 */
 	private static final long serialVersionUID = -6447914795234124870L;
 	protected Map<String, String> comptes = new HashMap<String, String>();// (pseudo,mdp)
-	protected Map<String, Boolean> estAdmin = new HashMap<String, Boolean>();// (pseudo ,estAdmin)
+	protected static Map<String, Boolean> estAdmin = new HashMap<String, Boolean>();// (pseudo ,estAdmin)
 
 	public ListeUtilisateurs() {
 		comptes.put("prof", "prof");
@@ -35,11 +35,8 @@ public class ListeUtilisateurs implements Serializable{
 		estAdmin.put("guest", false);
 	}
 
-	public String actionsPossibles(String pseudo) {
-		String reponse = "➡️ 1 : Changement de pièce\n➡️ 2 : Utilisation d'un équipement\n➡️ 3 : Quitter la simulation\n";
-		if (estAdmin.get(pseudo)) {
-			reponse += "➡️ 4 : Création d'une pièce\n➡️ 5 : Suppression de la pièce actuelle\n➡️ 6 : Création d'un équipement\n➡️ 7 : Suppression d'un équipement\n➡️ 8 : Suppression de tous les équipements de la pièce\n➡️ 9 : Affichages de toutes les pièces et équipements\n";
-		}
-		return reponse;
+	public static Map<String, Boolean> getAdmin() {
+		return estAdmin;
 	}
+	
 }

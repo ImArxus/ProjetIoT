@@ -17,7 +17,7 @@ public class Enceinte extends Equipement implements Serializable{
 	private String enEcoute;
 
 	public Enceinte(String nom) {
-		super(nom, false);
+		super(nom);
 		this.setVolume(100);
 		musiques.put("Bim Bam Toi - Carla", "Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
 		musiques.put("Dance Monkey - Tones and I", "Dance for me, dance for me, dance for me, oh, oh, oh");
@@ -27,8 +27,8 @@ public class Enceinte extends Equipement implements Serializable{
 		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
 	}
 
-	public Enceinte(String nom, boolean etatCourant, int volume, Map<String, String> musiques, String enEcoute) {
-		super(nom, etatCourant);
+	public Enceinte(String nom, boolean etatCourant, int volume,double positionHorizontale,double positionVerticale, Map<String, String> musiques, String enEcoute) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.setMusiques(musiques);
 		this.setEnEcoute(enEcoute);

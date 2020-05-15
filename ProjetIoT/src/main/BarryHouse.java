@@ -80,7 +80,7 @@ public class BarryHouse implements Serializable {
 	static Equipement PS51 = new PS5("PS5");
 	static Equipement enceinte1 = new Enceinte("Enceinte");
 	static Equipement Electrolyseur = new Electrolyseur("Electrolyseur");
-	static Equipement Alarme = new Alarme("Alarme", true);
+	static Equipement Alarme = new Alarme("Alarme");
 	static Equipement balance1 = new Balance("Balance1");
 	static Equipement frigo1 = new Frigo("Frigo1");
 	static Equipement thermostat1 = new Thermostat("Thermostat1");

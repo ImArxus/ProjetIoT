@@ -13,12 +13,14 @@ public class Radiateur extends Equipement implements Serializable{
 	private int thermostat;
 
 	public Radiateur(String nom) {
-		super(nom, false);
+		super(nom);
 		setThermostat(1);
+		this.setPositionHorizontale(0.8);
+		this.setPositionVerticale(0.32);
 	}
 
-	public Radiateur(String nom, boolean etatCourant, int thermostat) {
-		super(nom, etatCourant);
+	public Radiateur(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int thermostat) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setThermostat(thermostat);
 	}
 
@@ -67,11 +69,4 @@ public class Radiateur extends Equipement implements Serializable{
 		}
 	}
 
-	public static void main(String[] args) {
-		Radiateur a = new Radiateur("Radiateur1", false, 2);
-		a.allumer();
-		System.out.println(a.thermostat);
-		a.augmenterTemperature();
-		System.out.println(a.thermostat);
-	}
 }

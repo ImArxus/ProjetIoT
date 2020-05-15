@@ -13,12 +13,12 @@ public class Ventilateur extends Equipement implements Serializable{
 	private int intensite;
 
 	public Ventilateur(String nom) {
-		super(nom, false);
+		super(nom);
 		this.setIntensite(3);
 	}
 
-	public Ventilateur(String nom, boolean etatCourant, int intensite) {
-		super(nom, etatCourant);
+	public Ventilateur(String nom, boolean etatCourant, double positionHorizontale,double positionVerticale,int intensite) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
 	}
 

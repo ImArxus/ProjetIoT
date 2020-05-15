@@ -27,7 +27,7 @@ public class Action implements Serializable{
 	private static Piece position = Main.getPosition();
 
 	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
-		int requete = s.nextInt();
+		int requete = Main.toInt(s.nextLine());
 		switch (requete) {
 		case 1:
 			System.out.println("Vous n'utilisez plus " + objet.getNom()); // Ne fait aucune action
@@ -81,17 +81,19 @@ public class Action implements Serializable{
 		switch (requete) {
 		case 4:
 			e.augmenterTemperature();
+			position.setTemperature((int) (position.getTemperature() + 1));
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		case 5:
 			e.diminuerTemperature();
+			position.setTemperature((int) (position.getTemperature() - 1));
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		case 6:
 			System.out.println("Quelle température (entre 1 et 30) en °C ?");
-			int temperature = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int temperature = Main.toInt(s.nextLine());
 			e.choisirTemperature(temperature);
+			position.setTemperature(temperature);
 			System.out.println("La température de " + e.getNom() + " est réglé sur " + e.getTemperature() + "°C");
 			break;
 		default:
@@ -134,9 +136,8 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
-			intensite = s.nextInt();
+			intensite = Main.toInt(s.nextLine());
 			position.setTemperature((int) (position.getTemperature() + (intensite * 0.05)));
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
 			c.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + c.getNom() + " est réglé sur " + c.getIntensite());
 			break;
@@ -160,8 +161,7 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle température (entre 15 et 30) ?");
-			int temp = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int temp = Main.toInt(s.nextLine());
 			t.choisirTemperature(temp);
 			position.setTemperature(t.getTemperature());
 			System.out.println("L'intensité de " + t.getNom() + " est réglé sur " + t.getTemperature());
@@ -173,7 +173,6 @@ public class Action implements Serializable{
 	}
 
 	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (e.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -206,7 +205,6 @@ public class Action implements Serializable{
 	}
 
 	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
-		s.nextLine();// nécessaire pour enlever la mémoire en tampon
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -261,8 +259,7 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle intensité (entre 0 et 100) ?");
-			int intensite = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int intensite = Main.toInt(s.nextLine());
 			l.choisirIntensite(intensite);
 			System.out.println("L'intensité de " + l.getNom() + " est réglé sur " + l.getIntensite());
 			break;
@@ -292,8 +289,7 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle thermostat (entre 0 et 5) ?");
-			int thermostat = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int thermostat = Main.toInt(s.nextLine());
 			r.choisirThermostat(thermostat);
 			position.setTemperature(position.getTemperature() + r.getThermostat());
 			System.out.println("Le thermostat de " + r.getNom() + " est réglé sur " + r.getThermostat());
@@ -318,8 +314,7 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle thermostat (entre 0 et 5) ?");
-			int thermostat = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int thermostat = Main.toInt(s.nextLine());
 			v.choisirIntensite(thermostat);
 			position.setTemperature(position.getTemperature() - v.getIntensite());
 			System.out.println("Le thermostat de " + v.getNom() + " est réglé sur " + v.getIntensite());
@@ -350,8 +345,7 @@ public class Action implements Serializable{
 			break;
 		case 8:
 			System.out.println("Quelle chaine (entre 0 et 100) ?");
-			int chaine = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int chaine = Main.toInt(s.nextLine());
 			tv.mettreChaine(chaine);
 			System.out.println(tv.getNom() + " est réglé sur la chaine " + tv.getNumeroChaine());
 			break;
@@ -373,8 +367,7 @@ public class Action implements Serializable{
 			break;
 		case 6:
 			System.out.println("Quelle position (entre 0 et 100) ?");
-			int position = s.nextInt();
-			s.nextLine(); // On vide la ligne pour ne pas avoir de problème au prochain nextLine()
+			int position = Main.toInt(s.nextLine());
 			v.choisirPosition(position);
 			System.out.println("La position du store " + v.getNom() + " est de " + v.getPosition());
 			break;
@@ -398,8 +391,7 @@ public class Action implements Serializable{
 			System.out.println("Que voulez vous commander ?");
 			String requete1 = s.nextLine();
 			System.out.println("En quelle quantitée ?");
-			int requete2 = s.nextInt();
-			s.nextLine();
+			int requete2 = Main.toInt(s.nextLine());
 			f.commander(requete1, requete2);
 			System.out.println("Dans " + f.getNom() + ", il y a maintenant " + f.getDispo());
 			break;

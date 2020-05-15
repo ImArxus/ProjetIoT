@@ -18,12 +18,15 @@ public class Alexa extends Equipement implements Serializable {
 	private static String pseudo;
 
 	public Alexa(String nom) {
-		super(nom, false);
+		super(nom);
 		pseudo = Main.getPseudo();
+		this.setPositionHorizontale(0.2);
+		this.setPositionVerticale(0.7);
+		
 	}
 
-	public Alexa(String nom, boolean etatCourant) {
-		super(nom, etatCourant);
+	public Alexa(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+		super(nom, etatCourant,positionHorizontale,positionVerticale);
 		pseudo = Main.getPseudo();
 	}
 

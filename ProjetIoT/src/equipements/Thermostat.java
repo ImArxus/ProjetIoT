@@ -13,12 +13,12 @@ public class Thermostat extends Equipement implements Serializable{
 	private int temperature;
 
 	public Thermostat(String nom) {
-		super(nom, false);
+		super(nom);
 		this.setTemperature(21);
 	}
 
-	public Thermostat(String nom, boolean etatCourant, int temperature) {
-		super(nom, etatCourant);
+	public Thermostat(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int temperature) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setTemperature(temperature);
 	}
 
