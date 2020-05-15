@@ -11,7 +11,7 @@ public class PS5 extends Equipement {
 	private Map<String, String> jeux = new HashMap<String, String>();
 
 	public PS5(String nom) {
-		super(nom, false);
+		super(nom);
 
 		jeux.put("FIFA 2021", "It's in the game");
 		jeux.put("Call of Duty Modern Warfare V", "bam bam bam");
@@ -21,8 +21,8 @@ public class PS5 extends Equipement {
 
 	}
 
-	public PS5(String nom, boolean etatCourant, String jeu) {
-		super(nom, etatCourant);
+	public PS5(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, String jeu) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setJeu(jeu);
 	}
 

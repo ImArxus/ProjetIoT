@@ -8,13 +8,14 @@ public class Lumiere extends Equipement {
 	private String couleur;
 
 	public Lumiere(String nom) {
-		super(nom, false);
+		super(nom);
 		setIntensite(100);
 		setCouleur("blanc");
+		this.setPositionVerticale(0.75);
 	}
 
-	public Lumiere(String nom, boolean etatCourant, int intensite, String couleur) {
-		super(nom, etatCourant);
+	public Lumiere(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+		super(nom, etatCourant,positionHorizontale,positionVerticale);
 		setIntensite(intensite);
 		setCouleur(couleur);
 	}

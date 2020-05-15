@@ -6,10 +6,11 @@ public class Alarme extends Equipement {
 	
 	public Alarme(String nom) {
 		super(nom);
+		this.setEtatCourant(true);
 	}
 
-	public Alarme(String nom, boolean etatCourant) {
-		super(nom, etatCourant);
+	public Alarme(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+		super(nom, etatCourant,positionHorizontale,positionVerticale);
 	}
 
 	public void sonner() {

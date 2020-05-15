@@ -13,12 +13,12 @@ public class Alexa extends Equipement {
 	private static String pseudo;
 
 	public Alexa(String nom) {
-		super(nom, false);
+		super(nom);
 		pseudo = Main.getPseudo();
 	}
 
-	public Alexa(String nom, boolean etatCourant) {
-		super(nom, etatCourant);
+	public Alexa(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+		super(nom, etatCourant,positionHorizontale,positionVerticale);
 		pseudo = Main.getPseudo();
 	}
 

@@ -39,11 +39,11 @@ public class Main {
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-			MiseNiveauGraphique();
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
+			MiseNiveauGraphique();
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -229,14 +229,14 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 11 && droits) {
 				List<String> couleurs = new LinkedList<String>();
-				couleurs.add("vert");
-				couleurs.add("orange");
-				couleurs.add("rouge");
-				couleurs.add("blanc");
-				couleurs.add("gris");
-				couleurs.add("jaune");
-				couleurs.add("rose");
-				couleurs.add("bleu");
+				couleurs.add("GREEN");
+				couleurs.add("ORANGE");
+				couleurs.add("RED");
+				couleurs.add("WHITE");
+				couleurs.add("GRAY");
+				couleurs.add("YELLOW");
+				couleurs.add("PINK");
+				couleurs.add("BLUE");
 				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
 				for (int i = 0; i < couleurs.size(); i++) {
 					System.out.println((i + 1) + " : " + couleurs.get(i));
@@ -269,7 +269,7 @@ public class Main {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
-	private static String couleur = "bleu";
+	private static String couleur = "BLUE";
 
 	public static Maison getMaison() {
 		return maison;
@@ -484,19 +484,50 @@ public class Main {
 		StdDraw.text(0.63, 0.93, position.getNom());
 		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
 		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.97, 0.93, String.valueOf(heure + 1) + "h");
+		StdDraw.text(0.97, 0.93, String.valueOf(heure) + "h");
 		MiseNiveauGraphiqueObjets();
 	}
 
+	public static void choixCouleurLegende() {
+		switch (couleur) {
+		case "GREEN":
+			StdDraw.setPenColor(StdDraw.GREEN);
+			break;
+		case "PINK":
+			StdDraw.setPenColor(StdDraw.PINK);
+			break;
+		case "GRAY":
+			StdDraw.setPenColor(StdDraw.GRAY);
+			break;
+		case "RED":
+			StdDraw.setPenColor(StdDraw.RED);
+			break;
+		case "ORANGE":
+			StdDraw.setPenColor(StdDraw.ORANGE);
+			break;
+		case "YELLOW":
+			StdDraw.setPenColor(StdDraw.YELLOW);
+			break;
+		case "WHITE":
+			StdDraw.setPenColor(StdDraw.WHITE);
+			break;
+		default:
+			StdDraw.setPenColor(StdDraw.BLUE);
+			break;
+		}
+	}
+
 	public static void MiseNiveauGraphiqueObjets() {
-		String name;
+		choixCouleurLegende();
+		String nameClass;
 		List<Equipement> equip = getPosition().getEquipements();
 		for (int i = 0; i < equip.size(); i++) {
-			name = equip.get(i).getClass().getName();
-			 double position1 = (Math.random());
-			 double position2 = (Math.random()*0.85);
-			 System.out.println(name);
-			 StdDraw.picture(position1, position2, "images/objets/" + name + ".png");
+			nameClass = equip.get(i).getClass().getName();
+			StdDraw.picture(equip.get(i).getPositionHorizontale(), equip.get(i).getPositionVerticale(),
+					"images/objets/" + nameClass + ".png");
+			StdDraw.text(equip.get(i).getPositionHorizontale(), equip.get(i).getPositionVerticale(),
+					equip.get(i).getNom());
 		}
+		StdDraw.setPenColor(StdDraw.BLACK);
 	}
 }

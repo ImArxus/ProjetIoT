@@ -6,8 +6,8 @@ public class Volet extends Equipement {
 
 	private int position;
 
-	public Volet(String nom, boolean etatCourant, int position) {
-		super(nom, etatCourant);
+	public Volet(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int position) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setPosition(position);
 	}
 	

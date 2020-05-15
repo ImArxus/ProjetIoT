@@ -8,13 +8,13 @@ public class TV extends Equipement {
 	private int numeroChaine;
 
 	public TV(String nom) {
-		super(nom, false);
+		super(nom);
 		setVolume(50);
 		setNumeroChaine(1);
 	}
 
-	public TV(String nom, boolean etatCourant, int volume, int numeroChaine) {
-		super(nom, etatCourant);
+	public TV(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int volume, int numeroChaine) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;
 	}

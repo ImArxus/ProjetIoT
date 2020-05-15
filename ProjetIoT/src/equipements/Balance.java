@@ -11,7 +11,7 @@ public class Balance extends Equipement {
 	List<Integer> listePoids = new LinkedList<Integer>();
 
 	public Balance(String nom) {
-		super(nom, false);
+		super(nom);
 		listePoids.add(80);
 		listePoids.add(60);
 		listePoids.add(100);
@@ -19,8 +19,8 @@ public class Balance extends Equipement {
 		this.setPoids();
 	}
 
-	public Balance(String nom, boolean etatCourant, List<Integer> listePoids) {
-		super(nom, etatCourant);
+	public Balance(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, List<Integer> listePoids) {
+		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setListePoids(listePoids);
 		setPoids();
 	}

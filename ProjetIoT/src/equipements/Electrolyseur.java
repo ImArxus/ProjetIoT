@@ -9,14 +9,14 @@ public class Electrolyseur extends Equipement {
 	private double temperature;
 
 	public Electrolyseur(String nom) {
-		super(nom, false);
+		super(nom);
 		setSel(3800);
 		setPh(7.2);
 		setTemperature(25);
 	}
 
-	public Electrolyseur(String nom, boolean etatCourant, double sel, double ph, double temperature) {
-		super(nom, etatCourant);
+	public Electrolyseur(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, double sel, double ph, double temperature) {
+		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		setSel(sel);
 		setPh(ph);
 		setTemperature(temperature);

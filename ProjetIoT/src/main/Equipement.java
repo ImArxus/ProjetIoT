@@ -22,15 +22,21 @@ public class Equipement {
 
 	protected boolean etatCourant;
 	protected String nom;
+	protected double positionHorizontale;
+	protected double positionVerticale;
 
 	protected Equipement(String nom) {
 		setNom(nom);
 		setEtatCourant(false);
+		positionHorizontale = Math.random();
+		positionVerticale = (Math.random() * 0.7)+0.1;
 	}
 
-	protected Equipement(String nom, boolean etatCourant) {
+	protected Equipement(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
+		this.setPositionHorizontale(positionHorizontale);
+		this.setPositionVerticale(positionVerticale);
 	}
 
 	public String actionsPossibles() {
@@ -151,8 +157,24 @@ public class Equipement {
 		return nom;
 	}
 
+	public double getPositionHorizontale() {
+		return positionHorizontale;
+	}
+
+	public double getPositionVerticale() {
+		return positionVerticale;
+	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public void setPositionHorizontale(double positionHorizontale) {
+		this.positionHorizontale = positionHorizontale;
+	}
+
+	public void setPositionVerticale(double positionVerticale) {
+		this.positionVerticale = positionVerticale;
 	}
 
 	public void allumer() {
