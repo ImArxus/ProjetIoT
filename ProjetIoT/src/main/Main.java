@@ -59,7 +59,7 @@ public class Main implements Serializable{
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			miseNiveauGraphique();
+			MiseNiveauGraphique();
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -505,10 +505,20 @@ public class Main implements Serializable{
 		}
 	}
 
-	public static void miseNiveauGraphique() {
+
+	public static void MiseNiveauGraphique() {
+		Piece a = getPosition();
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/piece.png");
+		if (a.getNom() == "Jardin") {
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/jardin.png");
+		} else if (a.getNom() == "Piscine") {
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/piscine.png");
+		} else {
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/piece.png");
+		}
 		StdDraw.text(0.15, 0.93, pseudo);
 		StdDraw.text(0.38, 0.93, maison.getNom());
 		StdDraw.text(0.63, 0.93, position.getNom());
