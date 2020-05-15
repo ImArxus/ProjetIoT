@@ -481,10 +481,12 @@ public class Main {
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5,"images/couleurs/"+couleur+".png");
 		StdDraw.picture(0.5, 0.5,"images/piece.png");
-		StdDraw.text(0.13, 0.93, pseudo);
-		StdDraw.text(0.4, 0.93, maison.getNom());
-		StdDraw.text(0.7, 0.93, position.getNom());
-		StdDraw.text(0.95, 0.93, String.valueOf(heure+1)+"h");
+		StdDraw.text(0.15, 0.93, pseudo);
+		StdDraw.text(0.38, 0.93, maison.getNom());
+		StdDraw.text(0.63, 0.93, position.getNom());
+		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
+		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
+		StdDraw.text(0.97, 0.93, String.valueOf(heure+1)+"h");
 	}
 
 }
