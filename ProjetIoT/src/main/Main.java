@@ -290,6 +290,7 @@ public class Main implements Serializable{
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 	private static String couleur = "BLUE";
+	static Piece salon = new Piece("Salon");
 
 	public static Maison getMaison() {
 		return maison;
@@ -476,7 +477,9 @@ public class Main implements Serializable{
 				System.out.println("\nBienvenue dans la maison de Barry !\n");
 				maisonChoisie = true;
 			} else if (requete == 2) {
-				maison = BarryHouse.creerMaisonVide();
+				System.out.println("\nQuel nom voulez vous donner à votre maison?");
+				String name = s.nextLine();	
+				maison =  new Maison(name, salon);
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
