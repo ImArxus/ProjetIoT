@@ -15,7 +15,7 @@ public class TV extends Equipement implements Serializable{
 		setVolume(50);
 		setNumeroChaine(1);
 		this.setPositionHorizontale(0.5);
-		this.setPositionVerticale(0.41);
+		this.setPositionVerticale(0.385);
 	}
 
 	public TV(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int volume, int numeroChaine) {

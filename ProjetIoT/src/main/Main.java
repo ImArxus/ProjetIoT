@@ -280,6 +280,7 @@ public class Main implements Serializable {
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 	private static String couleur = "BLUE";
+	static Piece salon = new Piece("Salon");
 
 	public static Maison getMaison() {
 		return maison;
@@ -466,7 +467,9 @@ public class Main implements Serializable {
 				System.out.println("\nBienvenue dans la maison de Barry !\n");
 				maisonChoisie = true;
 			} else if (requete == 2) {
-				maison = BarryHouse.creerMaisonVide();
+				System.out.println("\nQuel nom voulez vous donner à votre maison?");
+				String name = s.nextLine();	
+				maison =  new Maison(name, salon);
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
@@ -506,12 +509,12 @@ public class Main implements Serializable {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piece.png");
 		}
-		StdDraw.text(0.15, 0.93, pseudo);
-		StdDraw.text(0.38, 0.93, maison.getNom());
-		StdDraw.text(0.63, 0.93, position.getNom());
-		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
-		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.97, 0.93, String.valueOf(heure) + "h");
+		StdDraw.text(0.15, 0.96, pseudo);
+		StdDraw.text(0.46, 0.96, maison.getNom());
+		StdDraw.text(0.78, 0.96, position.getNom());
+		StdDraw.text(0.29, 0.9, String.valueOf(position.getTemperature()));
+		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
+		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
 		miseNiveauGraphiqueObjets();
 	}
 
