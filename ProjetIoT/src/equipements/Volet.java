@@ -14,6 +14,8 @@ public class Volet extends Equipement {
 	public Volet(String nom) {
 		super(nom);
 		this.setPosition(position);
+		this.setPositionHorizontale(0.95);
+		this.setPositionVerticale(0.4);
 	}
 
 	@Override
