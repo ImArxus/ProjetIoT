@@ -28,6 +28,7 @@ public class Buanderie extends Piece implements Serializable {
 		equip.add("Frigo");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {

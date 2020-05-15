@@ -141,9 +141,11 @@ public class Piece implements Serializable {
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 		StdDraw.picture(0.5, 0.5, "images/piece.png");
 	}
-	public Equipement creationEquipement(String name,int nb) {
+
+	public Equipement creationEquipement(String name, int nb) {
 		return new Alarme(name);
 	}
+
 	public LinkedList<String> equipementsAutorises() {
 		LinkedList<String> equip = new LinkedList<String>();
 		equip.add("Alarme");

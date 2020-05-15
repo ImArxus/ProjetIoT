@@ -50,7 +50,7 @@ public class Equipement implements Serializable {
 		if (req >= 0 && req <= possibilites.size()) {
 			System.out.println("\nTapez le nom de ce nouvel équipement");
 			String name = s.nextLine();
-			Equipement objet = p.creationEquipement(name,req);
+			Equipement objet = p.creationEquipement(name, req);
 			p.ajouterEquipement(objet);
 			System.out.println("Ajout effectué");
 		} else {

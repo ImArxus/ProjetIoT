@@ -40,6 +40,7 @@ public class SalleAManger extends Piece implements Serializable {
 		equip.add("Volet");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {

@@ -42,6 +42,7 @@ public class Cuisine extends Piece implements Serializable {
 		equip.add("Frigo");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {
@@ -65,6 +66,7 @@ public class Cuisine extends Piece implements Serializable {
 			return new Frigo(name);
 		}
 	}
+
 	@Override
 	public void imagePiece() {
 		StdDraw.picture(0.5, 0.5, "images/couleurs" + Main.couleur + ".png");

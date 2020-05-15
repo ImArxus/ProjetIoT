@@ -36,7 +36,7 @@ public class Main implements Serializable {
 		avatars.add("fille1");
 		avatars.add("fille2");
 		avatars.add("fille3");
-		avatars.add("fille4");	
+		avatars.add("fille4");
 		avatars.add("fille5");
 		avatars.add("fille6");
 		avatars.add("fille7");
@@ -49,7 +49,7 @@ public class Main implements Serializable {
 		avatars.add("homme7");
 		avatars.add("homme8");
 		avatars.add("homme9");
-		
+
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
@@ -231,8 +231,7 @@ public class Main implements Serializable {
 				if (req > 0 && req <= avatars.size()) {
 					avatar = avatars.get(req - 1);
 					System.out.println("Nouvelle avatar validé");
-				} 
-				else {
+				} else {
 					System.out.println("Mauvaise commande");
 					Thread.sleep(3000); // Delai de 3 secondes
 				}
@@ -518,9 +517,11 @@ public class Main implements Serializable {
 			break;
 		}
 	}
+
 	public static String getCouleur() {
 		return couleur;
 	}
+
 	public static void miseNiveauGraphiqueObjets() {
 		choixCouleurLegende();
 		String nameClass;

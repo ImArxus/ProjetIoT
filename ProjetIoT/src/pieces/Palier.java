@@ -26,6 +26,7 @@ public class Palier extends Piece implements Serializable {
 		equip.add("Lumiere");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {

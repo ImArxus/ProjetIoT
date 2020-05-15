@@ -28,6 +28,7 @@ public class Dressing extends Piece implements Serializable {
 		equip.add("Radiateur");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {

@@ -49,7 +49,6 @@ public class BarryHouse implements Serializable {
 	static Piece piscine = new Piscine("Piscine");
 	static Piece salonVide = new Salon("Salon");
 
-
 	static Maison maison = new Maison("Barry House", salon); // Créé une maison avec un salon
 
 	// Création des équipements

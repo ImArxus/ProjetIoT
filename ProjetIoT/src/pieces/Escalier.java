@@ -28,6 +28,7 @@ public class Escalier extends Piece implements Serializable {
 		equip.add("Lumiere");
 		return equip;
 	}
+
 	@Override
 	public Equipement creationEquipement(String name, int nb) {
 		switch (nb) {
@@ -37,6 +38,7 @@ public class Escalier extends Piece implements Serializable {
 			return new Lumiere(name);
 		}
 	}
+
 	@Override
 	public void imagePiece() {
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + Main.couleur + ".png");
