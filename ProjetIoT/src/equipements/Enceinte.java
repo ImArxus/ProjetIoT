@@ -22,6 +22,8 @@ public class Enceinte extends Equipement implements Serializable{
 				"Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
 		musiques.put("Allumer le feu - Johnny Hallyday", "Il suffira d'une étincelle");
 		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
+		this.setPositionHorizontale(0.35);
+		this.setPositionVerticale(0.3);
 	}
 
 	public Enceinte(String nom, boolean etatCourant, int volume,double positionHorizontale,double positionVerticale, Map<String, String> musiques, String enEcoute) {
