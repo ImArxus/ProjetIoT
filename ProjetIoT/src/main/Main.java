@@ -12,18 +12,16 @@ public class Main {
 
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
-		StdDraw.setCanvasSize(800,600);
-		StdDraw.picture(0.5, 0.5,"images/chargement.png");
-/*
-		StdDraw.rectangle(0.21, 0.91, 0.2, 0.08);
-		StdDraw.text(0.085, 0.95, "Identifiant :");
-		StdDraw.text(0.075, 0.90, "Mot de passe :");
-		StdDraw.rectangle(0.25, 0.95, 0.1, 0.02);
-		StdDraw.rectangle(0.25, 0.90, 0.1, 0.02);	
-		StdDraw.text(0.24, 0.95, "Dans la console");
-		StdDraw.text(0.24, 0.90, "Dans la console");*/
+		StdDraw.setCanvasSize(800, 600);
+		StdDraw.picture(0.5, 0.5, "images/chargement.png");
+		/*
+		 * StdDraw.rectangle(0.21, 0.91, 0.2, 0.08); StdDraw.text(0.085, 0.95,
+		 * "Identifiant :"); StdDraw.text(0.075, 0.90, "Mot de passe :");
+		 * StdDraw.rectangle(0.25, 0.95, 0.1, 0.02); StdDraw.rectangle(0.25, 0.90, 0.1,
+		 * 0.02); StdDraw.text(0.24, 0.95, "Dans la console"); StdDraw.text(0.24, 0.90,
+		 * "Dans la console");
+		 */
 
-		
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
@@ -56,7 +54,7 @@ public class Main {
 			liste.add("2 : Utiliser un équipement");
 			liste.add("3 : Quitter la simulation");
 			liste.add("4 : Sauvegarder ma maison");
-			if(droits) {
+			if (droits) {
 				liste.add("5 : Créer une pièce");
 				liste.add("6 : Supprimer la pièce actuelle");
 				liste.add("7 : Créer un équipement");
@@ -109,7 +107,7 @@ public class Main {
 				} else {
 					System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 					for (int i = 0; i < equip.size(); i++) {
-						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
+						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des equipements
 					}
 					System.out.println();
 					int req = toInt(s.nextLine()) - 1;
@@ -240,15 +238,14 @@ public class Main {
 				couleurs.add("rose");
 				couleurs.add("bleu");
 				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
-				for (int i=0;i<couleurs.size();i++) {
-					System.out.println((i+1)+" : "+couleurs.get(i));
+				for (int i = 0; i < couleurs.size(); i++) {
+					System.out.println((i + 1) + " : " + couleurs.get(i));
 				}
 				int req = Main.toInt(s.nextLine());
-				if (req>0&&req<=couleurs.size()) {
-					couleur=couleurs.get(req-1);
+				if (req > 0 && req <= couleurs.size()) {
+					couleur = couleurs.get(req - 1);
 					System.out.println("Nouvelle couleur validée");
-				}
-				else {
+				} else {
 					System.out.println("Mauvaise commande");
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
@@ -272,8 +269,8 @@ public class Main {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
-	private static String couleur ="bleu";
-	
+	private static String couleur = "bleu";
+
 	public static Maison getMaison() {
 		return maison;
 	}
@@ -477,16 +474,29 @@ public class Main {
 			System.out.println("\nMaison non sauvegardée");
 		}
 	}
+
 	public static void MiseNiveauGraphique() {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/couleurs/"+couleur+".png");
-		StdDraw.picture(0.5, 0.5,"images/piece.png");
+		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+		StdDraw.picture(0.5, 0.5, "images/piece.png");
 		StdDraw.text(0.15, 0.93, pseudo);
 		StdDraw.text(0.38, 0.93, maison.getNom());
 		StdDraw.text(0.63, 0.93, position.getNom());
 		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
 		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.97, 0.93, String.valueOf(heure+1)+"h");
+		StdDraw.text(0.97, 0.93, String.valueOf(heure + 1) + "h");
+		MiseNiveauGraphiqueObjets();
 	}
 
+	public static void MiseNiveauGraphiqueObjets() {
+		String name;
+		List<Equipement> equip = getPosition().getEquipements();
+		for (int i = 0; i < equip.size(); i++) {
+			name = equip.get(i).getClass().getName();
+			 double position1 = (Math.random());
+			 double position2 = (Math.random()*0.85);
+			 System.out.println(name);
+			 StdDraw.picture(position1, position2, "images/objets/" + name + ".png");
+		}
+	}
 }
