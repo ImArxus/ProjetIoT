@@ -9,6 +9,8 @@ public class Radiateur extends Equipement {
 	public Radiateur(String nom) {
 		super(nom);
 		setThermostat(1);
+		this.setPositionHorizontale(0.75);
+		this.setPositionVerticale(0.35);
 	}
 
 	public Radiateur(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int thermostat) {
@@ -60,4 +62,5 @@ public class Radiateur extends Equipement {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer le thermostat");
 		}
 	}
+
 }
