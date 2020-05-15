@@ -34,6 +34,14 @@ public class Main implements Serializable {
 
 		}
 		avatars.add("plongeur");
+		avatars.add("animalcrossing");
+		avatars.add("happyman");
+		avatars.add("hulk");
+		avatars.add("neymar");
+		avatars.add("pokemon");
+		avatars.add("princesse");
+		avatars.add("spiderman");
+		avatars.add("valorant");
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
