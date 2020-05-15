@@ -20,7 +20,8 @@ public class PS5 extends Equipement implements Serializable {
 		jeux.put("Mario Kart X", "Mariooooo");
 		jeux.put("Just Dance 8", "La la la la");
 		this.setJeu((String) getJeux().keySet().toArray()[0]);
-
+		this.setPositionHorizontale(0.58);
+		this.setPositionVerticale(0.34);
 	}
 
 	public PS5(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, String jeu) {
@@ -59,11 +60,5 @@ public class PS5 extends Equipement implements Serializable {
 
 	public void setJeux(Map<String, String> jeux) {
 		this.jeux = jeux;
-	}
-
-	public static void main(String[] args) {
-		PS5 PS = new PS5("Jean");
-		String jeu = PS.getJeu();
-		System.out.println(jeu);
 	}
 }
