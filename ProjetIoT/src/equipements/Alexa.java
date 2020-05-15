@@ -1,5 +1,6 @@
 package equipements;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,8 +9,12 @@ import main.Main;
 import main.Maison;
 import main.Piece;
 
-public class Alexa extends Equipement {
+public class Alexa extends Equipement implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8308711409297886419L;
 	private static String pseudo;
 
 	public Alexa(String nom) {
@@ -43,7 +48,7 @@ public class Alexa extends Equipement {
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 		if (super.isEtatCourant()) {
 			System.out.println(" Bonjour " + pseudo + ", de quelle pièce s'agit-il?");
-			List<Piece> pieces = Maison.getPieces();
+			List<Piece> pieces = Main.getMaison().getPieces();
 			for (int i = 0; i < pieces.size(); i++) {
 				System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i).getNom()); // Affiche la liste des pièces
 			}
@@ -64,7 +69,7 @@ public class Alexa extends Equipement {
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 		if (super.isEtatCourant()) {
 			System.out.println(" Bonjour " + pseudo + ", de quelle pièce s'agit-il?");
-			List<Piece> pieces = Maison.getPieces();
+			List<Piece> pieces = Main.getMaison().getPieces();
 			for (int i = 0; i < pieces.size(); i++) {
 				System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i).getNom()); // Affiche la liste des pièces
 			}

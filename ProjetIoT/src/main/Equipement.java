@@ -1,6 +1,8 @@
 package main;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.LinkedList;
+
 import java.util.Scanner;
 
 import equipements.Alarme;
@@ -18,8 +20,12 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 
-public class Equipement {
+public class Equipement implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
 	protected boolean etatCourant;
 	protected String nom;
 	protected double positionHorizontale;
@@ -29,10 +35,10 @@ public class Equipement {
 		setNom(nom);
 		setEtatCourant(false);
 		positionHorizontale = Math.random();
-		positionVerticale = (Math.random() * 0.7)+0.1;
+		positionVerticale = (Math.random() * 0.7) + 0.1;
 	}
 
-	protected Equipement(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+	protected Equipement(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
 		this.setPositionHorizontale(positionHorizontale);
@@ -53,7 +59,7 @@ public class Equipement {
 
 	public static void creerEquipement(Piece p, Scanner s) {
 		System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
-		List<String> possibilites = ListeEquipementConstructibles.getListe();
+		LinkedList<String> possibilites = ListeEquipementConstructibles.getListe();
 		for (int i = 0; i < possibilites.size(); i++) {
 			System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Liste des équipements
 		}
@@ -117,7 +123,7 @@ public class Equipement {
 	}
 
 	public static void supprimerEquipement(Piece p, Scanner s) {
-		List<Equipement> equip = p.getEquipements();
+		LinkedList<Equipement> equip = p.getEquipements();
 		if (equip.isEmpty()) {
 			System.out.println("Il n'y a pas d'équipement à supprimer");
 		} else {

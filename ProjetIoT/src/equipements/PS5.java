@@ -1,12 +1,17 @@
 package equipements;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import main.Equipement;
 
-public class PS5 extends Equipement {
+public class PS5 extends Equipement implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
 	private Map<String, String> jeux = new HashMap<String, String>();
 

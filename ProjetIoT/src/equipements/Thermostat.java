@@ -1,9 +1,15 @@
 package equipements;
 
+import java.io.Serializable;
+
 import main.Equipement;
 
-public class Thermostat extends Equipement {
+public class Thermostat extends Equipement implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6630244045511449074L;
 	private int temperature;
 
 	public Thermostat(String nom) {

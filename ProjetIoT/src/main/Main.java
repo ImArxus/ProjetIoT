@@ -1,14 +1,22 @@
 package main;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Scanner;
 
 import equipements.Alarme;
 import equipements.Lumiere;
 
-public class Main {
+public class Main implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5850588170235124346L;
+	
+
 
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
@@ -23,11 +31,18 @@ public class Main {
 		 */
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
+		
+		
+		
+		
 
 		chargement(s); // Choix de la maison et de l'utilisateur
 		boolean stop = false; // Fin de parcours
+		
+	
 
-		List<Equipement> lumieres = getLumiere();
+
+		LinkedList<Equipement> lumieres = getLumiere();
 		if (intensiteLumineuseNaturelle == 0) {
 			if (lumieres.isEmpty()) {
 				System.out.println("Il n'y a pas de lumière dans cette pièce");
@@ -36,6 +51,7 @@ public class Main {
 				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
 				lum.allumer();
 			}
+
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
@@ -49,7 +65,7 @@ public class Main {
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(Equipement.actionsPossibles(pseudo));
-			List<String> liste = new LinkedList<String>();
+			LinkedList<String> liste = new LinkedList<String>();
 			liste.add("1 : Changer de pièce");
 			liste.add("2 : Utiliser un équipement");
 			liste.add("3 : Quitter la simulation");
@@ -69,7 +85,7 @@ public class Main {
 			 ************************* Déplacement *************************
 			 ***************************************************************/
 			if (requete == 1) {
-				List<Piece> piecesAdj = getPosition().getPiecesAdj();
+				LinkedList<Piece> piecesAdj = getPosition().getPiecesAdj();
 				if (piecesAdj.isEmpty()) {
 					System.out.println("\nIl n'y a pas de pièces dans laquelle se déplacer\n");
 				} else {
@@ -101,7 +117,7 @@ public class Main {
 			 ************************* Utilisation *************************
 			 ***************************************************************/
 			else if (requete == 2) {
-				List<Equipement> equip = getPosition().getEquipements();
+				LinkedList<Equipement> equip = getPosition().getEquipements();
 				if (equip.isEmpty()) {
 					System.out.println("\nIl n'y a pas d'équipement à utiliser ici\n");
 				} else {
@@ -156,8 +172,10 @@ public class Main {
 			/***************************************************************
 			 ******************* Suppression d'une pièce *******************
 			 ***************************************************************/
+
 			else if (requete == 6 && droits) {
-				List<Piece> piecesAdj = getPosition().getPiecesAdj();
+				LinkedList<Piece> piecesAdj = getPosition().getPiecesAdj();
+
 				if (piecesAdj.isEmpty()) {
 					System.out.println("Il n'y a pas de pièce à supprimer");
 				} else {
@@ -217,8 +235,10 @@ public class Main {
 			/***************************************************************
 			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
+
 			else if (requete == 10 && droits) {
-				List<Piece> pieces = Maison.getPieces();
+				LinkedList<Piece> pieces = getMaison().getPieces();
+
 				for (int i = 0; i < pieces.size(); i++) {
 					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
 				}
@@ -228,7 +248,7 @@ public class Main {
 			 *************** Choix couleur des parametres*******************
 			 ***************************************************************/
 			else if (requete == 11 && droits) {
-				List<String> couleurs = new LinkedList<String>();
+				LinkedList<String> couleurs = new LinkedList<String>();
 				couleurs.add("GREEN");
 				couleurs.add("ORANGE");
 				couleurs.add("RED");
@@ -291,9 +311,9 @@ public class Main {
 		return heure;
 	}
 
-	public static List<Equipement> getLumiere() {
-		List<Equipement> lumieres = new LinkedList<Equipement>();
-		List<Equipement> equip = getPosition().getEquipements();
+	public static LinkedList<Equipement> getLumiere() {
+		LinkedList<Equipement> lumieres = new LinkedList<Equipement>();
+		LinkedList<Equipement> equip = getPosition().getEquipements();
 		Iterator<Equipement> it = equip.iterator();
 		while (it.hasNext()) {
 			Equipement e = it.next();
@@ -317,7 +337,7 @@ public class Main {
 	}
 
 	public static boolean alarme(Scanner s) {
-		List<Equipement> equip = getPosition().getEquipements();
+		LinkedList<Equipement> equip = getPosition().getEquipements();
 		for (int i = 0; i < equip.size(); i++) {
 			Equipement objet = equip.get(i);
 			if (objet instanceof Alarme) {
@@ -372,7 +392,7 @@ public class Main {
 	}
 
 	public static void traitementIntensiteLumineuse() {
-		List<Equipement> lumieresPieces = getLumiere();
+		LinkedList<Equipement> lumieresPieces = getLumiere();
 		int sommeILobjets = 0;
 		for (int i = 0; i < lumieresPieces.size(); i++) {
 			Equipement objet = lumieresPieces.get(i);
@@ -448,7 +468,8 @@ public class Main {
 		boolean maisonChoisie = false;
 		while (!maisonChoisie) {
 			System.out.println("➡️ 1 : Barry's House");
-			System.out.println("➡️ 2 : Maison Vide\n");
+			System.out.println("➡️ 2 : Maison Vide");
+			System.out.println("➡️ 3 : Charger Maison\n");
 			int requete = toInt(s.nextLine());
 			if (requete == 1) {
 				maison = BarryHouse.creerMaison();
@@ -457,23 +478,33 @@ public class Main {
 			} else if (requete == 2) {
 				maison = BarryHouse.creerMaisonVide();
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
+				System.out.println(maison.toString());
 				maisonChoisie = true;
+			} else if (requete == 3) {
+				maison = Sauvegarde.chargerMAISON();
+				if(maison!=null) {
+					maisonChoisie = true;
+				}
 			}
+
 		}
-		setPosition(Maison.getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
+		setPosition(getMaison().getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
+	
+	
 
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
-			Sauvegarde.sauvegarder(maison.getNom());
+			Sauvegarde.sauvegarder();
 			System.out.println("\nSauvegarde effectuée");
 		} else {
 			System.out.println("\nMaison non sauvegardée");
 		}
 	}
+
 
 	public static void MiseNiveauGraphique() {
 		Piece a = getPosition();
@@ -494,7 +525,7 @@ public class Main {
 		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
 		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
 		StdDraw.text(0.97, 0.93, String.valueOf(heure) + "h");
-		MiseNiveauGraphiqueObjets();
+		miseNiveauGraphiqueObjets();
 	}
 
 	public static void choixCouleurLegende() {
@@ -526,10 +557,10 @@ public class Main {
 		}
 	}
 
-	public static void MiseNiveauGraphiqueObjets() {
+	public static void miseNiveauGraphiqueObjets() {
 		choixCouleurLegende();
 		String nameClass;
-		List<Equipement> equip = getPosition().getEquipements();
+		LinkedList<Equipement> equip = getPosition().getEquipements();
 		for (int i = 0; i < equip.size(); i++) {
 			nameClass = equip.get(i).getClass().getName();
 			StdDraw.picture(equip.get(i).getPositionHorizontale(), equip.get(i).getPositionVerticale(),

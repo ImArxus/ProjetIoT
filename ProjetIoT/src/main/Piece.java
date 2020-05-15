@@ -1,16 +1,21 @@
 package main;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
-public class Piece {
 
+public class Piece implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 	private String nom;
 	private int temperature;
 	private int intensiteLumineuse; // Intensité totale
-	private List<Piece> piecesAdj = new LinkedList<Piece>();
-	private List<Equipement> equipements = new LinkedList<Equipement>();
+	private LinkedList<Piece> piecesAdj = new LinkedList<Piece>();
+	private LinkedList<Equipement> equipements = new LinkedList<Equipement>();
 
 	public Piece(String nom) {
 		this.setNom(nom);
@@ -18,14 +23,14 @@ public class Piece {
 		this.intensiteLumineuse = 50;
 	}
 
-	public Piece(String nom, List<Equipement> equipements) {
+	public Piece(String nom, LinkedList<Equipement> equipements) {
 		this.setNom(nom);
 		this.setEquipements(equipements);
 		this.temperature = 21;
 		this.intensiteLumineuse = 50;
 	}
 
-	public Piece(String nom, List<Piece> piecesAdj, List<Equipement> equipements) {
+	public Piece(String nom, LinkedList<Piece> piecesAdj, LinkedList<Equipement> equipements) {
 		this.setNom(nom);
 		this.setPiecesAdj(piecesAdj);
 		this.setEquipements(equipements);
@@ -56,7 +61,7 @@ public class Piece {
 		return getNom() + " qui est équipé(e) de " + afficher(equipements);
 	}
 
-	public String afficher(List<Equipement> a) {
+	public String afficher(LinkedList<Equipement> a) {
 		Iterator<Equipement> it = a.iterator();
 		String fin = "\n";
 		while (it.hasNext()) {
@@ -103,19 +108,19 @@ public class Piece {
 		}
 	}
 
-	public List<Piece> getPiecesAdj() {
+	public LinkedList<Piece> getPiecesAdj() {
 		return piecesAdj;
 	}
 
-	public void setPiecesAdj(List<Piece> piecesAdj) {
+	public void setPiecesAdj(LinkedList<Piece> piecesAdj) {
 		this.piecesAdj = piecesAdj;
 	}
 
-	public List<Equipement> getEquipements() {
+	public LinkedList<Equipement> getEquipements() {
 		return equipements;
 	}
 
-	public void setEquipements(List<Equipement> equipements) {
+	public void setEquipements(LinkedList<Equipement> equipements) {
 		this.equipements = equipements;
 	}
 
