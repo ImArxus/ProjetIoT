@@ -11,6 +11,8 @@ import equipements.TV;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import pieces.Cuisine;
+import pieces.Salon;
 import equipements.Electrolyseur;
 
 import java.io.Serializable;
@@ -21,9 +23,9 @@ import equipements.Alexa;
 public class BarryHouse implements Serializable {
 
 	private static final long serialVersionUID = 5L;
-	static Piece cuisine = new Piece("Cuisine");
+	static Piece cuisine = new Cuisine("Cuisine");
 	static Piece salleaManger = new Piece("Salle à manger");
-	static Piece salon = new Piece("Salon");
+	static Piece salon = new Salon("Salon");
 	static Piece chambre = new Piece("Chambre1");
 	static Piece salleDeBain = new Piece("Salle de bain");
 	static Piece palier = new Piece("Palier");

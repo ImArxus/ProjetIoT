@@ -12,6 +12,8 @@ public class Piece implements Serializable {
 	private int intensiteLumineuse; // Intensité totale
 	private LinkedList<Piece> piecesAdj = new LinkedList<Piece>();
 	private LinkedList<Equipement> equipements = new LinkedList<Equipement>();
+	private static String couleur = "BLUE";
+
 
 	public Piece(String nom) {
 		this.setNom(nom);
@@ -120,4 +122,9 @@ public class Piece implements Serializable {
 		this.equipements = equipements;
 	}
 
+	public void imagePiece() {
+		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+		StdDraw.picture(0.5, 0.5, "images/piece.png");
+	}
+	
 }

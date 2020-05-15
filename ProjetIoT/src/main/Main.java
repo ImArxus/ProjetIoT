@@ -39,7 +39,7 @@ public class Main implements Serializable {
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			MiseNiveauGraphique();
+			miseNiveauGraphique();
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -486,19 +486,20 @@ public class Main implements Serializable {
 		}
 	}
 
-	public static void MiseNiveauGraphique() {
-		Piece a = getPosition();
+	public static void miseNiveauGraphique() {
+		Piece pos = getPosition();
 		StdDraw.clear();
-		if (a.getNom() == "Jardin") {
+		pos.imagePiece();
+		if (pos.getNom() == "Jardin") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/jardin.png");
-		} else if (a.getNom() == "Piscine") {
+		} else if (pos.getNom() == "Piscine") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piscine.png");
-		} else if (a.getNom() == "escalier") {
+		} else if (pos.getNom() == "escalier") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/escalier.png");
-		} else if (a.getNom() == "Cuisine") {
+		} else if (pos.getNom() == "Cuisine") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/cuisine.png");
 		} else {
