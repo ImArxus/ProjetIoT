@@ -16,13 +16,6 @@ public class Main implements Serializable {
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
-		/*
-		 * StdDraw.rectangle(0.21, 0.91, 0.2, 0.08); StdDraw.text(0.085, 0.95,
-		 * "Identifiant :"); StdDraw.text(0.075, 0.90, "Mot de passe :");
-		 * StdDraw.rectangle(0.25, 0.95, 0.1, 0.02); StdDraw.rectangle(0.25, 0.90, 0.1,
-		 * 0.02); StdDraw.text(0.24, 0.95, "Dans la console"); StdDraw.text(0.24, 0.90,
-		 * "Dans la console");
-		 */
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
