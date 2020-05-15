@@ -33,15 +33,23 @@ public class Main implements Serializable {
 				lum.allumer();
 			}
 		}
-		avatars.add("plongeur");
-		avatars.add("animalcrossing");
-		avatars.add("happyman");
-		avatars.add("hulk");
-		avatars.add("neymar");
-		avatars.add("pokemon");
-		avatars.add("princesse");
-		avatars.add("spiderman");
-		avatars.add("valorant");
+		avatars.add("fille1");
+		avatars.add("fille2");
+		avatars.add("fille3");
+		avatars.add("fille4");	
+		avatars.add("fille5");
+		avatars.add("fille6");
+		avatars.add("fille7");
+		avatars.add("homme1");
+		avatars.add("homme2");
+		avatars.add("homme3");
+		avatars.add("homme4");
+		avatars.add("homme5");
+		avatars.add("homme6");
+		avatars.add("homme7");
+		avatars.add("homme8");
+		avatars.add("homme9");
+		
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
@@ -251,7 +259,7 @@ public class Main implements Serializable {
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 	private static List<String> avatars = new LinkedList<String>();
 	public static String couleur = "BLUE";
-	private static String avatar = "plongeur";
+	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
 		return maison;
@@ -470,7 +478,8 @@ public class Main implements Serializable {
 	public static void miseNiveauGraphique() {
 		Piece position = getPosition();
 		StdDraw.clear();
-		position.imagePiece();
+		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+		StdDraw.picture(0.5, 0.5, "images/piece.png");
 		StdDraw.text(0.15, 0.96, getPseudo());
 		StdDraw.text(0.46, 0.96, getMaison().getNom());
 		StdDraw.text(0.78, 0.96, position.getNom());
@@ -509,7 +518,9 @@ public class Main implements Serializable {
 			break;
 		}
 	}
-
+	public static String getCouleur() {
+		return couleur;
+	}
 	public static void miseNiveauGraphiqueObjets() {
 		choixCouleurLegende();
 		String nameClass;
