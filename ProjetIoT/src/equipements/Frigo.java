@@ -1,5 +1,6 @@
 package equipements;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -7,8 +8,12 @@ import java.util.Set;
 
 import main.Equipement;
 
-public class Frigo extends Equipement {
+public class Frigo extends Equipement implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4392838038317445404L;
 	private int temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
 

@@ -1,5 +1,6 @@
 package main;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import equipements.Alarme;
@@ -17,8 +18,12 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 
-public class Action {
+public class Action implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2046399578821369069L;
 	private static Piece position = Main.getPosition();
 
 	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {

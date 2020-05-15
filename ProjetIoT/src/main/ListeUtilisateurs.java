@@ -1,11 +1,16 @@
 package main;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 //test mez
 
-public class ListeUtilisateurs {
+public class ListeUtilisateurs implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6447914795234124870L;
 	protected Map<String, String> comptes = new HashMap<String, String>();// (pseudo,mdp)
 	protected static Map<String, Boolean> estAdmin = new HashMap<String, Boolean>();// (pseudo ,estAdmin)
 

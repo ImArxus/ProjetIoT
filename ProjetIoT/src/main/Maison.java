@@ -1,13 +1,25 @@
 package main;
 
+import java.io.Serializable;
 import java.util.LinkedList;
-import java.util.List;
 
-public class Maison {
+public class Maison implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	 
 	private String nom;
-	protected static List<Piece> pieces = new LinkedList<Piece>();
-
+	//private Piece p = new Piece("TEST        TEST");  ///TEST
+	//private int s = 123;  ////TEST
+	protected  LinkedList<Piece> pieces = new LinkedList<Piece>();
+	
+          ;
+	
+     
+          
+          
 	public Maison(String nom) {
 		this.setNom(nom);
 		ajouterPiece(new Piece("Salon")); // Créé un salon par défaut si on ne précise aucune pièce
@@ -18,7 +30,7 @@ public class Maison {
 		ajouterPiece(piece);
 	}
 
-	public Maison(String nom, List<Piece> pieces) {
+	public Maison(String nom, LinkedList<Piece> pieces) {
 		this.setNom(nom);
 		this.setPieces(pieces);
 	}
@@ -42,7 +54,7 @@ public class Maison {
 	}
 
 	public String toString() {
-		return getNom() + " : " + getPieces();
+		return getNom() + " : " + getPieces().toString();
 	}
 
 	public String getNom() {
@@ -53,12 +65,12 @@ public class Maison {
 		this.nom = nom;
 	}
 
-	public static List<Piece> getPieces() {
-		return pieces;
+	public LinkedList<Piece> getPieces() {
+		return this.pieces;
 	}
 
-	public void setPieces(List<Piece> pieces) {
-		Maison.pieces = pieces;
+	public void setPieces(LinkedList<Piece> pieces) {
+		this.pieces = pieces;
 	}
 
 	public static void main(String[] args) {
