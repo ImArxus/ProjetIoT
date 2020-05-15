@@ -1,9 +1,15 @@
 package equipements;
 
+import java.io.Serializable;
+
 import main.Equipement;
 
-public class TV extends Equipement {
+public class TV extends Equipement implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5394573896230563021L;
 	private int volume;
 	private int numeroChaine;
 

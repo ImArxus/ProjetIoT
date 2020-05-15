@@ -1,54 +1,79 @@
 package main;
 
 import java.io.FileInputStream;
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
-public class Sauvegarde {
 
+
+public class Sauvegarde implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1850993100796950057L;
+	
 	// https://forum.hardware.fr/hfr/Programmation/Java/sauvegarde-sujet_129577_1.htm
+	
+	
 
 	public static void sauvegarder() {
-		// Map d'une maison associée à un pseudo
-		Map<String, Maison> maMaison = new HashMap<String, Maison>();
-		maMaison.put(Main.getPseudo(), Main.getMaison());
+		
+		 try {
+	            /* Create a file to write the serialized tree to. */
+	            FileOutputStream ostream = new FileOutputStream("Maison de " + Main.getPseudo());
+	            /* Create the output stream */
+	            ObjectOutputStream p = new ObjectOutputStream(ostream);
 
-		// Crée un fichier texte
-		try {
-			PrintWriter ecrit = new PrintWriter(new FileWriter("sauvegarde" + Main.getPseudo() + ".txt"));
-			ecrit.print(maMaison);
-			ecrit.flush();
-			ecrit.close();
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
-		}
-	}
+	            /* Create a tree with three levels. */
+	            Maison m = Main.getMaison();
+	           
+	           
+	            
+	            p.writeObject(m); // Write the tree to the stream.
+	            p.flush();
+	            ostream.close();    // close the file.
+	            
+	            System.out.println("votre maison a ete enregistre");
+	} catch (Exception ex) {
+        ex.printStackTrace();
+    }}
 
-	public static void charger(String save) {
-		try {
-			FileInputStream fichier = new FileInputStream(save);
-			ObjectInputStream ois = new ObjectInputStream(fichier);
-			Maison load = (Maison) ois.readObject();
-
-			System.out.println(load);
-			System.out.println(Main.getMaison());
-			/**
-			 * gui.print(play.getcurrentRoom().toString()); gui.print(load.toString());
-			 * play.enterRoom(load); gui.print(play.getcurrentRoom().toString());
-			 */
-
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	public static void main(String[] args) {
-		charger("sauvegardealex.txt");
-	}
+	
+	public static Maison chargerMAISON() {
+		
+	    try {
+		
+		 FileInputStream istream = new FileInputStream("Maison de " + Main.getPseudo());
+         ObjectInputStream q = new ObjectInputStream(istream);
+         
+         /* Read a tree object, and all the subtrees */
+         Maison m = (Maison)q.readObject();
+         q .close();
+         System.out.println(m.toString());
+         return m;
+	    } catch (Exception ex) {
+	    	System.out.println("vous n'avez pas de maison sauvegarde");
+          //  ex.printStackTrace();
+            return null;
+            
+       }}
+	
+	
 
 }

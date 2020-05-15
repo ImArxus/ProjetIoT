@@ -12,11 +12,18 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 import equipements.Electrolyseur;
+
+import java.io.Serializable;
+
 import equipements.Alarme;
 import equipements.Alexa;
 
-public class BarryHouse {
+public class BarryHouse implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
 	static Piece cuisine = new Piece("Cuisine");
 	static Piece salleaManger = new Piece("Salle à manger");
 	static Piece salon = new Piece("Salon");

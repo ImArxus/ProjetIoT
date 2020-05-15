@@ -1,11 +1,16 @@
 package main;
 
+import java.io.Serializable;
 import java.util.LinkedList;
-import java.util.List;
 
-public class ListeEquipementConstructibles {
 
-	private static List<String> liste = new LinkedList<String>();
+public class ListeEquipementConstructibles implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9L;
+	private static LinkedList<String> liste = new LinkedList<String>();
 
 	public static void ajoutEquipementConstructibles() {
 		liste.add("Alarme");
@@ -24,7 +29,7 @@ public class ListeEquipementConstructibles {
 		liste.add("Volet");
 	}
 
-	public static List<String> getListe() {
+	public static LinkedList<String> getListe() {
 		liste.clear();
 		ajoutEquipementConstructibles();
 		return liste;
