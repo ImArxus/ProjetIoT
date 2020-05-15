@@ -6,7 +6,7 @@ import java.util.Map;
 
 import main.Equipement;
 
-public class Enceinte extends Equipement implements Serializable{
+public class Enceinte extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 6075055980198184766L;
 	private int volume;
@@ -24,7 +24,8 @@ public class Enceinte extends Equipement implements Serializable{
 		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
 	}
 
-	public Enceinte(String nom, boolean etatCourant, int volume,double positionHorizontale,double positionVerticale, Map<String, String> musiques, String enEcoute) {
+	public Enceinte(String nom, boolean etatCourant, int volume, double positionHorizontale, double positionVerticale,
+			Map<String, String> musiques, String enEcoute) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.setMusiques(musiques);

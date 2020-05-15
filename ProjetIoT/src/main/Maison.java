@@ -5,14 +5,9 @@ import java.util.LinkedList;
 
 public class Maison implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String nom;
-	// private Piece p = new Piece("TEST TEST"); ///TEST
-	// private int s = 123; ////TEST
 	protected LinkedList<Piece> pieces = new LinkedList<Piece>();
 
 	public Maison(String nom) {

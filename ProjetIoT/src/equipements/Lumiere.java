@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Lumiere extends Equipement implements Serializable{
+public class Lumiere extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3377862988501403504L;
 	private int intensite;
@@ -18,8 +18,8 @@ public class Lumiere extends Equipement implements Serializable{
 		this.setPositionHorizontale(0.5);
 	}
 
-	public Lumiere(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
-		super(nom, etatCourant,positionHorizontale,positionVerticale);
+	public Lumiere(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
+		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		setIntensite(intensite);
 		setCouleur(couleur);
 	}

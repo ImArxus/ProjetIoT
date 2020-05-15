@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Radiateur extends Equipement implements Serializable{
+public class Radiateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
@@ -16,14 +16,16 @@ public class Radiateur extends Equipement implements Serializable{
 		this.setPositionVerticale(0.32);
 	}
 
-	public Radiateur(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int thermostat) {
+	public Radiateur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			int thermostat) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setThermostat(thermostat);
 	}
 
 	@Override
 	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir thermostat";
+		return super.actionsPossibles()
+				+ "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir thermostat";
 	}
 
 	public int getThermostat() {
@@ -58,7 +60,7 @@ public class Radiateur extends Equipement implements Serializable{
 		if (super.isEtatCourant()) {
 			if (thermostat <= 5 && thermostat >= 0) {
 				setThermostat(thermostat);
-			}else {
+			} else {
 				System.out.println("ThermostatF non-valide");
 			}
 		} else {
