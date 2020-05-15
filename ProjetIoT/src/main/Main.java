@@ -502,6 +502,9 @@ public class Main implements Serializable {
 		} else if (a.getNom() == "Piscine") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piscine.png");
+		} else if(a.getNom()=="escalier"){
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/escalier.png");
 		} else {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piece.png");
