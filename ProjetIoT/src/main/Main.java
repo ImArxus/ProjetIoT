@@ -269,6 +269,7 @@ public class Main implements Serializable {
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 	private static String couleur = "BLUE";
+	private static String avatar = "avatar1";
 	static Piece salon = new Piece("Salon");
 
 	public static Maison getMaison() {
@@ -508,6 +509,7 @@ public class Main implements Serializable {
 		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
 		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
 		miseNiveauGraphiqueObjets();
+		StdDraw.picture(0.5, 0.2, "images/avatar/"+avatar+".png");
 	}
 
 	public static void choixCouleurLegende() {
