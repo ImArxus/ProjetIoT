@@ -13,7 +13,7 @@ public class Main {
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(800,600);
-		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
+		StdDraw.picture(0.5, 0.5,"images/chargement.png");
 /*
 		StdDraw.rectangle(0.21, 0.91, 0.2, 0.08);
 		StdDraw.text(0.085, 0.95, "Identifiant :");
@@ -65,7 +65,6 @@ public class Main {
 				liste.add("10 : Afficher toutes les pièces et équipements");
 				liste.add("11 : Choisir couleur des paramètres");
 			}
-			afficherMessageChoix(liste);
 			int requete = toInt(s.nextLine());
 
 			/***************************************************************
@@ -74,34 +73,27 @@ public class Main {
 			if (requete == 1) {
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				if (piecesAdj.isEmpty()) {
-					afficherMessageBoucle("Il n'y a pas de pièces dans laquelle se déplacer");
 					System.out.println("\nIl n'y a pas de pièces dans laquelle se déplacer\n");
 				} else {
-					List<String> listeChoix = new LinkedList<String>();
 					System.out.println("Tapez la commande correspondant à la destination souhaitée");
 					for (int i = 0; i < piecesAdj.size(); i++) {
 						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-						listeChoix.add((i+1)+" : "+piecesAdj.get(i).getNom());
 					}
-					afficherMessageChoix(listeChoix);
 					int req = toInt(s.nextLine()) - 1;
 					if (req >= 0 && req < piecesAdj.size()) {
 						setPosition(piecesAdj.get(req));
 						if (intensiteLumineuseNaturelle == 0) {
 							lumieres = getLumiere();
 							if (lumieres.isEmpty()) {
-								afficherMessageBoucle("Il n'y a pas de lumières");
 								System.out.println("Il n'y a pas de lumières");
 							}
 							for (Equipement lum : lumieres) { // Allumer
-								afficherMessageBoucle("Allumage automatique des lumières");
 								System.out.println(
 										"Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
 								lum.allumer();
 							}
 						}
 					} else {
-						afficherMessageBoucle("Mauvaise commande");
 						System.out.println("Mauvaise commande");
 					}
 				}
@@ -111,18 +103,14 @@ public class Main {
 			 ************************* Utilisation *************************
 			 ***************************************************************/
 			else if (requete == 2) {
-				List<String> listeChoix = new LinkedList<String>();
 				List<Equipement> equip = getPosition().getEquipements();
 				if (equip.isEmpty()) {
-					afficherMessageBoucle("Il n'y a pas d'équipement à utiliser ici");
 					System.out.println("\nIl n'y a pas d'équipement à utiliser ici\n");
 				} else {
 					System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
 					for (int i = 0; i < equip.size(); i++) {
-						listeChoix.add((i+1)+" : "+equip.get(i).getNom());
 						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des pièces adjacentes
 					}
-					afficherMessageChoix(listeChoix);
 					System.out.println();
 					int req = toInt(s.nextLine()) - 1;
 					boolean exit = false;
@@ -135,7 +123,6 @@ public class Main {
 							Thread.sleep(2000); // Delai de 2 secondes
 						}
 					} else {
-						afficherMessageBoucle("Mauvaise Commande");
 						System.out.println("Mauvaise Commande");
 					}
 					Thread.sleep(3000); // Delai de 3 secondes
@@ -147,7 +134,6 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 3) {
 				choixSauvegarde(s);
-				afficherMessageBoucle("Au revoir !");
 				System.out.println("\nAu revoir !");
 				stop = true;
 			}
@@ -161,7 +147,6 @@ public class Main {
 			 ********************* Création d'une pièce ********************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
-				afficherMessageBoucle("Tapez le nom que vous voulez donner à votre nouvelle pièce");
 				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
 				String name = s.nextLine();
 				Piece aCreer = new Piece(name);
@@ -176,16 +161,12 @@ public class Main {
 			else if (requete == 6 && droits) {
 				List<Piece> piecesAdj = getPosition().getPiecesAdj();
 				if (piecesAdj.isEmpty()) {
-					afficherMessageBoucle("Il n'y a pas de pièce à supprimer");
 					System.out.println("Il n'y a pas de pièce à supprimer");
 				} else {
-					List<String> listeChoix = new LinkedList<String>();
 					System.out.println("Tapez la commande correspondant à la destination souhaitée");
 					for (int i = 0; i < piecesAdj.size(); i++) {
 						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-						listeChoix.add((i+1)+" : "+piecesAdj.get(i).getNom());
 					}
-					afficherMessageChoix(listeChoix);
 					int req = toInt(s.nextLine()) - 1;
 					if (req >= 0 && req < piecesAdj.size()) {
 						Piece destination = piecesAdj.get(req);
@@ -194,15 +175,12 @@ public class Main {
 							maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
 						}
 						maison.suppressionPiece(getPosition()); // Suppresion pièce
-						afficherMessageBoucle("Suppression effectuée");
 						System.out.println("\nSuppression effectuée");
 						setPosition(destination);
 						if (intensiteLumineuseNaturelle == 0) {
 							System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-							afficherMessageBoucle("Allumage automatique");
 							lumieres = getLumiere();
 							if (lumieres.isEmpty()) {
-								afficherMessageBoucle("Il n'y a pas de lumières");
 								System.out.println("Il n'y a pas de lumières");
 							}
 							for (Equipement lum : lumieres) { // Allumer
@@ -210,7 +188,6 @@ public class Main {
 							}
 						}
 					} else {
-						afficherMessageBoucle("Mauvaise commande");
 						System.out.println("Mauvaise commande");
 					}
 				}
@@ -236,7 +213,6 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 9 && droits) {
 				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
-				afficherMessageBoucle("Suppression effectuée");
 				System.out.println("Suppression effectuée");
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
@@ -255,36 +231,32 @@ public class Main {
 			 ***************************************************************/
 			else if (requete == 11 && droits) {
 				List<String> couleurs = new LinkedList<String>();
-				couleurs.add("1 : vert");
-				couleurs.add("2 : orange");
-				couleurs.add("3 : rouge");
-				couleurs.add("4 : bleu");
-				afficherMessageChoix(couleurs);
-				System.out.println("Choissisez votre couleur parmis bleu, orange, rouge et vert");
-				int req = Main.toInt(s.nextLine());
-				switch (req) {
-				case 1:
-					couleur="vert";
-					break;
-				case 2:
-					couleur="orange";
-					break;
-				case 3:
-					couleur="rouge";
-					break;
-				default:
-					couleur="bleu";
-					break;
+				couleurs.add("vert");
+				couleurs.add("orange");
+				couleurs.add("rouge");
+				couleurs.add("blanc");
+				couleurs.add("gris");
+				couleurs.add("jaune");
+				couleurs.add("rose");
+				couleurs.add("bleu");
+				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
+				for (int i=0;i<couleurs.size();i++) {
+					System.out.println((i+1)+" : "+couleurs.get(i));
 				}
-				afficherMessageBoucle("Nouvelle couleur validée");
-				System.out.println("Nouvelle couleur validée");
+				int req = Main.toInt(s.nextLine());
+				if (req>0&&req<=couleurs.size()) {
+					couleur=couleurs.get(req-1);
+					System.out.println("Nouvelle couleur validée");
+				}
+				else {
+					System.out.println("Mauvaise commande");
+				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
 			else {
-				afficherMessageBoucle("Mauvaise commande");
 				System.out.println("Cette commande n'est pas disponible\n");
 			}
 
@@ -426,18 +398,15 @@ public class Main {
 		 ***************************************************************/
 		boolean connecte = false;
 		while (!connecte) {
-			afficherMessageChargement("Veuillez saisir votre identifiant dans la console");
 			System.out.print("Identifiant : ");
 			pseudo = s.nextLine();
 			if (listeUtilisateurs.comptes.containsKey(pseudo)) {
-				afficherMessageChargement("Veuillez saisir votre mot de passe dans la console");
 				System.out.print("Mot de passe : ");
 				mdp = s.nextLine();
 				if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
 					System.out.println("Mot de passe correct");
 					connecte = true;
 				} else {
-					afficherMessageChargement("Mot de passe incorrect, choisissez une option");
 					System.out.println("Mot de passe incorrect");
 					System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Réessayer");
 					int requete = toInt(s.nextLine());
@@ -449,24 +418,20 @@ public class Main {
 					}
 				}
 			} else {
-				afficherMessageChargement("Identifiant inconnu, choisissez une option");
 				System.out.println("Identifiant inconnu");
 				System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Créer un compte\n➡️ 3 : Réessayer");
 				int requete = toInt(s.nextLine());
 				if (requete == 1) {
 					pseudo = "guest";
 					mdp = listeUtilisateurs.comptes.get(pseudo);
-					afficherMessageChargement("Connexion automatique en tant qu'invité");
 					System.out.println("Connexion automatique en tant qu'invité");
 					connecte = true;
 				} else if (requete == 2) {
 					System.out.println("Identifiant : " + pseudo);
-					afficherMessageChargement("Veuillez choisir un mot de passe");
 					System.out.print("Veuillez choisir un mot de passe : ");
 					mdp = s.nextLine();
 					listeUtilisateurs.comptes.put(pseudo, mdp);
 					ListeUtilisateurs.estAdmin.put(pseudo, false);
-					afficherMessageChargement("Féliciations, vous avez maintenant un compte utilisateur !");
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
 					connecte = true;
 				}
@@ -482,7 +447,6 @@ public class Main {
 		System.out.println("Activation du mode administrateur : " + droits);
 		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);
-		afficherMessageChargement("Bienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		System.out.println("\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
 		boolean maisonChoisie = false;
 		while (!maisonChoisie) {
@@ -491,12 +455,10 @@ public class Main {
 			int requete = toInt(s.nextLine());
 			if (requete == 1) {
 				maison = BarryHouse.creerMaison();
-				afficherMessageChargement("Bienvenue dans la maison de Barry !");
 				System.out.println("\nBienvenue dans la maison de Barry !\n");
 				maisonChoisie = true;
 			} else if (requete == 2) {
 				maison = BarryHouse.creerMaisonVide();
-				afficherMessageChargement("Votre maison de rêve n'attend que vous !");
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				maisonChoisie = true;
 			}
@@ -517,37 +479,12 @@ public class Main {
 	}
 	public static void MiseNiveauGraphique() {
 		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
-		StdDraw.text(0.13, 0.97, pseudo);
-		StdDraw.text(0.58, 0.97, position.getNom());
-		StdDraw.text(0.95, 0.97, String.valueOf(heure+1)+"h");
+		StdDraw.picture(0.5, 0.5,"images/couleurs/"+couleur+".png");
+		StdDraw.picture(0.5, 0.5,"images/piece.png");
+		StdDraw.text(0.13, 0.93, pseudo);
+		StdDraw.text(0.4, 0.93, maison.getNom());
+		StdDraw.text(0.7, 0.93, position.getNom());
+		StdDraw.text(0.95, 0.93, String.valueOf(heure+1)+"h");
 	}
-	public static void afficherMessageChargement(String message) {
-		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
-		StdDraw.text(0.5, 0.5, message);
-	}
-	public static void afficherMessageBoucle(String message) {
-		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
-		StdDraw.text(0.5, 0.5, message);
-		StdDraw.text(0.13, 0.97, pseudo);
-		StdDraw.text(0.58, 0.97, position.getNom());
-		StdDraw.text(0.95, 0.97, String.valueOf(heure+1)+"h");
-	}
-	public static void afficherMessageChoix(List<String> liste) {
-		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5,"images/accueil"+couleur+".png");
-		StdDraw.text(0.13, 0.97, pseudo);
-		StdDraw.text(0.58, 0.97, position.getNom());
-		StdDraw.text(0.95, 0.97, String.valueOf(heure+1)+"h");
-		int i=0; 
-		Iterator<String> iter = liste.iterator(); 
-		while (iter.hasNext()) { 
-		    String element = iter.next(); 
-		    double v=0.8-(i*0.05);
-		    StdDraw.text(0.5,v, element);
-		    i++; 
-		} 
-	}
+
 }
