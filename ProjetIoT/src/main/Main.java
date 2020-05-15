@@ -31,7 +31,6 @@ public class Main implements Serializable {
 				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
 				lum.allumer();
 			}
-
 		}
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
@@ -45,20 +44,7 @@ public class Main implements Serializable {
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(Equipement.actionsPossibles(pseudo));
-			LinkedList<String> liste = new LinkedList<String>();
-			liste.add("1 : Changer de pièce");
-			liste.add("2 : Utiliser un équipement");
-			liste.add("3 : Quitter la simulation");
-			liste.add("4 : Sauvegarder ma maison");
-			if (droits) {
-				liste.add("5 : Créer une pièce");
-				liste.add("6 : Supprimer la pièce actuelle");
-				liste.add("7 : Créer un équipement");
-				liste.add("8 : Supprimer un équipement");
-				liste.add("9 : Supprimer tous les équipements de la pièce");
-				liste.add("10 : Afficher toutes les pièces et équipements");
-				liste.add("11 : Choisir couleur des paramètres");
-			}
+
 			int requete = toInt(s.nextLine());
 
 			/***************************************************************
@@ -225,7 +211,7 @@ public class Main implements Serializable {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
-			 *************** Choix couleur des parametres*******************
+			 *************** Choix couleur des paramètres ******************
 			 ***************************************************************/
 			else if (requete == 11 && droits) {
 				LinkedList<String> couleurs = new LinkedList<String>();
@@ -239,12 +225,12 @@ public class Main implements Serializable {
 				couleurs.add("BLUE");
 				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
 				for (int i = 0; i < couleurs.size(); i++) {
-					System.out.println((i + 1) + " : " + couleurs.get(i));
+					System.out.println("➡️ " + (i + 1) + " : " + couleurs.get(i));
 				}
 				int req = Main.toInt(s.nextLine());
 				if (req > 0 && req <= couleurs.size()) {
 					couleur = couleurs.get(req - 1);
-					System.out.println("Nouvelle couleur validée");
+					System.out.println("\nNouvelle couleur validée\n");
 				} else {
 					System.out.println("Mauvaise commande");
 				}
@@ -269,7 +255,7 @@ public class Main implements Serializable {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
-	private static String couleur = "BLUE";
+	public static String couleur = "BLUE";
 	static Piece salon = new Piece("Salon");
 
 	public static Maison getMaison() {
@@ -476,42 +462,26 @@ public class Main implements Serializable {
 	}
 
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
-		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
+		System.out.println("Voulez vous sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
 			Sauvegarde.sauvegarder();
 			System.out.println("\nSauvegarde effectuée");
 		} else {
-			System.out.println("\nMaison non sauvegardée");
+			System.out.println("\nMaison non-sauvegardée");
 		}
 	}
 
 	public static void miseNiveauGraphique() {
-		Piece pos = getPosition();
+		Piece position = getPosition();
 		StdDraw.clear();
-		pos.imagePiece();
-		if (pos.getNom() == "Jardin") {
-			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-			StdDraw.picture(0.5, 0.5, "images/jardin.png");
-		} else if (pos.getNom() == "Piscine") {
-			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-			StdDraw.picture(0.5, 0.5, "images/piscine.png");
-		} else if (pos.getNom() == "escalier") {
-			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-			StdDraw.picture(0.5, 0.5, "images/escalier.png");
-		} else if (pos.getNom() == "Cuisine") {
-			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-			StdDraw.picture(0.5, 0.5, "images/cuisine.png");
-		} else {
-			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-			StdDraw.picture(0.5, 0.5, "images/piece.png");
-		}
-		StdDraw.text(0.15, 0.96, pseudo);
-		StdDraw.text(0.46, 0.96, maison.getNom());
+		position.imagePiece();
+		StdDraw.text(0.15, 0.96, getPseudo());
+		StdDraw.text(0.46, 0.96, getMaison().getNom());
 		StdDraw.text(0.78, 0.96, position.getNom());
 		StdDraw.text(0.29, 0.9, String.valueOf(position.getTemperature()));
 		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
+		StdDraw.text(0.9, 0.9, String.valueOf(getHeure()) + "h");
 		miseNiveauGraphiqueObjets();
 	}
 

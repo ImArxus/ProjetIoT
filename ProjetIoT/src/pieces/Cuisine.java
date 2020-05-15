@@ -1,12 +1,14 @@
 package pieces;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import main.Equipement;
+import main.Main;
 import main.Piece;
 import main.StdDraw;
 
-public class Cuisine extends Piece {
+public class Cuisine extends Piece implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,9 +20,9 @@ public class Cuisine extends Piece {
 		super(nom, piecesAdj, equipements);
 	}
 
+	@Override
 	public LinkedList<String> equipementsAutorises() {
-		LinkedList<String> equip = new LinkedList<String>();
-		equip.add("Alarme");
+		LinkedList<String> equip = super.equipementsAutorises();
 		equip.add("Alexa");
 		equip.add("Enceinte");
 		equip.add("Lumiere");
@@ -34,7 +36,7 @@ public class Cuisine extends Piece {
 
 	@Override
 	public void imagePiece() {
-		StdDraw.picture(0.5, 0.5, "images/couleurs/BLUE.png");
+		StdDraw.picture(0.5, 0.5, "images/couleurs" + Main.couleur + ".png");
 		StdDraw.picture(0.5, 0.5, "images/cuisine.png");
 	}
 

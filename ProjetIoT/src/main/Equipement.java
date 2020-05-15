@@ -56,7 +56,7 @@ public class Equipement implements Serializable {
 
 	public static void creerEquipement(Piece p, Scanner s) {
 		System.out.println("\nTapez la commande correspondant au type d'équipement à ajouter");
-		LinkedList<String> possibilites = ListeEquipementConstructibles.getListe();
+		LinkedList<String> possibilites = p.equipementsAutorises();
 		for (int i = 0; i < possibilites.size(); i++) {
 			System.out.println("➡️ " + (i + 1) + " : " + possibilites.get(i)); // Liste des équipements
 		}

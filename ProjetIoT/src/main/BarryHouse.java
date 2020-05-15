@@ -11,7 +11,18 @@ import equipements.TV;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import pieces.Buanderie;
+import pieces.Bureau;
+import pieces.Chambre;
 import pieces.Cuisine;
+import pieces.Dressing;
+import pieces.Escalier;
+import pieces.Jardin;
+import pieces.Mezzanine;
+import pieces.Palier;
+import pieces.Piscine;
+import pieces.SalleAManger;
+import pieces.SalleDeBain;
 import pieces.Salon;
 import equipements.Electrolyseur;
 
@@ -24,21 +35,21 @@ public class BarryHouse implements Serializable {
 
 	private static final long serialVersionUID = 5L;
 	static Piece cuisine = new Cuisine("Cuisine");
-	static Piece salleaManger = new Piece("Salle à manger");
+	static Piece salleaManger = new SalleAManger("Salle à manger");
 	static Piece salon = new Salon("Salon");
-	static Piece chambre = new Piece("Chambre1");
-	static Piece salleDeBain = new Piece("Salle de bain");
-	static Piece palier = new Piece("Palier");
-	static Piece escalier = new Piece("Escalier");
-	static Piece dressing = new Piece("Dressing");
-	static Piece buanderie = new Piece("Buanderie");
-	static Piece jardin = new Piece("Jardin");
-	static Piece bureau = new Piece("Bureau");
-	static Piece mezzanine = new Piece("Mezzanine");
-	static Piece piscine = new Piece("Piscine");
-	static Piece salonVide = new Piece("Salon");
+	static Piece chambre = new Chambre("Chambre1");
+	static Piece salleDeBain = new SalleDeBain("Salle de bain");
+	static Piece palier = new Palier("Palier");
+	static Piece escalier = new Escalier("Escalier");
+	static Piece dressing = new Dressing("Dressing");
+	static Piece buanderie = new Buanderie("Buanderie");
+	static Piece jardin = new Jardin("Jardin");
+	static Piece bureau = new Bureau("Bureau");
+	static Piece mezzanine = new Mezzanine("Mezzanine");
+	static Piece piscine = new Piscine("Piscine");
+	static Piece salonVide = new Salon("Salon");
 
-	static Maison maison = new Maison("Barry House", piscine); // Créé une maison avec un salon
+	static Maison maison = new Maison("Barry House", jardin); // Créé une maison avec un salon
 
 	// Création des équipements
 	static Equipement lumiere1 = new Lumiere("Lumière1");
