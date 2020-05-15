@@ -39,7 +39,8 @@ public class BarryHouse implements Serializable {
 	static Piece piscine = new Piece("Piscine");
 	static Piece salonVide = new Piece("Salon");
 
-	static Maison maison = new Maison("MyHouse", salon); // Créé une maison avec un salon
+	static Maison maison = new Maison("Barry House", salon); // Créé une maison avec un salon
+	static Maison maison2 = new Maison("Ma maison", salon);
 
 	// Création des équipements
 	static Equipement lumiere1 = new Lumiere("Lumière1");
@@ -104,9 +105,6 @@ public class BarryHouse implements Serializable {
 		maison.ajouterPiece(piscine);
 	}
 
-	public static void ajoutPieceVide() {
-		maison.ajouterPiece(salonVide);
-	}
 
 	public static void ajoutEquipement() {
 		// Ajout des équipements dans les pièces
@@ -204,8 +202,7 @@ public class BarryHouse implements Serializable {
 	}
 
 	public static Maison creerMaisonVide() {
-		ajoutPieceVide();
-		return maison;
+		return maison2;
 	}
 
 }
