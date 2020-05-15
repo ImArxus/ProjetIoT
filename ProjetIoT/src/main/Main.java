@@ -272,9 +272,6 @@ public class Main implements Serializable {
 					avatar = avatars.get(req - 1);
 					System.out.println("Nouvelle avatar validé");
 				} 
-				else if(req==69){
-					avatar="image";
-				}
 				else {
 					System.out.println("Mauvaise commande");
 					Thread.sleep(3000); // Delai de 3 secondes
