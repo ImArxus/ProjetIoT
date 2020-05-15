@@ -7,12 +7,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Sauvegarde implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1850993100796950057L;
 
-	// https://forum.hardware.fr/hfr/Programmation/Java/sauvegarde-sujet_129577_1.htm
+	private static final long serialVersionUID = -1850993100796950057L;
 
 	public static void sauvegarder() {
 
@@ -38,7 +34,6 @@ public class Sauvegarde implements Serializable {
 	public static Maison chargerMAISON() {
 
 		try {
-
 			FileInputStream istream = new FileInputStream("Maison de " + Main.getPseudo());
 			ObjectInputStream q = new ObjectInputStream(istream);
 
@@ -51,7 +46,6 @@ public class Sauvegarde implements Serializable {
 			System.out.println("vous n'avez pas de maison sauvegarde");
 			// ex.printStackTrace();
 			return null;
-
 		}
 	}
 
