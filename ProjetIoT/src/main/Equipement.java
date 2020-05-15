@@ -48,13 +48,13 @@ public class Equipement implements Serializable {
 		System.out.println();
 		int req = Main.toInt(s.nextLine());
 		if (req >= 0 && req <= possibilites.size()) {
-			System.out.println("\nTapez le nom de ce nouvel équipement");
+			System.out.println("\nTapez le nom de ce nouvel équipement\n");
 			String name = s.nextLine();
 			Equipement objet = p.creationEquipement(name, req);
 			p.ajouterEquipement(objet);
-			System.out.println("Ajout effectué");
+			System.out.println("\nAjout effectué\n");
 		} else {
-			System.out.println("Mauvaise Commande");
+			System.out.println("\nMauvaise Commande\n");
 		}
 	}
 

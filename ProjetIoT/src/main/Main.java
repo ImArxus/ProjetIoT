@@ -94,6 +94,7 @@ public class Main implements Serializable {
 						System.out.println("Mauvaise commande");
 					}
 				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
@@ -117,13 +118,12 @@ public class Main implements Serializable {
 							System.out.println("\nTapez la commande correspondant à l'action souhaitée pour " + objet);
 							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
 							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
-							Thread.sleep(2000); // Delai de 2 secondes
 						}
 					} else {
 						System.out.println("Mauvaise Commande");
 					}
-					Thread.sleep(3000); // Delai de 3 secondes
 				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
@@ -139,6 +139,7 @@ public class Main implements Serializable {
 			 ***************************************************************/
 			else if (requete == 4) {
 				choixSauvegarde(s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 			/***************************************************************
 			 ********************* Création d'une pièce ********************
@@ -151,7 +152,6 @@ public class Main implements Serializable {
 			/***************************************************************
 			 ******************* Suppression d'une pièce *******************
 			 ***************************************************************/
-
 			else if (requete == 6 && droits) {
 				Piece.supprimerPiece(getMaison(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
@@ -172,6 +172,7 @@ public class Main implements Serializable {
 				Equipement.supprimerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
+
 			/***************************************************************
 			 ******* Suppression de tous les equipements de la pièce *******
 			 ***************************************************************/
@@ -180,18 +181,18 @@ public class Main implements Serializable {
 				System.out.println("Suppression effectuée");
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
 			/***************************************************************
 			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
-
 			else if (requete == 10 && droits) {
 				LinkedList<Piece> pieces = getMaison().getPieces();
-
 				for (int i = 0; i < pieces.size(); i++) {
 					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
 			/***************************************************************
 			 *************** Choix couleur des paramètres ******************
 			 ***************************************************************/
@@ -218,10 +219,10 @@ public class Main implements Serializable {
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
 			/***************************************************************
 			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
-
 			else if (requete == 12 && droits) {
 				System.out.println("Tapez la commande correspondant à votre avatar désiré");
 				for (int i = 0; i < avatars.size(); i++) {
@@ -233,8 +234,8 @@ public class Main implements Serializable {
 					System.out.println("Nouvelle avatar validé");
 				} else {
 					System.out.println("Mauvaise commande");
-					Thread.sleep(3000); // Delai de 3 secondes
 				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************

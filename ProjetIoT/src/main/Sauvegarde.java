@@ -25,7 +25,7 @@ public class Sauvegarde implements Serializable {
 			p.flush();
 			ostream.close(); // close the file.
 
-			System.out.println("\nVotre maison a bien été enregistré !\n");
+			System.out.println("\nVotre maison a bien été enregistré !");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
