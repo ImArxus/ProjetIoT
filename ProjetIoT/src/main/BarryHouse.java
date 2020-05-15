@@ -20,9 +20,6 @@ import equipements.Alexa;
 
 public class BarryHouse implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5L;
 	static Piece cuisine = new Piece("Cuisine");
 	static Piece salleaManger = new Piece("Salle à manger");
@@ -40,7 +37,7 @@ public class BarryHouse implements Serializable {
 	static Piece salonVide = new Piece("Salon");
 
 	static Maison maison = new Maison("Barry House", salon); // Créé une maison avec un salon
-	
+
 	// Création des équipements
 	static Equipement lumiere1 = new Lumiere("Lumière1");
 	static Equipement lumiere2 = new Lumiere("Lumière2");
@@ -103,7 +100,6 @@ public class BarryHouse implements Serializable {
 		maison.ajouterPiece(mezzanine);
 		maison.ajouterPiece(piscine);
 	}
-
 
 	public static void ajoutEquipement() {
 		// Ajout des équipements dans les pièces

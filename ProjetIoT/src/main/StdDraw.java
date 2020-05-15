@@ -1,4 +1,5 @@
 package main;
+
 /******************************************************************************
  *  Compilation:  java StdDraw.java
  *  Execution:    java StdDraw

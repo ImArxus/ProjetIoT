@@ -11,9 +11,6 @@ import equipements.Lumiere;
 
 public class Main implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5850588170235124346L;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -468,8 +465,8 @@ public class Main implements Serializable {
 				maisonChoisie = true;
 			} else if (requete == 2) {
 				System.out.println("\nQuel nom voulez vous donner à votre maison?");
-				String name = s.nextLine();	
-				maison =  new Maison(name, salon);
+				String name = s.nextLine();
+				maison = new Maison(name, salon);
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
@@ -505,7 +502,7 @@ public class Main implements Serializable {
 		} else if (a.getNom() == "Piscine") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piscine.png");
-		} else if(a.getNom()=="escalier"){
+		} else if (a.getNom() == "escalier") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/escalier.png");
 		} else {

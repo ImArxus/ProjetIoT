@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Alarme extends Equipement implements Serializable{
+public class Alarme extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -1828693427527124467L;
 
@@ -15,8 +15,8 @@ public class Alarme extends Equipement implements Serializable{
 		this.setPositionVerticale(0.2);
 	}
 
-	public Alarme(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
-		super(nom, etatCourant,positionHorizontale,positionVerticale);
+	public Alarme(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
+		super(nom, etatCourant, positionHorizontale, positionVerticale);
 	}
 
 	public void sonner() {

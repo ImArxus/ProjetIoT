@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Ventilateur extends Equipement implements Serializable{
+public class Ventilateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 8252594235507326423L;
 	private int intensite;
@@ -12,9 +12,12 @@ public class Ventilateur extends Equipement implements Serializable{
 	public Ventilateur(String nom) {
 		super(nom);
 		this.setIntensite(3);
+		this.setPositionHorizontale(0.2);
+		this.setPositionVerticale(0.27);
 	}
 
-	public Ventilateur(String nom, boolean etatCourant, double positionHorizontale,double positionVerticale,int intensite) {
+	public Ventilateur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			int intensite) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
 	}

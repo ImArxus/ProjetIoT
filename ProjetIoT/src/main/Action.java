@@ -18,11 +18,8 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 
-public class Action implements Serializable{
+public class Action implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2046399578821369069L;
 	private static Piece position = Main.getPosition();
 

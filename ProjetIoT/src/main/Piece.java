@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-
 public class Piece implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	private String nom;
 	private int temperature;

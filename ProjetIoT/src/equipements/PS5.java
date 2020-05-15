@@ -6,7 +6,7 @@ import java.util.Map;
 
 import main.Equipement;
 
-public class PS5 extends Equipement implements Serializable{
+public class PS5 extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
@@ -23,7 +23,7 @@ public class PS5 extends Equipement implements Serializable{
 
 	}
 
-	public PS5(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, String jeu) {
+	public PS5(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, String jeu) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setJeu(jeu);
 	}
