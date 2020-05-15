@@ -29,10 +29,10 @@ public class Equipement {
 		setNom(nom);
 		setEtatCourant(false);
 		positionHorizontale = Math.random();
-		positionVerticale = (Math.random() * 0.7)+0.1;
+		positionVerticale = (Math.random() * 0.7) + 0.1;
 	}
 
-	protected Equipement(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
+	protected Equipement(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
 		this.setPositionHorizontale(positionHorizontale);

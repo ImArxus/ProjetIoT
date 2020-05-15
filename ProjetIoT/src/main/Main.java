@@ -43,7 +43,7 @@ public class Main {
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			MiseNiveauGraphique();
+			miseNiveauGraphique();
 			Thread.sleep(2000);
 
 			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
@@ -475,7 +475,7 @@ public class Main {
 		}
 	}
 
-	public static void MiseNiveauGraphique() {
+	public static void miseNiveauGraphique() {
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 		StdDraw.picture(0.5, 0.5, "images/piece.png");
@@ -485,7 +485,7 @@ public class Main {
 		StdDraw.text(0.79, 0.93, String.valueOf(position.getTemperature()));
 		StdDraw.text(0.87, 0.93, String.valueOf(position.getIntensiteLumineuse()));
 		StdDraw.text(0.97, 0.93, String.valueOf(heure) + "h");
-		MiseNiveauGraphiqueObjets();
+		miseNiveauGraphiqueObjets();
 	}
 
 	public static void choixCouleurLegende() {
@@ -517,7 +517,7 @@ public class Main {
 		}
 	}
 
-	public static void MiseNiveauGraphiqueObjets() {
+	public static void miseNiveauGraphiqueObjets() {
 		choixCouleurLegende();
 		String nameClass;
 		List<Equipement> equip = getPosition().getEquipements();
