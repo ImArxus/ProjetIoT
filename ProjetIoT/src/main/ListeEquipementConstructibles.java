@@ -3,12 +3,8 @@ package main;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-
 public class ListeEquipementConstructibles implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9L;
 	private static LinkedList<String> liste = new LinkedList<String>();
 

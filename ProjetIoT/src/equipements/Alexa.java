@@ -6,14 +6,10 @@ import java.util.Scanner;
 
 import main.Equipement;
 import main.Main;
-import main.Maison;
 import main.Piece;
 
 public class Alexa extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8308711409297886419L;
 	private static String pseudo;
 
@@ -22,11 +18,11 @@ public class Alexa extends Equipement implements Serializable {
 		pseudo = Main.getPseudo();
 		this.setPositionHorizontale(0.23);
 		this.setPositionVerticale(0.46);
-		
+
 	}
 
-	public Alexa(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
-		super(nom, etatCourant,positionHorizontale,positionVerticale);
+	public Alexa(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
+		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		pseudo = Main.getPseudo();
 	}
 

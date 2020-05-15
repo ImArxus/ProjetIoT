@@ -20,11 +20,8 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 
-public class Equipement implements Serializable{
+public class Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3L;
 	protected boolean etatCourant;
 	protected String nom;

@@ -8,11 +8,8 @@ import java.util.Set;
 
 import main.Equipement;
 
-public class Frigo extends Equipement implements Serializable{
+public class Frigo extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4392838038317445404L;
 	private int temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
@@ -26,7 +23,8 @@ public class Frigo extends Equipement implements Serializable{
 		dispo.put("tomates", 3);
 	}
 
-	protected Frigo(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int temperature, Map<String, Integer> dispo) {
+	protected Frigo(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			int temperature, Map<String, Integer> dispo) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		setTemperature(temperature);
 	}

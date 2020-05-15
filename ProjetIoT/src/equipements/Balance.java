@@ -6,11 +6,8 @@ import java.util.List;
 
 import main.Equipement;
 
-public class Balance extends Equipement implements Serializable{
+public class Balance extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8591722619347662110L;
 	private int poids;
 	List<Integer> listePoids = new LinkedList<Integer>();
@@ -24,7 +21,8 @@ public class Balance extends Equipement implements Serializable{
 		this.setPoids();
 	}
 
-	public Balance(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, List<Integer> listePoids) {
+	public Balance(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			List<Integer> listePoids) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setListePoids(listePoids);
 		setPoids();

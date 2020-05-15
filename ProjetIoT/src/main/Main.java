@@ -9,16 +9,10 @@ import java.util.Scanner;
 import equipements.Alarme;
 import equipements.Lumiere;
 
-public class Main implements Serializable{
+public class Main implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5850588170235124346L;
-	
 
-
-	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
@@ -31,16 +25,9 @@ public class Main implements Serializable{
 		 */
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
-		
-		
-		
-		
 
 		chargement(s); // Choix de la maison et de l'utilisateur
 		boolean stop = false; // Fin de parcours
-		
-	
-
 
 		LinkedList<Equipement> lumieres = getLumiere();
 		if (intensiteLumineuseNaturelle == 0) {
@@ -478,14 +465,14 @@ public class Main implements Serializable{
 				maisonChoisie = true;
 			} else if (requete == 2) {
 				System.out.println("\nQuel nom voulez vous donner à votre maison?");
-				String name = s.nextLine();	
-				maison =  new Maison(name, salon);
+				String name = s.nextLine();
+				maison = new Maison(name, salon);
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
 			} else if (requete == 3) {
 				maison = Sauvegarde.chargerMAISON();
-				if(maison!=null) {
+				if (maison != null) {
 					maisonChoisie = true;
 				}
 			}
@@ -494,8 +481,6 @@ public class Main implements Serializable{
 		setPosition(getMaison().getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
-	
-	
 
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
 		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
@@ -508,7 +493,6 @@ public class Main implements Serializable{
 		}
 	}
 
-
 	public static void MiseNiveauGraphique() {
 		Piece a = getPosition();
 		StdDraw.clear();
@@ -518,6 +502,9 @@ public class Main implements Serializable{
 		} else if (a.getNom() == "Piscine") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piscine.png");
+		} else if (a.getNom() == "escalier") {
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/escalier.png");
 		} else {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piece.png");
