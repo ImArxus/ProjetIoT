@@ -18,6 +18,8 @@ public class Cheminee extends Equipement implements Serializable {
 	public Cheminee(String nom) {
 		super(nom);
 		this.setIntensite(intensite);
+		this.setPositionHorizontale(0.26);
+		this.setPositionVerticale(0.34);
 	}
 
 	@Override
