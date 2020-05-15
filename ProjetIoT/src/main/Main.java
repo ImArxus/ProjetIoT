@@ -16,6 +16,7 @@ public class Main implements Serializable {
 	public static void main(String[] args) throws InterruptedException {
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
+
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur
@@ -498,6 +499,9 @@ public class Main implements Serializable {
 		} else if (a.getNom() == "escalier") {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/escalier.png");
+		} else if (a.getNom() == "Cuisine") {
+			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
+			StdDraw.picture(0.5, 0.5, "images/cuisine.png");
 		} else {
 			StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
 			StdDraw.picture(0.5, 0.5, "images/piece.png");
