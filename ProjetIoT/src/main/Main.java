@@ -24,12 +24,12 @@ public class Main implements Serializable {
 		boolean stop = false; // Fin de parcours
 
 		LinkedList<Equipement> lumieres = getLumiere();
-		if (intensiteLumineuseNaturelle == 0) {
+		if (getIntensiteLumineuseNaturelle() == 0) {
 			if (lumieres.isEmpty()) {
-				System.out.println("Il n'y a pas de lumière dans cette pièce");
+				System.out.println("Il n'y a pas de lumière dans cette pièce\n");
 			}
 			for (Equipement lum : lumieres) { // Allumer
-				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
+				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce\n");
 				lum.allumer();
 			}
 		}
@@ -71,7 +71,7 @@ public class Main implements Serializable {
 					int req = toInt(s.nextLine()) - 1;
 					if (req >= 0 && req < piecesAdj.size()) {
 						setPosition(piecesAdj.get(req));
-						if (intensiteLumineuseNaturelle == 0) {
+						if (getIntensiteLumineuseNaturelle() == 0) {
 							lumieres = getLumiere();
 							if (lumieres.isEmpty()) {
 								System.out.println("Il n'y a pas de lumières");
@@ -136,12 +136,8 @@ public class Main implements Serializable {
 			 ********************* Création d'une pièce ********************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
-				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
-				String name = s.nextLine();
-				Piece aCreer = new Piece(name);
-				maison.ajouterPiece(aCreer);
-				maison.sontAdjacents(aCreer, getPosition());
-				setPosition(aCreer);
+				Piece.creerPiece(getMaison(), s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 
 			/***************************************************************
@@ -149,39 +145,8 @@ public class Main implements Serializable {
 			 ***************************************************************/
 
 			else if (requete == 6 && droits) {
-				LinkedList<Piece> piecesAdj = getPosition().getPiecesAdj();
-
-				if (piecesAdj.isEmpty()) {
-					System.out.println("Il n'y a pas de pièce à supprimer");
-				} else {
-					System.out.println("Tapez la commande correspondant à la destination souhaitée");
-					for (int i = 0; i < piecesAdj.size(); i++) {
-						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-					}
-					int req = toInt(s.nextLine()) - 1;
-					if (req >= 0 && req < piecesAdj.size()) {
-						Piece destination = piecesAdj.get(req);
-						getPosition().getEquipements().clear(); // Suppression de tous les équipements de la pièce
-						for (int i = 0; i < piecesAdj.size(); i++) { // Suppression de toutes les pieces adj
-							maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
-						}
-						maison.suppressionPiece(getPosition()); // Suppresion pièce
-						System.out.println("\nSuppression effectuée");
-						setPosition(destination);
-						if (intensiteLumineuseNaturelle == 0) {
-							System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-							lumieres = getLumiere();
-							if (lumieres.isEmpty()) {
-								System.out.println("Il n'y a pas de lumières");
-							}
-							for (Equipement lum : lumieres) { // Allumer
-								lum.allumer();
-							}
-						}
-					} else {
-						System.out.println("Mauvaise commande");
-					}
-				}
+				Piece.supprimerPiece(getMaison(), s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 
 			/***************************************************************
@@ -376,15 +341,15 @@ public class Main implements Serializable {
 
 	public static void traitementIntensiteLumineuseNaturelle() {
 		if ((heure == 8) || (heure == 21)) {
-			intensiteLumineuseNaturelle = 20;
+			setIntensiteLumineuseNaturelle(20);
 		} else if ((heure == 9) || (heure == 20)) {
-			intensiteLumineuseNaturelle = 40;
+			setIntensiteLumineuseNaturelle(40);
 		} else if ((heure == 10) || ((heure >= 18) && (heure < 20))) {
-			intensiteLumineuseNaturelle = 60;
+			setIntensiteLumineuseNaturelle(60);
 		} else if ((heure >= 11) && (heure < 18)) {
-			intensiteLumineuseNaturelle = 100;
+			setIntensiteLumineuseNaturelle(100);
 		} else {
-			intensiteLumineuseNaturelle = 0;
+			setIntensiteLumineuseNaturelle(0);
 		}
 	}
 
@@ -399,9 +364,9 @@ public class Main implements Serializable {
 				}
 			}
 		}
-		position.setIntensiteLumineuse(intensiteLumineuseNaturelle + sommeILobjets);
+		position.setIntensiteLumineuse(getIntensiteLumineuseNaturelle() + sommeILobjets);
 		System.out.println("L'intensité lumineuse de " + position.getNom() + " est de "
-				+ position.getIntensiteLumineuse() + "% (dont = " + intensiteLumineuseNaturelle + "% naturelle et "
+				+ position.getIntensiteLumineuse() + "% (dont = " + getIntensiteLumineuseNaturelle() + "% naturelle et "
 				+ sommeILobjets + "% artificielle)");
 	}
 
@@ -557,5 +522,13 @@ public class Main implements Serializable {
 					equip.get(i).getNom());
 		}
 		StdDraw.setPenColor(StdDraw.BLACK);
+	}
+
+	public static int getIntensiteLumineuseNaturelle() {
+		return intensiteLumineuseNaturelle;
+	}
+
+	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
+		intensiteLumineuseNaturelle = newIntensite;
 	}
 }
