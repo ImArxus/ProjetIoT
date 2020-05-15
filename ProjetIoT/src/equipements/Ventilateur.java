@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Ventilateur extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8252594235507326423L;
 	private int intensite;
 

@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Electrolyseur extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3214694664282896820L;
 	private double sel;
 	private double ph;

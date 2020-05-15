@@ -5,10 +5,7 @@ import java.io.Serializable;
 import main.Equipement;
 
 public class Alarme extends Equipement implements Serializable{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1828693427527124467L;
 
 	public Alarme(String nom) {

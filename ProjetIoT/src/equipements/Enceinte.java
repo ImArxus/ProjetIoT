@@ -8,9 +8,6 @@ import main.Equipement;
 
 public class Enceinte extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6075055980198184766L;
 	private int volume;
 	private Map<String, String> musiques = new HashMap<String, String>();
