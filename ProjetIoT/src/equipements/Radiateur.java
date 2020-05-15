@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Radiateur extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
 

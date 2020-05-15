@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Lumiere extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3377862988501403504L;
 	private int intensite;
 	private String couleur;

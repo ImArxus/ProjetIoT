@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Volet extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
 

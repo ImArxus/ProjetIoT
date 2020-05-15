@@ -6,9 +6,6 @@ import main.Equipement;
 
 public class Cheminee extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7169763608942128813L;
 	private int intensite;
 

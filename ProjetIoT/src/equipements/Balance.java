@@ -8,9 +8,6 @@ import main.Equipement;
 
 public class Balance extends Equipement implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8591722619347662110L;
 	private int poids;
 	List<Integer> listePoids = new LinkedList<Integer>();
