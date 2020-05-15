@@ -3,7 +3,7 @@ package main;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-
+import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
@@ -33,7 +33,7 @@ public class Main implements Serializable {
 			}
 
 		}
-
+		avatars.add("plongeur");
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
@@ -251,6 +251,25 @@ public class Main implements Serializable {
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
 			/***************************************************************
+			 ******** Affichage de toutes les pièces et équipements ********
+			 ***************************************************************/
+
+			else if (requete == 12 && droits) {
+				System.out.println("Tapez la commande correspondant à votre avatar désiré");
+				for (int i = 0; i < avatars.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + avatars.get(i)); // Affiche la liste des pièces
+				}
+				int req = Main.toInt(s.nextLine());
+				if (req > 0 && req <= avatars.size()) {
+					avatar = avatars.get(req - 1);
+					System.out.println("Nouvelle avatar validé");
+				} else {
+					System.out.println("Mauvaise commande");
+					Thread.sleep(3000); // Delai de 3 secondes
+				}
+			}
+
+			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
 			else {
@@ -269,8 +288,9 @@ public class Main implements Serializable {
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
+	private static List<String> avatars = new LinkedList<String>();
 	private static String couleur = "BLUE";
-	private static String avatar = "avatar1";
+	private static String avatar = "plongeur";
 	static Piece salon = new Piece("Salon");
 
 	public static Maison getMaison() {
@@ -513,7 +533,7 @@ public class Main implements Serializable {
 		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
 		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
 		miseNiveauGraphiqueObjets();
-		StdDraw.picture(0.5, 0.2, "images/avatar/"+avatar+".png");
+		StdDraw.picture(0.5, 0.2, "images/avatar/" + avatar + ".png");
 	}
 
 	public static void choixCouleurLegende() {
