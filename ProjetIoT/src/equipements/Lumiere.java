@@ -12,6 +12,7 @@ public class Lumiere extends Equipement {
 		setIntensite(100);
 		setCouleur("blanc");
 		this.setPositionVerticale(0.75);
+		this.setPositionHorizontale(0.5);
 	}
 
 	public Lumiere(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {

@@ -15,6 +15,9 @@ public class Alexa extends Equipement {
 	public Alexa(String nom) {
 		super(nom);
 		pseudo = Main.getPseudo();
+		this.setPositionHorizontale(0.2);
+		this.setPositionVerticale(0.7);
+		
 	}
 
 	public Alexa(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale) {
