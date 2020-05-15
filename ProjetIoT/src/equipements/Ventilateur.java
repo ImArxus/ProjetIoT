@@ -15,6 +15,8 @@ public class Ventilateur extends Equipement implements Serializable{
 	public Ventilateur(String nom) {
 		super(nom);
 		this.setIntensite(3);
+		this.setPositionHorizontale(0.2);
+		this.setPositionVerticale(0.27);
 	}
 
 	public Ventilateur(String nom, boolean etatCourant, double positionHorizontale,double positionVerticale,int intensite) {
