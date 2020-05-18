@@ -28,7 +28,6 @@ public class Piece implements Serializable {
 	private int intensiteLumineuse; // Intensité totale
 	private LinkedList<Piece> piecesAdj = new LinkedList<Piece>();
 	private LinkedList<Equipement> equipements = new LinkedList<Equipement>();
-	private static String couleur = Main.getCouleur();
 
 	public Piece(String nom) {
 		this.setNom(nom);
