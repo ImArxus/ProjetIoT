@@ -21,6 +21,7 @@ public class Main implements Serializable{
 
 	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
+		Main.ChargerCompte();
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
 		/*
@@ -42,7 +43,7 @@ public class Main implements Serializable{
 		
 	
 
-
+		
 		LinkedList<Equipement> lumieres = getLumiere();
 		if (intensiteLumineuseNaturelle == 0) {
 			if (lumieres.isEmpty()) {
@@ -289,8 +290,20 @@ public class Main implements Serializable{
 	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
-	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
 	private static String couleur = "BLUE";
+	static ListeUtilisateurs ListeAdmin = new ListeUtilisateurs();
+	
+	
+	public static void ChargerCompte() {
+		ListeUtilisateurs Listetmp = Sauvegarde.chargerComptes();
+		if(Listetmp!=null) {
+			ListeAdmin=Listetmp;
+		}
+	}
+	 
+	public static ListeUtilisateurs getListeAdmin() {
+		return ListeAdmin;
+	}
 
 	public static Maison getMaison() {
 		return maison;
@@ -418,10 +431,10 @@ public class Main implements Serializable{
 		while (!connecte) {
 			System.out.print("Identifiant : ");
 			pseudo = s.nextLine();
-			if (listeUtilisateurs.comptes.containsKey(pseudo)) {
+			if (ListeAdmin.comptes.containsKey(pseudo)) {
 				System.out.print("Mot de passe : ");
 				mdp = s.nextLine();
-				if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
+				if (ListeAdmin.comptes.get(pseudo).equals(mdp)) {
 					System.out.println("Mot de passe correct");
 					connecte = true;
 				} else {
@@ -430,7 +443,7 @@ public class Main implements Serializable{
 					int requete = toInt(s.nextLine());
 					if (requete == 1) {
 						pseudo = "guest";
-						mdp = listeUtilisateurs.comptes.get(pseudo);
+						mdp = ListeAdmin.comptes.get(pseudo);
 						System.out.println("Connexion automatique en tant qu'invité");
 						connecte = true;
 					}
@@ -441,15 +454,17 @@ public class Main implements Serializable{
 				int requete = toInt(s.nextLine());
 				if (requete == 1) {
 					pseudo = "guest";
-					mdp = listeUtilisateurs.comptes.get(pseudo);
+					mdp = ListeAdmin.comptes.get(pseudo);
 					System.out.println("Connexion automatique en tant qu'invité");
 					connecte = true;
 				} else if (requete == 2) {
 					System.out.println("Identifiant : " + pseudo);
 					System.out.print("Veuillez choisir un mot de passe : ");
 					mdp = s.nextLine();
-					listeUtilisateurs.comptes.put(pseudo, mdp);
-					ListeUtilisateurs.estAdmin.put(pseudo, false);
+					ListeAdmin.comptes.put(pseudo, mdp);
+					ListeAdmin.getAdmin().put(pseudo, false);
+					Sauvegarde.sauvegarderCompte();
+					
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
 					connecte = true;
 				}
@@ -461,7 +476,7 @@ public class Main implements Serializable{
 		 ********************* Choix de la maison **********************
 		 ***************************************************************/
 		System.out.println("Identifiant : " + pseudo);
-		droits = ListeUtilisateurs.getAdmin().get(pseudo);
+		droits = ListeAdmin.getAdmin().get(pseudo);
 		System.out.println("Activation du mode administrateur : " + droits);
 		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);

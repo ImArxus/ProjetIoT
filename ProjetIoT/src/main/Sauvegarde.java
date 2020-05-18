@@ -54,6 +54,48 @@ public class Sauvegarde implements Serializable{
 	} catch (Exception ex) {
         ex.printStackTrace();
     }}
+	
+	public static void sauvegarderCompte() {
+		 try {
+	            /* Create a file to write the serialized tree to. */
+	            FileOutputStream ostream = new FileOutputStream("Comptes");
+	            /* Create the output stream */
+	            ObjectOutputStream p = new ObjectOutputStream(ostream);
+
+	            /* Create a tree with three levels. */
+	            ListeUtilisateurs ListeAdmin = Main.getListeAdmin();
+	           
+	           
+	            
+	            p.writeObject(ListeAdmin); // Write the tree to the stream.
+	            p.flush();
+	            ostream.close();    // close the file.
+	            
+	            System.out.println("Compte Enregistre");
+	} catch (Exception ex) {
+     ex.printStackTrace();
+ }}
+	
+public static ListeUtilisateurs chargerComptes() {
+		
+	    try {
+		
+		 FileInputStream istream = new FileInputStream("Comptes");
+         ObjectInputStream q = new ObjectInputStream(istream);
+         
+         /* Read a tree object, and all the subtrees */
+         ListeUtilisateurs ListeAdmin = (ListeUtilisateurs)q.readObject();
+         q .close();
+         System.out.println(ListeAdmin.toString());
+         return ListeAdmin;
+	    } catch (Exception ex) {
+	    	//System.out.println("vous n'avez pas de compte sauvegarde");
+          //  ex.printStackTrace();
+            return null;
+            
+       }}
+	
+	
 
 
 	
@@ -68,7 +110,7 @@ public class Sauvegarde implements Serializable{
          /* Read a tree object, and all the subtrees */
          Maison m = (Maison)q.readObject();
          q .close();
-         System.out.println(m.toString());
+         //System.out.println(m.toString());
          return m;
 	    } catch (Exception ex) {
 	    	System.out.println("vous n'avez pas de maison sauvegarde");
