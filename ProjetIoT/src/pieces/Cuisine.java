@@ -13,9 +13,7 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Cuisine extends Piece implements Serializable {
 

@@ -6,9 +6,7 @@ import java.util.LinkedList;
 import equipements.Alarme;
 import equipements.Lumiere;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Escalier extends Piece implements Serializable {
 

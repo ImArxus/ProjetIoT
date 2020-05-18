@@ -7,9 +7,7 @@ import equipements.Alarme;
 import equipements.Electrolyseur;
 import equipements.Lumiere;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Piscine extends Piece implements Serializable {
 
