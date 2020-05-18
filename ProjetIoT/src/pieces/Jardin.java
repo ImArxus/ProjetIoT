@@ -8,9 +8,7 @@ import equipements.Enceinte;
 import equipements.Lumiere;
 import equipements.Volet;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Jardin extends Piece implements Serializable {
 
