@@ -555,10 +555,14 @@ public class Main extends Application implements Serializable {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//https://www.youtube.com/watch?v=cgv63JD7pfc
-		Parent root = FXMLLoader.load(getClass().getResource("Test.fxml"));
-		primaryStage.setTitle("FirstTry");
-		primaryStage.setScene(new Scene(root));
-		primaryStage.show();
+		// https://www.youtube.com/watch?v=cgv63JD7pfc
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
+			primaryStage.setTitle("Login");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
