@@ -22,7 +22,7 @@ public class Escalier extends Piece implements Serializable {
 
 	@Override
 	public LinkedList<String> equipementsAutorises() {
-		LinkedList<String> equip = new LinkedList<String>();
+		LinkedList<String> equip =super.equipementsAutorises();
 		equip.add("Lumiere");
 		return equip;
 	}
@@ -36,5 +36,8 @@ public class Escalier extends Piece implements Serializable {
 			return new Lumiere(name);
 		}
 	}
-
+	@Override
+	public String imagePiece() {
+		return ("images/escalier.png");
+	}
 }
