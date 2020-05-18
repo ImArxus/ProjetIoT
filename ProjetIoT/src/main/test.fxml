@@ -8,8 +8,7 @@
 	xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10"
 	vgap="10">
 
-	<ImageView fx:id="imageView" Gridplane.columnIndex="1"
-		Gridplane.rowIndex="1">
+	<ImageView fx:id="imageView" onMouseClicked="#mousePressed">
 		<image>
 			<Image url="@images/objets/equipements.Volet.png">
 			</Image>
