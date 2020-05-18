@@ -479,7 +479,7 @@ public class Main implements Serializable {
 		Piece position = getPosition();
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/" + position.getNom() + ".png");
+		StdDraw.picture(0.5, 0.5, "images/piece.png");
 		StdDraw.text(0.15, 0.96, getPseudo());
 		StdDraw.text(0.46, 0.96, getMaison().getNom());
 		StdDraw.text(0.78, 0.96, position.getNom());
