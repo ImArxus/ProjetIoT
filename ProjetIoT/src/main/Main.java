@@ -231,7 +231,7 @@ public class Main implements Serializable {
 				int req = Main.toInt(s.nextLine());
 				if (req > 0 && req <= avatars.size()) {
 					avatar = avatars.get(req - 1);
-					System.out.println("Nouvelle avatar validé");
+					System.out.println("Nouveau avatar validé");
 				} else {
 					System.out.println("Mauvaise commande");
 				}
