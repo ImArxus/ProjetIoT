@@ -238,7 +238,16 @@ public class Main implements Serializable {
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
-
+			/***************************************************************
+			 ******************** Changer nom de la maison *****************
+			 ***************************************************************/
+			else if (requete == 13 && droits) {
+				System.out.println("\nTapez le nom de votre nouvel maison\n");
+				String name = s.nextLine();
+				maison.setNom(name);
+				System.out.println("\nModification executée\n");
+				Thread.sleep(3000); // Délai de 3 secondes
+			}
 			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/

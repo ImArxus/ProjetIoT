@@ -35,7 +35,7 @@ public class Equipement implements Serializable {
 		String reponse = "➡️ 1 : Changer de pièce\n➡️ 2 : Utiliser un équipement\n➡️ 3 : Quitter la simulation\n➡️ 4 : Sauvegarder ma maison\n";
 
 		if (Main.getListeAdmin().getAdmin().get(pseudo)) {
-			reponse += "➡️ 5 : Créer une pièce\n➡️ 6 : Supprimer la pièce actuelle\n➡️ 7 : Créer un équipement\n➡️ 8 : Supprimer un équipement\n➡️ 9 : Supprimer tous les équipements de la pièce\n➡️ 10 : Afficher toutes les pièces et équipements\n➡️ 11 : Choisir couleur des paramètres\n➡️ 12 : Choisir mon avatar\n";
+			reponse += "➡️ 5 : Créer une pièce\n➡️ 6 : Supprimer la pièce actuelle\n➡️ 7 : Créer un équipement\n➡️ 8 : Supprimer un équipement\n➡️ 9 : Supprimer tous les équipements de la pièce\n➡️ 10 : Afficher toutes les pièces et équipements\n➡️ 11 : Choisir couleur des paramètres\n➡️ 12 : Choisir mon avatar\n➡️ 13 : Changer le nom de ma maison\n";
 
 		}
 		return reponse;
