@@ -58,7 +58,7 @@ public class Main implements Serializable {
 			miseNiveauGraphique();
 			Thread.sleep(2000);
 
-			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
+			System.out.println("\nVous êtes dans " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(Equipement.actionsPossibles(pseudo));
 

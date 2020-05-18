@@ -71,7 +71,7 @@ public class Piece implements Serializable {
 		if (getEquipements().isEmpty()) {
 			return getNom() + " qui est sans équipement...";
 		}
-		return getNom() + " qui est équipé(e) de " + afficher(equipements);
+		return getClass().getSimpleName() + " (" + getNom() + ") qui est équipé(e) de " + afficher(equipements);
 	}
 
 	public String afficher(LinkedList<Equipement> a) {
