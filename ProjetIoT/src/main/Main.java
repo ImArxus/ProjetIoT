@@ -260,15 +260,14 @@ public class Main implements Serializable {
 
 	private static String couleur = "BLUE";
 	static ListeUtilisateurs ListeAdmin = new ListeUtilisateurs();
-	
-	
+
 	public static void ChargerCompte() {
 		ListeUtilisateurs Listetmp = Sauvegarde.chargerComptes();
-		if(Listetmp!=null) {
-			ListeAdmin=Listetmp;
+		if (Listetmp != null) {
+			ListeAdmin = Listetmp;
 		}
 	}
-	 
+
 	public static ListeUtilisateurs getListeAdmin() {
 		return ListeAdmin;
 	}
@@ -435,7 +434,7 @@ public class Main implements Serializable {
 					ListeAdmin.comptes.put(pseudo, mdp);
 					ListeAdmin.getAdmin().put(pseudo, false);
 					Sauvegarde.sauvegarderCompte();
-					
+
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
 					connecte = true;
 				}

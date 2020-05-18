@@ -8,9 +8,8 @@ public class ListeUtilisateurs implements Serializable {
 
 	private static final long serialVersionUID = -6447914795234124870L;
 
-	protected Map<String, String> comptes = new HashMap<String, String>();// (pseudo,mdp)
-	protected  Map<String, Boolean> estAdmin = new HashMap<String, Boolean>();// (pseudo ,estAdmin)
-
+	protected Map<String, String> comptes = new HashMap<String, String>(); // (pseudo, mdp)
+	protected Map<String, Boolean> estAdmin = new HashMap<String, Boolean>(); // (pseudo, estAdmin)
 
 	public ListeUtilisateurs() {
 		comptes.put("prof", "prof");
