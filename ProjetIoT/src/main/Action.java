@@ -18,15 +18,12 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 
-public class Action implements Serializable{
+public class Action implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2046399578821369069L;
 	private static Piece position = Main.getPosition();
 
-	public static boolean actionEquipement(Equipement objet, Scanner s) throws InterruptedException {
+	public static boolean actionEquipement(Equipement objet, Scanner s) {
 		int requete = Main.toInt(s.nextLine());
 		switch (requete) {
 		case 1:
@@ -172,7 +169,7 @@ public class Action implements Serializable{
 		}
 	}
 
-	public static void actionEnceinte(Enceinte e, int requete, Scanner s) throws InterruptedException {
+	public static void actionEnceinte(Enceinte e, int requete, Scanner s) {
 		if (e.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -191,7 +188,6 @@ public class Action implements Serializable{
 				if (e.getMusiques().containsKey(musique)) {
 					System.out.println("Lancement de " + e.getEnEcoute() + " sur votre " + e.getNom());
 					System.out.println("...");
-					Thread.sleep(2000);
 					System.out.println(e.getMusiques().get(musique));
 				}
 				break;
@@ -204,7 +200,7 @@ public class Action implements Serializable{
 		}
 	}
 
-	public static void actionPS5(PS5 c, int requete, Scanner s) throws InterruptedException {
+	public static void actionPS5(PS5 c, int requete, Scanner s) {
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -215,7 +211,6 @@ public class Action implements Serializable{
 				if (c.getJeux().containsKey(jeu)) {
 					System.out.println("Lancement de " + c.getJeu() + " sur votre " + c.getNom());
 					System.out.println("...");
-					Thread.sleep(2000);
 					System.out.println(c.getJeux().get(jeu));
 				}
 				break;
@@ -229,12 +224,11 @@ public class Action implements Serializable{
 
 	}
 
-	public static void actionBalance(Balance b, int requete, Scanner s) throws InterruptedException {
+	public static void actionBalance(Balance b, int requete, Scanner s) {
 		if (b.isEtatCourant()) {
 			switch (requete) {
 			case 4:
 				System.out.println("Mesure ...");
-				Thread.sleep(2000);
 				b.peser();
 				System.out.println("Votre poids est de " + b.getPoids() + " kilos.");
 				break;

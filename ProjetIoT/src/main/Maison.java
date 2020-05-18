@@ -1,26 +1,15 @@
 package main;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Maison implements Serializable{
+public class Maison implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	 
+
 	private String nom;
-	//private Piece p = new Piece("TEST        TEST");  ///TEST
-	//private int s = 123;  ////TEST
-	protected  LinkedList<Piece> pieces = new LinkedList<Piece>();
-	
-          ;
-	
-     
-          
-          
+	protected LinkedList<Piece> pieces = new LinkedList<Piece>();
+
 	public Maison(String nom) {
 		this.setNom(nom);
 		ajouterPiece(new Piece("Salon")); // Créé un salon par défaut si on ne précise aucune pièce

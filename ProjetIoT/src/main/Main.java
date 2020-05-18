@@ -1,86 +1,68 @@
 package main;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
-
+import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import pieces.Salon;
 
-public class Main implements Serializable{
+public class Main implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5850588170235124346L;
-	
 
-
-	@SuppressWarnings("null")
 	public static void main(String[] args) throws InterruptedException {
 		Main.ChargerCompte();
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
-		/*
-		 * StdDraw.rectangle(0.21, 0.91, 0.2, 0.08); StdDraw.text(0.085, 0.95,
-		 * "Identifiant :"); StdDraw.text(0.075, 0.90, "Mot de passe :");
-		 * StdDraw.rectangle(0.25, 0.95, 0.1, 0.02); StdDraw.rectangle(0.25, 0.90, 0.1,
-		 * 0.02); StdDraw.text(0.24, 0.95, "Dans la console"); StdDraw.text(0.24, 0.90,
-		 * "Dans la console");
-		 */
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
-		
-		
-		
-		
 
 		chargement(s); // Choix de la maison et de l'utilisateur
 		boolean stop = false; // Fin de parcours
-		
-	
 
-		
 		LinkedList<Equipement> lumieres = getLumiere();
-		if (intensiteLumineuseNaturelle == 0) {
+		if (getIntensiteLumineuseNaturelle() == 0) {
 			if (lumieres.isEmpty()) {
-				System.out.println("Il n'y a pas de lumière dans cette pièce");
+				System.out.println("Il n'y a pas de lumière dans cette pièce\n");
 			}
 			for (Equipement lum : lumieres) { // Allumer
-				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
+				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce\n");
 				lum.allumer();
 			}
-
 		}
+		avatars.add("fille1");
+		avatars.add("fille2");
+		avatars.add("fille3");
+		avatars.add("fille4");
+		avatars.add("fille5");
+		avatars.add("fille6");
+		avatars.add("fille7");
+		avatars.add("homme1");
+		avatars.add("homme2");
+		avatars.add("homme3");
+		avatars.add("homme4");
+		avatars.add("homme5");
+		avatars.add("homme6");
+		avatars.add("homme7");
+		avatars.add("homme8");
+		avatars.add("homme9");
 
 		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
 			calculHoraires(); // Calcul heure du jour
 			affichageTemperature(); // Affichage temperature pièce
 			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
 			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			MiseNiveauGraphique();
+			miseNiveauGraphique();
 			Thread.sleep(2000);
 
-			System.out.println("\nVous êtes dans : " + getPosition() + "\n");
+			System.out.println("\nVous êtes dans " + getPosition() + "\n");
 			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
 			System.out.println(Equipement.actionsPossibles(pseudo));
-			LinkedList<String> liste = new LinkedList<String>();
-			liste.add("1 : Changer de pièce");
-			liste.add("2 : Utiliser un équipement");
-			liste.add("3 : Quitter la simulation");
-			liste.add("4 : Sauvegarder ma maison");
-			if (droits) {
-				liste.add("5 : Créer une pièce");
-				liste.add("6 : Supprimer la pièce actuelle");
-				liste.add("7 : Créer un équipement");
-				liste.add("8 : Supprimer un équipement");
-				liste.add("9 : Supprimer tous les équipements de la pièce");
-				liste.add("10 : Afficher toutes les pièces et équipements");
-				liste.add("11 : Choisir couleur des paramètres");
-			}
+
 			int requete = toInt(s.nextLine());
 
 			/***************************************************************
@@ -98,7 +80,7 @@ public class Main implements Serializable{
 					int req = toInt(s.nextLine()) - 1;
 					if (req >= 0 && req < piecesAdj.size()) {
 						setPosition(piecesAdj.get(req));
-						if (intensiteLumineuseNaturelle == 0) {
+						if (getIntensiteLumineuseNaturelle() == 0) {
 							lumieres = getLumiere();
 							if (lumieres.isEmpty()) {
 								System.out.println("Il n'y a pas de lumières");
@@ -113,6 +95,7 @@ public class Main implements Serializable{
 						System.out.println("Mauvaise commande");
 					}
 				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
@@ -136,13 +119,12 @@ public class Main implements Serializable{
 							System.out.println("\nTapez la commande correspondant à l'action souhaitée pour " + objet);
 							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
 							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
-							Thread.sleep(2000); // Delai de 2 secondes
 						}
 					} else {
 						System.out.println("Mauvaise Commande");
 					}
-					Thread.sleep(3000); // Delai de 3 secondes
 				}
+				Thread.sleep(3000); // Delai de 3 secondes
 			}
 
 			/***************************************************************
@@ -158,57 +140,22 @@ public class Main implements Serializable{
 			 ***************************************************************/
 			else if (requete == 4) {
 				choixSauvegarde(s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 			/***************************************************************
 			 ********************* Création d'une pièce ********************
 			 ***************************************************************/
 			else if (requete == 5 && droits) {
-				System.out.println("\nTapez le nom que vous voulez donner à votre nouvelle pièce");
-				String name = s.nextLine();
-				Piece aCreer = new Piece(name);
-				maison.ajouterPiece(aCreer);
-				maison.sontAdjacents(aCreer, getPosition());
-				setPosition(aCreer);
+				Piece.creerPiece(getMaison(), s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 
 			/***************************************************************
 			 ******************* Suppression d'une pièce *******************
 			 ***************************************************************/
-
 			else if (requete == 6 && droits) {
-				LinkedList<Piece> piecesAdj = getPosition().getPiecesAdj();
-
-				if (piecesAdj.isEmpty()) {
-					System.out.println("Il n'y a pas de pièce à supprimer");
-				} else {
-					System.out.println("Tapez la commande correspondant à la destination souhaitée");
-					for (int i = 0; i < piecesAdj.size(); i++) {
-						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-					}
-					int req = toInt(s.nextLine()) - 1;
-					if (req >= 0 && req < piecesAdj.size()) {
-						Piece destination = piecesAdj.get(req);
-						getPosition().getEquipements().clear(); // Suppression de tous les équipements de la pièce
-						for (int i = 0; i < piecesAdj.size(); i++) { // Suppression de toutes les pieces adj
-							maison.sontPlusAdjacents(getPosition(), piecesAdj.get(i));
-						}
-						maison.suppressionPiece(getPosition()); // Suppresion pièce
-						System.out.println("\nSuppression effectuée");
-						setPosition(destination);
-						if (intensiteLumineuseNaturelle == 0) {
-							System.out.println("Il fait nuit nous allons allumer automatiquement les lumières");
-							lumieres = getLumiere();
-							if (lumieres.isEmpty()) {
-								System.out.println("Il n'y a pas de lumières");
-							}
-							for (Equipement lum : lumieres) { // Allumer
-								lum.allumer();
-							}
-						}
-					} else {
-						System.out.println("Mauvaise commande");
-					}
-				}
+				Piece.supprimerPiece(getMaison(), s);
+				Thread.sleep(3000); // Délai de 3 secondes
 			}
 
 			/***************************************************************
@@ -226,6 +173,7 @@ public class Main implements Serializable{
 				Equipement.supprimerEquipement(getPosition(), s);
 				Thread.sleep(3000); // Délai de 3 secondes
 			}
+
 			/***************************************************************
 			 ******* Suppression de tous les equipements de la pièce *******
 			 ***************************************************************/
@@ -234,20 +182,20 @@ public class Main implements Serializable{
 				System.out.println("Suppression effectuée");
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
 			/***************************************************************
 			 ******** Affichage de toutes les pièces et équipements ********
 			 ***************************************************************/
-
 			else if (requete == 10 && droits) {
 				LinkedList<Piece> pieces = getMaison().getPieces();
-
 				for (int i = 0; i < pieces.size(); i++) {
 					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
 			/***************************************************************
-			 *************** Choix couleur des parametres*******************
+			 *************** Choix couleur des paramètres ******************
 			 ***************************************************************/
 			else if (requete == 11 && droits) {
 				LinkedList<String> couleurs = new LinkedList<String>();
@@ -261,17 +209,36 @@ public class Main implements Serializable{
 				couleurs.add("BLUE");
 				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
 				for (int i = 0; i < couleurs.size(); i++) {
-					System.out.println((i + 1) + " : " + couleurs.get(i));
+					System.out.println("➡️ " + (i + 1) + " : " + couleurs.get(i));
 				}
 				int req = Main.toInt(s.nextLine());
 				if (req > 0 && req <= couleurs.size()) {
 					couleur = couleurs.get(req - 1);
-					System.out.println("Nouvelle couleur validée");
+					System.out.println("\nNouvelle couleur validée\n");
 				} else {
 					System.out.println("Mauvaise commande");
 				}
 				Thread.sleep(3000); // Delai de 3 secondes
 			}
+
+			/***************************************************************
+			 ******** Affichage de toutes les pièces et équipements ********
+			 ***************************************************************/
+			else if (requete == 12 && droits) {
+				System.out.println("Tapez la commande correspondant à votre avatar désiré");
+				for (int i = 0; i < avatars.size(); i++) {
+					System.out.println("➡️ " + (i + 1) + " : " + avatars.get(i)); // Affiche la liste des pièces
+				}
+				int req = Main.toInt(s.nextLine());
+				if (req > 0 && req <= avatars.size()) {
+					avatar = avatars.get(req - 1);
+					System.out.println("Nouvel avatar validé");
+				} else {
+					System.out.println("Mauvaise commande");
+				}
+				Thread.sleep(3000); // Delai de 3 secondes
+			}
+
 			/***************************************************************
 			 ********************* Commande non valide *********************
 			 ***************************************************************/
@@ -290,6 +257,7 @@ public class Main implements Serializable{
 	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
+
 	private static String couleur = "BLUE";
 	static ListeUtilisateurs ListeAdmin = new ListeUtilisateurs();
 	
@@ -304,6 +272,9 @@ public class Main implements Serializable{
 	public static ListeUtilisateurs getListeAdmin() {
 		return ListeAdmin;
 	}
+
+	private static List<String> avatars = new LinkedList<String>();
+	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
 		return maison;
@@ -393,15 +364,15 @@ public class Main implements Serializable{
 
 	public static void traitementIntensiteLumineuseNaturelle() {
 		if ((heure == 8) || (heure == 21)) {
-			intensiteLumineuseNaturelle = 20;
+			setIntensiteLumineuseNaturelle(20);
 		} else if ((heure == 9) || (heure == 20)) {
-			intensiteLumineuseNaturelle = 40;
+			setIntensiteLumineuseNaturelle(40);
 		} else if ((heure == 10) || ((heure >= 18) && (heure < 20))) {
-			intensiteLumineuseNaturelle = 60;
+			setIntensiteLumineuseNaturelle(60);
 		} else if ((heure >= 11) && (heure < 18)) {
-			intensiteLumineuseNaturelle = 100;
+			setIntensiteLumineuseNaturelle(100);
 		} else {
-			intensiteLumineuseNaturelle = 0;
+			setIntensiteLumineuseNaturelle(0);
 		}
 	}
 
@@ -416,9 +387,9 @@ public class Main implements Serializable{
 				}
 			}
 		}
-		position.setIntensiteLumineuse(intensiteLumineuseNaturelle + sommeILobjets);
+		position.setIntensiteLumineuse(getIntensiteLumineuseNaturelle() + sommeILobjets);
 		System.out.println("L'intensité lumineuse de " + position.getNom() + " est de "
-				+ position.getIntensiteLumineuse() + "% (dont = " + intensiteLumineuseNaturelle + "% naturelle et "
+				+ position.getIntensiteLumineuse() + "% (dont = " + getIntensiteLumineuseNaturelle() + "% naturelle et "
 				+ sommeILobjets + "% artificielle)");
 	}
 
@@ -492,13 +463,15 @@ public class Main implements Serializable{
 				System.out.println("\nBienvenue dans la maison de Barry !\n");
 				maisonChoisie = true;
 			} else if (requete == 2) {
-				maison = BarryHouse.creerMaisonVide();
+				System.out.println("\nQuel nom voulez vous donner à votre maison?");
+				String name = s.nextLine();
+				maison = new Maison(name, new Salon("Salon"));
 				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
 				System.out.println(maison.toString());
 				maisonChoisie = true;
 			} else if (requete == 3) {
 				maison = Sauvegarde.chargerMAISON();
-				if(maison!=null) {
+				if (maison != null) {
 					maisonChoisie = true;
 				}
 			}
@@ -507,31 +480,31 @@ public class Main implements Serializable{
 		setPosition(getMaison().getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
 		Thread.sleep(2000);
 	}
-	
-	
 
 	public static void choixSauvegarde(Scanner s) throws InterruptedException {
-		System.out.println("Voulez vous vraiment sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
+		System.out.println("Voulez vous sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
 		int req = toInt(s.nextLine());
 		if (req == 1) {
 			Sauvegarde.sauvegarder();
 			System.out.println("\nSauvegarde effectuée");
 		} else {
-			System.out.println("\nMaison non sauvegardée");
+			System.out.println("\nMaison non-sauvegardée");
 		}
 	}
 
-	public static void MiseNiveauGraphique() {
+	public static void miseNiveauGraphique() {
+		Piece position = getPosition();
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/piece.png");
-		StdDraw.text(0.15, 0.96, pseudo);
-		StdDraw.text(0.45, 0.96, maison.getNom());
-		StdDraw.text(0.75, 0.96, position.getNom());
-		StdDraw.text(0.27, 0.9, String.valueOf(position.getTemperature()));
-		StdDraw.text(0.75, 0.9, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.9, 0.9, String.valueOf(heure) + "h");
-		MiseNiveauGraphiqueObjets();
+		StdDraw.picture(0.5, 0.5, position.imagePiece());
+		StdDraw.text(0.15, 0.96, getPseudo());
+		StdDraw.text(0.46, 0.96, getMaison().getNom());
+		StdDraw.text(0.78, 0.96, position.getNom());
+		StdDraw.text(0.29, 0.9, String.valueOf(position.getTemperature()));
+		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
+		StdDraw.text(0.9, 0.9, String.valueOf(getHeure()) + "h");
+		miseNiveauGraphiqueObjets();
+		StdDraw.picture(0.5, 0.2, "images/avatar/" + avatar + ".png");
 	}
 
 	public static void choixCouleurLegende() {
@@ -563,7 +536,11 @@ public class Main implements Serializable{
 		}
 	}
 
-	public static void MiseNiveauGraphiqueObjets() {
+	public static String getCouleur() {
+		return couleur;
+	}
+
+	public static void miseNiveauGraphiqueObjets() {
 		choixCouleurLegende();
 		String nameClass;
 		LinkedList<Equipement> equip = getPosition().getEquipements();
@@ -575,5 +552,13 @@ public class Main implements Serializable{
 					equip.get(i).getNom());
 		}
 		StdDraw.setPenColor(StdDraw.BLACK);
+	}
+
+	public static int getIntensiteLumineuseNaturelle() {
+		return intensiteLumineuseNaturelle;
+	}
+
+	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
+		intensiteLumineuseNaturelle = newIntensite;
 	}
 }

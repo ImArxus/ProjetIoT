@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Thermostat extends Equipement implements Serializable{
+public class Thermostat extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6630244045511449074L;
 	private int temperature;
 
 	public Thermostat(String nom) {
 		super(nom);
 		this.setTemperature(21);
+		this.setPositionHorizontale(0.8);
+		this.setPositionVerticale(0.52);
 	}
 
-	public Thermostat(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int temperature) {
+	public Thermostat(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			int temperature) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setTemperature(temperature);
 	}

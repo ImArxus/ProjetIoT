@@ -4,11 +4,8 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Electrolyseur extends Equipement implements Serializable{
+public class Electrolyseur extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3214694664282896820L;
 	private double sel;
 	private double ph;
@@ -19,9 +16,12 @@ public class Electrolyseur extends Equipement implements Serializable{
 		setSel(3800);
 		setPh(7.2);
 		setTemperature(25);
+		this.setPositionHorizontale(0.9);
+		this.setPositionVerticale(0.34);
 	}
 
-	public Electrolyseur(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, double sel, double ph, double temperature) {
+	public Electrolyseur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
+			double sel, double ph, double temperature) {
 		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		setSel(sel);
 		setPh(ph);

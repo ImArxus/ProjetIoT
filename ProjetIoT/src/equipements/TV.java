@@ -4,11 +4,8 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class TV extends Equipement implements Serializable{
+public class TV extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5394573896230563021L;
 	private int volume;
 	private int numeroChaine;
@@ -17,11 +14,12 @@ public class TV extends Equipement implements Serializable{
 		super(nom);
 		setVolume(50);
 		setNumeroChaine(1);
-		this.setPositionHorizontale(0.5);
-		this.setPositionVerticale(0.41);
+		this.setPositionHorizontale(0.49);
+		this.setPositionVerticale(0.4);
 	}
 
-	public TV(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int volume, int numeroChaine) {
+	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
+			int numeroChaine) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;

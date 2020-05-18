@@ -4,15 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-//test mez
+public class ListeUtilisateurs implements Serializable {
 
-public class ListeUtilisateurs implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6447914795234124870L;
+
 	protected Map<String, String> comptes = new HashMap<String, String>();// (pseudo,mdp)
 	protected  Map<String, Boolean> estAdmin = new HashMap<String, Boolean>();// (pseudo ,estAdmin)
+
 
 	public ListeUtilisateurs() {
 		comptes.put("prof", "prof");
@@ -38,7 +36,5 @@ public class ListeUtilisateurs implements Serializable{
 	public Map<String, Boolean> getAdmin() {
 		return estAdmin;
 	}
-	
-	
-	
+
 }

@@ -1,59 +1,34 @@
 package main;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
+public class Sauvegarde implements Serializable {
 
-
-public class Sauvegarde implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1850993100796950057L;
-	
-	// https://forum.hardware.fr/hfr/Programmation/Java/sauvegarde-sujet_129577_1.htm
-	
-	
-
 
 	public static void sauvegarder() {
-		
-		 try {
-	            /* Create a file to write the serialized tree to. */
-	            FileOutputStream ostream = new FileOutputStream("Maison de " + Main.getPseudo());
-	            /* Create the output stream */
-	            ObjectOutputStream p = new ObjectOutputStream(ostream);
+		try {
+			/* Create a file to write the serialized tree to. */
+			FileOutputStream ostream = new FileOutputStream("Maison de " + Main.getPseudo());
+			/* Create the output stream */
+			ObjectOutputStream p = new ObjectOutputStream(ostream);
 
-	            /* Create a tree with three levels. */
-	            Maison m = Main.getMaison();
-	           
-	           
-	            
-	            p.writeObject(m); // Write the tree to the stream.
-	            p.flush();
-	            ostream.close();    // close the file.
-	            
-	            System.out.println("votre maison a ete enregistre");
-	} catch (Exception ex) {
-        ex.printStackTrace();
-    }}
+			/* Create a tree with three levels. */
+			Maison m = Main.getMaison();
+
+			p.writeObject(m); // Write the tree to the stream.
+			p.flush();
+			ostream.close(); // close the file.
+
+			System.out.println("\nVotre maison a bien été enregistré !");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
 	public static void sauvegarderCompte() {
 		 try {
@@ -86,7 +61,7 @@ public static ListeUtilisateurs chargerComptes() {
          /* Read a tree object, and all the subtrees */
          ListeUtilisateurs ListeAdmin = (ListeUtilisateurs)q.readObject();
          q .close();
-         System.out.println(ListeAdmin.toString());
+        // System.out.println(ListeAdmin.toString());
          return ListeAdmin;
 	    } catch (Exception ex) {
 	    	//System.out.println("vous n'avez pas de compte sauvegarde");
@@ -97,28 +72,25 @@ public static ListeUtilisateurs chargerComptes() {
 	
 	
 
+		
 
-	
-	
 	public static Maison chargerMAISON() {
-		
-	    try {
-		
-		 FileInputStream istream = new FileInputStream("Maison de " + Main.getPseudo());
-         ObjectInputStream q = new ObjectInputStream(istream);
-         
-         /* Read a tree object, and all the subtrees */
-         Maison m = (Maison)q.readObject();
-         q .close();
-         //System.out.println(m.toString());
-         return m;
-	    } catch (Exception ex) {
-	    	System.out.println("vous n'avez pas de maison sauvegarde");
-          //  ex.printStackTrace();
-            return null;
-            
-       }}
-	
-	
+
+
+		try {
+			FileInputStream istream = new FileInputStream("Maison de " + Main.getPseudo());
+			ObjectInputStream q = new ObjectInputStream(istream);
+
+			/* Read a tree object, and all the subtrees */
+			Maison m = (Maison) q.readObject();
+			q.close();
+			System.out.println(m.toString());
+			return m;
+		} catch (Exception ex) {
+			System.out.println("Vous n'avez pas de maison sauvegardée...");
+			// ex.printStackTrace();
+			return null;
+		}
+	}
 
 }

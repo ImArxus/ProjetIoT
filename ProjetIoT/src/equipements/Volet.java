@@ -4,19 +4,16 @@ import java.io.Serializable;
 
 import main.Equipement;
 
-public class Volet extends Equipement implements Serializable{
+public class Volet extends Equipement implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
 
-	public Volet(String nom, boolean etatCourant,double positionHorizontale,double positionVerticale, int position) {
+	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setPosition(position);
 	}
-	
+
 	public Volet(String nom) {
 		super(nom);
 		this.setPosition(position);
@@ -40,7 +37,7 @@ public class Volet extends Equipement implements Serializable{
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
 			if (getPosition() < 91) {
-				position+=10;
+				position += 10;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
@@ -50,7 +47,7 @@ public class Volet extends Equipement implements Serializable{
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
 			if (getPosition() > 9) {
-				position-=10;
+				position -= 10;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
