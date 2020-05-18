@@ -1,10 +1,7 @@
 package pieces;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
 
 import equipements.Alarme;
 import equipements.Electrolyseur;
