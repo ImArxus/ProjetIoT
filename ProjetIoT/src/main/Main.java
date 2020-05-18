@@ -9,11 +9,9 @@ import java.util.Scanner;
 import equipements.Alarme;
 import equipements.Lumiere;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pieces.Salon;
 
@@ -557,20 +555,10 @@ public class Main extends Application implements Serializable {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Button btn = new Button("Click poto");
-		Button exit = new Button("Quitter la simulation");
-		exit.setOnAction(e -> System.exit(0));
-		btn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("GG poto");
-			}
-		});
-
-		VBox root = new VBox();
-		root.getChildren().addAll(btn, exit);
+		//https://www.youtube.com/watch?v=cgv63JD7pfc
+		Parent root = FXMLLoader.load(getClass().getResource("Test.fxml"));
 		primaryStage.setTitle("FirstTry");
-		primaryStage.setScene(new Scene(root, 300, 300));
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
 	}
 }
