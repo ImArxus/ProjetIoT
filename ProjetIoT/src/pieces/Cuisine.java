@@ -64,7 +64,7 @@ public class Cuisine extends Piece implements Serializable {
 			return new Frigo(name);
 		}
 	}
-	
+
 	@Override
 	public String imagePiece() {
 		return ("images/cuisine.png");
