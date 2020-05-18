@@ -8,13 +8,21 @@ import java.util.Scanner;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import pieces.Salon;
 
-public class Main implements Serializable {
+public class Main extends Application implements Serializable {
 
 	private static final long serialVersionUID = -5850588170235124346L;
 
 	public static void main(String[] args) throws InterruptedException {
+		
+		launch(args); // Lancement actions JavaFX
+		
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
 
@@ -543,5 +551,13 @@ public class Main implements Serializable {
 
 	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
 		intensiteLumineuseNaturelle = newIntensite;
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
+		primaryStage.setTitle("FirstTry");
+		primaryStage.setScene(new Scene(root, 300, 300));
+		primaryStage.show();
 	}
 }
