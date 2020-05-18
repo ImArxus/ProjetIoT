@@ -39,10 +39,4 @@ public class Escalier extends Piece implements Serializable {
 		}
 	}
 
-	@Override
-	public void imagePiece() {
-		StdDraw.picture(0.5, 0.5, "images/couleurs/" + Main.couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/escalier.png");
-	}
-
 }
