@@ -10,7 +10,6 @@ import equipements.Alarme;
 import equipements.Lumiere;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pieces.Salon;
@@ -569,27 +568,29 @@ public class Main extends Application implements Serializable {
 		intensiteLumineuseNaturelle = newIntensite;
 	}
 
+	Scene loginScene, newAccountScene;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// https://www.youtube.com/watch?v=cgv63JD7pfc
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 			primaryStage.setTitle("Login");
-			primaryStage.setScene(new Scene(root));
+			loginScene = new Scene(FXMLLoader.load(getClass().getResource("/main/Login.fxml")));
+			primaryStage.setScene(loginScene);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
 	public void creerCompte(Stage primaryStage) throws Exception {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/main/CreationCompte.fxml"));
 			primaryStage.setTitle("Créer un compte");
-			primaryStage.setScene(new Scene(root));
+			newAccountScene = new Scene(FXMLLoader.load(getClass().getResource("/main/CreationCompte.fxml")));
+			primaryStage.setScene(newAccountScene);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
