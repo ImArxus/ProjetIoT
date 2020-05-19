@@ -24,6 +24,6 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="325.0" layoutY="500.0" mnemonicParsing="false" onAction="#creerCompte" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
+      <Button layoutX="325.0" layoutY="500.0" mnemonicParsing="false" onAction="#versCreation" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
    </children>
 </AnchorPane>

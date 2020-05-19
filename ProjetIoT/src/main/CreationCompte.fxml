@@ -16,10 +16,10 @@
             <Image url="@../images/chargement.png" />
          </image>
       </ImageView>
-      <Button layoutX="325.0" layoutY="460.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
-      <TextField fx:id="userTxt" layoutX="275.0" layoutY="350.0" prefHeight="30.0" prefWidth="250.0" promptText="Identifiant" />
-      <PasswordField fx:id="passwordTxt" layoutX="275.0" layoutY="400.0" prefHeight="30.0" prefWidth="250.0" promptText="Mot de passe" />
-      <Label fx:id="loginTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="260.0" prefHeight="60.0" prefWidth="600.0" text="Veuillez saisir un identifiant et un mot de passe" textFill="WHITE">
+      <Button layoutX="325.0" layoutY="460.0" mnemonicParsing="false" onAction="#creerCompte" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
+      <TextField fx:id="newUserTxt" layoutX="275.0" layoutY="350.0" prefHeight="30.0" prefWidth="250.0" promptText="Identifiant" />
+      <PasswordField fx:id="newPasswordTxt" layoutX="275.0" layoutY="400.0" prefHeight="30.0" prefWidth="250.0" promptText="Mot de passe" />
+      <Label fx:id="creationTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="224.0" prefHeight="113.0" prefWidth="600.0" text="Veuillez saisir un identifiant et un mot de passe" textFill="WHITE">
          <font>
             <Font size="26.0" />
          </font>

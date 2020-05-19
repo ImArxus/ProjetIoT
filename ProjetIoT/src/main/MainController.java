@@ -2,8 +2,10 @@ package main;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -12,7 +14,7 @@ import javafx.stage.Stage;
 
 public class MainController {
 
-	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
+	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
 	@FXML
 	private Label loginTxt;
@@ -21,25 +23,47 @@ public class MainController {
 	@FXML
 	private PasswordField passwordTxt;
 
+	@FXML
+	private Label creationTxt;
+	@FXML
+	private TextField newUserTxt;
+	@FXML
+	private PasswordField newPasswordTxt;
+
+	public Scene choixScene(String url) {
+		try {
+			return new Scene(FXMLLoader.load(getClass().getResource(url)));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public void login() {
-		if (listeUtilisateurs.comptes.containsKey(userTxt.getText())
-				&& listeUtilisateurs.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
+		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
+				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
 	}
 
+	public void versCreation(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = choixScene("/main/CreationCompte.fxml");
+		window.setTitle("Créer un compte");
+		window.setScene(scene);
+		window.show();
+	}
+
 	public void creerCompte() {
-		//primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/main/CreationCompte.fxml"))));
-		ListeUtilisateurs ListeUser = new ListeUtilisateurs();
-		if (!listeUtilisateurs.comptes.containsKey(userTxt.getText()) && !passwordTxt.getText().isEmpty()) {
-			ListeUser.comptes.put(userTxt.getText(), passwordTxt.getText());
-			ListeUtilisateurs.getAdmin().put(userTxt.getText(), false);
+		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText()) && !newPasswordTxt.getText().isEmpty()) {
+			listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
+			ListeUtilisateurs.getAdmin().put(newUserTxt.getText(), false);
 			Sauvegarde.sauvegarderCompte();
-			System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
+			creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
 		} else {
-			loginTxt.setText("Identifiant déjà existant");
+			creationTxt.setText("Identifiant déjà existant");
 		}
 	}
 
