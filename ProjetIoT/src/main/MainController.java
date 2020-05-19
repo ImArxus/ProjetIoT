@@ -15,13 +15,14 @@ public class MainController {
 
 	@FXML
 	private TextField userTxt;
-	private String user = userTxt.getText();
 
 	@FXML
 	private PasswordField passwordTxt;
-	private String password = passwordTxt.getText();
 
 	public void login(ActionEvent e) {
+		String user = userTxt.getText();
+		String password = passwordTxt.getText();
+
 		if (listeUtilisateurs.comptes.containsKey(user) && listeUtilisateurs.comptes.get(user).equals(password)) {
 			loginTxt.setText("Bienvenue " + user + " !");
 		} else {

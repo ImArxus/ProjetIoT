@@ -7,27 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
-	<children>
-		<Button layoutX="325.0" layoutY="350.0" mnemonicParsing="false"
-			onAction="#login" prefHeight="30.0" prefWidth="150.0"
-			text="S'identifier" />
-		<TextField fx:id="userTxt" layoutX="300.0" layoutY="250.0"
-			prefHeight="30.0" prefWidth="200.0" promptText="Identifiant" />
-		<PasswordField fx:id="passwordTxt" layoutX="300.0"
-			layoutY="300.0" prefHeight="30.0" prefWidth="200.0"
-			promptText="Mot de passe" />
-		<Label fx:id="loginTxt" alignment="CENTER"
-			contentDisplay="CENTER" layoutX="100.0" layoutY="150.0"
-			prefHeight="60.0" prefWidth="600.0"
-			text="Veuillez saisir votre identifiant et mot de passe">
-			<font>
-				<Font size="26.0" />
-			</font>
-		</Label>
-		<Button layoutX="325.0" layoutY="390.0" mnemonicParsing="false"
-			prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
-	</children>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+   <children>
+      <Button layoutX="325.0" layoutY="350.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="150.0" text="S'identifier" />
+      <TextField fx:id="userTxt" layoutX="300.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="Identifiant" />
+      <PasswordField fx:id="passwordTxt" layoutX="300.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" promptText="Mot de passe" />
+      <Label fx:id="loginTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="150.0" prefHeight="60.0" prefWidth="600.0" text="Veuillez saisir votre identifiant et mot de passe">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Button layoutX="325.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
+   </children>
 </AnchorPane>
