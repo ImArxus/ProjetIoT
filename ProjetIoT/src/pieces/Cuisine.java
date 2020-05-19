@@ -13,9 +13,7 @@ import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Cuisine extends Piece implements Serializable {
 
@@ -68,9 +66,8 @@ public class Cuisine extends Piece implements Serializable {
 	}
 
 	@Override
-	public void imagePiece() {
-		StdDraw.picture(0.5, 0.5, "images/couleurs" + Main.couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/cuisine.png");
+	public String imagePiece() {
+		return ("images/cuisine.png");
 	}
 
 }

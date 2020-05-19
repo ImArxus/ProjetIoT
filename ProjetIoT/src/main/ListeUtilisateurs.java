@@ -7,6 +7,7 @@ import java.util.Map;
 public class ListeUtilisateurs implements Serializable {
 
 	private static final long serialVersionUID = -6447914795234124870L;
+
 	protected Map<String, String> comptes = new HashMap<String, String>(); // (pseudo, mdp)
 	protected static Map<String, Boolean> estAdmin = new HashMap<String, Boolean>(); // (pseudo, estAdmin)
 

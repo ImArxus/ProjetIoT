@@ -12,6 +12,8 @@ public class Thermostat extends Equipement implements Serializable {
 	public Thermostat(String nom) {
 		super(nom);
 		this.setTemperature(21);
+		this.setPositionHorizontale(0.8);
+		this.setPositionVerticale(0.52);
 	}
 
 	public Thermostat(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,

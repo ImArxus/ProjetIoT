@@ -11,8 +11,8 @@ public class Alarme extends Equipement implements Serializable {
 	public Alarme(String nom) {
 		super(nom);
 		this.setEtatCourant(true);
-		this.setPositionHorizontale(0.1);
-		this.setPositionVerticale(0.25);
+		this.setPositionHorizontale(0);
+		this.setPositionVerticale(0.5);
 	}
 
 	public Alarme(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {

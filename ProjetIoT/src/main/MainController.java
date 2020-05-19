@@ -1,6 +1,5 @@
 package main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -12,21 +11,29 @@ public class MainController {
 
 	@FXML
 	private Label loginTxt;
-
 	@FXML
 	private TextField userTxt;
-
 	@FXML
 	private PasswordField passwordTxt;
 
-	public void login(ActionEvent e) {
-		String user = userTxt.getText();
-		String password = passwordTxt.getText();
-
-		if (listeUtilisateurs.comptes.containsKey(user) && listeUtilisateurs.comptes.get(user).equals(password)) {
-			loginTxt.setText("Bienvenue " + user + " !");
+	public void login() {
+		if (listeUtilisateurs.comptes.containsKey(userTxt.getText())
+				&& listeUtilisateurs.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
+			loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
+		}
+	}
+
+	public void creerCompte() {
+		ListeUtilisateurs ListeUser = new ListeUtilisateurs();
+		if (!listeUtilisateurs.comptes.containsKey(userTxt.getText()) && !passwordTxt.getText().isEmpty()) {
+			ListeUser.comptes.put(userTxt.getText(), passwordTxt.getText());
+			ListeUtilisateurs.getAdmin().put(userTxt.getText(), false);
+			Sauvegarde.sauvegarderCompte();
+			System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
+		} else {
+			loginTxt.setText("Identifiant déjà existant");
 		}
 	}
 

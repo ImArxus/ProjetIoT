@@ -7,9 +7,7 @@ import equipements.Alarme;
 import equipements.Electrolyseur;
 import equipements.Lumiere;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Piscine extends Piece implements Serializable {
 
@@ -44,9 +42,8 @@ public class Piscine extends Piece implements Serializable {
 	}
 
 	@Override
-	public void imagePiece() {
-		StdDraw.picture(0.5, 0.5, "images/couleurs/" + Main.couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/piscine.png");
+	public String imagePiece() {
+		return ("images/piscine.png");
 	}
 
 }

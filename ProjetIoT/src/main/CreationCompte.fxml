@@ -11,19 +11,18 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
-      <ImageView fitHeight="603.0" fitWidth="800.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/chargement.png" />
          </image>
       </ImageView>
-      <Button layoutX="325.0" layoutY="460.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="150.0" text="S'identifier" />
+      <Button layoutX="325.0" layoutY="460.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
       <TextField fx:id="userTxt" layoutX="275.0" layoutY="350.0" prefHeight="30.0" prefWidth="250.0" promptText="Identifiant" />
       <PasswordField fx:id="passwordTxt" layoutX="275.0" layoutY="400.0" prefHeight="30.0" prefWidth="250.0" promptText="Mot de passe" />
-      <Label fx:id="loginTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="260.0" prefHeight="60.0" prefWidth="600.0" text="Veuillez saisir votre identifiant et mot de passe" textFill="WHITE">
+      <Label fx:id="loginTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="260.0" prefHeight="60.0" prefWidth="600.0" text="Veuillez saisir un identifiant et un mot de passe" textFill="WHITE">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="325.0" layoutY="500.0" mnemonicParsing="false" onAction="#creerCompte" prefHeight="30.0" prefWidth="150.0" text="Créer un compte" />
    </children>
 </AnchorPane>

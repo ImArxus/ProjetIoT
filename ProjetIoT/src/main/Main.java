@@ -23,6 +23,7 @@ public class Main extends Application implements Serializable {
 
 		launch(args); // Lancement actions JavaFX
 
+		Main.ChargerCompte();
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
 
@@ -264,9 +265,22 @@ public class Main extends Application implements Serializable {
 	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
-	private static ListeUtilisateurs listeUtilisateurs = new ListeUtilisateurs();
+
+	private static String couleur = "BLUE";
+	static ListeUtilisateurs ListeAdmin = new ListeUtilisateurs();
+
+	public static void ChargerCompte() {
+		ListeUtilisateurs Listetmp = Sauvegarde.chargerComptes();
+		if (Listetmp != null) {
+			ListeAdmin = Listetmp;
+		}
+	}
+
+	public static ListeUtilisateurs getListeAdmin() {
+		return ListeAdmin;
+	}
+
 	private static List<String> avatars = new LinkedList<String>();
-	public static String couleur = "BLUE";
 	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
@@ -395,10 +409,10 @@ public class Main extends Application implements Serializable {
 		while (!connecte) {
 			System.out.print("Identifiant : ");
 			pseudo = s.nextLine();
-			if (listeUtilisateurs.comptes.containsKey(pseudo)) {
+			if (ListeAdmin.comptes.containsKey(pseudo)) {
 				System.out.print("Mot de passe : ");
 				mdp = s.nextLine();
-				if (listeUtilisateurs.comptes.get(pseudo).equals(mdp)) {
+				if (ListeAdmin.comptes.get(pseudo).equals(mdp)) {
 					System.out.println("Mot de passe correct");
 					connecte = true;
 				} else {
@@ -407,7 +421,7 @@ public class Main extends Application implements Serializable {
 					int requete = toInt(s.nextLine());
 					if (requete == 1) {
 						pseudo = "guest";
-						mdp = listeUtilisateurs.comptes.get(pseudo);
+						mdp = ListeAdmin.comptes.get(pseudo);
 						System.out.println("Connexion automatique en tant qu'invité");
 						connecte = true;
 					}
@@ -418,15 +432,17 @@ public class Main extends Application implements Serializable {
 				int requete = toInt(s.nextLine());
 				if (requete == 1) {
 					pseudo = "guest";
-					mdp = listeUtilisateurs.comptes.get(pseudo);
+					mdp = ListeAdmin.comptes.get(pseudo);
 					System.out.println("Connexion automatique en tant qu'invité");
 					connecte = true;
 				} else if (requete == 2) {
 					System.out.println("Identifiant : " + pseudo);
 					System.out.print("Veuillez choisir un mot de passe : ");
 					mdp = s.nextLine();
-					listeUtilisateurs.comptes.put(pseudo, mdp);
-					ListeUtilisateurs.estAdmin.put(pseudo, false);
+					ListeAdmin.comptes.put(pseudo, mdp);
+					ListeUtilisateurs.getAdmin().put(pseudo, false);
+					Sauvegarde.sauvegarderCompte();
+
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
 					connecte = true;
 				}
@@ -487,7 +503,7 @@ public class Main extends Application implements Serializable {
 		Piece position = getPosition();
 		StdDraw.clear();
 		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/" + position.getNom() + ".png");
+		StdDraw.picture(0.5, 0.5, position.imagePiece());
 		StdDraw.text(0.15, 0.96, getPseudo());
 		StdDraw.text(0.46, 0.96, getMaison().getNom());
 		StdDraw.text(0.78, 0.96, position.getNom());
@@ -559,6 +575,17 @@ public class Main extends Application implements Serializable {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 			primaryStage.setTitle("Login");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void creerCompte(Stage primaryStage) throws Exception {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/main/CreationCompte.fxml"));
+			primaryStage.setTitle("Créer un compte");
 			primaryStage.setScene(new Scene(root));
 			primaryStage.show();
 		} catch (Exception e) {

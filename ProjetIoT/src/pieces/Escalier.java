@@ -6,9 +6,7 @@ import java.util.LinkedList;
 import equipements.Alarme;
 import equipements.Lumiere;
 import main.Equipement;
-import main.Main;
 import main.Piece;
-import main.StdDraw;
 
 public class Escalier extends Piece implements Serializable {
 
@@ -37,12 +35,6 @@ public class Escalier extends Piece implements Serializable {
 		default:
 			return new Lumiere(name);
 		}
-	}
-
-	@Override
-	public void imagePiece() {
-		StdDraw.picture(0.5, 0.5, "images/couleurs/" + Main.couleur + ".png");
-		StdDraw.picture(0.5, 0.5, "images/escalier.png");
 	}
 
 }
