@@ -16,6 +16,9 @@ public class MainController {
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
+	/**
+	 * Champs page Login
+	 */
 	@FXML
 	private Label loginTxt;
 	@FXML
@@ -23,6 +26,9 @@ public class MainController {
 	@FXML
 	private PasswordField passwordTxt;
 
+	/**
+	 * Champs page Création de compte
+	 */
 	@FXML
 	private Label creationTxt;
 	@FXML
@@ -39,13 +45,23 @@ public class MainController {
 		}
 	}
 
-	public void login() {
+	public void login(ActionEvent event) throws InterruptedException {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
+			Thread.sleep(2000);
+			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
+	}
+	
+	public void versChoixMaison(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = choixScene("/main/ChoixMaison.fxml");
+		window.setTitle("Choix Maison");
+		window.setScene(scene);
+		window.show();
 	}
 
 	public void versCreation(ActionEvent event) {
@@ -56,12 +72,24 @@ public class MainController {
 		window.show();
 	}
 
+	public void versLogin(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = choixScene("/main/Login.fxml");
+		window.setTitle("Login");
+		window.setScene(scene);
+		window.show();
+	}
+
 	public void creerCompte() {
-		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText()) && !newPasswordTxt.getText().isEmpty()) {
-			listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
-			ListeUtilisateurs.getAdmin().put(newUserTxt.getText(), false);
-			Sauvegarde.sauvegarderCompte();
-			creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
+		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
+			if (!newPasswordTxt.getText().isEmpty()) {
+				listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
+				ListeUtilisateurs.getAdmin().put(newUserTxt.getText(), false);
+				Sauvegarde.sauvegarderCompte();
+				creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
+			} else {
+				creationTxt.setText("Veuillez entrer un mot de passe");
+			}
 		} else {
 			creationTxt.setText("Identifiant déjà existant");
 		}
