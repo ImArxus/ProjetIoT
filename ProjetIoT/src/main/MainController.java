@@ -92,6 +92,8 @@ public class MainController {
 	
 	public void versMaisonBarry(ActionEvent event) {
 		//choixTxt.setText("Bienvenue dans la maison de Barry !");
+		Main.setMaison(BarryHouse.creerMaison());
+		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
 
@@ -114,10 +116,27 @@ public class MainController {
         imageView.setImage(new Image("/images/piece.png"));
         imageView.setFitWidth(800);
         imageView.setFitHeight(600);
-
         root.getChildren().add(imageView);
         
-		window.setTitle("Barry House");
+        Label pseudoAffichage= new Label();//gestion pseudo
+        pseudoAffichage.setText(Main.getPseudo());
+        pseudoAffichage.setTranslateX(100);
+        pseudoAffichage.setTranslateY(12);
+        root.getChildren().add(pseudoAffichage);
+        
+        Label positionAffichage= new Label();//gestion position
+        positionAffichage.setText(Main.getPosition().getNom());
+        positionAffichage.setTranslateX(600);
+        positionAffichage.setTranslateY(12);
+        root.getChildren().add(positionAffichage);
+        
+        Label nomMaisonAffichage= new Label();//gestion nom maison
+        nomMaisonAffichage.setText(Main.getMaison().getNom());
+        nomMaisonAffichage.setTranslateX(370);
+        nomMaisonAffichage.setTranslateY(12);
+        root.getChildren().add(nomMaisonAffichage);
+        
+        window.setTitle("Barry House");
 		window.setScene(scene);
 		window.show();
 	}
