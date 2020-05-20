@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Ventilateur extends Equipement implements Serializable {
@@ -66,6 +68,14 @@ public class Ventilateur extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer l'intensité");
 		}
+	}
+	
+	public ImageView afficherVentilateur() {
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/objets/equipements.Volet.png"));
+        imageView.setLayoutX(30);
+        imageView.setLayoutX(30);
+        return imageView;
 	}
 
 }
