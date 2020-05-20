@@ -1,7 +1,17 @@
 package main;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedList;
 
+import equipements.Alexa;
+import equipements.Cheminee;
+import equipements.Enceinte;
+import equipements.Lumiere;
+import equipements.PS5;
+import equipements.Radiateur;
+import equipements.TV;
+import equipements.Ventilateur;
 import equipements.Volet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +30,6 @@ import javafx.stage.Stage;
 
 public class MainController {
 	private static String pseudo;
-
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
@@ -63,7 +72,7 @@ public class MainController {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			Main.setPseudo(userTxt.getText());
-			//loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
+			// loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
@@ -93,72 +102,99 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public void versMaisonBarry(ActionEvent event) {
-		//choixTxt.setText("Bienvenue dans la maison de Barry !");
+		// choixTxt.setText("Bienvenue dans la maison de Barry !");
 		Main.setMaison(BarryHouse.creerMaison());
 		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
 
 	public void versMaisonVide(ActionEvent event) {
-		//choixTxt.setText("Votre maison de rêve n'attend que vous !");
+		// choixTxt.setText("Votre maison de rêve n'attend que vous !");
 		creerMaison(event);
 	}
 
 	public void versMaisonChargee(ActionEvent event) {
-		//choixTxt.setText("Votre maison est chargée !");
+		// choixTxt.setText("Votre maison est chargée !");
 		creerMaison(event);
 	}
-	
+
 	public void creerMaison(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
-		
+
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/piece.png"));
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
-        root.getChildren().add(imageView);
-        
-        Label pseudoAffichage= new Label();//gestion affichage pseudo
-        pseudoAffichage.setText(Main.getPseudo());
-        pseudoAffichage.setTranslateX(100);
-        pseudoAffichage.setTranslateY(12);
-        root.getChildren().add(pseudoAffichage);
-        
-        Label positionAffichage= new Label();//gestion affichage position
-        positionAffichage.setText(Main.getPosition().getNom());
-        positionAffichage.setTranslateX(600);
-        positionAffichage.setTranslateY(12);
-        root.getChildren().add(positionAffichage);
-        
-        Label nomMaisonAffichage= new Label();//gestion affichage nom maison
-        nomMaisonAffichage.setText(Main.getMaison().getNom());
-        nomMaisonAffichage.setTranslateX(370);
-        nomMaisonAffichage.setTranslateY(12);
-        root.getChildren().add(nomMaisonAffichage);
-        
-        Label heureAffichage= new Label();//gestion affichage heure
-        heureAffichage.setText(String.valueOf(Main.getHeure()));
-        heureAffichage.setTranslateX(740);
-        heureAffichage.setTranslateY(50);
-        root.getChildren().add(heureAffichage);
-        
-        Label temperatureAffichage= new Label();//gestion affichage temperature piece
-        temperatureAffichage.setText(String.valueOf(Main.getPosition().getTemperature()));
-        temperatureAffichage.setTranslateX(240);
-        temperatureAffichage.setTranslateY(50);
-        root.getChildren().add(temperatureAffichage);
-        
-        Label ilAffichage= new Label();//gestion affichage intensitelumineuse piece
-        ilAffichage.setText(String.valueOf(Main.getPosition().getIntensiteLumineuse()));
-        ilAffichage.setTranslateX(600);
-        ilAffichage.setTranslateY(50);
-        root.getChildren().add(ilAffichage);
-        
-        window.setTitle("Barry House");
+		imageView.setImage(new Image("/images/piece.png"));
+		imageView.setFitWidth(800);
+		imageView.setFitHeight(600);
+		root.getChildren().add(imageView);
+
+		Label pseudoAffichage = new Label();// gestion affichage pseudo
+		pseudoAffichage.setText(Main.getPseudo());
+		pseudoAffichage.setTranslateX(100);
+		pseudoAffichage.setTranslateY(12);
+		root.getChildren().add(pseudoAffichage);
+
+		Label positionAffichage = new Label();// gestion affichage position
+		positionAffichage.setText(Main.getPosition().getNom());
+		positionAffichage.setTranslateX(600);
+		positionAffichage.setTranslateY(12);
+		root.getChildren().add(positionAffichage);
+
+		Label nomMaisonAffichage = new Label();// gestion affichage nom maison
+		nomMaisonAffichage.setText(Main.getMaison().getNom());
+		nomMaisonAffichage.setTranslateX(370);
+		nomMaisonAffichage.setTranslateY(12);
+		root.getChildren().add(nomMaisonAffichage);
+
+		Label heureAffichage = new Label();// gestion affichage heure
+		heureAffichage.setText(String.valueOf(Main.getHeure()));
+		heureAffichage.setTranslateX(740);
+		heureAffichage.setTranslateY(50);
+		root.getChildren().add(heureAffichage);
+
+		Label temperatureAffichage = new Label();// gestion affichage temperature piece
+		temperatureAffichage.setText(String.valueOf(Main.getPosition().getTemperature()));
+		temperatureAffichage.setTranslateX(240);
+		temperatureAffichage.setTranslateY(50);
+		root.getChildren().add(temperatureAffichage);
+
+		Label ilAffichage = new Label();// gestion affichage intensitelumineuse piece
+		ilAffichage.setText(String.valueOf(Main.getPosition().getIntensiteLumineuse()));
+		ilAffichage.setTranslateX(600);
+		ilAffichage.setTranslateY(50);
+		root.getChildren().add(ilAffichage);
+		
+		/*LinkedList<Equipement> equip = Main.getPosition().getEquipements();
+	    Iterator<Equipement> it = equip.iterator();
+	    while(it.hasNext()){
+	    	Equipement actuel = it.next();
+	    	actuel.afficher();
+		}*/
+		
+		Volet a = new Volet("Volet");
+		root.getChildren().add(a.afficher());
+		TV c = new TV("TV");
+		root.getChildren().add(c.afficher());
+		Radiateur d = new Radiateur("radia");
+		root.getChildren().add(d.afficher());
+		PS5 e = new PS5("PS5");
+		root.getChildren().add(e.afficher());
+		Enceinte d1 = new Enceinte("Enceinte");
+		root.getChildren().add(d1.afficher());
+		Lumiere d2 = new Lumiere("lum");
+		root.getChildren().add(d2.afficher());
+		Cheminee d3 = new Cheminee("lum");
+		root.getChildren().add(d3.afficher());
+		Ventilateur b = new Ventilateur("vent");
+		root.getChildren().add(b.afficher());
+		Alexa d4 = new Alexa("Alexa");
+		root.getChildren().add(d4.afficher());
+
+
+		window.setTitle("Barry House");
 		window.setScene(scene);
 		window.show();
 	}

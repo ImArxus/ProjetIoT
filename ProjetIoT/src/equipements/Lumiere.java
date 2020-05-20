@@ -2,7 +2,10 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
+import main.Main;
 
 public class Lumiere extends Equipement implements Serializable {
 
@@ -89,6 +92,17 @@ public class Lumiere extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer d'intensité");
 		}
+	}
+
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		if (Main.getHeure() > 21 || Main.getHeure() < 6) {
+			imageView.setImage(new Image("/images/objets/equipements.Lumiere.png"));
+		} else {
+			imageView.setImage(new Image("/images/objets/equipements.Lumieres.desactive.png"));
+		}
+		imageView.setTranslateY(-120);
+		return imageView;
 	}
 
 }

@@ -67,5 +67,6 @@ public class Thermostat extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la température");
 		}
 	}
+	
 
 }

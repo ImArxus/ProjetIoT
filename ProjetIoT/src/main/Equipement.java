@@ -136,5 +136,11 @@ public class Equipement implements Serializable {
 			setEtatCourant(false);
 		}
 	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/objets/equipements."+ getNom() +".png"));
+        return imageView;
+	}
+
 
 }

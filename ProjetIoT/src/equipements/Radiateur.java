@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Radiateur extends Equipement implements Serializable {
@@ -66,6 +68,14 @@ public class Radiateur extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer le thermostat");
 		}
+	}
+	
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/objets/equipements.Radiateur.png"));
+        imageView.setTranslateY(110);
+        imageView.setTranslateX(240);
+        return imageView;
 	}
 
 }

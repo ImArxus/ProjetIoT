@@ -67,14 +67,12 @@ public class Volet extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer de position");
 		}
 	}
-	
-	public ImageView afficherVolet() {
+	@Override
+	public ImageView afficher() {
 		ImageView imageView = new ImageView();
         imageView.setImage(new Image("/images/objets/equipements.Volet.png"));
-        imageView.setLayoutX(350);
-        imageView.setLayoutY(80);
-        imageView.setFitWidth(600);
-        imageView.setFitHeight(600);
+        imageView.setTranslateY(70);
+        imageView.setTranslateX(370);
         return imageView;
 	}
 

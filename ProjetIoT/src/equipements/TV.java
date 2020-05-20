@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class TV extends Equipement implements Serializable {
@@ -102,6 +104,19 @@ public class TV extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
+	}
+
+	@Override
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		if (super.isEtatCourant()) {
+			imageView.setImage(new Image("/images/objets/equipements.TV.png"));
+		} else {
+			imageView.setImage(new Image("/images/objets/equipements.TV.desactive.png"));
+		}
+		imageView.setTranslateY(80);
+		imageView.setTranslateX(35);
+		return imageView;
 	}
 
 }
