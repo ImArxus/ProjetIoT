@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,8 +19,8 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="chargerBtn" layoutX="325.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="170.0" text="Charger ma maison" />
-      <Button fx:id="videBtn" layoutX="325.0" layoutY="400.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="170.0" text="Maison vide" />
-      <Button fx:id="barryBtn" layoutX="325.0" layoutY="350.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="170.0" text="Barry's House" />
+      <Button fx:id="chargerBtn" layoutX="325.0" layoutY="450.0" mnemonicParsing="false" onAction="#versMaisonChargee" prefHeight="30.0" prefWidth="170.0" text="Charger ma maison" />
+      <Button fx:id="videBtn" layoutX="325.0" layoutY="400.0" mnemonicParsing="false" onAction="#versMaisonVide" prefHeight="30.0" prefWidth="170.0" text="Maison vide" />
+      <Button fx:id="barryBtn" layoutX="325.0" layoutY="350.0" mnemonicParsing="false" onAction="#versMaisonBarry" prefHeight="30.0" prefWidth="170.0" text="Barry's House" />
    </children>
 </AnchorPane>
