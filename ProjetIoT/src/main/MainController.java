@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import pieces.Salon;
 
 public class MainController {
 
@@ -99,6 +100,8 @@ public class MainController {
 
 	public void versMaisonVide(ActionEvent event) {
 		//choixTxt.setText("Votre maison de rêve n'attend que vous !");
+		Main.setMaison(new Maison("my House", new Salon("Salon")));
+		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
 
@@ -137,7 +140,7 @@ public class MainController {
         root.getChildren().add(nomMaisonAffichage);
         
         Label heureAffichage= new Label();//gestion affichage heure
-        heureAffichage.setText(String.valueOf(Main.getHeure()));
+        heureAffichage.setText(String.valueOf(Main.getHeure())+ "h");
         heureAffichage.setTranslateX(740);
         heureAffichage.setTranslateY(50);
         root.getChildren().add(heureAffichage);
