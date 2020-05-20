@@ -25,6 +25,6 @@
          </font>
       </Label>
       <Button layoutX="315.0" layoutY="500.0" mnemonicParsing="false" onAction="#versCreation" prefHeight="30.0" prefWidth="170.0" text="Créer un compte" />
-      <Button layoutX="315.0" layoutY="542.0" mnemonicParsing="false" onAction="#versChoixMaison" prefHeight="30.0" prefWidth="170.0" text="Invité" />
+      <Button layoutX="315.0" layoutY="542.0" mnemonicParsing="false" onAction="#invite" prefHeight="30.0" prefWidth="170.0" text="Invité" />
    </children>
 </AnchorPane>
