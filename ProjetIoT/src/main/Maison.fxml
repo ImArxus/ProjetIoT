@@ -6,6 +6,6 @@
 
 <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <image>
-      <Image url="@images/vide.png" />
+      <Image url="@../../../../ProjetIoT/src/images/couleurs/BLUE.png" />
    </image>
 </ImageView>
