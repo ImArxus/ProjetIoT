@@ -1,9 +1,12 @@
 package main;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.util.LinkedList;
+>>>>>>> branch 'JavaFX' of https://github.com/ImArxus/ProjetIoT.git
 
-import equipements.Volet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pieces.Salon;
 
 public class MainController {
-	private static String pseudo;
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
@@ -64,11 +65,15 @@ public class MainController {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			Main.setPseudo(userTxt.getText());
-			// loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
+	}
+
+	public void invite(ActionEvent event) {
+		Main.setPseudo("guest");
+		versChoixMaison(event);
 	}
 
 	public void versChoixMaison(ActionEvent event) {
@@ -96,18 +101,18 @@ public class MainController {
 	}
 
 	public void versMaisonBarry(ActionEvent event) {
-		// choixTxt.setText("Bienvenue dans la maison de Barry !");
-		Main.setMaison(BarryHouse.creerMaison());
-		Main.setPosition(Main.getMaison().getPieces().get(1));
 		creerMaison(event);
 	}
 
 	public void versMaisonVide(ActionEvent event) {
-		// choixTxt.setText("Votre maison de rêve n'attend que vous !");
-		Main.setMaison(new Maison("my House", new Salon("Salon")));
+		// Donne un titre à la fenêtre avec le pseudo
+		((Stage) ((Node) event.getSource()).getScene().getWindow()).setTitle("Maison de " + Main.getPseudo());
+
+		Main.setMaison(new Maison("Maison de " + Main.getPseudo(), new Salon("Salon"))); // Crée la maison avec un salon
 		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
+
 
 	public void versMaisonChargee(ActionEvent event) {//BUUUUUG
 		Main.setMaison(Sauvegarde.chargerMAISON());
@@ -120,83 +125,16 @@ public class MainController {
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
-		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {//affichage piece
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/cuisine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image("/images/piece.png"));
+		imageView.setFitWidth(800);
+		imageView.setFitHeight(600);
+
+		root.getChildren().add(imageView);
+		LinkedList<Label> liste = affichageBande(event);
+		for (int i = 0; i < liste.size(); i++) {
+			root.getChildren().add(liste.get(i));
 		}
-		else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/escalier.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
-		else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/jardin.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
-		else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piscine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
-		else {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piece.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
-
-		Label pseudoAffichage = new Label();// gestion affichage pseudo
-		pseudoAffichage.setText(Main.getPseudo());
-		pseudoAffichage.setTranslateX(100);
-		pseudoAffichage.setTranslateY(12);
-		root.getChildren().add(pseudoAffichage);
-
-		Label positionAffichage = new Label();// gestion affichage position
-		positionAffichage.setText(Main.getPosition().getNom());
-		positionAffichage.setTranslateX(600);
-		positionAffichage.setTranslateY(12);
-		root.getChildren().add(positionAffichage);
-
-		Label nomMaisonAffichage = new Label();// gestion affichage nom maison
-		nomMaisonAffichage.setText(Main.getMaison().getNom());
-		nomMaisonAffichage.setTranslateX(370);
-		nomMaisonAffichage.setTranslateY(12);
-		root.getChildren().add(nomMaisonAffichage);
-
-		Label heureAffichage = new Label();// gestion affichage heure
-		heureAffichage.setText(String.valueOf(Main.getHeure()) + "h");
-		heureAffichage.setTranslateX(740);
-		heureAffichage.setTranslateY(50);
-		root.getChildren().add(heureAffichage);
-
-		Label temperatureAffichage = new Label();// gestion affichage temperature piece
-		temperatureAffichage.setText(String.valueOf(Main.getPosition().getTemperature()));
-		temperatureAffichage.setTranslateX(240);
-		temperatureAffichage.setTranslateY(50);
-		root.getChildren().add(temperatureAffichage);
-
-		Label ilAffichage = new Label();// gestion affichage intensitelumineuse piece
-		ilAffichage.setText(String.valueOf(Main.getPosition().getIntensiteLumineuse()));
-		ilAffichage.setTranslateX(600);
-		ilAffichage.setTranslateY(50);
-		root.getChildren().add(ilAffichage);
-		
-		List<Equipement> equip =Main.getPosition().getEquipements();//affichage objets
-		for(int i=0;i<equip.size();i++) {
-			root.getChildren().add(equip.get(i).getImageView());
-		}
-
 		window.setTitle("Barry House");
 		window.setScene(scene);
 		window.show();
@@ -217,6 +155,50 @@ public class MainController {
 		} else {
 			creationTxt.setText("Identifiant déjà existant");
 		}
+	}
+
+	public LinkedList<Label> affichageBande(ActionEvent event) {
+		LinkedList<Label> liste = new LinkedList<Label>();
+
+		Label lbl1 = new Label();
+		lbl1.setText(Main.getPseudo());
+		lbl1.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl1.setLayoutX(85);
+		lbl1.setLayoutY(10);
+		Label lbl2 = new Label();
+		lbl2.setText(Main.getMaison().getNom());
+		lbl2.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl2.setLayoutX(310);
+		lbl2.setLayoutY(10);
+		Label lbl3 = new Label();
+		lbl3.setText(Main.getPosition().getNom());
+		lbl3.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl3.setLayoutX(570);
+		lbl3.setLayoutY(10);
+		Label lbl4 = new Label();
+		lbl4.setText("" + Main.getPosition().getTemperature());
+		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl4.setLayoutX(205);
+		lbl4.setLayoutY(47);
+		Label lbl5 = new Label();
+		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse());
+		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl5.setLayoutX(570);
+		lbl5.setLayoutY(47);
+		Label lbl6 = new Label();
+		lbl6.setText("" + Main.getHeure() + "h");
+		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl6.setLayoutX(700);
+		lbl6.setLayoutY(47);
+
+		liste.add(lbl1);
+		liste.add(lbl2);
+		liste.add(lbl3);
+		liste.add(lbl4);
+		liste.add(lbl5);
+		liste.add(lbl6);
+
+		return liste;
 	}
 
 }

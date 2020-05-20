@@ -286,9 +286,11 @@ public class Main extends Application implements Serializable {
 	public static Maison getMaison() {
 		return maison;
 	}
-	public static void setMaison(Maison m) {
-		maison=m;
+	
+	public static void setMaison(Maison maison) {
+		Main.maison = maison;
 	}
+
 	public static String getPseudo() {
 		return pseudo;
 	}
