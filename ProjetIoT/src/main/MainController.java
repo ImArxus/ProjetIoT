@@ -122,23 +122,41 @@ public class MainController {
         imageView.setFitHeight(600);
         root.getChildren().add(imageView);
         
-        Label pseudoAffichage= new Label();//gestion pseudo
+        Label pseudoAffichage= new Label();//gestion affichage pseudo
         pseudoAffichage.setText(Main.getPseudo());
         pseudoAffichage.setTranslateX(100);
         pseudoAffichage.setTranslateY(12);
         root.getChildren().add(pseudoAffichage);
         
-        Label positionAffichage= new Label();//gestion position
+        Label positionAffichage= new Label();//gestion affichage position
         positionAffichage.setText(Main.getPosition().getNom());
         positionAffichage.setTranslateX(600);
         positionAffichage.setTranslateY(12);
         root.getChildren().add(positionAffichage);
         
-        Label nomMaisonAffichage= new Label();//gestion nom maison
+        Label nomMaisonAffichage= new Label();//gestion affichage nom maison
         nomMaisonAffichage.setText(Main.getMaison().getNom());
         nomMaisonAffichage.setTranslateX(370);
         nomMaisonAffichage.setTranslateY(12);
         root.getChildren().add(nomMaisonAffichage);
+        
+        Label heureAffichage= new Label();//gestion affichage heure
+        heureAffichage.setText(String.valueOf(Main.getHeure()));
+        heureAffichage.setTranslateX(740);
+        heureAffichage.setTranslateY(50);
+        root.getChildren().add(heureAffichage);
+        
+        Label temperatureAffichage= new Label();//gestion affichage temperature piece
+        temperatureAffichage.setText(String.valueOf(Main.getPosition().getTemperature()));
+        temperatureAffichage.setTranslateX(240);
+        temperatureAffichage.setTranslateY(50);
+        root.getChildren().add(temperatureAffichage);
+        
+        Label ilAffichage= new Label();//gestion affichage intensitelumineuse piece
+        ilAffichage.setText(String.valueOf(Main.getPosition().getIntensiteLumineuse()));
+        ilAffichage.setTranslateX(600);
+        ilAffichage.setTranslateY(50);
+        root.getChildren().add(ilAffichage);
         
         window.setTitle("Barry House");
 		window.setScene(scene);
