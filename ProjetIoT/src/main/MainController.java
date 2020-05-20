@@ -1,10 +1,6 @@
 package main;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-
-import com.sun.javafx.scene.control.LabeledText;
 
 import equipements.Volet;
 import javafx.event.ActionEvent;
@@ -67,72 +63,11 @@ public class MainController {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			Main.setPseudo(userTxt.getText());
-			loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
+			//loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
-	}
-
-	public void versMaisonBarry(ActionEvent event) {
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Pane root = (Pane) getRoot("/main/Maison.fxml");
-		Scene scene = new Scene(root);
-		Volet a = new Volet("Volet");
-
-		
-		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/piece.png"));
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
-
-        root.getChildren().add(imageView);
-        root.getChildren().add(a.afficherVolet());
-
-        
-		window.setTitle("Barry's House");
-		window.setScene(scene);
-		window.show();
-	}
-
-	public void versMaisonVide(ActionEvent event) {
-		choixTxt.setText("Votre maison de rêve n'attend que vous !");
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Pane root = (Pane) getRoot("/main/Maison.fxml");
-		Scene scene = new Scene(root);
-		
-		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/piece.png"));
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
-
-        root.getChildren().add(imageView);
-        
-		window.setTitle("Maison vide");
-		window.setScene(scene);
-		window.show();
-	}
-
-	public void versMaisonChargee(ActionEvent event) {
-		choixTxt.setText("Votre maison est chargée !");
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Pane root = (Pane) getRoot("/main/Maison.fxml");
-		Scene scene = new Scene(root);
-
-		
-		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/piece.png"));
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(600);
-        
-        
-        root.getChildren().add(imageView);
-        
-		window.setTitle("Maison de " + Main.getPseudo());
-		window.setScene(scene);
-		window.show();
-		
-		
 	}
 
 	public void versChoixMaison(ActionEvent event) {
@@ -159,7 +94,56 @@ public class MainController {
 		window.show();
 	}
 	
+	public void versMaisonBarry(ActionEvent event) {
+		//choixTxt.setText("Bienvenue dans la maison de Barry !");
+		Main.setMaison(BarryHouse.creerMaison());
+		Main.setPosition(Main.getMaison().getPieces().get(0));
+		creerMaison(event);
+	}
 
+	public void versMaisonVide(ActionEvent event) {
+		//choixTxt.setText("Votre maison de rêve n'attend que vous !");
+		creerMaison(event);
+	}
+
+	public void versMaisonChargee(ActionEvent event) {
+		//choixTxt.setText("Votre maison est chargée !");
+		creerMaison(event);
+	}
+	
+	public void creerMaison(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Pane root = (Pane) getRoot("/main/Maison.fxml");
+		Scene scene = new Scene(root);
+		
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/piece.png"));
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(600);
+        root.getChildren().add(imageView);
+        
+        Label pseudoAffichage= new Label();//gestion pseudo
+        pseudoAffichage.setText(Main.getPseudo());
+        pseudoAffichage.setTranslateX(100);
+        pseudoAffichage.setTranslateY(12);
+        root.getChildren().add(pseudoAffichage);
+        
+        Label positionAffichage= new Label();//gestion position
+        positionAffichage.setText(Main.getPosition().getNom());
+        positionAffichage.setTranslateX(600);
+        positionAffichage.setTranslateY(12);
+        root.getChildren().add(positionAffichage);
+        
+        Label nomMaisonAffichage= new Label();//gestion nom maison
+        nomMaisonAffichage.setText(Main.getMaison().getNom());
+        nomMaisonAffichage.setTranslateX(370);
+        nomMaisonAffichage.setTranslateY(12);
+        root.getChildren().add(nomMaisonAffichage);
+        
+        window.setTitle("Barry House");
+		window.setScene(scene);
+		window.show();
+	}
 
 	public void creerCompte() {
 		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
