@@ -2,10 +2,15 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
 
-<ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <image>
-      <Image url="@../../../../ProjetIoT/src/images/couleurs/BLUE.png" />
-   </image>
-</ImageView>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/couleurs/WHITE.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

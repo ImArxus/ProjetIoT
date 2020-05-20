@@ -6,10 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainController {
@@ -42,9 +46,9 @@ public class MainController {
 	@FXML
 	private Label choixTxt;
 
-	public Scene choixScene(String url) {
+	public Parent getRoot(String url) {
 		try {
-			return new Scene(FXMLLoader.load(getClass().getResource(url)));
+			return FXMLLoader.load(getClass().getResource(url));
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
@@ -63,6 +67,21 @@ public class MainController {
 
 	public void versMaisonBarry(ActionEvent event) {
 		choixTxt.setText("Bienvenue dans la maison de Barry !");
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Pane root = (Pane) getRoot("/main/Maison.fxml");
+		Scene scene = new Scene(root);
+		
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/vide.png"));
+        imageView.setLayoutY(100);
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(500);
+
+        root.getChildren().add(imageView);
+        
+		window.setTitle("Barry's House");
+		window.setScene(scene);
+		window.show();
 	}
 
 	public void versMaisonVide(ActionEvent event) {
@@ -75,7 +94,7 @@ public class MainController {
 
 	public void versChoixMaison(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Scene scene = choixScene("/main/ChoixMaison.fxml");
+		Scene scene = new Scene(getRoot("/main/ChoixMaison.fxml"));
 		window.setTitle("Choix Maison");
 		window.setScene(scene);
 		window.show();
@@ -83,7 +102,7 @@ public class MainController {
 
 	public void versCreation(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Scene scene = choixScene("/main/CreationCompte.fxml");
+		Scene scene = new Scene(getRoot("/main/CreationCompte.fxml"));
 		window.setTitle("Créer un compte");
 		window.setScene(scene);
 		window.show();
@@ -91,7 +110,7 @@ public class MainController {
 
 	public void versLogin(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		Scene scene = choixScene("/main/Login.fxml");
+		Scene scene = new Scene(getRoot("/main/Login.fxml"));
 		window.setTitle("Login");
 		window.setScene(scene);
 		window.show();
