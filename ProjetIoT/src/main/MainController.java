@@ -185,15 +185,9 @@ public class MainController {
 		ilAffichage.setTranslateX(600);
 		ilAffichage.setTranslateY(50);
 		root.getChildren().add(ilAffichage);
+	
 		
-		/*LinkedList<Equipement> equip = Main.getPosition().getEquipements();
-	    Iterator<Equipement> it = equip.iterator();
-	    while(it.hasNext()){
-	    	Equipement actuel = it.next();
-	    	actuel.afficher();
-		}*/
-		
-		Volet a = new Volet("Volet");
+		/*Volet a = new Volet("Volet");
 		root.getChildren().add(a.afficher());
 		TV c = new TV("TV");
 		root.getChildren().add(c.afficher());
@@ -210,12 +204,9 @@ public class MainController {
 		Ventilateur b = new Ventilateur("vent");
 		root.getChildren().add(b.afficher());
 		Alexa d4 = new Alexa("Alexa");
-		root.getChildren().add(d4.afficher());
+		root.getChildren().add(d4.afficher());*/
 
 
-
-
-		root.getChildren().add(imageView);
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
