@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Volet extends Equipement implements Serializable {
@@ -64,6 +66,16 @@ public class Volet extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer de position");
 		}
+	}
+	
+	public ImageView afficherVolet() {
+		ImageView imageView = new ImageView();
+        imageView.setImage(new Image("/images/objets/equipements.Volet.png"));
+        imageView.setLayoutX(350);
+        imageView.setLayoutY(80);
+        imageView.setFitWidth(600);
+        imageView.setFitHeight(600);
+        return imageView;
 	}
 
 }

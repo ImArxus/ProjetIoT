@@ -290,6 +290,10 @@ public class Main extends Application implements Serializable {
 	public static String getPseudo() {
 		return pseudo;
 	}
+	
+	public static void setPseudo(String pseudo) {
+		Main.pseudo = pseudo;
+	}
 
 	public static Piece getPosition() {
 		return position;
