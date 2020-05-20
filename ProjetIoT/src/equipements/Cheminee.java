@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Cheminee extends Equipement implements Serializable {
@@ -67,5 +69,9 @@ public class Cheminee extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
 		}
 	}
-
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Cheminee.png"));
+		return i0;
+	}
 }

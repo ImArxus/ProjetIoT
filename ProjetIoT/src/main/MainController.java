@@ -1,6 +1,7 @@
 package main;
 
 import java.io.IOException;
+import java.util.List;
 
 import equipements.Volet;
 import javafx.event.ActionEvent;
@@ -108,8 +109,9 @@ public class MainController {
 		creerMaison(event);
 	}
 
-	public void versMaisonChargee(ActionEvent event) {
-		// choixTxt.setText("Votre maison est chargée !");
+	public void versMaisonChargee(ActionEvent event) {//BUUUUUG
+		Main.setMaison(Sauvegarde.chargerMAISON());
+		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
 
@@ -155,7 +157,7 @@ public class MainController {
 		}
 
 		Label pseudoAffichage = new Label();// gestion affichage pseudo
-		pseudoAffichage.setText(Main.getPosition().getClass().getName());
+		pseudoAffichage.setText(Main.getPseudo());
 		pseudoAffichage.setTranslateX(100);
 		pseudoAffichage.setTranslateY(12);
 		root.getChildren().add(pseudoAffichage);
@@ -189,6 +191,11 @@ public class MainController {
 		ilAffichage.setTranslateX(600);
 		ilAffichage.setTranslateY(50);
 		root.getChildren().add(ilAffichage);
+		
+		List<Equipement> equip =Main.getPosition().getEquipements();//affichage objets
+		for(int i=0;i<equip.size();i++) {
+			root.getChildren().add(equip.get(i).getImageView());
+		}
 
 		window.setTitle("Barry House");
 		window.setScene(scene);

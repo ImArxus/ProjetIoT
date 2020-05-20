@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Balance extends Equipement implements Serializable {
@@ -62,5 +64,9 @@ public class Balance extends Equipement implements Serializable {
 	public void setListePoids(List<Integer> listePoids) {
 		this.listePoids = listePoids;
 	}
-
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Balance.png"));
+		return i0;
+	}
 }

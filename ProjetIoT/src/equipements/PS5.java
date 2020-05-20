@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class PS5 extends Equipement implements Serializable {
@@ -60,5 +62,10 @@ public class PS5 extends Equipement implements Serializable {
 
 	public void setJeux(Map<String, String> jeux) {
 		this.jeux = jeux;
+	}
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.PS5.png"));
+		return i0;
 	}
 }

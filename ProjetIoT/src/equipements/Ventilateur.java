@@ -77,5 +77,9 @@ public class Ventilateur extends Equipement implements Serializable {
         imageView.setLayoutX(30);
         return imageView;
 	}
-
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Ventilateur.png"));
+		return i0;
+	}
 }

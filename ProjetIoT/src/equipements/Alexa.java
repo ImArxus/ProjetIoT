@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 import main.Main;
 import main.Piece;
@@ -79,5 +81,11 @@ public class Alexa extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas l'utiliser");
 		}
 		s.close();
+	}
+
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Alexa.png"));
+		return i0;
 	}
 }

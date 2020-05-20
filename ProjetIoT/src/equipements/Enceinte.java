@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Enceinte extends Equipement implements Serializable {
@@ -97,6 +99,11 @@ public class Enceinte extends Equipement implements Serializable {
 
 	public void setMusiques(Map<String, String> musiques) {
 		this.musiques = musiques;
+	}
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Enceinte.png"));
+		return i0;
 	}
 
 }

@@ -5,8 +5,11 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class Equipement implements Serializable {
+
+public abstract class Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3L;
 	protected boolean etatCourant;
@@ -134,5 +137,5 @@ public class Equipement implements Serializable {
 			setEtatCourant(false);
 		}
 	}
-
+	abstract public ImageView getImageView();
 }
