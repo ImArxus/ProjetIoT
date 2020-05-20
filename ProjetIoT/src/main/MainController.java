@@ -96,6 +96,8 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
+	
+
 
 	public void creerCompte() {
 		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
