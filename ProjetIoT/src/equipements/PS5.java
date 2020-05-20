@@ -63,12 +63,12 @@ public class PS5 extends Equipement implements Serializable {
 	public void setJeux(Map<String, String> jeux) {
 		this.jeux = jeux;
 	}
-	
+
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements.PS5.png"));
-        imageView.setTranslateY(90);
-        imageView.setTranslateX(40);
-        return imageView;
+		imageView.setImage(new Image("/images/objets/equipements.PS5.png"));
+		imageView.setTranslateY(90);
+		imageView.setTranslateX(40);
+		return imageView;
 	}
 }

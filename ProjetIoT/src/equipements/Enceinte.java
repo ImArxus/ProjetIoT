@@ -100,13 +100,14 @@ public class Enceinte extends Equipement implements Serializable {
 	public void setMusiques(Map<String, String> musiques) {
 		this.musiques = musiques;
 	}
+
 	@Override
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements.Enceinte.png"));
-        imageView.setTranslateY(133);
-        imageView.setTranslateX(140);
-        return imageView;
+		imageView.setImage(new Image("/images/objets/equipements.Enceinte.png"));
+		imageView.setTranslateY(133);
+		imageView.setTranslateX(140);
+		return imageView;
 	}
 
 }

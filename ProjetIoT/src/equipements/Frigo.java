@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Frigo extends Equipement implements Serializable {
@@ -95,5 +97,9 @@ public class Frigo extends Equipement implements Serializable {
 			test.put(a, b);
 		}
 	}
-
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Frigo.png"));
+		return i0;
+	}
 }

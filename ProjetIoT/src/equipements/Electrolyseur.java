@@ -2,6 +2,8 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Electrolyseur extends Equipement implements Serializable {
@@ -92,5 +94,9 @@ public class Electrolyseur extends Equipement implements Serializable {
 					"L'électrolyseur de " + this.getNom() + " est éteint, on ne peut pas changer de température");
 		}
 	}
-
+	public ImageView getImageView() {
+		ImageView i0 = new ImageView();
+		i0.setImage(new Image("/images/objets/equipements.Electrolyseur.png"));
+		return i0;
+	}
 }
