@@ -2,6 +2,8 @@ package main;
 
 import java.io.IOException;
 
+import com.sun.javafx.scene.control.LabeledText;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainController {
+	private static String pseudo;
+
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
@@ -66,7 +71,6 @@ public class MainController {
 	}
 
 	public void versMaisonBarry(ActionEvent event) {
-		choixTxt.setText("Bienvenue dans la maison de Barry !");
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
@@ -76,8 +80,9 @@ public class MainController {
         imageView.setLayoutY(100);
         imageView.setFitWidth(800);
         imageView.setFitHeight(500);
-
+        
         root.getChildren().add(imageView);
+
         
 		window.setTitle("Barry's House");
 		window.setScene(scene);
