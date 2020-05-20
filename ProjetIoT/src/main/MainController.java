@@ -1,12 +1,8 @@
 package main;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.LinkedList;
->>>>>>> branch 'JavaFX' of https://github.com/ImArxus/ProjetIoT.git
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,6 +97,8 @@ public class MainController {
 	}
 
 	public void versMaisonBarry(ActionEvent event) {
+		Main.setMaison(BarryHouse.creerMaison()); // Crée la maison avec un salon
+		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
 
@@ -134,6 +132,11 @@ public class MainController {
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
+		}
+		
+		LinkedList<Equipement> equip = Main.getPosition().getEquipements();//afficher equipements
+		for (int i = 0; i < liste.size(); i++) {
+			root.getChildren().add(equip.get(i).getImageView());
 		}
 		window.setTitle("Barry House");
 		window.setScene(scene);
