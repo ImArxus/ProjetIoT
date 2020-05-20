@@ -35,6 +35,12 @@ public class MainController {
 	private TextField newUserTxt;
 	@FXML
 	private PasswordField newPasswordTxt;
+	
+	/**
+	 * Champs page Choix maison
+	 */
+	@FXML
+	private Label choixTxt;
 
 	public Scene choixScene(String url) {
 		try {
@@ -55,7 +61,7 @@ public class MainController {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
 	}
-	
+
 	public void versChoixMaison(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Scene scene = choixScene("/main/ChoixMaison.fxml");
