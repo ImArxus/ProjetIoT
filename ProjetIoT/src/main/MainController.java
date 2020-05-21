@@ -71,8 +71,6 @@ public class MainController {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			Main.setPseudo(userTxt.getText());
-			// loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
-
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
