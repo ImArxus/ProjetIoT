@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 import equipements.Alarme;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import pieces.Buanderie;
 import pieces.Bureau;
 import pieces.Chambre;
