@@ -28,9 +28,19 @@ public class Maison implements Serializable {
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
 	}
+	
+	public void ajouterPieceFX(Piece p) {
+		getPieces().add(p);
+		sontAdjacents(p, Main.getPosition());
+		Main.setPosition(p);
+	}
 
 	public void suppressionPiece(Piece p) {
-		getPieces().remove(p);
+		if (Main.getMaison().getPieces().size() > 1) {
+			getPieces().remove(p);
+		} else {
+			System.err.println("Suppression impossible");
+		}
 	}
 
 	public void sontAdjacents(Piece piece1, Piece piece2) {

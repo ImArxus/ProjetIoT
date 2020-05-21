@@ -227,7 +227,11 @@ public class MainController {
 					String choix = choixDispo[newValue.intValue()];
 					switch (choix) {
 					case "Créer une pièce":
-						System.out.println("Créer une pièce");
+						Stage window1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						Scene scene1 = new Scene(getRoot("/main/CreationPiece.fxml"));
+						window1.setTitle("Créer une pièce");
+						window1.setScene(scene1);
+						window1.show();
 						break;
 					case "Supprimer une pièce":
 						System.out.println("Supprimer une pièce");
