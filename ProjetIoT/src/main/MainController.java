@@ -1,20 +1,6 @@
 package main;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-
-import equipements.Alexa;
-import equipements.Cheminee;
-import equipements.Enceinte;
-import equipements.Lumiere;
-import equipements.PS5;
-import equipements.Radiateur;
-import equipements.TV;
-import equipements.Ventilateur;
-import equipements.Volet;
-
-import java.util.List;
 import java.util.LinkedList;
 
 import javafx.event.ActionEvent;
@@ -33,9 +19,6 @@ import javafx.stage.Stage;
 import pieces.Salon;
 
 public class MainController {
-
-	private static String pseudo;
-
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 
@@ -116,9 +99,7 @@ public class MainController {
 	}
 
 	public void versMaisonBarry(ActionEvent event) {
-		// choixTxt.setText("Bienvenue dans la maison de Barry !");
 		Main.setMaison(BarryHouse.creerMaison());
-
 		Main.setPosition(Main.getMaison().getPieces().get(0));
 		creerMaison(event);
 	}
@@ -132,10 +113,15 @@ public class MainController {
 		creerMaison(event);
 	}
 
-	public void versMaisonChargee(ActionEvent event) {//BUUUUUG
-		Main.setMaison(Sauvegarde.chargerMAISON());
-		Main.setPosition(Main.getMaison().getPieces().get(0));
-		creerMaison(event);
+	public void versMaisonChargee(ActionEvent event) {
+		Maison maison = Sauvegarde.chargerMaison();
+		Main.setMaison(maison);
+		if (maison == null) {
+			choixTxt.setText("Vous n'avez pas de maison à charger...");
+		} else {
+			Main.setPosition(Main.getMaison().getPieces().get(0));
+			creerMaison(event);
+		}
 	}
 
 	public void creerMaison(ActionEvent event) {
@@ -147,17 +133,19 @@ public class MainController {
 		imageView.setImage(new Image("/images/piece.png"));
 		imageView.setFitWidth(800);
 		imageView.setFitHeight(600);
-		
+
 		root.getChildren().add(imageView);
 
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
 		}
-		
-		LinkedList<Equipement> equip = Main.getPosition().getEquipements();//afficher equipements
-		for (int i = 0; i < liste.size(); i++) {
-			root.getChildren().add(equip.get(i).afficher());
+
+		LinkedList<Equipement> equip = Main.getPosition().getEquipements(); // Afficher equipements
+		if (!equip.isEmpty()) {
+			for (int i = 0; i < liste.size(); i++) {
+				root.getChildren().add(equip.get(i).afficher());
+			}
 		}
 
 		window.setTitle("Barry House");

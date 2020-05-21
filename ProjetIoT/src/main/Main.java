@@ -19,11 +19,11 @@ public class Main extends Application implements Serializable {
 	private static final long serialVersionUID = -5850588170235124346L;
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		Main.chargerCompte();
-		
+
 		launch(args); // Lancement actions JavaFX
-		
+
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.picture(0.5, 0.5, "images/chargement.png");
 
@@ -286,7 +286,7 @@ public class Main extends Application implements Serializable {
 	public static Maison getMaison() {
 		return maison;
 	}
-	
+
 	public static void setMaison(Maison maison) {
 		Main.maison = maison;
 	}
@@ -294,7 +294,7 @@ public class Main extends Application implements Serializable {
 	public static String getPseudo() {
 		return pseudo;
 	}
-	
+
 	public static void setPseudo(String pseudo) {
 		Main.pseudo = pseudo;
 	}
@@ -485,7 +485,7 @@ public class Main extends Application implements Serializable {
 				System.out.println(maison.toString());
 				maisonChoisie = true;
 			} else if (requete == 3) {
-				maison = Sauvegarde.chargerMAISON();
+				maison = Sauvegarde.chargerMaison();
 				if (maison != null) {
 					maisonChoisie = true;
 				}
@@ -576,7 +576,7 @@ public class Main extends Application implements Serializable {
 	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
 		intensiteLumineuseNaturelle = newIntensite;
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// https://www.youtube.com/watch?v=cgv63JD7pfc

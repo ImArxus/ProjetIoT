@@ -38,9 +38,9 @@ public class Sauvegarde implements Serializable {
 			ObjectOutputStream p = new ObjectOutputStream(ostream);
 
 			/* Create a tree with three levels. */
-			ListeUtilisateurs ListeAdmin = Main.getListeUtilisateur();
+			ListeUtilisateurs ListeUser = Main.getListeUtilisateur();
 
-			p.writeObject(ListeAdmin); // Write the tree to the stream.
+			p.writeObject(ListeUser); // Write the tree to the stream.
 			p.flush();
 			ostream.close(); // close the file.
 
@@ -56,15 +56,15 @@ public class Sauvegarde implements Serializable {
 			ObjectInputStream q = new ObjectInputStream(istream);
 
 			/* Read a tree object, and all the subtrees */
-			ListeUtilisateurs ListeAdmin = (ListeUtilisateurs) q.readObject();
+			ListeUtilisateurs ListeUser = (ListeUtilisateurs) q.readObject();
 			q.close();
-			return ListeAdmin;
+			return ListeUser;
 		} catch (Exception ex) {
 			return null;
 		}
 	}
 
-	public static Maison chargerMAISON() {
+	public static Maison chargerMaison() {
 		try {
 			FileInputStream istream = new FileInputStream("Maison de " + Main.getPseudo());
 			ObjectInputStream q = new ObjectInputStream(istream);
