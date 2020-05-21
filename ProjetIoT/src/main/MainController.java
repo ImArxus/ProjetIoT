@@ -153,6 +153,7 @@ public class MainController {
 			imageView.setImage(new Image("/images/cuisine.png"));
 			imageView.setFitWidth(800);
 			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
 		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
 			ImageView imageView = new ImageView();
 			imageView.setImage(new Image("/images/escalier.png"));
