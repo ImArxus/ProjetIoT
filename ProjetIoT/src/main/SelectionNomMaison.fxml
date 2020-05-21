@@ -15,7 +15,7 @@
             <Image url="@../images/chargement.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nameHouseTxt" layoutX="275.0" layoutY="350.0" prefHeight="30.0" prefWidth="250.0" promptText="nom Maison" />
+      <TextField fx:id="nameHouseTxt" layoutX="275.0" layoutY="350.0" prefHeight="30.0" prefWidth="250.0" promptText="Nouveau nom de maison" />
       <Label fx:id="loginTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="245.0" prefHeight="93.0" prefWidth="600.0" text="Veuillez choisir le nom de votre maison" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="26.0" />

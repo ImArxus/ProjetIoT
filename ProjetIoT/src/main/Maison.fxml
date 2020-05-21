@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/couleurs/WHITE.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="427.0" layoutY="8.0" mnemonicParsing="false" onAction="#versSelectionNomMaison" text="changer">
+      <Button layoutX="200.0" layoutY="37.0" mnemonicParsing="false" onAction="#versSelectionNomMaison" prefHeight="22.0" prefWidth="100.0" text="Changer nom">
          <font>
-            <Font size="8.0" />
-         </font>
-      </Button>
-      <Button layoutX="731.0" layoutY="7.0" mnemonicParsing="false" onAction="#versSelectionPiece" text="Se déplacer">
+            <Font size="12.0" />
+         </font></Button>
+      <Button layoutX="506.0" layoutY="37.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="100.0" text="Se déplacer">
          <font>
-            <Font size="9.0" />
-         </font>
-      </Button>
+            <Font size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

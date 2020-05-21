@@ -3,6 +3,9 @@ package main;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import com.sun.javafx.tk.FontLoader;
+import com.sun.javafx.tk.Toolkit;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pieces.Salon;
 
+@SuppressWarnings("restriction")
 public class MainController {
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
@@ -238,37 +242,98 @@ public class MainController {
 
 	public LinkedList<Label> affichageBande(ActionEvent event) {
 		LinkedList<Label> liste = new LinkedList<Label>();
+		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+		double prochainLabel = 4; // LayoutX où insérer le prochain label
 
+		Label pseudo = new Label();
+		pseudo.setText("Pseudo :");
+		pseudo.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		pseudo.setUnderline(true);
+		pseudo.setLayoutX(prochainLabel);
+		pseudo.setLayoutY(10);
+		prochainLabel = prochainLabel + 95;
 		Label lbl1 = new Label();
 		lbl1.setText(Main.getPseudo());
 		lbl1.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl1.setLayoutX(85);
+		lbl1.setLayoutX(prochainLabel);
 		lbl1.setLayoutY(10);
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl1.getText(), lbl1.getFont()) + 80;
+
+		Label maison = new Label();
+		maison.setText("Maison :");
+		maison.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		maison.setUnderline(true);
+		maison.setLayoutX(prochainLabel);
+		maison.setLayoutY(10);
+		prochainLabel = prochainLabel + 91;
 		Label lbl2 = new Label();
 		lbl2.setText(Main.getMaison().getNom());
 		lbl2.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl2.setLayoutX(310);
+		lbl2.setLayoutX(prochainLabel);
 		lbl2.setLayoutY(10);
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl2.getText(), lbl2.getFont()) + 120;
+
+		Label position = new Label();
+		position.setText("Position :");
+		position.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		position.setUnderline(true);
+		position.setLayoutX(prochainLabel);
+		position.setLayoutY(10);
+		prochainLabel = prochainLabel + 102;
 		Label lbl3 = new Label();
 		lbl3.setText(Main.getPosition().getNom());
 		lbl3.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl3.setLayoutX(570);
+		lbl3.setLayoutX(prochainLabel);
 		lbl3.setLayoutY(10);
+		prochainLabel = 4; // Reviens à la ligne
+
+		Label temperature = new Label();
+		temperature.setText("Température :");
+		temperature.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		temperature.setUnderline(true);
+		temperature.setLayoutX(prochainLabel);
+		temperature.setLayoutY(60);
+		prochainLabel = prochainLabel + 144;
 		Label lbl4 = new Label();
-		lbl4.setText("" + Main.getPosition().getTemperature());
+		lbl4.setText("" + Main.getPosition().getTemperature() + "°C");
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl4.setLayoutX(205);
-		lbl4.setLayoutY(47);
+		lbl4.setLayoutX(prochainLabel);
+		lbl4.setLayoutY(60);
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 160;
+
+		Label luminosite = new Label();
+		luminosite.setText("Luminosité :");
+		luminosite.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		luminosite.setUnderline(true);
+		luminosite.setLayoutX(prochainLabel);
+		luminosite.setLayoutY(60);
+		prochainLabel = prochainLabel + 130;
 		Label lbl5 = new Label();
-		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse());
+		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl5.setLayoutX(570);
-		lbl5.setLayoutY(47);
+		lbl5.setLayoutX(prochainLabel);
+		lbl5.setLayoutY(60);
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 160;
+
+		Label heure = new Label();
+		heure.setText("Heure :");
+		heure.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		heure.setUnderline(true);
+		heure.setLayoutX(prochainLabel);
+		heure.setLayoutY(60);
+		prochainLabel = prochainLabel + 77;
 		Label lbl6 = new Label();
 		lbl6.setText("" + Main.getHeure() + "h");
 		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl6.setLayoutX(700);
-		lbl6.setLayoutY(47);
+		lbl6.setLayoutX(prochainLabel);
+		lbl6.setLayoutY(60);
+
+		liste.add(pseudo);
+		liste.add(maison);
+		liste.add(position);
+		liste.add(temperature);
+		liste.add(luminosite);
+		liste.add(heure);
 
 		liste.add(lbl1);
 		liste.add(lbl2);
