@@ -150,63 +150,6 @@ public class MainController {
 		
 		root.getChildren().add(imageView);
 
-		Label pseudoAffichage = new Label();// gestion affichage pseudo
-		pseudoAffichage.setText(Main.getPseudo());
-		pseudoAffichage.setTranslateX(100);
-		pseudoAffichage.setTranslateY(12);
-		root.getChildren().add(pseudoAffichage);
-
-		Label positionAffichage = new Label();// gestion affichage position
-		positionAffichage.setText(Main.getPosition().getNom());
-		positionAffichage.setTranslateX(600);
-		positionAffichage.setTranslateY(12);
-		root.getChildren().add(positionAffichage);
-
-		Label nomMaisonAffichage = new Label();// gestion affichage nom maison
-		nomMaisonAffichage.setText(Main.getMaison().getNom());
-		nomMaisonAffichage.setTranslateX(370);
-		nomMaisonAffichage.setTranslateY(12);
-		root.getChildren().add(nomMaisonAffichage);
-
-		Label heureAffichage = new Label();// gestion affichage heure
-		heureAffichage.setText(String.valueOf(Main.getHeure()));
-		heureAffichage.setTranslateX(740);
-		heureAffichage.setTranslateY(50);
-		root.getChildren().add(heureAffichage);
-
-		Label temperatureAffichage = new Label();// gestion affichage temperature piece
-		temperatureAffichage.setText(String.valueOf(Main.getPosition().getTemperature()));
-		temperatureAffichage.setTranslateX(240);
-		temperatureAffichage.setTranslateY(50);
-		root.getChildren().add(temperatureAffichage);
-
-		Label ilAffichage = new Label();// gestion affichage intensitelumineuse piece
-		ilAffichage.setText(String.valueOf(Main.getPosition().getIntensiteLumineuse()));
-		ilAffichage.setTranslateX(600);
-		ilAffichage.setTranslateY(50);
-		root.getChildren().add(ilAffichage);
-	
-		
-		/*Volet a = new Volet("Volet");
-		root.getChildren().add(a.afficher());
-		TV c = new TV("TV");
-		root.getChildren().add(c.afficher());
-		Radiateur d = new Radiateur("radia");
-		root.getChildren().add(d.afficher());
-		PS5 e = new PS5("PS5");
-		root.getChildren().add(e.afficher());
-		Enceinte d1 = new Enceinte("Enceinte");
-		root.getChildren().add(d1.afficher());
-		Lumiere d2 = new Lumiere("lum");
-		root.getChildren().add(d2.afficher());
-		Cheminee d3 = new Cheminee("lum");
-		root.getChildren().add(d3.afficher());
-		Ventilateur b = new Ventilateur("vent");
-		root.getChildren().add(b.afficher());
-		Alexa d4 = new Alexa("Alexa");
-		root.getChildren().add(d4.afficher());*/
-
-
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
