@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -161,7 +162,8 @@ public class MainController {
 					@Override
 					public void handle(ActionEvent e) {
 						Main.setPosition(piece);
-						scenePiece(e);;
+						scenePiece(e);
+						;
 					}
 				});
 				root.getChildren().add(boutonPiece);
@@ -171,6 +173,20 @@ public class MainController {
 		window.setTitle("Déplacer vers une autre pièce");
 		window.setScene(scene);
 		window.show();
+	}
+
+	public void quitter(ActionEvent event) {
+		Platform.exit();
+		System.exit(1);
+	}
+
+	public void sauvegarder() {
+		Sauvegarde.sauvegarder();
+		Label lbl = new Label();
+		lbl.setText(Main.getPseudo());
+		lbl.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl.setLayoutX(4);
+		lbl.setLayoutY(550);
 	}
 
 	public void scenePiece(ActionEvent event) {
