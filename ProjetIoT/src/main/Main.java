@@ -230,7 +230,7 @@ public class Main extends Application implements Serializable {
 			}
 
 			/***************************************************************
-			 ******** Affichage de toutes les pièces et équipements ********
+			 ******************* Changement de l'avatar ********************
 			 ***************************************************************/
 			else if (requete == 12 && droits) {
 				System.out.println("Tapez la commande correspondant à votre avatar désiré");
@@ -470,7 +470,7 @@ public class Main extends Application implements Serializable {
 		 ********************* Choix de la maison **********************
 		 ***************************************************************/
 		System.out.println("Identifiant : " + pseudo);
-		droits = ListeUtilisateurs.getAdmin().get(pseudo);
+		droits = ListeUtilisateurs.getAdmin().get(getPseudo());
 		System.out.println("Activation du mode administrateur : " + droits);
 		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);
