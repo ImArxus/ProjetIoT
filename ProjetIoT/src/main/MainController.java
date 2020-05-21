@@ -226,7 +226,7 @@ public class MainController {
 				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 					String choix = choixDispo[newValue.intValue()];
 					switch (choix) {
-					case "Créer une pièce":
+					case "Créer une pièce": // NE FONCTIONNE PAS
 						Stage window1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
 						Scene scene1 = new Scene(getRoot("/main/CreationPiece.fxml"));
 						window1.setTitle("Créer une pièce");
