@@ -299,6 +299,14 @@ public class Main extends Application implements Serializable {
 		Main.pseudo = pseudo;
 	}
 
+	public static String getAvatar() {
+		return avatar;
+	}
+	public static void setAvatar(String avatar) {
+		Main.avatar = avatar;
+	}
+
+	
 	public static Piece getPosition() {
 		return position;
 	}

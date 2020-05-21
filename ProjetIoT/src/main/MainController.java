@@ -52,6 +52,12 @@ public class MainController {
 	@FXML
 	private Label choixTxt;
 
+	/**
+	 * Champs page Sélection nom maison
+	 */
+	@FXML
+	private TextField nameHouseTxt;
+
 	public Parent getRoot(String url) {
 		try {
 			return FXMLLoader.load(getClass().getResource(url));
@@ -117,6 +123,11 @@ public class MainController {
 		creerMaison(event);
 	}
 
+	public void versRetourMaison(ActionEvent event) {
+		Main.getMaison().setNom(nameHouseTxt.getText());
+		creerMaison(event);
+	}
+
 	public void versMaisonChargee(ActionEvent event) {
 		Maison maison = Sauvegarde.chargerMaison();
 		Main.setMaison(maison);
@@ -128,17 +139,50 @@ public class MainController {
 		}
 	}
 
+	public void versSelectionNomMaison(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Scene scene = new Scene(getRoot("/main/SelectionNomMaison.fxml"));
+		window.setTitle("Modifier le nom de la maison");
+		window.setScene(scene);
+		window.show();
+	}
+
 	public void creerMaison(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
-		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/piece.png"));
-		imageView.setFitWidth(800);
-		imageView.setFitHeight(600);
-
-		root.getChildren().add(imageView);
+		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
+			ImageView imageView = new ImageView();
+			imageView.setImage(new Image("/images/cuisine.png"));
+			imageView.setFitWidth(800);
+			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
+		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
+			ImageView imageView = new ImageView();
+			imageView.setImage(new Image("/images/escalier.png"));
+			imageView.setFitWidth(800);
+			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
+		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
+			ImageView imageView = new ImageView();
+			imageView.setImage(new Image("/images/jardin.png"));
+			imageView.setFitWidth(800);
+			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
+		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
+			ImageView imageView = new ImageView();
+			imageView.setImage(new Image("/images/piscine.png"));
+			imageView.setFitWidth(800);
+			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
+		} else {
+			ImageView imageView = new ImageView();
+			imageView.setImage(new Image("/images/piece.png"));
+			imageView.setFitWidth(800);
+			imageView.setFitHeight(600);
+			root.getChildren().add(imageView);
+		}
 
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
@@ -152,7 +196,13 @@ public class MainController {
 			}
 		}
 
-		window.setTitle("Barry House");
+		ImageView imageViewAvatar = new ImageView();
+		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
+		imageViewAvatar.setTranslateX(50);
+		imageViewAvatar.setTranslateY(200);
+		root.getChildren().add(imageViewAvatar);
+
+		window.setTitle(Main.getMaison().getNom());
 		window.setScene(scene);
 		window.show();
 	}
@@ -226,13 +276,13 @@ public class MainController {
 		temperature.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		temperature.setUnderline(true);
 		temperature.setLayoutX(prochainLabel);
-		temperature.setLayoutY(47);
+		temperature.setLayoutY(60);
 		prochainLabel = prochainLabel + 144;
 		Label lbl4 = new Label();
 		lbl4.setText("" + Main.getPosition().getTemperature() + "°C");
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl4.setLayoutX(prochainLabel);
-		lbl4.setLayoutY(47);
+		lbl4.setLayoutY(60);
 		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 160;
 
 		Label luminosite = new Label();
@@ -240,13 +290,13 @@ public class MainController {
 		luminosite.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		luminosite.setUnderline(true);
 		luminosite.setLayoutX(prochainLabel);
-		luminosite.setLayoutY(47);
+		luminosite.setLayoutY(60);
 		prochainLabel = prochainLabel + 130;
 		Label lbl5 = new Label();
 		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
-		lbl5.setLayoutY(47);
+		lbl5.setLayoutY(60);
 		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 160;
 
 		Label heure = new Label();
@@ -254,13 +304,13 @@ public class MainController {
 		heure.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		heure.setUnderline(true);
 		heure.setLayoutX(prochainLabel);
-		heure.setLayoutY(47);
+		heure.setLayoutY(60);
 		prochainLabel = prochainLabel + 77;
 		Label lbl6 = new Label();
 		lbl6.setText("" + Main.getHeure() + "h");
 		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl6.setLayoutX(prochainLabel);
-		lbl6.setLayoutY(47);
+		lbl6.setLayoutY(60);
 
 		liste.add(pseudo);
 		liste.add(maison);
