@@ -159,6 +159,12 @@ public class MainController {
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(equip.get(i).afficher());
 		}
+		
+		ImageView imageViewAvatar = new ImageView();
+		imageViewAvatar.setImage(new Image("/images/avatar/"+Main.getAvatar()+".png"));		
+		imageViewAvatar.setTranslateX(50);
+		imageViewAvatar.setTranslateY(200);
+		root.getChildren().add(imageViewAvatar);
 
 		window.setTitle("Barry House");
 		window.setScene(scene);
