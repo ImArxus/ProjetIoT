@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import equipements.Alarme;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import pieces.Buanderie;
 import pieces.Bureau;
 import pieces.Chambre;
@@ -267,9 +269,29 @@ public class Piece implements Serializable {
 			}
 		}
 	}
+	
 	public Button getButton() {
 		Button but = new Button();
 		but.setText(getNom());
         return but;
 	}
+	
+	public static ImageView imageViewPiece() {
+		ImageView imageView = new ImageView();
+		imageView.setFitWidth(800);
+		imageView.setFitHeight(600);
+		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
+			imageView.setImage(new Image("/images/cuisine.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
+			imageView.setImage(new Image("/images/escalier.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
+			imageView.setImage(new Image("/images/jardin.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
+			imageView.setImage(new Image("/images/piscine.png"));
+		} else {
+			imageView.setImage(new Image("/images/piece.png"));
+		}
+		return imageView;
+	}
+	
 }

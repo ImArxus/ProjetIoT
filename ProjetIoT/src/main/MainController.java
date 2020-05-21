@@ -7,11 +7,13 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -109,7 +111,7 @@ public class MainController {
 	public void versMaisonBarry(ActionEvent event) {
 		Main.setMaison(BarryHouse.creerMaison());
 		Main.setPosition(Main.getMaison().getPieces().get(0));
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versMaisonVide(ActionEvent event) {
@@ -118,12 +120,12 @@ public class MainController {
 
 		Main.setMaison(new Maison("Maison de " + Main.getPseudo(), new Salon("Salon"))); // Crée la maison avec un salon
 		Main.setPosition(Main.getMaison().getPieces().get(0));
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versRetourMaison(ActionEvent event) {
 		Main.getMaison().setNom(nameHouseTxt.getText());
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versMaisonChargee(ActionEvent event) {
@@ -133,7 +135,7 @@ public class MainController {
 			choixTxt.setText("Vous n'avez pas de maison à charger...");
 		} else {
 			Main.setPosition(Main.getMaison().getPieces().get(0));
-			creerMaison(event);
+			scenePiece(event);
 		}
 	}
 
@@ -153,51 +155,31 @@ public class MainController {
 		LinkedList<Piece> pieceAdj = Main.getPosition().getPiecesAdj();
 		if (!pieceAdj.isEmpty()) {
 			for (int i = 0; i < pieceAdj.size(); i++) {
-				root.getChildren().add(pieceAdj.get(i).getButton());
+				Piece piece = pieceAdj.get(i);
+				Button boutonPiece = piece.getButton();
+				boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						Main.setPosition(piece);
+						scenePiece(e);;
+					}
+				});
+				root.getChildren().add(boutonPiece);
 			}
 		}
 
-		window.setTitle("Modifier le nom de la maison");
+		window.setTitle("Déplacer vers une autre pièce");
 		window.setScene(scene);
 		window.show();
 	}
 
-	public void creerMaison(ActionEvent event) {
+	public void scenePiece(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
-		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/cuisine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/escalier.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/jardin.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piscine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piece.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
+		ImageView imageView = Piece.imageViewPiece();
+		root.getChildren().add(imageView);
 
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {

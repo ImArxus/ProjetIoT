@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public abstract class Equipement implements Serializable {
+public class Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3L;
 	protected boolean etatCourant;
@@ -139,7 +139,7 @@ public abstract class Equipement implements Serializable {
 	}
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements."+ getNom() +".png"));
+        imageView.setImage(new Image("/images/objets/equipements."+ getClass().getSimpleName() +".png"));
         return imageView;
 	}
 }
