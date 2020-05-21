@@ -313,7 +313,7 @@ public class MainController {
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
 		lbl5.setLayoutY(60);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 160;
+		prochainLabel = prochainLabel + ((Object) fontLoader).computeStringWidth(lbl5.getText(), lbl5.getFont()) + 160;
 
 		Label heure = new Label();
 		heure.setText("Heure :");
