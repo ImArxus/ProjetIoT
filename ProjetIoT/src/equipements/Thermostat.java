@@ -2,8 +2,6 @@ package equipements;
 
 import java.io.Serializable;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Thermostat extends Equipement implements Serializable {
