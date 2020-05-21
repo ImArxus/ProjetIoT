@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import equipements.Alarme;
 import equipements.Electrolyseur;
 import equipements.Lumiere;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -44,6 +45,13 @@ public class Piscine extends Piece implements Serializable {
 	@Override
 	public String imagePiece() {
 		return ("images/piscine.png");
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(700);
+		but.setTranslateY(400);
+		return but;
 	}
 
 }

@@ -12,6 +12,7 @@ import equipements.Radiateur;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -68,6 +69,13 @@ public class Cuisine extends Piece implements Serializable {
 	@Override
 	public String imagePiece() {
 		return ("images/cuisine.png");
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(100);
+		but.setTranslateY(500);
+		return but;
 	}
 
 }

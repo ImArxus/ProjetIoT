@@ -7,6 +7,7 @@ import equipements.Alarme;
 import equipements.Enceinte;
 import equipements.Lumiere;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -49,5 +50,11 @@ public class Jardin extends Piece implements Serializable {
 	public String imagePiece() {
 		return ("images/jardin.png");
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(500);
+		but.setTranslateY(450);
+		return but;
+	}
 }

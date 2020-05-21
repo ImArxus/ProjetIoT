@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -35,5 +36,12 @@ public class Palier extends Piece implements Serializable {
 		default:
 			return new Lumiere(name);
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(600);
+		but.setTranslateY(450);
+		return but;
 	}
 }

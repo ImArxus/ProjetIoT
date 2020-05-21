@@ -13,6 +13,7 @@ import equipements.TV;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -67,5 +68,12 @@ public class Chambre extends Piece implements Serializable {
 		default:
 			return new Volet(name);
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(400);
+		but.setTranslateY(400);
+		return but;
 	}
 }

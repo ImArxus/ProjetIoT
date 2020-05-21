@@ -12,6 +12,7 @@ import equipements.Radiateur;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -63,5 +64,12 @@ public class SalleAManger extends Piece implements Serializable {
 		default:
 			return new Volet(name);
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(200);
+		but.setTranslateY(500);
+		return but;
 	}
 }

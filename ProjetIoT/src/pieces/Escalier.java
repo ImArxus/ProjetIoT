@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -36,5 +37,11 @@ public class Escalier extends Piece implements Serializable {
 			return new Lumiere(name);
 		}
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(600);
+		but.setTranslateY(500);
+		return but;
+	}
 }

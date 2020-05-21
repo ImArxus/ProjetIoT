@@ -11,6 +11,7 @@ import equipements.Radiateur;
 import equipements.Thermostat;
 import equipements.Ventilateur;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -60,5 +61,11 @@ public class Bureau extends Piece implements Serializable {
 			return new Volet(name);
 		}
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(200);
+		but.setTranslateY(450);
+		return but;
+	}
 }

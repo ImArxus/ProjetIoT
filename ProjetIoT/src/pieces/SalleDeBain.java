@@ -10,6 +10,7 @@ import equipements.Lumiere;
 import equipements.Radiateur;
 import equipements.Thermostat;
 import equipements.Volet;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -56,5 +57,11 @@ public class SalleDeBain extends Piece implements Serializable {
 			return new Volet(name);
 		}
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(700);
+		but.setTranslateY(500);
+		return but;
+	}
 }

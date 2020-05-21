@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import equipements.Alarme;
 import equipements.Frigo;
 import equipements.Lumiere;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -39,5 +40,12 @@ public class Buanderie extends Piece implements Serializable {
 		default:
 			return new Frigo(name);
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(400);
+		but.setTranslateY(450);
+		return but;
 	}
 }

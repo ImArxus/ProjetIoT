@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import equipements.Alarme;
 import equipements.Lumiere;
 import equipements.Radiateur;
+import javafx.scene.control.Button;
 import main.Equipement;
 import main.Piece;
 
@@ -39,5 +40,12 @@ public class Dressing extends Piece implements Serializable {
 		default:
 			return new Radiateur(name);
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(600);
+		but.setTranslateY(400);
+		return but;
 	}
 }

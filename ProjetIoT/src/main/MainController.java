@@ -142,7 +142,23 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
+	public void versSelectionPiece(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Pane root = (Pane) getRoot("/main/SelectionPiece.fxml");
+		Scene scene = new Scene(root);
 
+		
+		LinkedList<Piece> pieceAdj =Main.getPosition().getPiecesAdj();
+		if (!pieceAdj.isEmpty()) {
+			for (int i = 0; i < pieceAdj.size(); i++) {
+				root.getChildren().add(pieceAdj.get(i).getButton());
+			}
+		}
+		
+		window.setTitle("Modifier le nom de la maison");
+		window.setScene(scene);
+		window.show();
+	}
 	public void creerMaison(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");

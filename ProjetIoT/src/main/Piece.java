@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import pieces.Buanderie;
 import pieces.Bureau;
 import pieces.Chambre;
@@ -266,5 +269,9 @@ public class Piece implements Serializable {
 			}
 		}
 	}
-
+	public Button getButton() {
+		Button but = new Button();
+		but.setText(getNom());
+        return but;
+	}
 }
