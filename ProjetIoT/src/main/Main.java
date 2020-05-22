@@ -270,9 +270,9 @@ public class Main extends Application implements Serializable {
 	private static ListeUtilisateurs listeUtilisateur = new ListeUtilisateurs();
 
 	public static void chargerCompte() {
-		ListeUtilisateurs Listetmp = Sauvegarde.chargerComptes();
-		if (Listetmp != null) {
-			listeUtilisateur = Listetmp;
+		ListeUtilisateurs listeUserTmp = Sauvegarde.chargerComptes();
+		if (listeUserTmp != null) {
+			listeUtilisateur = listeUserTmp;
 		}
 	}
 

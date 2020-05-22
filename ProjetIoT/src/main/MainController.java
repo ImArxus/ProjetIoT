@@ -208,7 +208,7 @@ public class MainController {
 		}
 
 		// Affichage des fonctions admin
-		if (ListeUtilisateurs.getAdmin().get(Main.getPseudo())) {
+		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
 			MenuButton choiceBox = new MenuButton("Modes admin");
 			choiceBox.setPrefSize(130, 10);
 			choiceBox.setLayoutX(657);
@@ -224,6 +224,7 @@ public class MainController {
 					window.show();
 				}
 			});
+
 			MenuItem choix2 = new MenuItem("Supprimer une pièce");
 			choix2.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -250,6 +251,7 @@ public class MainController {
 					window.show();
 				}
 			});
+
 			MenuItem choix3 = new MenuItem("Créer un équipement");
 			choix3.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -260,6 +262,7 @@ public class MainController {
 					window.show();
 				}
 			});
+
 			MenuItem choix4 = new MenuItem("Supprimer un équipement");
 			choix4.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -267,6 +270,7 @@ public class MainController {
 					System.out.println("Supprimer un équipement");
 				}
 			});
+
 			MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
 			choix5.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -274,6 +278,7 @@ public class MainController {
 					System.out.println("Supprimer tous les équipement de la pièce");
 				}
 			});
+
 			MenuItem choix6 = new MenuItem("Afficher toutes les pièces et équipements");
 			choix6.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -281,6 +286,7 @@ public class MainController {
 					System.out.println("Afficher toutes les pièces et équipements");
 				}
 			});
+
 			MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
 			choix7.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -288,6 +294,7 @@ public class MainController {
 					System.out.println("Changer la couleur des paramètres");
 				}
 			});
+
 			MenuItem choix8 = new MenuItem("Changer l'avatar");
 			choix8.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -353,6 +360,7 @@ public class MainController {
 		Label lbl1 = new Label();
 		lbl1.setText(Main.getPseudo());
 		lbl1.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl1.setPrefWidth(200);
 		lbl1.setLayoutX(prochainLabel);
 		lbl1.setLayoutY(10);
 		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl1.getText(), lbl1.getFont()) + 80;
@@ -367,6 +375,7 @@ public class MainController {
 		Label lbl2 = new Label();
 		lbl2.setText(Main.getMaison().getNom());
 		lbl2.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl2.setPrefWidth(100);
 		lbl2.setLayoutX(prochainLabel);
 		lbl2.setLayoutY(10);
 		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl2.getText(), lbl2.getFont()) + 120;
@@ -381,6 +390,7 @@ public class MainController {
 		Label lbl3 = new Label();
 		lbl3.setText(Main.getPosition().getNom());
 		lbl3.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl3.setPrefWidth(100);
 		lbl3.setLayoutX(prochainLabel);
 		lbl3.setLayoutY(10);
 		prochainLabel = 4; // Reviens à la ligne
@@ -390,41 +400,41 @@ public class MainController {
 		temperature.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		temperature.setUnderline(true);
 		temperature.setLayoutX(prochainLabel);
-		temperature.setLayoutY(60);
-		prochainLabel = prochainLabel + 144;
+		temperature.setLayoutY(68);
+		prochainLabel = prochainLabel + 137;
 		Label lbl4 = new Label();
 		lbl4.setText("" + Main.getPosition().getTemperature() + "°C");
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl4.setLayoutX(prochainLabel);
-		lbl4.setLayoutY(60);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 100;
+		lbl4.setLayoutY(68);
+		prochainLabel = prochainLabel + 140;
 
 		Label luminosite = new Label();
 		luminosite.setText("Luminosité :");
 		luminosite.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		luminosite.setUnderline(true);
 		luminosite.setLayoutX(prochainLabel);
-		luminosite.setLayoutY(60);
+		luminosite.setLayoutY(68);
 		prochainLabel = prochainLabel + 130;
 		Label lbl5 = new Label();
 		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
-		lbl5.setLayoutY(60);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 100;
+		lbl5.setLayoutY(68);
+		prochainLabel = prochainLabel + 110;
 
 		Label heure = new Label();
 		heure.setText("Heure :");
 		heure.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		heure.setUnderline(true);
 		heure.setLayoutX(prochainLabel);
-		heure.setLayoutY(60);
+		heure.setLayoutY(68);
 		prochainLabel = prochainLabel + 77;
 		Label lbl6 = new Label();
 		lbl6.setText("" + Main.getHeure() + "h");
 		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl6.setLayoutX(prochainLabel);
-		lbl6.setLayoutY(60);
+		lbl6.setLayoutY(68);
 
 		liste.add(pseudo);
 		liste.add(maison);
