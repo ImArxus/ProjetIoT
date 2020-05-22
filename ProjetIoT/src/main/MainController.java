@@ -165,7 +165,6 @@ public class MainController {
 					public void handle(ActionEvent e) {
 						Main.setPosition(piece);
 						scenePiece(e);
-						;
 					}
 				});
 				root.getChildren().add(boutonPiece);
@@ -195,6 +194,8 @@ public class MainController {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
+
+		Maison maison = Main.getMaison();
 
 		// Affichage de la pièce
 		ImageView imageView = Piece.imageViewPiece();
@@ -227,7 +228,26 @@ public class MainController {
 			choix2.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("Supprimer une pièce");
+					Pane root = (Pane) getRoot("/main/SuppressionPiece.fxml");
+					Scene scene = new Scene(root);
+					LinkedList<Piece> pieces = maison.getPieces();
+					if (!pieces.isEmpty()) {
+						for (int i = 0; i < pieces.size(); i++) {
+							Piece piece = pieces.get(i);
+							Button boutonPiece = piece.getButton();
+							boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+								@Override
+								public void handle(ActionEvent e) {
+									maison.suppressionPieceFX(piece);
+									scenePiece(e);
+								}
+							});
+							root.getChildren().add(boutonPiece);
+						}
+					}
+					window.setTitle("Supprimer une pièce");
+					window.setScene(scene);
+					window.show();
 				}
 			});
 			MenuItem choix3 = new MenuItem("Créer un équipement");
@@ -293,7 +313,7 @@ public class MainController {
 		imageViewAvatar.setTranslateY(200);
 		root.getChildren().add(imageViewAvatar);
 
-		window.setTitle(Main.getMaison().getNom());
+		window.setTitle(maison.getNom());
 		window.setScene(scene);
 		window.show();
 	}
