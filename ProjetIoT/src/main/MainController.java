@@ -7,9 +7,6 @@ import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,8 +15,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -210,55 +208,72 @@ public class MainController {
 
 		// Affichage des fonctions admin
 		if (ListeUtilisateurs.getAdmin().get(Main.getPseudo())) {
-			String choixDispo[] = { "Créer une pièce", "Supprimer une pièce", "Créer un équipement",
-					"Supprimer un équipement", "Supprimer tous les équipement de la pièce",
-					"Afficher toutes les pièces et équipements", "Changer la couleur des paramètres",
-					"Changer l'avatar" };
-
-			ComboBox<String> choiceBox = new ComboBox<String>(FXCollections.observableArrayList(choixDispo));
-			choiceBox.setPromptText("Modes admin");
+			MenuButton choiceBox = new MenuButton("Modes admin");
 			choiceBox.setPrefSize(130, 10);
 			choiceBox.setLayoutX(657);
 			choiceBox.setLayoutY(64);
 
-			choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			MenuItem choix1 = new MenuItem("Créer une pièce");
+			choix1.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
-				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-					String choix = choixDispo[newValue.intValue()];
-					switch (choix) {
-					case "Créer une pièce": // NE FONCTIONNE PAS
-						Stage window1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						Scene scene1 = new Scene(getRoot("/main/CreationPiece.fxml"));
-						window1.setTitle("Créer une pièce");
-						window1.setScene(scene1);
-						window1.show();
-						break;
-					case "Supprimer une pièce":
-						System.out.println("Supprimer une pièce");
-						break;
-					case "Créer un équipement":
-						System.out.println("Créer un équipement");
-						break;
-					case "Supprimer un équipement":
-						System.out.println("Supprimer un équipement");
-						break;
-					case "Supprimer tous les équipement de la pièce":
-						System.out.println("Supprimer tous les équipement de la pièce");
-						break;
-					case "Afficher toutes les pièces et équipements":
-						System.out.println("Afficher toutes les pièces et équipements");
-						break;
-					case "Changer la couleur des paramètres":
-						System.out.println("Créer une pièce");
-						break;
-					case "Changer l'avatar":
-						System.out.println("Changer l'avatar");
-						break;
-					default:
-						System.err.println("Veuillez faire un choix valide");
-					}
+				public void handle(ActionEvent event) {
+					Scene scene = new Scene(getRoot("/main/CreationPiece.fxml"));
+					window.setTitle("Créer une pièce");
+					window.setScene(scene);
+					window.show();
 				}
 			});
+			MenuItem choix2 = new MenuItem("Supprimer une pièce");
+			choix2.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Supprimer une pièce");
+				}
+			});
+			MenuItem choix3 = new MenuItem("Créer un équipement");
+			choix3.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Créer un équipement");
+				}
+			});
+			MenuItem choix4 = new MenuItem("Supprimer un équipement");
+			choix4.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Supprimer un équipement");
+				}
+			});
+			MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
+			choix5.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Supprimer tous les équipement de la pièce");
+				}
+			});
+			MenuItem choix6 = new MenuItem("Afficher toutes les pièces et équipements");
+			choix6.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Afficher toutes les pièces et équipements");
+				}
+			});
+			MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
+			choix7.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Changer la couleur des paramètres");
+				}
+			});
+			MenuItem choix8 = new MenuItem("Changer l'avatar");
+			choix8.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					System.out.println("Changer l'avatar");
+				}
+			});
+
+			choiceBox.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8);
 
 			root.getChildren().add(choiceBox);
 		}
