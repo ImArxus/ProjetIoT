@@ -6,12 +6,19 @@ import java.util.LinkedList;
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -71,8 +78,6 @@ public class MainController {
 		if (listeUtilisateur.comptes.containsKey(userTxt.getText())
 				&& listeUtilisateur.comptes.get(userTxt.getText()).equals(passwordTxt.getText())) {
 			Main.setPseudo(userTxt.getText());
-			// loginTxt.setText("Bienvenue " + userTxt.getText() + " !");
-
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
@@ -111,7 +116,7 @@ public class MainController {
 	public void versMaisonBarry(ActionEvent event) {
 		Main.setMaison(BarryHouse.creerMaison());
 		Main.setPosition(Main.getMaison().getPieces().get(0));
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versMaisonVide(ActionEvent event) {
@@ -120,12 +125,12 @@ public class MainController {
 
 		Main.setMaison(new Maison("Maison de " + Main.getPseudo(), new Salon("Salon"))); // Crée la maison avec un salon
 		Main.setPosition(Main.getMaison().getPieces().get(0));
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versRetourMaison(ActionEvent event) {
 		Main.getMaison().setNom(nameHouseTxt.getText());
-		creerMaison(event);
+		scenePiece(event);
 	}
 
 	public void versMaisonChargee(ActionEvent event) {
@@ -135,7 +140,7 @@ public class MainController {
 			choixTxt.setText("Vous n'avez pas de maison à charger...");
 		} else {
 			Main.setPosition(Main.getMaison().getPieces().get(0));
-			creerMaison(event);
+			scenePiece(event);
 		}
 	}
 
@@ -146,72 +151,127 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
+
 	public void versSelectionPiece(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/SelectionPiece.fxml");
 		Scene scene = new Scene(root);
 
-		
-		LinkedList<Piece> pieceAdj =Main.getPosition().getPiecesAdj();
+		LinkedList<Piece> pieceAdj = Main.getPosition().getPiecesAdj();
 		if (!pieceAdj.isEmpty()) {
 			for (int i = 0; i < pieceAdj.size(); i++) {
-				root.getChildren().add(pieceAdj.get(i).getButton());
+				Piece piece = pieceAdj.get(i);
+				Button boutonPiece = piece.getButton();
+				boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						Main.setPosition(piece);
+						scenePiece(e);
+						;
+					}
+				});
+				root.getChildren().add(boutonPiece);
 			}
 		}
-		
-		window.setTitle("Modifier le nom de la maison");
+
+		window.setTitle("Déplacer vers une autre pièce");
 		window.setScene(scene);
 		window.show();
 	}
-	public void creerMaison(ActionEvent event) {
+
+	public void quitter(ActionEvent event) {
+		Platform.exit();
+		System.exit(1);
+	}
+
+	public void sauvegarder() {
+		Sauvegarde.sauvegarder();
+		Label lbl = new Label();
+		lbl.setText(Main.getPseudo());
+		lbl.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl.setLayoutX(4);
+		lbl.setLayoutY(550);
+	}
+
+	public void scenePiece(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
-		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/cuisine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/escalier.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/jardin.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piscine.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		} else {
-			ImageView imageView = new ImageView();
-			imageView.setImage(new Image("/images/piece.png"));
-			imageView.setFitWidth(800);
-			imageView.setFitHeight(600);
-			root.getChildren().add(imageView);
-		}
+		// Affichage de la pièce
+		ImageView imageView = Piece.imageViewPiece();
+		root.getChildren().add(imageView);
 
+		// Affichage de la bande d'infos
 		LinkedList<Label> liste = affichageBande(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
 		}
 
-		LinkedList<Equipement> equip = Main.getPosition().getEquipements(); // Afficher equipements
+		// Affichage des fonctions admin
+		if (ListeUtilisateurs.getAdmin().get(Main.getPseudo())) {
+			String choixDispo[] = { "Créer une pièce", "Supprimer une pièce", "Créer un équipement",
+					"Supprimer un équipement", "Supprimer tous les équipement de la pièce",
+					"Afficher toutes les pièces et équipements", "Changer la couleur des paramètres",
+					"Changer l'avatar" };
+
+			ComboBox<String> choiceBox = new ComboBox<String>(FXCollections.observableArrayList(choixDispo));
+			choiceBox.setPromptText("Modes admin");
+			choiceBox.setPrefSize(130, 10);
+			choiceBox.setLayoutX(657);
+			choiceBox.setLayoutY(64);
+
+			choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+					String choix = choixDispo[newValue.intValue()];
+					switch (choix) {
+					case "Créer une pièce": // NE FONCTIONNE PAS
+						Stage window1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						Scene scene1 = new Scene(getRoot("/main/CreationPiece.fxml"));
+						window1.setTitle("Créer une pièce");
+						window1.setScene(scene1);
+						window1.show();
+						break;
+					case "Supprimer une pièce":
+						System.out.println("Supprimer une pièce");
+						break;
+					case "Créer un équipement":
+						System.out.println("Créer un équipement");
+						break;
+					case "Supprimer un équipement":
+						System.out.println("Supprimer un équipement");
+						break;
+					case "Supprimer tous les équipement de la pièce":
+						System.out.println("Supprimer tous les équipement de la pièce");
+						break;
+					case "Afficher toutes les pièces et équipements":
+						System.out.println("Afficher toutes les pièces et équipements");
+						break;
+					case "Changer la couleur des paramètres":
+						System.out.println("Créer une pièce");
+						break;
+					case "Changer l'avatar":
+						System.out.println("Changer l'avatar");
+						break;
+					default:
+						System.err.println("Veuillez faire un choix valide");
+					}
+				}
+			});
+
+			root.getChildren().add(choiceBox);
+		}
+
+		// Affichage des équipements
+		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
 		if (!equip.isEmpty()) {
-			for (int i = 0; i < liste.size(); i++) {
+			for (int i = 0; i < equip.size(); i++) {
 				root.getChildren().add(equip.get(i).afficher());
 			}
 		}
 
+		// Affichage de l'avatar
 		ImageView imageViewAvatar = new ImageView();
 		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
 		imageViewAvatar.setTranslateX(50);
@@ -299,7 +359,7 @@ public class MainController {
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl4.setLayoutX(prochainLabel);
 		lbl4.setLayoutY(60);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 160;
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 100;
 
 		Label luminosite = new Label();
 		luminosite.setText("Luminosité :");
@@ -313,7 +373,8 @@ public class MainController {
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
 		lbl5.setLayoutY(60);
-		prochainLabel = prochainLabel + ((Object) fontLoader).computeStringWidth(lbl5.getText(), lbl5.getFont()) + 160;
+
+		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 100;
 
 		Label heure = new Label();
 		heure.setText("Heure :");

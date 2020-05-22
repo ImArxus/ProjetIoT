@@ -6,13 +6,23 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
    <children>
-      <Button layoutX="200.0" layoutY="37.0" mnemonicParsing="false" onAction="#versSelectionNomMaison" prefHeight="22.0" prefWidth="100.0" text="Changer nom">
+      <Button layoutX="250.0" layoutY="37.0" mnemonicParsing="false" onAction="#versSelectionNomMaison" prefHeight="22.0" prefWidth="130.0" text="Changer nom maison">
          <font>
             <Font size="12.0" />
          </font></Button>
-      <Button layoutX="506.0" layoutY="37.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="100.0" text="Se déplacer">
+      <Button layoutX="75.0" layoutY="37.0" mnemonicParsing="false" onAction="#versSelectionPiece" prefHeight="22.0" prefWidth="130.0" text="Se déplacer">
          <font>
             <Font size="12.0" />
          </font></Button>
+      <Button layoutX="425.0" layoutY="37.0" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="22.0" prefWidth="130.0" text="Sauvegarder">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="600.0" layoutY="37.0" mnemonicParsing="false" onAction="#quitter" prefHeight="22.0" prefWidth="130.0" text="Quitter">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
