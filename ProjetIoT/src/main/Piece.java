@@ -269,13 +269,13 @@ public class Piece implements Serializable {
 			}
 		}
 	}
-	
+
 	public Button getButton() {
 		Button but = new Button();
 		but.setText(getNom());
-        return but;
+		return but;
 	}
-	
+
 	public static ImageView imageViewPiece() {
 		ImageView imageView = new ImageView();
 		imageView.setFitWidth(800);
@@ -293,5 +293,5 @@ public class Piece implements Serializable {
 		}
 		return imageView;
 	}
-	
+
 }
