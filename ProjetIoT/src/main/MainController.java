@@ -254,7 +254,10 @@ public class MainController {
 			choix3.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("Créer un équipement");
+					Scene scene = new Scene(getRoot("/main/CreationEquipement.fxml"));
+					window.setTitle("Créer un équipement");
+					window.setScene(scene);
+					window.show();
 				}
 			});
 			MenuItem choix4 = new MenuItem("Supprimer un équipement");
