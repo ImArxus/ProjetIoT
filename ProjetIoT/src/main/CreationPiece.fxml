@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.CreationPieceController">
    <children>
       <ImageView fitHeight="603.0" fitWidth="800.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,18 +19,18 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="55.0" layoutY="327.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Buanderie" />
-      <Button layoutX="245.0" layoutY="327.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Bureau" />
-      <Button layoutX="435.0" layoutY="327.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Chambre" />
-      <Button layoutX="625.0" layoutY="327.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Cuisine" />
-      <Button layoutX="25.0" layoutY="407.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Dressing" />
-      <Button layoutX="175.0" layoutY="407.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Escalier" />
-      <Button layoutX="330.0" layoutY="407.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Jardin" />
-      <Button layoutX="485.0" layoutY="407.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Mezzanine" />
-      <Button layoutX="640.0" layoutY="407.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Palier" />
-      <Button layoutX="55.0" layoutY="487.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Piscine" />
-      <Button layoutX="245.0" layoutY="487.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Salle à manger" />
-      <Button layoutX="435.0" layoutY="487.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Salle de bain" />
-      <Button layoutX="625.0" layoutY="487.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="130.0" text="Salon" />
+      <Button layoutX="55.0" layoutY="327.0" mnemonicParsing="false" onAction="#creerBuanderie" prefHeight="22.0" prefWidth="130.0" text="Buanderie" />
+      <Button layoutX="245.0" layoutY="327.0" mnemonicParsing="false" onAction="#creerBureau" prefHeight="22.0" prefWidth="130.0" text="Bureau" />
+      <Button layoutX="435.0" layoutY="327.0" mnemonicParsing="false" onAction="#creerChambre" prefHeight="22.0" prefWidth="130.0" text="Chambre" />
+      <Button layoutX="625.0" layoutY="327.0" mnemonicParsing="false" onAction="#creerCuisine" prefHeight="22.0" prefWidth="130.0" text="Cuisine" />
+      <Button layoutX="25.0" layoutY="407.0" mnemonicParsing="false" onAction="#creerDressing" prefHeight="22.0" prefWidth="130.0" text="Dressing" />
+      <Button layoutX="175.0" layoutY="407.0" mnemonicParsing="false" onAction="#creerEscalier" prefHeight="22.0" prefWidth="130.0" text="Escalier" />
+      <Button layoutX="330.0" layoutY="407.0" mnemonicParsing="false" onAction="#creerJardin" prefHeight="22.0" prefWidth="130.0" text="Jardin" />
+      <Button layoutX="485.0" layoutY="407.0" mnemonicParsing="false" onAction="#creerMezzanine" prefHeight="22.0" prefWidth="130.0" text="Mezzanine" />
+      <Button layoutX="640.0" layoutY="407.0" mnemonicParsing="false" onAction="#creerPalier" prefHeight="22.0" prefWidth="130.0" text="Palier" />
+      <Button layoutX="55.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerPiscine" prefHeight="22.0" prefWidth="130.0" text="Piscine" />
+      <Button layoutX="245.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalleAManger" prefHeight="22.0" prefWidth="130.0" text="Salle à manger" />
+      <Button layoutX="435.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalleDeBain" prefHeight="22.0" prefWidth="130.0" text="Salle de bain" />
+      <Button layoutX="625.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalon" prefHeight="22.0" prefWidth="130.0" text="Salon" />
    </children>
 </AnchorPane>
