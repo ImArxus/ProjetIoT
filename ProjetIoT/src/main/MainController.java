@@ -191,8 +191,6 @@ public class MainController {
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
-		Maison maison = Main.getMaison();
-
 		// Affichage de la pièce
 		ImageView imageView = Piece.imageViewPiece();
 		root.getChildren().add(imageView);
@@ -220,107 +218,10 @@ public class MainController {
 
 		// Affichage des fonctions admin
 		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
-			MenuButton choiceBox = new MenuButton("Modes admin");
-			choiceBox.setPrefSize(130, 10);
-			choiceBox.setLayoutX(657);
-			choiceBox.setLayoutY(64);
-
-			MenuItem choix1 = new MenuItem("Créer une pièce");
-			choix1.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					Scene scene = new Scene(getRoot("/main/CreationPiece.fxml"));
-					window.setTitle("Créer une pièce");
-					window.setScene(scene);
-					window.show();
-				}
-			});
-
-			MenuItem choix2 = new MenuItem("Supprimer une pièce");
-			choix2.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					Pane root = (Pane) getRoot("/main/SuppressionPiece.fxml");
-					Scene scene = new Scene(root);
-					LinkedList<Piece> pieces = maison.getPieces();
-					if (!pieces.isEmpty()) {
-						for (int i = 0; i < pieces.size(); i++) {
-							Piece piece = pieces.get(i);
-							Button boutonPiece = piece.getButton();
-							boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
-								@Override
-								public void handle(ActionEvent e) {
-									maison.suppressionPieceFX(piece);
-									scenePiece(e);
-								}
-							});
-							root.getChildren().add(boutonPiece);
-						}
-					}
-					window.setTitle("Supprimer une pièce");
-					window.setScene(scene);
-					window.show();
-				}
-			});
-
-			MenuItem choix3 = new MenuItem("Créer un équipement");
-			choix3.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					Scene scene = new Scene(getRoot("/main/CreationEquipement.fxml"));
-					window.setTitle("Créer un équipement");
-					window.setScene(scene);
-					window.show();
-				}
-			});
-
-			MenuItem choix4 = new MenuItem("Supprimer un équipement");
-			choix4.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Supprimer un équipement");
-
-				}
-			});
-
-			MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
-			choix5.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Supprimer tous les équipement de la pièce");
-				}
-			});
-
-			MenuItem choix6 = new MenuItem("Afficher toutes les pièces et équipements");
-			choix6.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Afficher toutes les pièces et équipements");
-				}
-			});
-
-			MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
-			choix7.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Changer la couleur des paramètres");
-				}
-			});
-
-			MenuItem choix8 = new MenuItem("Changer l'avatar");
-			choix8.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Changer l'avatar");
-				}
-			});
-
-			choiceBox.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8);
-
-			root.getChildren().add(choiceBox);
+			root.getChildren().add(actionsAdmin(event));
 		}
 
-		window.setTitle(maison.getNom());
+		window.setTitle(Main.getMaison().getNom());
 		window.setScene(scene);
 		window.show();
 	}
@@ -340,6 +241,134 @@ public class MainController {
 		} else {
 			creationTxt.setText("Identifiant déjà existant");
 		}
+	}
+
+	public MenuButton actionsAdmin(ActionEvent event) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		Maison maison = Main.getMaison();
+
+		MenuButton choiceBox = new MenuButton("Modes admin");
+		choiceBox.setPrefSize(130, 10);
+		choiceBox.setLayoutX(657);
+		choiceBox.setLayoutY(64);
+
+		MenuItem choix1 = new MenuItem("Créer une pièce");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scene scene = new Scene(getRoot("/main/CreationPiece.fxml"));
+				window.setTitle("Créer une pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		MenuItem choix2 = new MenuItem("Supprimer une pièce");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Pane root = (Pane) getRoot("/main/SuppressionPiece.fxml");
+				Scene scene = new Scene(root);
+				LinkedList<Piece> pieces = maison.getPieces();
+				if (!pieces.isEmpty()) {
+					for (int i = 0; i < pieces.size(); i++) {
+						Piece piece = pieces.get(i);
+						Button boutonPiece = piece.getButton();
+						boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								maison.suppressionPieceFX(piece);
+								scenePiece(e);
+							}
+						});
+						root.getChildren().add(boutonPiece);
+					}
+				}
+				window.setTitle("Supprimer une pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		MenuItem choix3 = new MenuItem("Créer un équipement");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scene scene = new Scene(getRoot("/main/CreationEquipement.fxml"));
+				window.setTitle("Créer un équipement");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		// TODO
+		MenuItem choix4 = new MenuItem("Supprimer un équipement");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Supprimer un équipement");
+
+			}
+		});
+
+		// TODO
+		MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Supprimer tous les équipement de la pièce");
+			}
+		});
+
+		MenuItem choix6 = new MenuItem("Se déplacer dans n'importe quelle pièce");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Pane root = (Pane) getRoot("/main/SelectionPiece.fxml");
+				Scene scene = new Scene(root);
+
+				LinkedList<Piece> pieces = Main.getMaison().getPieces();
+				if (!pieces.isEmpty()) {
+					for (int i = 0; i < pieces.size(); i++) {
+						Piece piece = pieces.get(i);
+						Button boutonPiece = piece.getButton();
+						boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								Main.setPosition(piece);
+								scenePiece(e);
+							}
+						});
+						root.getChildren().add(boutonPiece);
+					}
+				}
+				window.setTitle("Déplacer vers une autre pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		// TODO
+		MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
+		choix7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Changer la couleur des paramètres");
+			}
+		});
+
+		// TODO
+		MenuItem choix8 = new MenuItem("Changer l'avatar");
+		choix8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Changer l'avatar");
+			}
+		});
+
+		choiceBox.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8);
+		return choiceBox;
 	}
 
 	public LinkedList<Label> affichageBande(ActionEvent event) {
