@@ -3,9 +3,6 @@ package main;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +23,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pieces.Salon;
 
-@SuppressWarnings("restriction")
 public class MainController {
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
@@ -207,6 +203,21 @@ public class MainController {
 			root.getChildren().add(liste.get(i));
 		}
 
+		// Affichage des équipements
+		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
+		if (!equip.isEmpty()) {
+			for (int i = 0; i < equip.size(); i++) {
+				root.getChildren().add(equip.get(i).afficher());
+			}
+		}
+
+		// Affichage de l'avatar
+		ImageView imageViewAvatar = new ImageView();
+		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
+		imageViewAvatar.setTranslateX(50);
+		imageViewAvatar.setTranslateY(200);
+		root.getChildren().add(imageViewAvatar);
+
 		// Affichage des fonctions admin
 		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
 			MenuButton choiceBox = new MenuButton("Modes admin");
@@ -268,6 +279,7 @@ public class MainController {
 				@Override
 				public void handle(ActionEvent event) {
 					System.out.println("Supprimer un équipement");
+
 				}
 			});
 
@@ -308,21 +320,6 @@ public class MainController {
 			root.getChildren().add(choiceBox);
 		}
 
-		// Affichage des équipements
-		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
-		if (!equip.isEmpty()) {
-			for (int i = 0; i < equip.size(); i++) {
-				root.getChildren().add(equip.get(i).afficher());
-			}
-		}
-
-		// Affichage de l'avatar
-		ImageView imageViewAvatar = new ImageView();
-		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
-		imageViewAvatar.setTranslateX(50);
-		imageViewAvatar.setTranslateY(200);
-		root.getChildren().add(imageViewAvatar);
-
 		window.setTitle(maison.getNom());
 		window.setScene(scene);
 		window.show();
@@ -347,7 +344,6 @@ public class MainController {
 
 	public LinkedList<Label> affichageBande(ActionEvent event) {
 		LinkedList<Label> liste = new LinkedList<Label>();
-		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 		double prochainLabel = 4; // LayoutX où insérer le prochain label
 
 		Label pseudo = new Label();
@@ -360,10 +356,10 @@ public class MainController {
 		Label lbl1 = new Label();
 		lbl1.setText(Main.getPseudo());
 		lbl1.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl1.setPrefWidth(200);
+		lbl1.setPrefWidth(170);
 		lbl1.setLayoutX(prochainLabel);
 		lbl1.setLayoutY(10);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl1.getText(), lbl1.getFont()) + 80;
+		prochainLabel = prochainLabel + 170;
 
 		Label maison = new Label();
 		maison.setText("Maison :");
@@ -375,10 +371,10 @@ public class MainController {
 		Label lbl2 = new Label();
 		lbl2.setText(Main.getMaison().getNom());
 		lbl2.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl2.setPrefWidth(100);
+		lbl2.setPrefWidth(170);
 		lbl2.setLayoutX(prochainLabel);
 		lbl2.setLayoutY(10);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl2.getText(), lbl2.getFont()) + 120;
+		prochainLabel = prochainLabel + 180;
 
 		Label position = new Label();
 		position.setText("Position :");
@@ -390,7 +386,7 @@ public class MainController {
 		Label lbl3 = new Label();
 		lbl3.setText(Main.getPosition().getNom());
 		lbl3.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl3.setPrefWidth(100);
+		lbl3.setPrefWidth(150);
 		lbl3.setLayoutX(prochainLabel);
 		lbl3.setLayoutY(10);
 		prochainLabel = 4; // Reviens à la ligne

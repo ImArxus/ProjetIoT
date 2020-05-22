@@ -8,7 +8,6 @@ import java.util.Scanner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
 public class Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3L;
@@ -137,9 +136,10 @@ public class Equipement implements Serializable {
 			setEtatCourant(false);
 		}
 	}
+
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements."+ getClass().getSimpleName() +".png"));
-        return imageView;
+		imageView.setImage(new Image("/images/objets/equipements." + getClass().getSimpleName() + ".png"));
+		return imageView;
 	}
 }
