@@ -20,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pieces.Salon;
@@ -218,7 +219,49 @@ public class MainController {
 		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
 		if (!equip.isEmpty()) {
 			for (int i = 0; i < equip.size(); i++) {
-				root.getChildren().add(equip.get(i).afficher());
+				Equipement current = equip.get(i);
+				ImageView img = equip.get(i).afficher();
+				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						System.out.println(current.getNom());
+						MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+						fonctionnalite.setPrefSize(220, 30);
+						fonctionnalite.setLayoutX(570);
+						fonctionnalite.setLayoutY(100);
+
+						MenuItem choix1 = new MenuItem("Quitter");
+						choix1.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								root.getChildren().remove(fonctionnalite);
+							}
+						});
+						MenuItem choix2 = new MenuItem("Allumer");
+						choix2.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								current.allumer();
+							}
+						});
+						MenuItem choix3 = new MenuItem("Éteindre");
+						choix3.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								current.eteindre();
+							}
+						});
+						MenuItem choix4 = new MenuItem("Actions possibles");
+						choix3.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent event) {
+								System.out.println(current.actionsPossibles());
+							}
+						});
+						fonctionnalite.getItems().addAll(choix1, choix2, choix3, choix4);
+						root.getChildren().add(fonctionnalite);
+					}
+				}));
+				root.getChildren().add(img);
 			}
 		}
 
@@ -320,7 +363,7 @@ public class MainController {
 				Scene scene = new Scene(root);
 				List<Equipement> equip = Main.getPosition().getEquipements();
 				for (int i = 0; i < equip.size(); i++) {
-					Equipement equipement =equip.get(i);
+					Equipement equipement = equip.get(i);
 					Button boutonEquip = equip.get(i).getButton();
 					boutonEquip.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
@@ -745,5 +788,4 @@ public class MainController {
 				choix11, choix12, choix13, choix14, choix15, choix16, choix17);
 		root.getChildren().add(avatars);
 	}
-
 }
