@@ -71,7 +71,7 @@ public class Volet extends Equipement implements Serializable {
 	@Override
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements.Volet.png"));
+        imageView.setImage(new Image(getImage()));
         imageView.setTranslateY(70);
         imageView.setTranslateX(370);
         return imageView;
@@ -88,5 +88,13 @@ public class Volet extends Equipement implements Serializable {
 		but.setTranslateX(700);
 		but.setTranslateY(500);
 		return but;
+	}
+	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Volet.png");
+		} else {
+			return ("/images/objets/equipements.Volet.desactive.png");
+		}
 	}
 }
