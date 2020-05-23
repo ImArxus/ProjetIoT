@@ -10,6 +10,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import main.Equipement;
 import main.Main;
 
@@ -140,8 +141,8 @@ public class TV extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées() {
-		MenuButton fonctionnalite = super.getFonctionnalitées();
+	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
 		MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
 		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {

@@ -2,7 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -222,18 +221,17 @@ public class MainController {
 				Equipement current = equip.get(i);
 				ImageView img = equip.get(i).afficher();
 				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
-					public void handle(MouseEvent event) {
-						System.out.println(current.nom+" : "+ current.etatCourant );
-					MenuButton fonct = current.getFonctionnalitées();
-					MenuItem quitter = new MenuItem("Quitter");
-					quitter.setOnAction(new EventHandler<ActionEvent>() {
-						@Override
-						public void handle(ActionEvent event) {
-							root.getChildren().remove(fonct);
-						}
-					});
-					fonct.getItems().add(quitter);
-					root.getChildren().add(fonct);
+					public void handle(MouseEvent e) {
+						MenuButton fonct = current.getFonctionnalitées(root, img);
+						MenuItem quitter = new MenuItem("Quitter");
+						quitter.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent evt) {
+								root.getChildren().remove(fonct);
+							}
+						});
+						fonct.getItems().add(quitter);
+						root.getChildren().add(fonct);
 					}
 				}));
 				root.getChildren().add(img);
@@ -336,7 +334,7 @@ public class MainController {
 			public void handle(ActionEvent event) {
 				Pane root = (Pane) getRoot("/main/SuppressionEquipement.fxml");
 				Scene scene = new Scene(root);
-				List<Equipement> equip = Main.getPosition().getEquipements();
+				LinkedList<Equipement> equip = Main.getPosition().getEquipements();
 				for (int i = 0; i < equip.size(); i++) {
 					Equipement equipement = equip.get(i);
 					Button boutonEquip = equip.get(i).getButton();
@@ -763,4 +761,5 @@ public class MainController {
 				choix11, choix12, choix13, choix14, choix15, choix16, choix17);
 		root.getChildren().add(avatars);
 	}
+
 }

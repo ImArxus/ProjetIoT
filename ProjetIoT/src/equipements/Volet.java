@@ -92,9 +92,9 @@ public class Volet extends Equipement implements Serializable {
 	@Override
 	public String getImage() {
 		if (etatCourant) {
-			return ("/images/objets/equipements.Volet.png");
-		} else {
 			return ("/images/objets/equipements.Volet.desactive.png");
+		} else {
+			return ("/images/objets/equipements.Volet.png");
 		}
 	}
 }

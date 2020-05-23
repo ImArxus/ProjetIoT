@@ -12,6 +12,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class Equipement implements Serializable {
 
@@ -141,20 +142,24 @@ public class Equipement implements Serializable {
 			setEtatCourant(false);
 		}
 	}
+
 	public String getImage() {
-		return ("/images/objets/"+this.getClass().getName()+".png");
+		return ("/images/objets/" + this.getClass().getName() + ".png");
 	}
+
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		return imageView;
 	}
+
 	public Button getButton() {
 		Button but = new Button();
 		but.setText(getNom());
 		return but;
 	}
-	public MenuButton getFonctionnalitées() {
+
+	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
@@ -163,15 +168,19 @@ public class Equipement implements Serializable {
 		MenuItem allumer = new MenuItem("Allumer");
 		allumer.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent evt) {
 				allumer();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
 		MenuItem eteindre = new MenuItem("Éteindre");
 		eteindre.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent evt) {
 				eteindre();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
 		fonctionnalite.getItems().addAll(allumer, eteindre);
