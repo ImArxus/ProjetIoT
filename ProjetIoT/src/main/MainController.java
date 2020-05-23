@@ -195,8 +195,8 @@ public class MainController {
 		ImageView imageView = Piece.imageViewPiece();
 		root.getChildren().add(imageView);
 
-		// Affichage de la bande d'infos
-		LinkedList<Label> liste = affichageBande(event);
+		// Affichage du bandeau d'infos
+		LinkedList<Label> liste = affichageBandeau(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
 		}
@@ -218,7 +218,7 @@ public class MainController {
 
 		// Affichage des fonctions admin
 		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
-			root.getChildren().add(actionsAdmin(event));
+			root.getChildren().add(actionsAdmin(event, root));
 		}
 
 		window.setTitle(Main.getMaison().getNom());
@@ -243,7 +243,7 @@ public class MainController {
 		}
 	}
 
-	public MenuButton actionsAdmin(ActionEvent event) {
+	public MenuButton actionsAdmin(ActionEvent event, Pane root) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		Maison maison = Main.getMaison();
@@ -251,7 +251,7 @@ public class MainController {
 		MenuButton choiceBox = new MenuButton("Modes admin");
 		choiceBox.setPrefSize(130, 10);
 		choiceBox.setLayoutX(657);
-		choiceBox.setLayoutY(64);
+		choiceBox.setLayoutY(67);
 
 		MenuItem choix1 = new MenuItem("Créer une pièce");
 		choix1.setOnAction(new EventHandler<ActionEvent>() {
@@ -349,12 +349,11 @@ public class MainController {
 			}
 		});
 
-		// TODO
-		MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
+		MenuItem choix7 = new MenuItem("Changer la couleur du bandeau");
 		choix7.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Changer la couleur des paramètres");
+				couleurBandeau(root);
 			}
 		});
 
@@ -371,7 +370,7 @@ public class MainController {
 		return choiceBox;
 	}
 
-	public LinkedList<Label> affichageBande(ActionEvent event) {
+	public LinkedList<Label> affichageBandeau(ActionEvent event) {
 		LinkedList<Label> liste = new LinkedList<Label>();
 		double prochainLabel = 4; // LayoutX où insérer le prochain label
 
@@ -476,6 +475,102 @@ public class MainController {
 		liste.add(lbl6);
 
 		return liste;
+	}
+
+	public void couleurBandeau(Pane root) {
+		MenuButton couleurs = new MenuButton("Couleur du bandeau");
+		couleurs.setPrefSize(220, 30);
+		couleurs.setLayoutX(300);
+		couleurs.setLayoutY(220);
+
+		MenuItem choix1 = new MenuItem("Blanc");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FFFFFF");
+			}
+		});
+		MenuItem choix2 = new MenuItem("Argent");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #C0C0C0");
+			}
+		});
+		MenuItem choix3 = new MenuItem("Gris");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #808080");
+			}
+		});
+		MenuItem choix4 = new MenuItem("Noir");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #000000");
+			}
+		});
+		MenuItem choix5 = new MenuItem("Rouge");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FF0000");
+			}
+		});
+		MenuItem choix6 = new MenuItem("Bordeau");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #800000");
+			}
+		});
+		MenuItem choix7 = new MenuItem("Jaune");
+		choix7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FFFF00");
+			}
+		});
+		MenuItem choix8 = new MenuItem("Vert");
+		choix8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #008000");
+			}
+		});
+		MenuItem choix9 = new MenuItem("Bleu");
+		choix9.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #0000FF");
+			}
+		});
+		MenuItem choix10 = new MenuItem("Magenta");
+		choix10.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FF00FF");
+			}
+		});
+		MenuItem choix11 = new MenuItem("Violet");
+		choix11.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #800080");
+			}
+		});
+		MenuItem choix12 = new MenuItem("Cette couleur est parfaite pour moi !");
+		choix12.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.getChildren().remove(couleurs);
+			}
+		});
+
+		couleurs.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8, choix9, choix10,
+				choix11, choix12);
+		root.getChildren().add(couleurs);
 	}
 
 }
