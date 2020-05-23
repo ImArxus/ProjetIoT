@@ -77,8 +77,4 @@ public class Balance extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
-	@Override
-	public String getImage() {
-		return ("/images/objets/equipements.Balance.png");
-	}
 }

@@ -142,7 +142,7 @@ public class Equipement implements Serializable {
 		}
 	}
 	public String getImage() {
-		return ("/images/objets/equipements.png");
+		return ("/images/objets/"+this.getClass().getName()+".png");
 	}
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
