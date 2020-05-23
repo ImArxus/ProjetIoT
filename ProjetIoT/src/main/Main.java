@@ -281,6 +281,7 @@ public class Main extends Application implements Serializable {
 	}
 
 	private static List<String> avatars = new LinkedList<String>();
+	
 	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
@@ -306,7 +307,6 @@ public class Main extends Application implements Serializable {
 		Main.avatar = avatar;
 	}
 
-	
 	public static Piece getPosition() {
 		return position;
 	}

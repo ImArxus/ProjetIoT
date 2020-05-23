@@ -186,6 +186,18 @@ public class MainController {
 		lbl.setLayoutY(550);
 	}
 
+	private ImageView imageViewAvatar = new ImageView();
+
+	public void afficherAvatar(Pane root) {
+		if (root.getChildren().contains(imageViewAvatar)) {
+			root.getChildren().remove(imageViewAvatar);
+		}
+		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
+		imageViewAvatar.setTranslateX(50);
+		imageViewAvatar.setTranslateY(200);
+		root.getChildren().add(imageViewAvatar);
+	}
+
 	public void scenePiece(ActionEvent event) {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
@@ -210,11 +222,7 @@ public class MainController {
 		}
 
 		// Affichage de l'avatar
-		ImageView imageViewAvatar = new ImageView();
-		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
-		imageViewAvatar.setTranslateX(50);
-		imageViewAvatar.setTranslateY(200);
-		root.getChildren().add(imageViewAvatar);
+		afficherAvatar(root);
 
 		// Affichage des fonctions admin
 		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
@@ -357,12 +365,11 @@ public class MainController {
 			}
 		});
 
-		// TODO
 		MenuItem choix8 = new MenuItem("Changer l'avatar");
 		choix8.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Changer l'avatar");
+				changerAvatar(root);
 			}
 		});
 
@@ -571,6 +578,154 @@ public class MainController {
 		couleurs.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8, choix9, choix10,
 				choix11, choix12);
 		root.getChildren().add(couleurs);
+	}
+
+	public void changerAvatar(Pane root) {
+		MenuButton avatars = new MenuButton("Avatars");
+		avatars.setPrefSize(220, 30);
+		avatars.setLayoutX(570);
+		avatars.setLayoutY(100);
+
+		MenuItem choix1 = new MenuItem("Homme 9");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme9");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix2 = new MenuItem("Homme 8");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme8");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix3 = new MenuItem("Homme 7");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme7");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix4 = new MenuItem("Homme 6");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme6");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix5 = new MenuItem("Homme 5");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme5");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix6 = new MenuItem("Homme 4");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme4");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix7 = new MenuItem("Homme 3");
+		choix7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme3");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix8 = new MenuItem("Homme 2");
+		choix8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme2");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix9 = new MenuItem("Homme 1");
+		choix9.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("homme1");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix10 = new MenuItem("Femme 6");
+		choix10.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille7");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix11 = new MenuItem("Femme 5");
+		choix11.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille6");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix12 = new MenuItem("Femme 4");
+		choix12.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille5");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix13 = new MenuItem("Femme 3");
+		choix13.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille4");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix14 = new MenuItem("Femme 2");
+		choix14.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille1");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix15 = new MenuItem("Femme 1");
+		choix15.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Main.setAvatar("fille2");
+				afficherAvatar(root);
+			}
+		});
+		MenuItem choix16 = new MenuItem("Supprimer l'avatar");
+		choix16.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (root.getChildren().contains(imageViewAvatar)) {
+					root.getChildren().remove(imageViewAvatar);
+				}
+			}
+		});
+		MenuItem choix17 = new MenuItem("Cet avatar est parfait pour moi !");
+		choix17.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.getChildren().remove(avatars);
+			}
+		});
+
+		avatars.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8, choix9, choix10,
+				choix11, choix12, choix13, choix14, choix15, choix16, choix17);
+		root.getChildren().add(avatars);
 	}
 
 }
