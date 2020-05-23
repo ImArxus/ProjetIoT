@@ -4,12 +4,18 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
+import main.Main;
 
 public class Frigo extends Equipement implements Serializable {
 
@@ -109,5 +115,50 @@ public class Frigo extends Equipement implements Serializable {
 		but.setTranslateX(700);
 		but.setTranslateY(450);
 		return but;
+	}
+	@Override
+	public MenuButton getFonctionnalitées() {
+		MenuButton fonctionnalite = super.getFonctionnalitées();
+
+		MenuItem baisserTemperature = new MenuItem(" Baisser temperature");
+		baisserTemperature.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				diminuerTemperature();
+				System.out.println("La temperature du frigo " + getNom() + " est de " + getTemperature());
+			}
+		});
+		MenuItem augmenterTemperature = new MenuItem(" Augmenter temperature");
+		augmenterTemperature.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				augmenterTemperature();
+				System.out.println("La temperature du frigo " + getNom() + " est de " + getTemperature());
+			}
+		});
+		MenuItem commander = new MenuItem(" Commander");
+		commander.setOnAction(new EventHandler<ActionEvent>() {
+		
+			@Override
+			public void handle(ActionEvent event) {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Que voulez vous commander ?");
+				String requete1 = s.nextLine();
+				System.out.println("En quelle quantitée ?");
+				int requete2 = Main.toInt(s.nextLine());
+				commander(requete1, requete2);
+				System.out.println("Dans " + getNom() + ", il y a maintenant " + getDispo());
+				s.close();
+			}
+		});
+		MenuItem listerProduits = new MenuItem(" Lister produits");
+		listerProduits.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Dans " + getNom() + ", il y a " + getDispo());
+			}
+		});
+		fonctionnalite.getItems().addAll(baisserTemperature,augmenterTemperature,listerProduits,commander);
+		return fonctionnalite;
 	}
 }
