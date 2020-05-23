@@ -318,9 +318,18 @@ public class MainController {
 			public void handle(ActionEvent event) {
 				Pane root = (Pane) getRoot("/main/SuppressionEquipement.fxml");
 				Scene scene = new Scene(root);
-				List <Equipement> equip=Main.getPosition().getEquipements();
-				for (int i=0;i<equip.size();i++) {
-					root.getChildren().add(equip.get(i).getButton());
+				List<Equipement> equip = Main.getPosition().getEquipements();
+				for (int i = 0; i < equip.size(); i++) {
+					Equipement equipement =equip.get(i);
+					Button boutonEquip = equip.get(i).getButton();
+					boutonEquip.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent e) {
+							Main.getPosition().supprimerEquipement(equipement);
+							scenePiece(e);
+						}
+					});
+					root.getChildren().add(boutonEquip);
 				}
 				window.setTitle("Supprimer un équipement");
 				window.setScene(scene);
