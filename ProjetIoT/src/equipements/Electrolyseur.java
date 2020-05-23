@@ -107,4 +107,12 @@ public class Electrolyseur extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(105);
+		imageView.setTranslateX(300);
+		return imageView;
+	}
+
 }

@@ -73,7 +73,7 @@ public class Radiateur extends Equipement implements Serializable {
 	
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements.Radiateur.png"));
+        imageView.setImage(new Image(getImage()));
         imageView.setTranslateY(110);
         imageView.setTranslateX(240);
         return imageView;

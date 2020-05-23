@@ -116,11 +116,7 @@ public class TV extends Equipement implements Serializable {
 	@Override
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		if (super.isEtatCourant()) {
-			imageView.setImage(new Image("/images/objets/equipements.TV.png"));
-		} else {
-			imageView.setImage(new Image("/images/objets/equipements.TV.desactive.png"));
-		}
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(80);
 		imageView.setTranslateX(35);
 		return imageView;
@@ -155,14 +151,15 @@ public class TV extends Equipement implements Serializable {
 				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
 			}
 		});
-		MenuItem diminuerVolume= new MenuItem(" Diminuer Volume");
+		MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
 		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				diminuerVolume();
 				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
 			}
-		});MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
+		});
+		MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
 		augmenterChaine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -170,7 +167,7 @@ public class TV extends Equipement implements Serializable {
 				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
 			}
 		});
-		MenuItem diminuerChaine= new MenuItem(" Diminuer chaine");
+		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
 		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -190,7 +187,8 @@ public class TV extends Equipement implements Serializable {
 				s.close();
 			}
 		});
-		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume,augmenterChaine,diminuerChaine, choisirChaine);
+		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine,
+				choisirChaine);
 		return fonctionnalite;
 	}
 }

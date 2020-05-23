@@ -82,7 +82,7 @@ public class Cheminee extends Equipement implements Serializable {
 
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/objets/equipements.Cheminee.png"));
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(105);
 		imageView.setTranslateX(-180);
 		return imageView;

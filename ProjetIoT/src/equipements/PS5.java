@@ -67,7 +67,7 @@ public class PS5 extends Equipement implements Serializable {
 
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/objets/equipements.PS5.png"));
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(90);
 		imageView.setTranslateX(40);
 		return imageView;

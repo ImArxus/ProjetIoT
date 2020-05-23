@@ -79,7 +79,7 @@ public class Volet extends Equipement implements Serializable {
 	
 	public ImageView getImageView() {
 		ImageView i0 = new ImageView();
-		i0.setImage(new Image("/images/objets/equipements.Volet.png"));
+		i0.setImage(new Image(getImage()));
 		return i0;
 	}
 	@Override

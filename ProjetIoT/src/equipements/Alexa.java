@@ -86,7 +86,7 @@ public class Alexa extends Equipement implements Serializable {
 
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/objets/equipements.Alexa.png"));
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(25);
 		imageView.setTranslateX(-200);
 		return imageView;

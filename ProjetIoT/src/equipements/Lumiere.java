@@ -102,11 +102,7 @@ public class Lumiere extends Equipement implements Serializable {
 
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		if (Main.getHeure() > 21 || Main.getHeure() < 6) {
-			imageView.setImage(new Image("/images/objets/equipements.Lumiere.png"));
-		} else {
-			imageView.setImage(new Image("/images/objets/equipements.Lumieres.desactive.png"));
-		}
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(-120);
 		return imageView;
 	}
@@ -170,7 +166,17 @@ public class Lumiere extends Equipement implements Serializable {
 	@Override
 	public String getImage() {
 		if (etatCourant) {
-			return ("/images/objets/equipements.Lumiere.png");
+			if (getCouleur() == "bleu") {
+				return ("/images/objets/equipements.Lumiere.bleu.png");
+			} else if (getCouleur() == "rouge") {
+				return ("/images/objets/equipements.Lumiere.rouge.png");
+			} else if (getCouleur() == "jaune") {
+				return ("/images/objets/equipements.Lumiere.jaune.png");
+			} else if (getCouleur() == "vert") {
+				return ("/images/objets/equipements.Lumiere.vert.png");
+			} else {
+				return ("/images/objets/equipements.Lumiere.png");
+			}
 		} else {
 			return ("/images/objets/equipements.Lumiere.desactive.png");
 		}

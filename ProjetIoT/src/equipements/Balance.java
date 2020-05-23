@@ -77,4 +77,12 @@ public class Balance extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(-105);
+		imageView.setTranslateX(-180);
+		return imageView;
+	}
+
 }
