@@ -5,7 +5,11 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -147,5 +151,28 @@ public class Equipement implements Serializable {
 		Button but = new Button();
 		but.setText(getNom());
 		return but;
+	}
+	public MenuButton getFonctionnalitées() {
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+		fonctionnalite.setPrefSize(220, 30);
+		fonctionnalite.setLayoutX(570);
+		fonctionnalite.setLayoutY(100);
+
+		MenuItem allumer = new MenuItem("Allumer");
+		allumer.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				allumer();
+			}
+		});
+		MenuItem eteindre = new MenuItem("Éteindre");
+		eteindre.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				eteindre();
+			}
+		});
+		fonctionnalite.getItems().addAll(allumer, eteindre);
+		return fonctionnalite;
 	}
 }

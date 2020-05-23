@@ -1,8 +1,13 @@
 package equipements;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -105,6 +110,7 @@ public class Lumiere extends Equipement implements Serializable {
 		imageView.setTranslateY(-120);
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -113,4 +119,49 @@ public class Lumiere extends Equipement implements Serializable {
 		return but;
 	}
 
+	@Override
+	public MenuButton getFonctionnalitées() {
+		MenuButton fonctionnalite = super.getFonctionnalitées();
+
+		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				augmenterIntensite();
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+			}
+		});
+		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				diminuerIntensite();
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+			}
+		});
+		MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
+		choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Quelle intensité (entre 0 et 100) ?");
+				int intensite = Main.toInt(s.nextLine());
+				choisirIntensite(intensite);
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+			}
+		});
+		MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
+		choisirCouleur.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Quelle couleur parmis les suivantes : blanc, bleu, rouge, jaune, vert");
+				String couleur = s.nextLine();
+				changerCouleur(couleur);
+				System.out.println("La couleur de " + getNom() + " est réglé sur " + getCouleur());
+			}
+		});
+		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);
+		return fonctionnalite;
+	}
 }

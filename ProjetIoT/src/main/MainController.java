@@ -224,41 +224,16 @@ public class MainController {
 				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent event) {
 						System.out.println(current.getNom());
-						MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
-						fonctionnalite.setPrefSize(220, 30);
-						fonctionnalite.setLayoutX(570);
-						fonctionnalite.setLayoutY(100);
-
-						MenuItem choix1 = new MenuItem("Quitter");
-						choix1.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								root.getChildren().remove(fonctionnalite);
-							}
-						});
-						MenuItem choix2 = new MenuItem("Allumer");
-						choix2.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								current.allumer();
-							}
-						});
-						MenuItem choix3 = new MenuItem("Éteindre");
-						choix3.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								current.eteindre();
-							}
-						});
-						MenuItem choix4 = new MenuItem("Actions possibles");
-						choix3.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								System.out.println(current.actionsPossibles());
-							}
-						});
-						fonctionnalite.getItems().addAll(choix1, choix2, choix3, choix4);
-						root.getChildren().add(fonctionnalite);
+					MenuButton fonct = current.getFonctionnalitées();
+					MenuItem quitter = new MenuItem("Quitter");
+					quitter.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent event) {
+							root.getChildren().remove(fonct);
+						}
+					});
+					fonct.getItems().add(quitter);
+					root.getChildren().add(fonct);
 					}
 				}));
 				root.getChildren().add(img);
