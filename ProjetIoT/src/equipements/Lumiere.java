@@ -148,6 +148,7 @@ public class Lumiere extends Equipement implements Serializable {
 				int intensite = Main.toInt(s.nextLine());
 				choisirIntensite(intensite);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				s.close();
 			}
 		});
 		MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
@@ -159,6 +160,7 @@ public class Lumiere extends Equipement implements Serializable {
 				String couleur = s.nextLine();
 				changerCouleur(couleur);
 				System.out.println("La couleur de " + getNom() + " est réglé sur " + getCouleur());
+				s.close();
 			}
 		});
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);

@@ -130,9 +130,18 @@ public class Cheminee extends Equipement implements Serializable {
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 				choisirIntensite(intensite);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				s.close();
 				}
 		});
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité);
 		return fonctionnalite;
+	}
+	@Override
+	public String getImage() {
+		if (super.etatCourant) {
+			return ("/images/objets/equipements.Cheminee.png");
+		} else {
+			return ("/images/objets/equipements.Cheminee.desactive.png");
+		}
 	}
 }
