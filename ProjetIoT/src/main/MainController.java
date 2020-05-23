@@ -325,7 +325,8 @@ public class MainController {
 		choix5.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Supprimer tous les équipement de la pièce");
+				Main.getPosition().getEquipements().clear();
+				System.out.println("Suppression effectuée, page à rafraichir");
 			}
 		});
 
