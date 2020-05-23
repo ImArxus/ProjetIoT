@@ -2,6 +2,7 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -81,5 +82,12 @@ public class Ventilateur extends Equipement implements Serializable {
 		ImageView i0 = new ImageView();
 		i0.setImage(new Image("/images/objets/equipements.Ventilateur.png"));
 		return i0;
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(600);
+		but.setTranslateY(500);
+		return but;
 	}
 }

@@ -2,6 +2,7 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -118,5 +119,11 @@ public class TV extends Equipement implements Serializable {
 		imageView.setTranslateX(35);
 		return imageView;
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(500);
+		but.setTranslateY(500);
+		return but;
+	}
 }

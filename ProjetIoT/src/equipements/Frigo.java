@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -101,5 +102,12 @@ public class Frigo extends Equipement implements Serializable {
 		ImageView i0 = new ImageView();
 		i0.setImage(new Image("/images/objets/equipements.Frigo.png"));
 		return i0;
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(700);
+		but.setTranslateY(450);
+		return but;
 	}
 }

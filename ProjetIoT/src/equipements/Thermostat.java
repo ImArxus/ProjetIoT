@@ -2,6 +2,7 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.control.Button;
 import main.Equipement;
 
 public class Thermostat extends Equipement implements Serializable {
@@ -66,5 +67,12 @@ public class Thermostat extends Equipement implements Serializable {
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la température");
 		}
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(400);
+		but.setTranslateY(500);
+		return but;
 	}
 }

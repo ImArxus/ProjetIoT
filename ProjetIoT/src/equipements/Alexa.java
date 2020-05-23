@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -89,5 +90,12 @@ public class Alexa extends Equipement implements Serializable {
 		imageView.setTranslateY(25);
 		imageView.setTranslateX(-200);
 		return imageView;
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(200);
+		but.setTranslateY(450);
+		return but;
 	}
 }

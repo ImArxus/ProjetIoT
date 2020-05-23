@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -141,5 +142,10 @@ public class Equipement implements Serializable {
 		ImageView imageView = new ImageView();
 		imageView.setImage(new Image("/images/objets/equipements." + getClass().getSimpleName() + ".png"));
 		return imageView;
+	}
+	public Button getButton() {
+		Button but = new Button();
+		but.setText(getNom());
+		return but;
 	}
 }

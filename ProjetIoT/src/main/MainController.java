@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -315,8 +316,15 @@ public class MainController {
 		choix4.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Supprimer un équipement");
-
+				Pane root = (Pane) getRoot("/main/SuppressionEquipement.fxml");
+				Scene scene = new Scene(root);
+				List <Equipement> equip=Main.getPosition().getEquipements();
+				for (int i=0;i<equip.size();i++) {
+					root.getChildren().add(equip.get(i).getButton());
+				}
+				window.setTitle("Supprimer un équipement");
+				window.setScene(scene);
+				window.show();
 			}
 		});
 
