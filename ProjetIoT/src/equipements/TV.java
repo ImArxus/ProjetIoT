@@ -126,4 +126,12 @@ public class TV extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+	@Override
+	public String getImage() {
+		if (super.etatCourant) {
+			return ("/images/objets/equipements.TV.png");
+		} else {
+			return ("/images/objets/equipements.TV.desactive.png");
+		}
+	}
 }

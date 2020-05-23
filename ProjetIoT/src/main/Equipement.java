@@ -141,10 +141,12 @@ public class Equipement implements Serializable {
 			setEtatCourant(false);
 		}
 	}
-
+	public String getImage() {
+		return ("/images/objets/equipements.png");
+	}
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/objets/equipements." + getClass().getSimpleName() + ".png"));
+		imageView.setImage(new Image(getImage()));
 		return imageView;
 	}
 	public Button getButton() {

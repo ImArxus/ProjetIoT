@@ -79,4 +79,8 @@ public class PS5 extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+	@Override
+	public String getImage() {
+		return ("/images/objets/equipements.PS5.png");
+	}
 }

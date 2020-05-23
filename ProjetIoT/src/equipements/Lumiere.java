@@ -164,4 +164,13 @@ public class Lumiere extends Equipement implements Serializable {
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);
 		return fonctionnalite;
 	}
+
+	@Override
+	public String getImage() {
+		if (super.etatCourant) {
+			return ("/images/objets/equipements.Lumiere.png");
+		} else {
+			return ("/images/objets/equipements.Lumiere.desactive.png");
+		}
+	}
 }

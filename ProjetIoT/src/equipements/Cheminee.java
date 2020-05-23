@@ -135,4 +135,8 @@ public class Cheminee extends Equipement implements Serializable {
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité);
 		return fonctionnalite;
 	}
+	@Override
+	public String getImage() {
+		return ("/images/objets/equipements.Cheminee.png");
+	}
 }
