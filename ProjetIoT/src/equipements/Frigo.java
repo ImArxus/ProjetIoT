@@ -161,4 +161,11 @@ public class Frigo extends Equipement implements Serializable {
 		fonctionnalite.getItems().addAll(baisserTemperature,augmenterTemperature,listerProduits,commander);
 		return fonctionnalite;
 	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(140);
+		imageView.setTranslateX(-100);
+		return imageView;
+	}
 }
