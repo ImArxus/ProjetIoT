@@ -223,7 +223,7 @@ public class MainController {
 				ImageView img = equip.get(i).afficher();
 				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent event) {
-						System.out.println(current.getNom());
+						System.out.println(current.nom+" : "+ current.etatCourant );
 					MenuButton fonct = current.getFonctionnalitées();
 					MenuItem quitter = new MenuItem("Quitter");
 					quitter.setOnAction(new EventHandler<ActionEvent>() {

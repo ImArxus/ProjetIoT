@@ -138,7 +138,7 @@ public class Cheminee extends Equipement implements Serializable {
 	}
 	@Override
 	public String getImage() {
-		if (super.etatCourant) {
+		if (etatCourant) {
 			return ("/images/objets/equipements.Cheminee.png");
 		} else {
 			return ("/images/objets/equipements.Cheminee.desactive.png");

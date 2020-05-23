@@ -1,11 +1,17 @@
 package equipements;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
+import main.Main;
 
 public class TV extends Equipement implements Serializable {
 
@@ -119,6 +125,7 @@ public class TV extends Equipement implements Serializable {
 		imageView.setTranslateX(35);
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -126,12 +133,64 @@ public class TV extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+
 	@Override
 	public String getImage() {
-		if (super.etatCourant) {
+		if (etatCourant) {
 			return ("/images/objets/equipements.TV.png");
 		} else {
 			return ("/images/objets/equipements.TV.desactive.png");
 		}
+	}
+
+	@Override
+	public MenuButton getFonctionnalitées() {
+		MenuButton fonctionnalite = super.getFonctionnalitées();
+
+		MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
+		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				augmenterVolume();
+				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
+			}
+		});
+		MenuItem diminuerVolume= new MenuItem(" Diminuer Volume");
+		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				diminuerVolume();
+				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
+			}
+		});MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
+		augmenterChaine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				augmenterChaine();
+				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
+			}
+		});
+		MenuItem diminuerChaine= new MenuItem(" Diminuer chaine");
+		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				diminuerChaine();
+				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
+			}
+		});
+		MenuItem choisirChaine = new MenuItem(" Choisir chaine");
+		choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Quelle chaine (entre 0 et 100) ?");
+				int chaine = Main.toInt(s.nextLine());
+				mettreChaine(chaine);
+				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
+				s.close();
+			}
+		});
+		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume,augmenterChaine,diminuerChaine, choisirChaine);
+		return fonctionnalite;
 	}
 }

@@ -169,7 +169,7 @@ public class Lumiere extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
-		if (super.etatCourant) {
+		if (etatCourant) {
 			return ("/images/objets/equipements.Lumiere.png");
 		} else {
 			return ("/images/objets/equipements.Lumiere.desactive.png");
