@@ -14,6 +14,7 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import main.Equipement;
 import main.Main;
 
@@ -117,8 +118,8 @@ public class Frigo extends Equipement implements Serializable {
 		return but;
 	}
 	@Override
-	public MenuButton getFonctionnalitées() {
-		MenuButton fonctionnalite = super.getFonctionnalitées();
+	public MenuButton getFonctionnalitées(Pane root, ImageView imv) {
+		MenuButton fonctionnalite = super.getFonctionnalitées(root, imv);
 
 		MenuItem baisserTemperature = new MenuItem(" Baisser temperature");
 		baisserTemperature.setOnAction(new EventHandler<ActionEvent>() {
