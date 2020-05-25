@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -17,12 +19,17 @@ import main.Main;
 public class Cheminee extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 7169763608942128813L;
-	private int intensite;
+	private double intensite;
+	private static ProgressBar volumeBar = new ProgressBar(0);
 
-	public Cheminee(String nom, boolean etatCourant, int intensite, double positionHorizontale,
+
+	public Cheminee(String nom, boolean etatCourant, double intensite, double positionHorizontale,
 			double positionVerticale) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
+		volumeBar.setLayoutX(170);
+		volumeBar.setLayoutY(350);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	public Cheminee(String nom) {
@@ -30,6 +37,9 @@ public class Cheminee extends Equipement implements Serializable {
 		this.setIntensite(intensite);
 		this.setPositionHorizontale(0.26);
 		this.setPositionVerticale(0.34);
+		volumeBar.setLayoutX(170);
+		volumeBar.setLayoutY(350);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	@Override
@@ -37,12 +47,16 @@ public class Cheminee extends Equipement implements Serializable {
 		return super.actionsPossibles()
 				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité";
 	}
+	
+	public static ProgressBar getVolumeBar() {
+		return volumeBar;
+	}
 
 	public double getIntensite() {
 		return intensite;
 	}
 
-	public void setIntensite(int intensite) {
+	public void setIntensite(double intensite) {
 		this.intensite = intensite;
 	}
 
@@ -68,16 +82,44 @@ public class Cheminee extends Equipement implements Serializable {
 		}
 	}
 
-	public void choisirIntensite(int intensite) {
+	public void choisirIntensite(double intensite2) {
 		if (super.isEtatCourant()) {
-			if (intensite <= 100 && intensite >= 0) {
-				setIntensite(intensite);
-				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
+			if (intensite2 <= 100 && intensite2 >= 0) {
+				setIntensite(intensite2);
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite2 * 0.05)));
 			} else {
 				System.out.println("Intensite non-valide");
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
+		}
+	}
+	
+	public void augmenterIntensiteFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getIntensite() <= 90) {
+				intensite += 10;
+				volumeBar.setProgress(getIntensite() / 100);
+				try {
+					root.getChildren().add(volumeBar);
+				} catch (Exception e) {
+				}
+			}
+		}
+	}
+
+	public void diminuerIntensiteFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getIntensite() > 10) {
+				intensite -= 10;
+				volumeBar.setProgress(getIntensite() / 100);
+			}
+			try {
+				root.getChildren().add(volumeBar);
+			} catch (Exception e) {
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
@@ -107,7 +149,7 @@ public class Cheminee extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				intensite = (int) getIntensite();
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-				augmenterIntensite();
+				augmenterIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 			}
 		});
@@ -117,7 +159,7 @@ public class Cheminee extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				intensite = (int) getIntensite();
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-				diminuerIntensite();
+				diminuerIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 			}
 		});

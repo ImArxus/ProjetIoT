@@ -23,8 +23,7 @@ public class Enceinte extends Equipement implements Serializable {
 	private double volume;
 	private Map<String, String> musiques = new HashMap<String, String>();
 	private String enEcoute;
-	private ProgressBar volumeBar = new ProgressBar(0);
-
+	private static ProgressBar volumeBar = new ProgressBar(0);
 
 	public Enceinte(String nom) {
 		super(nom);
@@ -42,8 +41,8 @@ public class Enceinte extends Equipement implements Serializable {
 		volumeBar.setPrefSize(80, 15);
 	}
 
-	public Enceinte(String nom, boolean etatCourant, double volume, double positionHorizontale, double positionVerticale,
-			Map<String, String> musiques, String enEcoute) {
+	public Enceinte(String nom, boolean etatCourant, double volume, double positionHorizontale,
+			double positionVerticale, Map<String, String> musiques, String enEcoute) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.setMusiques(musiques);
@@ -56,6 +55,10 @@ public class Enceinte extends Equipement implements Serializable {
 	@Override
 	public String actionsPossibles() {
 		return super.actionsPossibles() + "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Jouer musique ";
+	}
+	
+	public static ProgressBar getVolumeBar() {
+		return volumeBar;
 	}
 
 	public double getVolume() {
@@ -126,6 +129,7 @@ public class Enceinte extends Equipement implements Serializable {
 		imageView.setTranslateX(140);
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -133,27 +137,35 @@ public class Enceinte extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
-	
+
 	public void augmenterVolumeFX(Pane root) {
 		if (super.isEtatCourant()) {
-			if (getVolume() < 90) {
+			if (getVolume() <= 90) {
 				volume += 10;
 				volumeBar.setProgress(getVolume() / 100);
+				try {
+					root.getChildren().add(volumeBar);
+				} catch (Exception e) {
+				}
 			}
-			root.getChildren().add(volumeBar);
-		} 
+		}
 	}
-	
+
 	public void diminuerVolumeFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getVolume() > 10) {
 				volume -= 10;
 				volumeBar.setProgress(getVolume() / 100);
 			}
-			root.getChildren().add(volumeBar);
+			try {
+				root.getChildren().add(volumeBar);
+			} catch (Exception e) {
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
-	
+
 	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
@@ -177,6 +189,5 @@ public class Enceinte extends Equipement implements Serializable {
 		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume);
 		return fonctionnalite;
 	}
-	
-	
+
 }

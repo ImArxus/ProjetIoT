@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
+import equipements.Cheminee;
+import equipements.Enceinte;
 import equipements.TV;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -193,6 +195,12 @@ public class Equipement implements Serializable {
 		LinkedList<Object> liste = new LinkedList<Object>();
 		if (this instanceof TV) {
 			liste.add(TV.getVolumeBar());
+		}
+		if(this instanceof Enceinte) {
+			liste.add(Enceinte.getVolumeBar());
+		}
+		if(this instanceof Cheminee) {
+			liste.add(Cheminee.getVolumeBar());
 		}
 		return liste;
 	}

@@ -28,9 +28,9 @@ public class TV extends Equipement implements Serializable {
 		setNumeroChaine(1);
 		this.setPositionHorizontale(0.49);
 		this.setPositionVerticale(0.4);
-		volumeBar.setLayoutX(325);
+		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
-		volumeBar.setPrefSize(150, 25);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
@@ -38,9 +38,9 @@ public class TV extends Equipement implements Serializable {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;
-		volumeBar.setLayoutX(325);
+		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
-		volumeBar.setPrefSize(150, 25);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	@Override
