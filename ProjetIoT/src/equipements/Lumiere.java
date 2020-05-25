@@ -6,11 +6,13 @@ import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Box;
 import main.Equipement;
 import main.Main;
 
@@ -114,6 +116,23 @@ public class Lumiere extends Equipement implements Serializable {
 		but.setTranslateX(100);
 		but.setTranslateY(500);
 		return but;
+	}
+
+	public static void boxIntensiteLum(Pane root) {
+		Main.traitementIntensiteLumineuseNaturelle();
+		Main.traitementIntensiteLumineuse();
+
+		Box box = new Box(100, 25, 0);
+		box.setLayoutX(458);
+		box.setLayoutY(80);
+		Label lblLum = new Label();
+		lblLum.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
+		lblLum.setStyle("-fx-font: 20 arial; -fx-font-weight: bold;");
+		lblLum.setLayoutX(411);
+		lblLum.setLayoutY(68);
+
+		root.getChildren().add(box);
+		root.getChildren().add(lblLum);
 	}
 
 	@Override

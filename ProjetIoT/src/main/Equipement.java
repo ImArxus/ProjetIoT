@@ -8,6 +8,8 @@ import java.util.Scanner;
 import equipements.Cheminee;
 import equipements.Enceinte;
 import equipements.Frigo;
+import equipements.Lumiere;
+import equipements.Radiateur;
 import equipements.TV;
 import equipements.Ventilateur;
 import javafx.event.ActionEvent;
@@ -177,6 +179,8 @@ public class Equipement implements Serializable {
 				allumer();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
 			}
 		});
 		MenuItem eteindre = new MenuItem("Éteindre");
@@ -187,6 +191,8 @@ public class Equipement implements Serializable {
 				root.getChildren().remove(img);
 				root.getChildren().removeAll(indicateurs());
 				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
 			}
 		});
 		fonctionnalite.getItems().addAll(allumer, eteindre);
@@ -197,20 +203,16 @@ public class Equipement implements Serializable {
 		LinkedList<Object> liste = new LinkedList<Object>();
 		if (this instanceof TV) {
 			liste.add(TV.getVolumeBar());
-		}
-		else if(this instanceof Enceinte) {
+		} else if (this instanceof Enceinte) {
 			liste.add(Enceinte.getVolumeBar());
-		}
-		else if(this instanceof Cheminee) {
+		} else if (this instanceof Cheminee) {
 			liste.add(Cheminee.getVolumeBar());
-		}
-		else if(this instanceof Frigo) {
+		} else if (this instanceof Frigo) {
 			liste.add(Frigo.getVolumeBar());
-		}
-		else if(this instanceof Ventilateur) {
+		} else if (this instanceof Ventilateur) {
 			liste.add(Ventilateur.getVolumeBar());
 		}
-		
+
 		return liste;
 	}
 }

@@ -95,21 +95,18 @@ public class Piece implements Serializable {
 	}
 
 	public double getTemperature() {
+		Main.traitementTemperatureNaturelle();
+		Main.traitementTemperature();
 		return temperature;
 	}
 
 	public void setTemperature(double temperature) {
-		if ((temperature >= 15) && (temperature <= 30)) {
-			this.temperature = temperature;
-		} else if (temperature > 30) {
-			this.temperature = 30;
-		} else {
-			this.temperature = 15;
-		}
-
+		this.temperature = temperature;
 	}
 
 	public int getIntensiteLumineuse() {
+		Main.traitementIntensiteLumineuseNaturelle();
+		Main.traitementIntensiteLumineuse();
 		return intensiteLumineuse;
 	}
 
