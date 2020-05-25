@@ -119,7 +119,6 @@ public class BarryHouse implements Serializable {
 		// Ajout cuisine
 		cuisine.ajouterEquipement(lumiere1);
 		cuisine.ajouterEquipement(volet1);
-		cuisine.ajouterEquipement(TV1);
 		cuisine.ajouterEquipement(Radiateur1);
 		cuisine.ajouterEquipement(frigo1);
 		cuisine.ajouterEquipement(Alarme);

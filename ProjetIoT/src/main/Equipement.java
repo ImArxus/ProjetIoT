@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 import equipements.Cheminee;
 import equipements.Enceinte;
+import equipements.Frigo;
 import equipements.TV;
+import equipements.Ventilateur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -196,12 +198,19 @@ public class Equipement implements Serializable {
 		if (this instanceof TV) {
 			liste.add(TV.getVolumeBar());
 		}
-		if(this instanceof Enceinte) {
+		else if(this instanceof Enceinte) {
 			liste.add(Enceinte.getVolumeBar());
 		}
-		if(this instanceof Cheminee) {
+		else if(this instanceof Cheminee) {
 			liste.add(Cheminee.getVolumeBar());
 		}
+		else if(this instanceof Frigo) {
+			liste.add(Frigo.getVolumeBar());
+		}
+		else if(this instanceof Ventilateur) {
+			liste.add(Ventilateur.getVolumeBar());
+		}
+		
 		return liste;
 	}
 }

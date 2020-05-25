@@ -50,6 +50,10 @@ public class Ventilateur extends Equipement implements Serializable {
 		return intensite;
 	}
 
+	public static ProgressBar getVolumeBar() {
+		return volumeBar;
+	}
+
 	public void setIntensite(double intensite2) {
 		this.intensite = intensite2;
 	}

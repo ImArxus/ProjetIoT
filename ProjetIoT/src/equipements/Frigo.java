@@ -56,6 +56,7 @@ public class Frigo extends Equipement implements Serializable {
 				+ "\n➡️ 4 : Baisser temperature\n➡️ 5 : Augmenter temperature\n➡️ 6 : Lister produits\n➡️ 7 : Commander";
 	}
 
+
 	@Override
 	public String toString() {
 		String etat = "fermé";
@@ -63,6 +64,10 @@ public class Frigo extends Equipement implements Serializable {
 			etat = "ouvert";
 		}
 		return getNom() + " (" + etat + ")";
+	}
+	
+	public static ProgressBar getVolumeBar() {
+		return volumeBar;
 	}
 
 	public double getTemperature() {
