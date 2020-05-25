@@ -19,6 +19,7 @@ public class TV extends Equipement implements Serializable {
 	private static ProgressBar volumeBar = new ProgressBar(0);
 	private double volume;
 	private int numeroChaine;
+	private ImageView imageView = new ImageView();
 
 	public TV(String nom) {
 		super(nom);
@@ -153,7 +154,6 @@ public class TV extends Equipement implements Serializable {
 
 	@Override
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(50);
 		imageView.setTranslateX(0);
@@ -211,7 +211,8 @@ public class TV extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				augmenterChaine();
 				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
+				root.getChildren().add(afficher());
+			}
 		});
 		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
 		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
@@ -219,20 +220,19 @@ public class TV extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				diminuerChaine();
 				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
-		});
-		/*MenuItem choisirChaine = new MenuItem(" Choisir chaine");
-		choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle chaine (entre 1 et 4) ?");
-				int chaine = Main.toInt(s.nextLine());
-				mettreChaine(chaine);
-				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
-				s.close();
+				root.getChildren().add(afficher());
 			}
-		});*/
+		});
+		/*
+		 * MenuItem choisirChaine = new MenuItem(" Choisir chaine");
+		 * choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
+		 * 
+		 * @Override public void handle(ActionEvent event) { Scanner s = new
+		 * Scanner(System.in); System.out.println("Quelle chaine (entre 1 et 4) ?"); int
+		 * chaine = Main.toInt(s.nextLine()); mettreChaine(chaine);
+		 * System.out.println(getNom() + " est réglé sur la chaine " +
+		 * getNumeroChaine()); s.close(); } });
+		 */
 		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
 		return fonctionnalite;
 	}

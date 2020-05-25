@@ -14,10 +14,10 @@ public class PS5 extends Equipement implements Serializable {
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
 	private Map<String, String> jeux = new HashMap<String, String>();
+	private ImageView imageView = new ImageView();
 
 	public PS5(String nom) {
 		super(nom);
-
 		jeux.put("FIFA 2021", "It's in the game");
 		jeux.put("Call of Duty Modern Warfare V", "bam bam bam");
 		jeux.put("Mario Kart X", "Mariooooo");
@@ -66,12 +66,12 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(90);
 		imageView.setTranslateX(40);
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();

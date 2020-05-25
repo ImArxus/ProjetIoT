@@ -20,6 +20,7 @@ public class Alexa extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 8308711409297886419L;
 	private static String pseudo;
+	private ImageView imageView = new ImageView();
 
 	public Alexa(String nom) {
 		super(nom);
@@ -90,12 +91,12 @@ public class Alexa extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(25);
 		imageView.setTranslateX(-200);
 		return imageView;
 	}
+
 	@Override
 	public String getImage() {
 		if (etatCourant) {
@@ -104,13 +105,16 @@ public class Alexa extends Equipement implements Serializable {
 			return ("/images/objets/equipements.Alexa.desactive.png");
 		}
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
 		but.setTranslateX(200);
 		but.setTranslateY(450);
 		return but;
-	}@Override
+	}
+
+	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
@@ -118,7 +122,7 @@ public class Alexa extends Equipement implements Serializable {
 		reponseHeure.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-			reponseHeure();
+				reponseHeure();
 			}
 		});
 		MenuItem reponseTemperature = new MenuItem(" Connaitre la température");
@@ -132,9 +136,12 @@ public class Alexa extends Equipement implements Serializable {
 		reponseEquipement.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				reponseEquipement();		}
+				reponseEquipement();
+			}
 		});
-		fonctionnalite.getItems().addAll(reponseHeure,reponseTemperature,reponseEquipement);
+
+
+		fonctionnalite.getItems().addAll(reponseHeure, reponseTemperature, reponseEquipement);
 		return fonctionnalite;
 	}
 
