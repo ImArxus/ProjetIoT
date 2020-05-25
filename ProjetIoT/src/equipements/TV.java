@@ -81,9 +81,10 @@ public class TV extends Equipement implements Serializable {
 				volume += 10;
 				volumeBar.setProgress(getVolume() / 100);
 			}
-			root.getChildren().add(volumeBar);
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+			try {
+				root.getChildren().add(volumeBar);
+			} catch (Exception e) {
+			}
 		}
 	}
 
@@ -103,7 +104,10 @@ public class TV extends Equipement implements Serializable {
 				volume -= 10;
 				volumeBar.setProgress(getVolume() / 100);
 			}
-			root.getChildren().add(volumeBar);
+			try {
+				root.getChildren().add(volumeBar);
+			} catch (Exception e) {
+			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
