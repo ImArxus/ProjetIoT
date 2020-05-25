@@ -18,7 +18,7 @@ import main.Main;
 public class TV extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 5394573896230563021L;
-	private ProgressBar volumeBar = new ProgressBar(0);
+	private static ProgressBar volumeBar = new ProgressBar(0);
 	private double volume;
 	private int numeroChaine;
 
@@ -49,6 +49,10 @@ public class TV extends Equipement implements Serializable {
 				+ "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Augmenter chaine\n➡️ 7 : Diminuer chaine\n➡️ 8 : Mettre chaine";
 	}
 
+	public static ProgressBar getVolumeBar() {
+		return volumeBar;
+	}
+	
 	public int getNumeroChaine() {
 		return numeroChaine;
 	}
