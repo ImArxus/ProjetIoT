@@ -21,7 +21,7 @@ public class Volet extends Equipement implements Serializable {
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
-		this.setPosition(position);
+		this.setPosition(3);
 	}
 
 	public Volet(String nom) {
@@ -101,7 +101,6 @@ public class Volet extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
-
 		if (getPosition() == 0) {
 			return ("/images/objets/equipements.Volet.desactive.png");
 		} else if (getPosition() == 1) {
