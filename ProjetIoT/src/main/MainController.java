@@ -242,7 +242,7 @@ public class MainController {
 		afficherAvatar(root);
 
 		// Affichage des fonctions admin
-		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
+		if (ListeUtilisateurs.getAdmin().contains(Main.getPseudo())) {
 			root.getChildren().add(actionsAdmin(event, root));
 		}
 
@@ -259,7 +259,6 @@ public class MainController {
 				creationTxt.setText("Veuillez entrer un mot de passe");
 			} else {
 				listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
-				ListeUtilisateurs.getAdmin().put(newUserTxt.getText(), false);
 				Sauvegarde.sauvegarderCompte();
 				creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
 			}

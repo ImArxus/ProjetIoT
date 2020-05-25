@@ -2,6 +2,7 @@ package main;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class ListeUtilisateurs implements Serializable {
@@ -9,7 +10,7 @@ public class ListeUtilisateurs implements Serializable {
 	private static final long serialVersionUID = -6447914795234124870L;
 
 	protected Map<String, String> comptes = new HashMap<String, String>(); // (pseudo, mdp)
-	protected static Map<String, Boolean> estAdmin = new HashMap<String, Boolean>(); // (pseudo, estAdmin)
+	protected static LinkedList<String> estAdmin = new LinkedList<String>(); 
 
 	public ListeUtilisateurs() {
 		comptes.put("prof", "prof");
@@ -21,18 +22,14 @@ public class ListeUtilisateurs implements Serializable {
 		comptes.put("newbie2", "newbie");
 		comptes.put("newbie3", "newbie");
 		comptes.put("guest", "guest");
-		estAdmin.put("prof", true);
-		estAdmin.put("mez", true);
-		estAdmin.put("alex", true);
-		estAdmin.put("eloy", true);
-		estAdmin.put("vince", true);
-		estAdmin.put("newbie1", false);
-		estAdmin.put("newbie2", false);
-		estAdmin.put("newbie3", false);
-		estAdmin.put("guest", false);
+		estAdmin.add("prof");
+		estAdmin.add("mez");
+		estAdmin.add("alex");
+		estAdmin.add("eloy");
+		estAdmin.add("vince");
 	}
 
-	public static Map<String, Boolean> getAdmin() {
+	public static LinkedList<String> getAdmin() {
 		return estAdmin;
 	}
 

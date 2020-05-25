@@ -456,7 +456,6 @@ public class Main extends Application implements Serializable {
 					System.out.print("Veuillez choisir un mot de passe : ");
 					mdp = s.nextLine();
 					listeUtilisateur.comptes.put(pseudo, mdp);
-					ListeUtilisateurs.getAdmin().put(pseudo, false);
 					Sauvegarde.sauvegarderCompte();
 
 					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
@@ -470,7 +469,7 @@ public class Main extends Application implements Serializable {
 		 ********************* Choix de la maison **********************
 		 ***************************************************************/
 		System.out.println("Identifiant : " + pseudo);
-		droits = ListeUtilisateurs.getAdmin().get(getPseudo());
+		droits = ListeUtilisateurs.getAdmin().contains(getPseudo());
 		System.out.println("Activation du mode administrateur : " + droits);
 		System.out.println("------------------------------------------------------------------");
 		Thread.sleep(1000);
