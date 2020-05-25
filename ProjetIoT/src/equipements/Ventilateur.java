@@ -90,4 +90,11 @@ public class Ventilateur extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Ventilateur.png");
+		} else {
+			return ("/images/objets/equipements.Ventilateur.desactive.png");
+		}}
 }
