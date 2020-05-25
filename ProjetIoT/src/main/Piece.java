@@ -27,7 +27,7 @@ public class Piece implements Serializable {
 
 	private static final long serialVersionUID = 2L;
 	private String nom;
-	private int temperature;
+	private double temperature;
 	private int intensiteLumineuse; // Intensité totale
 	private LinkedList<Piece> piecesAdj = new LinkedList<Piece>();
 	private LinkedList<Equipement> equipements = new LinkedList<Equipement>();
@@ -94,11 +94,11 @@ public class Piece implements Serializable {
 		this.nom = nom;
 	}
 
-	public int getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(int temperature) {
+	public void setTemperature(double temperature) {
 		if ((temperature >= 15) && (temperature <= 30)) {
 			this.temperature = temperature;
 		} else if (temperature > 30) {
