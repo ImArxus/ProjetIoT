@@ -214,18 +214,18 @@ public class TV extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				augmenterChaine();
-				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
 		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
 		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				diminuerChaine();
-				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
-		MenuItem choisirChaine = new MenuItem(" Choisir chaine");
+		/*MenuItem choisirChaine = new MenuItem(" Choisir chaine");
 		choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -236,9 +236,8 @@ public class TV extends Equipement implements Serializable {
 				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
 				s.close();
 			}
-		});
-		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine,
-				choisirChaine);
+		});*/
+		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
 		return fonctionnalite;
 	}
 }

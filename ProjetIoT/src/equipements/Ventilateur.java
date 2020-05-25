@@ -156,7 +156,8 @@ public class Ventilateur extends Equipement implements Serializable {
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 				augmenterIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
 		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
 		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
@@ -166,6 +167,8 @@ public class Ventilateur extends Equipement implements Serializable {
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 				diminuerIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
 	
