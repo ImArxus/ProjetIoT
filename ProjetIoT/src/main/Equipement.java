@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import java.util.Scanner;
 
+import equipements.TV;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -180,10 +181,19 @@ public class Equipement implements Serializable {
 			public void handle(ActionEvent evt) {
 				eteindre();
 				root.getChildren().remove(img);
+				root.getChildren().removeAll(indicateurs());
 				root.getChildren().add(afficher());
 			}
 		});
 		fonctionnalite.getItems().addAll(allumer, eteindre);
 		return fonctionnalite;
+	}
+
+	public LinkedList<Object> indicateurs() {
+		LinkedList<Object> liste = new LinkedList<Object>();
+		if (this instanceof TV) {
+			liste.add(TV.getVolumeBar());
+		}
+		return liste;
 	}
 }
