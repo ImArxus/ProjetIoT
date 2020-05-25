@@ -80,8 +80,8 @@ public class Balance extends Equipement implements Serializable {
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(-105);
-		imageView.setTranslateX(-180);
+		imageView.setTranslateY(185);
+		imageView.setTranslateX(160);
 		return imageView;
 	}
 
