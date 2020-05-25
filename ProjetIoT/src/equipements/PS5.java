@@ -56,14 +56,6 @@ public class PS5 extends Equipement implements Serializable {
 			this.jeu = jeu;
 	}
 
-	public void choisirJeu(String jeu) {
-		if (super.isEtatCourant()) {
-			setJeu(jeu);
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas lancer un jeu");
-		}
-	}
-
 	public List<String> getJeux() {
 		return jeux;
 	}
