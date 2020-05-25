@@ -148,7 +148,7 @@ public class Ventilateur extends Equipement implements Serializable {
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
-		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+		MenuItem augmenterIntensité = new MenuItem("Augmenter intensité");
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -159,7 +159,7 @@ public class Ventilateur extends Equipement implements Serializable {
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());			}
 		});
-		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+		MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
