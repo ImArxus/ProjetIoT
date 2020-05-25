@@ -11,6 +11,7 @@ public class Radiateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
+	private ImageView imageView = new ImageView();
 
 	public Radiateur(String nom) {
 		super(nom);
@@ -70,14 +71,14 @@ public class Radiateur extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas changer le thermostat");
 		}
 	}
-	
+
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
-        imageView.setImage(new Image(getImage()));
-        imageView.setTranslateY(110);
-        imageView.setTranslateX(240);
-        return imageView;
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(110);
+		imageView.setTranslateX(240);
+		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();

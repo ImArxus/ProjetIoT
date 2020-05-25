@@ -19,6 +19,7 @@ public class Lumiere extends Equipement implements Serializable {
 	private static final long serialVersionUID = 3377862988501403504L;
 	private int intensite;
 	private String couleur;
+	private ImageView imageView = new ImageView();
 
 	public Lumiere(String nom) {
 		super(nom);
@@ -102,7 +103,6 @@ public class Lumiere extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(-120);
 		return imageView;

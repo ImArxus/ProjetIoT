@@ -25,7 +25,7 @@ public class Frigo extends Equipement implements Serializable {
 	private double temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
 	private static ProgressBar volumeBar = new ProgressBar(0);
-
+	private ImageView imageView = new ImageView();
 
 	public Frigo(String nom) {
 		super(nom);
@@ -56,7 +56,6 @@ public class Frigo extends Equipement implements Serializable {
 				+ "\n➡️ 4 : Baisser temperature\n➡️ 5 : Augmenter temperature\n➡️ 6 : Lister produits\n➡️ 7 : Commander";
 	}
 
-
 	@Override
 	public String toString() {
 		String etat = "fermé";
@@ -65,7 +64,7 @@ public class Frigo extends Equipement implements Serializable {
 		}
 		return getNom() + " (" + etat + ")";
 	}
-	
+
 	public static ProgressBar getVolumeBar() {
 		return volumeBar;
 	}
@@ -77,7 +76,7 @@ public class Frigo extends Equipement implements Serializable {
 	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
-	
+
 	public void augmenterTemperatureFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getTemperature() < 10) {
@@ -90,7 +89,7 @@ public class Frigo extends Equipement implements Serializable {
 			}
 		}
 	}
-	
+
 	public void diminuerTemperatureFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getTemperature() > 0) {
@@ -105,7 +104,6 @@ public class Frigo extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
-	
 
 	public Map<String, Integer> getDispo() {
 		return dispo;
@@ -148,11 +146,12 @@ public class Frigo extends Equipement implements Serializable {
 			test.put(a, b);
 		}
 	}
+
 	public ImageView getImageView() {
-		ImageView i0 = new ImageView();
-		i0.setImage(new Image(getImage()));
-		return i0;
+		imageView.setImage(new Image(getImage()));
+		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -160,6 +159,7 @@ public class Frigo extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
+
 	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView imv) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, imv);
@@ -182,7 +182,7 @@ public class Frigo extends Equipement implements Serializable {
 		});
 		MenuItem commander = new MenuItem(" Commander");
 		commander.setOnAction(new EventHandler<ActionEvent>() {
-		
+
 			@Override
 			public void handle(ActionEvent event) {
 				Scanner s = new Scanner(System.in);
@@ -202,11 +202,11 @@ public class Frigo extends Equipement implements Serializable {
 				System.out.println("Dans " + getNom() + ", il y a " + getDispo());
 			}
 		});
-		fonctionnalite.getItems().addAll(baisserTemperature,augmenterTemperature,listerProduits,commander);
+		fonctionnalite.getItems().addAll(baisserTemperature, augmenterTemperature, listerProduits, commander);
 		return fonctionnalite;
 	}
+
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(140);
 		imageView.setTranslateX(-100);

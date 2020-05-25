@@ -13,6 +13,7 @@ public class Electrolyseur extends Equipement implements Serializable {
 	private double sel;
 	private double ph;
 	private double temperature;
+	ImageView imageView = new ImageView();
 
 	public Electrolyseur(String nom) {
 		super(nom);
@@ -96,9 +97,8 @@ public class Electrolyseur extends Equipement implements Serializable {
 		}
 	}
 	public ImageView getImageView() {
-		ImageView i0 = new ImageView();
-		i0.setImage(new Image("/images/objets/equipements.Electrolyseur.png"));
-		return i0;
+		imageView.setImage(new Image("/images/objets/equipements.Electrolyseur.png"));
+		return imageView;
 	}
 	@Override
 	public Button getButton() {
@@ -108,7 +108,6 @@ public class Electrolyseur extends Equipement implements Serializable {
 		return but;
 	}
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(105);
 		imageView.setTranslateX(300);
