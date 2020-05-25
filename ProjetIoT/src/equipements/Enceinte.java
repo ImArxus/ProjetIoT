@@ -110,11 +110,21 @@ public class Enceinte extends Equipement implements Serializable {
 		imageView.setTranslateX(140);
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
 		but.setTranslateX(600);
 		but.setTranslateY(450);
 		return but;
+	}
+
+	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Enceinte.png");
+		} else {
+			return ("/images/objets/equipements.Enceinte.desactive.png");
+		}
 	}
 }
