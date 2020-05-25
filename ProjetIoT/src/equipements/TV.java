@@ -144,7 +144,7 @@ public class TV extends Equipement implements Serializable {
 
 	public void mettreChaine(int chaine) {
 		if (super.isEtatCourant()) {
-			if (chaine <= 100 && chaine >= 0) {
+			if (chaine <= 4 && chaine >= 1) {
 				setNumeroChaine(chaine);
 			} else {
 				System.out.println("Chaine non-valide");
@@ -230,7 +230,7 @@ public class TV extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle chaine (entre 0 et 100) ?");
+				System.out.println("Quelle chaine (entre 1 et 4) ?");
 				int chaine = Main.toInt(s.nextLine());
 				mettreChaine(chaine);
 				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
