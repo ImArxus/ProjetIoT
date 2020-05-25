@@ -183,16 +183,16 @@ public class Enceinte extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				augmenterVolumeFX(root);
-				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
 		MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
 		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				diminuerVolumeFX(root);
-				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
 		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume);
 		return fonctionnalite;

@@ -4,9 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import main.Equipement;
 import main.Main;
 import main.Piece;
@@ -105,5 +110,39 @@ public class Alexa extends Equipement implements Serializable {
 		but.setTranslateX(200);
 		but.setTranslateY(450);
 		return but;
+	}@Override
+	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+
+		MenuItem reponseHeure = new MenuItem(" Connaitre l'heure");
+		reponseHeure.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			reponseHeure();
+			}
+		});
+		MenuItem reponseTemperature = new MenuItem(" Connaitre la température");
+		reponseTemperature.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				reponseTemperature();
+			}
+		});
+		MenuItem reponseEquipement = new MenuItem(" Connaitre les équipements");
+		reponseEquipement.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				reponseEquipement();		}
+		});
+		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
+		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
+		});
+		fonctionnalite.getItems().addAll(reponseHeure,reponseTemperature,reponseEquipement);
+		return fonctionnalite;
 	}
+
 }

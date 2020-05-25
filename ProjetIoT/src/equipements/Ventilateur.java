@@ -139,12 +139,20 @@ public class Ventilateur extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Ventilateur.png");
+		} else {
+			return ("/images/objets/equipements.Ventilateur.desactive.png");
+		}}
+
 	
 	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
-		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+		MenuItem augmenterIntensité = new MenuItem("Augmenter intensité");
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -152,9 +160,10 @@ public class Ventilateur extends Equipement implements Serializable {
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 				augmenterIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-			}
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());			}
 		});
-		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+		MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -162,6 +171,8 @@ public class Ventilateur extends Equipement implements Serializable {
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 				diminuerIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
 	
