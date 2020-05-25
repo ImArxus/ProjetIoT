@@ -485,6 +485,7 @@ public class MainController {
 		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
+
 		lbl5.setLayoutY(68);
 		prochainLabel = prochainLabel + 110;
 
