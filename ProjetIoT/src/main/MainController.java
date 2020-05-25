@@ -3,9 +3,6 @@ package main;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +23,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pieces.Salon;
 
-@SuppressWarnings("restriction")
 public class MainController {
 
 	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
@@ -165,7 +161,6 @@ public class MainController {
 					public void handle(ActionEvent e) {
 						Main.setPosition(piece);
 						scenePiece(e);
-						;
 					}
 				});
 				root.getChildren().add(boutonPiece);
@@ -200,82 +195,10 @@ public class MainController {
 		ImageView imageView = Piece.imageViewPiece();
 		root.getChildren().add(imageView);
 
-		// Affichage de la bande d'infos
-		LinkedList<Label> liste = affichageBande(event);
+		// Affichage du bandeau d'infos
+		LinkedList<Label> liste = affichageBandeau(event);
 		for (int i = 0; i < liste.size(); i++) {
 			root.getChildren().add(liste.get(i));
-		}
-
-		// Affichage des fonctions admin
-		if (ListeUtilisateurs.getAdmin().get(Main.getPseudo())) {
-			MenuButton choiceBox = new MenuButton("Modes admin");
-			choiceBox.setPrefSize(130, 10);
-			choiceBox.setLayoutX(657);
-			choiceBox.setLayoutY(64);
-
-			MenuItem choix1 = new MenuItem("Créer une pièce");
-			choix1.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					Scene scene = new Scene(getRoot("/main/CreationPiece.fxml"));
-					window.setTitle("Créer une pièce");
-					window.setScene(scene);
-					window.show();
-				}
-			});
-			MenuItem choix2 = new MenuItem("Supprimer une pièce");
-			choix2.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Supprimer une pièce");
-				}
-			});
-			MenuItem choix3 = new MenuItem("Créer un équipement");
-			choix3.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Créer un équipement");
-				}
-			});
-			MenuItem choix4 = new MenuItem("Supprimer un équipement");
-			choix4.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Supprimer un équipement");
-				}
-			});
-			MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
-			choix5.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Supprimer tous les équipement de la pièce");
-				}
-			});
-			MenuItem choix6 = new MenuItem("Afficher toutes les pièces et équipements");
-			choix6.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Afficher toutes les pièces et équipements");
-				}
-			});
-			MenuItem choix7 = new MenuItem("Changer la couleur des paramètres");
-			choix7.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Changer la couleur des paramètres");
-				}
-			});
-			MenuItem choix8 = new MenuItem("Changer l'avatar");
-			choix8.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					System.out.println("Changer l'avatar");
-				}
-			});
-
-			choiceBox.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8);
-
-			root.getChildren().add(choiceBox);
 		}
 
 		// Affichage des équipements
@@ -292,6 +215,11 @@ public class MainController {
 		imageViewAvatar.setTranslateX(50);
 		imageViewAvatar.setTranslateY(200);
 		root.getChildren().add(imageViewAvatar);
+
+		// Affichage des fonctions admin
+		if (ListeUtilisateurs.getAdmin().containsKey(Main.getPseudo())) {
+			root.getChildren().add(actionsAdmin(event, root));
+		}
 
 		window.setTitle(Main.getMaison().getNom());
 		window.setScene(scene);
@@ -315,9 +243,135 @@ public class MainController {
 		}
 	}
 
-	public LinkedList<Label> affichageBande(ActionEvent event) {
+	public MenuButton actionsAdmin(ActionEvent event, Pane root) {
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		Maison maison = Main.getMaison();
+
+		MenuButton choiceBox = new MenuButton("Modes admin");
+		choiceBox.setPrefSize(130, 10);
+		choiceBox.setLayoutX(657);
+		choiceBox.setLayoutY(67);
+
+		MenuItem choix1 = new MenuItem("Créer une pièce");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scene scene = new Scene(getRoot("/main/CreationPiece.fxml"));
+				window.setTitle("Créer une pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		MenuItem choix2 = new MenuItem("Supprimer une pièce");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Pane root = (Pane) getRoot("/main/SuppressionPiece.fxml");
+				Scene scene = new Scene(root);
+				LinkedList<Piece> pieces = maison.getPieces();
+				if (!pieces.isEmpty()) {
+					for (int i = 0; i < pieces.size(); i++) {
+						Piece piece = pieces.get(i);
+						Button boutonPiece = piece.getButton();
+						boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								maison.suppressionPieceFX(piece);
+								scenePiece(e);
+							}
+						});
+						root.getChildren().add(boutonPiece);
+					}
+				}
+				window.setTitle("Supprimer une pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		MenuItem choix3 = new MenuItem("Créer un équipement");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scene scene = new Scene(getRoot("/main/CreationEquipement.fxml"));
+				window.setTitle("Créer un équipement");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		// TODO
+		MenuItem choix4 = new MenuItem("Supprimer un équipement");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Supprimer un équipement");
+
+			}
+		});
+
+		// TODO
+		MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Supprimer tous les équipement de la pièce");
+			}
+		});
+
+		MenuItem choix6 = new MenuItem("Se déplacer dans n'importe quelle pièce");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Pane root = (Pane) getRoot("/main/SelectionPiece.fxml");
+				Scene scene = new Scene(root);
+
+				LinkedList<Piece> pieces = Main.getMaison().getPieces();
+				if (!pieces.isEmpty()) {
+					for (int i = 0; i < pieces.size(); i++) {
+						Piece piece = pieces.get(i);
+						Button boutonPiece = piece.getButton();
+						boutonPiece.setOnAction(new EventHandler<ActionEvent>() {
+							@Override
+							public void handle(ActionEvent e) {
+								Main.setPosition(piece);
+								scenePiece(e);
+							}
+						});
+						root.getChildren().add(boutonPiece);
+					}
+				}
+				window.setTitle("Déplacer vers une autre pièce");
+				window.setScene(scene);
+				window.show();
+			}
+		});
+
+		MenuItem choix7 = new MenuItem("Changer la couleur du bandeau");
+		choix7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				couleurBandeau(root);
+			}
+		});
+
+		// TODO
+		MenuItem choix8 = new MenuItem("Changer l'avatar");
+		choix8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Changer l'avatar");
+			}
+		});
+
+		choiceBox.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8);
+		return choiceBox;
+	}
+
+	public LinkedList<Label> affichageBandeau(ActionEvent event) {
 		LinkedList<Label> liste = new LinkedList<Label>();
-		FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 		double prochainLabel = 4; // LayoutX où insérer le prochain label
 
 		Label pseudo = new Label();
@@ -330,9 +384,10 @@ public class MainController {
 		Label lbl1 = new Label();
 		lbl1.setText(Main.getPseudo());
 		lbl1.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl1.setPrefWidth(170);
 		lbl1.setLayoutX(prochainLabel);
 		lbl1.setLayoutY(10);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl1.getText(), lbl1.getFont()) + 80;
+		prochainLabel = prochainLabel + 170;
 
 		Label maison = new Label();
 		maison.setText("Maison :");
@@ -344,9 +399,10 @@ public class MainController {
 		Label lbl2 = new Label();
 		lbl2.setText(Main.getMaison().getNom());
 		lbl2.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl2.setPrefWidth(170);
 		lbl2.setLayoutX(prochainLabel);
 		lbl2.setLayoutY(10);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl2.getText(), lbl2.getFont()) + 120;
+		prochainLabel = prochainLabel + 180;
 
 		Label position = new Label();
 		position.setText("Position :");
@@ -358,6 +414,7 @@ public class MainController {
 		Label lbl3 = new Label();
 		lbl3.setText(Main.getPosition().getNom());
 		lbl3.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
+		lbl3.setPrefWidth(150);
 		lbl3.setLayoutX(prochainLabel);
 		lbl3.setLayoutY(10);
 		prochainLabel = 4; // Reviens à la ligne
@@ -367,42 +424,42 @@ public class MainController {
 		temperature.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		temperature.setUnderline(true);
 		temperature.setLayoutX(prochainLabel);
-		temperature.setLayoutY(60);
-		prochainLabel = prochainLabel + 144;
+		temperature.setLayoutY(68);
+		prochainLabel = prochainLabel + 137;
 		Label lbl4 = new Label();
 		lbl4.setText("" + Main.getPosition().getTemperature() + "°C");
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl4.setLayoutX(prochainLabel);
-		lbl4.setLayoutY(60);
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl4.getText(), lbl4.getFont()) + 100;
+		lbl4.setLayoutY(68);
+		prochainLabel = prochainLabel + 140;
 
 		Label luminosite = new Label();
 		luminosite.setText("Luminosité :");
 		luminosite.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		luminosite.setUnderline(true);
 		luminosite.setLayoutX(prochainLabel);
-		luminosite.setLayoutY(60);
+		luminosite.setLayoutY(68);
 		prochainLabel = prochainLabel + 130;
 		Label lbl5 = new Label();
 		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl5.setLayoutX(prochainLabel);
-		lbl5.setLayoutY(60);
 
-		prochainLabel = prochainLabel + fontLoader.computeStringWidth(lbl5.getText(), lbl5.getFont()) + 100;
+		lbl5.setLayoutY(68);
+		prochainLabel = prochainLabel + 110;
 
 		Label heure = new Label();
 		heure.setText("Heure :");
 		heure.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		heure.setUnderline(true);
 		heure.setLayoutX(prochainLabel);
-		heure.setLayoutY(60);
+		heure.setLayoutY(68);
 		prochainLabel = prochainLabel + 77;
 		Label lbl6 = new Label();
 		lbl6.setText("" + Main.getHeure() + "h");
 		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		lbl6.setLayoutX(prochainLabel);
-		lbl6.setLayoutY(60);
+		lbl6.setLayoutY(68);
 
 		liste.add(pseudo);
 		liste.add(maison);
@@ -419,6 +476,102 @@ public class MainController {
 		liste.add(lbl6);
 
 		return liste;
+	}
+
+	public void couleurBandeau(Pane root) {
+		MenuButton couleurs = new MenuButton("Couleur du bandeau");
+		couleurs.setPrefSize(220, 30);
+		couleurs.setLayoutX(300);
+		couleurs.setLayoutY(220);
+
+		MenuItem choix1 = new MenuItem("Blanc");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FFFFFF");
+			}
+		});
+		MenuItem choix2 = new MenuItem("Argent");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #C0C0C0");
+			}
+		});
+		MenuItem choix3 = new MenuItem("Gris");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #808080");
+			}
+		});
+		MenuItem choix4 = new MenuItem("Noir");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #000000");
+			}
+		});
+		MenuItem choix5 = new MenuItem("Rouge");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FF0000");
+			}
+		});
+		MenuItem choix6 = new MenuItem("Bordeau");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #800000");
+			}
+		});
+		MenuItem choix7 = new MenuItem("Jaune");
+		choix7.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FFFF00");
+			}
+		});
+		MenuItem choix8 = new MenuItem("Vert");
+		choix8.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #008000");
+			}
+		});
+		MenuItem choix9 = new MenuItem("Bleu");
+		choix9.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #0000FF");
+			}
+		});
+		MenuItem choix10 = new MenuItem("Magenta");
+		choix10.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #FF00FF");
+			}
+		});
+		MenuItem choix11 = new MenuItem("Violet");
+		choix11.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.setStyle("-fx-background-color: #800080");
+			}
+		});
+		MenuItem choix12 = new MenuItem("Cette couleur est parfaite pour moi !");
+		choix12.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.getChildren().remove(couleurs);
+			}
+		});
+
+		couleurs.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6, choix7, choix8, choix9, choix10,
+				choix11, choix12);
+		root.getChildren().add(couleurs);
 	}
 
 }

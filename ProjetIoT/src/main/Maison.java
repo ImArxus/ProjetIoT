@@ -28,7 +28,7 @@ public class Maison implements Serializable {
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
 	}
-	
+
 	public void ajouterPieceFX(Piece p) {
 		getPieces().add(p);
 		sontAdjacents(p, Main.getPosition());
@@ -40,6 +40,36 @@ public class Maison implements Serializable {
 			getPieces().remove(p);
 		} else {
 			System.err.println("Suppression impossible");
+		}
+	}
+
+	public void suppressionPieceFX(Piece p) {
+		if (Main.getMaison().getPieces().size() > 1) {
+			if (Main.getPosition().equals(p)) {
+				Main.setPosition(Main.getMaison().getPieces().getFirst());
+			}
+			getPieces().remove(p);
+			LinkedList<Piece> piecesAdj = p.getPiecesAdj();
+			while (!piecesAdj.isEmpty()) {
+				sontPlusAdjacents(p, piecesAdj.getFirst());
+			}
+			checkAccess(getPieces());
+		} else {
+			System.err.println("Suppression impossible");
+		}
+	}
+
+	/**
+	 * Si une pièce a moins de deux pièces adajcentes, alors elle devient adjacente
+	 * de la première pièce de la maison pour eviter de se retrouver inaccessible en
+	 * cas de suppression de la pièce qui la rattache au reste de la maison
+	 */
+	public void checkAccess(LinkedList<Piece> pieces) {
+		for (int i = 0; i < pieces.size(); i++) {
+			Piece piece = pieces.get(i);
+			if (piece.getPiecesAdj().size() < 2) {
+				sontAdjacents(piece, getPieces().getFirst());
+			}
 		}
 	}
 
