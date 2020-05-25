@@ -11,7 +11,6 @@ import equipements.Electrolyseur;
 import equipements.Enceinte;
 import equipements.Frigo;
 import equipements.Lumiere;
-import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
