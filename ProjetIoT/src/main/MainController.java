@@ -228,6 +228,7 @@ public class MainController {
 							@Override
 							public void handle(ActionEvent evt) {
 								root.getChildren().remove(fonct);
+								root.getChildren().removeAll(current.indicateurs());
 							}
 						});
 						fonct.getItems().add(quitter);
