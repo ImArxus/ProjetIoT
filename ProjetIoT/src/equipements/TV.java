@@ -115,11 +115,11 @@ public class TV extends Equipement implements Serializable {
 
 	public void augmenterChaine() {
 		if (super.isEtatCourant()) {
-			if (getNumeroChaine() < 100) {
+			if (getNumeroChaine() < 4) {
 
 				numeroChaine++;
 			} else {
-				numeroChaine = 1;
+				numeroChaine = 4;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
@@ -131,7 +131,7 @@ public class TV extends Equipement implements Serializable {
 			if (getNumeroChaine() > 1) {
 				numeroChaine--;
 			} else {
-				numeroChaine = 100;
+				numeroChaine = 1;
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
@@ -154,8 +154,8 @@ public class TV extends Equipement implements Serializable {
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(80);
-		imageView.setTranslateX(35);
+		imageView.setTranslateY(50);
+		imageView.setTranslateX(0);
 		return imageView;
 	}
 
@@ -170,7 +170,16 @@ public class TV extends Equipement implements Serializable {
 	@Override
 	public String getImage() {
 		if (etatCourant) {
-			return ("/images/objets/equipements.TV.png");
+			if (getNumeroChaine()==1) {
+				return ("/images/objets/equipements.TV.chaine1.png");
+			} else if (getNumeroChaine()==2) {
+				return ("/images/objets/equipements.TV.chaine2.png");
+			} else if (getNumeroChaine()==3) {
+				return ("/images/objets/equipements.TV.chaine3.png");
+			} else {
+				return ("/images/objets/equipements.TV.chaine4.png");
+			}
+
 		} else {
 			return ("/images/objets/equipements.TV.desactive.png");
 		}
