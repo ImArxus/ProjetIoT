@@ -92,6 +92,14 @@ public class Alexa extends Equipement implements Serializable {
 		return imageView;
 	}
 	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Alexa.png");
+		} else {
+			return ("/images/objets/equipements.Alexa.desactive.png");
+		}
+	}
+	@Override
 	public Button getButton() {
 		Button but = super.getButton();
 		but.setTranslateX(200);
