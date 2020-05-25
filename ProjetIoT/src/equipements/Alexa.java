@@ -140,6 +140,7 @@ public class Alexa extends Equipement implements Serializable {
 			}
 		});
 
+
 		fonctionnalite.getItems().addAll(reponseHeure, reponseTemperature, reponseEquipement);
 		return fonctionnalite;
 	}

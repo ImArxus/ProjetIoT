@@ -25,9 +25,6 @@ public class Main extends Application implements Serializable {
 
 		launch(args); // Lancement actions JavaFX
 
-		StdDraw.setCanvasSize(800, 600);
-		StdDraw.picture(0.5, 0.5, "images/chargement.png");
-
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
 		chargement(s); // Choix de la maison et de l'utilisateur

@@ -19,6 +19,7 @@ public class TV extends Equipement implements Serializable {
 	private static ProgressBar volumeBar = new ProgressBar(0);
 	private double volume;
 	private int numeroChaine;
+	private String image;
 	private ImageView imageView = new ImageView();
 
 	public TV(String nom) {
@@ -30,6 +31,7 @@ public class TV extends Equipement implements Serializable {
 		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
+		image = "/images/objets/equipements.TV.desactive.png";
 	}
 
 	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
@@ -40,6 +42,7 @@ public class TV extends Equipement implements Serializable {
 		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
+		image = "/images/objets/equipements.TV.desactive.png";
 	}
 
 	@Override
@@ -67,7 +70,28 @@ public class TV extends Equipement implements Serializable {
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
-
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getImage() {
+		return image;
+	}
+	
+	public void setImageChaine() {
+		if (isEtatCourant()) {
+			if (getNumeroChaine() == 1) {
+				image="/images/objets/equipements.TV.chaine1.png";
+			} else if (getNumeroChaine() == 2) {
+				image= "/images/objets/equipements.TV.chaine2.png";
+			} else if (getNumeroChaine() == 3) {
+				image= "/images/objets/equipements.TV.chaine3.png";
+			} else {
+				image= "/images/objets/equipements.TV.chaine4.png";
+			}
+		} else {
+			image = "/images/objets/equipements.TV.desactive.png";
+		}
+	}
 	public void augmenterVolume() {
 		if (super.isEtatCourant()) {
 			if (getVolume() <= 100) {
@@ -154,7 +178,7 @@ public class TV extends Equipement implements Serializable {
 
 	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
+		imageView.setImage(new Image(image));
 		imageView.setTranslateY(50);
 		imageView.setTranslateX(0);
 		return imageView;
@@ -169,26 +193,39 @@ public class TV extends Equipement implements Serializable {
 	}
 
 	@Override
-	public String getImage() {
-		if (isEtatCourant()) {
-			if (getNumeroChaine() == 1) {
-				return ("/images/objets/equipements.TV.chaine1.png");
-			} else if (getNumeroChaine() == 2) {
-				return ("/images/objets/equipements.TV.chaine2.png");
-			} else if (getNumeroChaine() == 3) {
-				return ("/images/objets/equipements.TV.chaine3.png");
-			} else {
-				return ("/images/objets/equipements.TV.chaine4.png");
-			}
-		} else {
-			return ("/images/objets/equipements.TV.desactive.png");
+	public void allumer() {
+		if (!isEtatCourant()) {
+			setEtatCourant(true);
+			image = "/images/objets/equipements.TV.demarrage.png";
 		}
 	}
-
 	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+		fonctionnalite.setPrefSize(220, 30);
+		fonctionnalite.setLayoutX(570);
+		fonctionnalite.setLayoutY(100);
+
+		MenuItem allumer = new MenuItem("Allumer");
+		allumer.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				allumer();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem eteindre = new MenuItem("Éteindre");
+		eteindre.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				eteindre();
+				root.getChildren().remove(img);
+				root.getChildren().removeAll(indicateurs());
+				root.getChildren().add(afficher());
+			}
+		});
 		MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
 		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -210,6 +247,7 @@ public class TV extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				augmenterChaine();
+				setImageChaine();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}
@@ -219,6 +257,7 @@ public class TV extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				diminuerChaine();
+				setImageChaine();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}
@@ -233,7 +272,7 @@ public class TV extends Equipement implements Serializable {
 		 * System.out.println(getNom() + " est réglé sur la chaine " +
 		 * getNumeroChaine()); s.close(); } });
 		 */
-		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
+		fonctionnalite.getItems().addAll(allumer,eteindre,augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
 		return fonctionnalite;
 	}
 }
