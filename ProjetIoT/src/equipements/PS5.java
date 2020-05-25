@@ -56,7 +56,7 @@ public class PS5 extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
 	}
-
+	
 	public Map<String, String> getJeux() {
 		return jeux;
 	}

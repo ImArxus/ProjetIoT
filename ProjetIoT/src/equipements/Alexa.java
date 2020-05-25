@@ -134,13 +134,6 @@ public class Alexa extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				reponseEquipement();		}
 		});
-		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
-		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
-		});
 		fonctionnalite.getItems().addAll(reponseHeure,reponseTemperature,reponseEquipement);
 		return fonctionnalite;
 	}
