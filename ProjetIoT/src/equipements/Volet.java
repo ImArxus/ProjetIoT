@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,12 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
-import main.Main;
 
 public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
+	private ImageView imageView = new ImageView();
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -46,8 +45,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() < 3) {
-				position ++;
+			if (getPosition() <= 4) {
+				setPosition(getPosition() - 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
@@ -56,8 +55,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() > 0) {
-				position --;
+			if (getPosition() >= 0) {
+				setPosition(getPosition() + 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
@@ -78,7 +77,6 @@ public class Volet extends Equipement implements Serializable {
 
 	@Override
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(70);
 		imageView.setTranslateX(370);
@@ -86,9 +84,8 @@ public class Volet extends Equipement implements Serializable {
 	}
 
 	public ImageView getImageView() {
-		ImageView i0 = new ImageView();
-		i0.setImage(new Image(getImage()));
-		return i0;
+		imageView.setImage(new Image(getImage()));
+		return imageView;
 	}
 
 	@Override
@@ -101,19 +98,20 @@ public class Volet extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
-
-		if (getPosition() == 0) {
-			return ("/images/objets/equipements.Volet.desactive.png");
-		} else if (getPosition() == 1) {
-			return ("/images/objets/equipements.Volet.position1.png");
-		} else if (getPosition() == 2) {
-			return ("/images/objets/equipements.Volet.position2.png");
-		} else if (getPosition() == 3) {
-			return ("/images/objets/equipements.Volet.position3.png");
-		} else {
-			return ("/images/objets/equipements.Volet.png");
+		if (isEtatCourant()) {
+			if (getPosition() == 0) {
+				return "/images/objets/equipements.Volet.desactive.png";
+			} else if (getPosition() == 1) {
+				return "/images/objets/equipements.Volet.position1.png";
+			} else if (getPosition() == 2) {
+				return "/images/objets/equipements.Volet.position2.png";
+			} else if (getPosition() == 3) {
+				return "/images/objets/equipements.Volet.position3.png";
+			}
 		}
+		return "/images/objets/equipements.Volet.png";
 	}
+
 	@Override
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
@@ -123,6 +121,8 @@ public class Volet extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				monterVolet();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
 		MenuItem descendreVolet = new MenuItem(" Descendre Volet");
@@ -130,20 +130,12 @@ public class Volet extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				descendreVolet();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
 			}
 		});
-		MenuItem choisirPosition = new MenuItem(" Choisir position");
-		choisirPosition.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle position (entre 0 et 4) ?");
-				int position = Main.toInt(s.nextLine());
-				choisirPosition(position);
-				s.close();}
-		});
-		
-		fonctionnalite.getItems().addAll(monterVolet, descendreVolet,choisirPosition);
+
+		fonctionnalite.getItems().addAll(monterVolet, descendreVolet);
 		return fonctionnalite;
 	}
 }

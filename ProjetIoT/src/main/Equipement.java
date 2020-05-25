@@ -24,6 +24,7 @@ public class Equipement implements Serializable {
 	protected String nom;
 	protected double positionHorizontale;
 	protected double positionVerticale;
+	private ImageView imageView = new ImageView();
 
 	protected Equipement(String nom) {
 		setNom(nom);
@@ -151,7 +152,6 @@ public class Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		return imageView;
 	}
