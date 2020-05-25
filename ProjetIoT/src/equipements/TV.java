@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
-import main.Main;
 
 public class TV extends Equipement implements Serializable {
 
