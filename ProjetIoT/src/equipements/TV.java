@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -17,7 +18,8 @@ import main.Main;
 public class TV extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 5394573896230563021L;
-	private int volume;
+	private ProgressBar volumeBar = new ProgressBar(0);
+	private double volume;
 	private int numeroChaine;
 
 	public TV(String nom) {
@@ -26,6 +28,9 @@ public class TV extends Equipement implements Serializable {
 		setNumeroChaine(1);
 		this.setPositionHorizontale(0.49);
 		this.setPositionVerticale(0.4);
+		volumeBar.setLayoutX(325);
+		volumeBar.setLayoutY(275);
+		volumeBar.setPrefSize(150, 25);
 	}
 
 	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
@@ -33,6 +38,9 @@ public class TV extends Equipement implements Serializable {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;
+		volumeBar.setLayoutX(325);
+		volumeBar.setLayoutY(275);
+		volumeBar.setPrefSize(150, 25);
 	}
 
 	@Override
@@ -49,7 +57,7 @@ public class TV extends Equipement implements Serializable {
 		this.numeroChaine = numeroChaine;
 	}
 
-	public int getVolume() {
+	public double getVolume() {
 		return volume;
 	}
 
@@ -59,7 +67,7 @@ public class TV extends Equipement implements Serializable {
 
 	public void augmenterVolume() {
 		if (super.isEtatCourant()) {
-			if (getVolume() < 100) {
+			if (getVolume() <= 100) {
 				volume++;
 			}
 		} else {
@@ -67,11 +75,35 @@ public class TV extends Equipement implements Serializable {
 		}
 	}
 
+	public void augmenterVolumeFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getVolume() <= 100) {
+				volume += 10;
+				volumeBar.setProgress(getVolume() / 100);
+			}
+			root.getChildren().add(volumeBar);
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+		}
+	}
+
 	public void diminuerVolume() {
 		if (super.isEtatCourant()) {
-			if (getVolume() > 0) {
+			if (getVolume() >= 0) {
 				volume--;
 			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+		}
+	}
+
+	public void diminuerVolumeFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getVolume() >= 0) {
+				volume -= 10;
+				volumeBar.setProgress(getVolume() / 100);
+			}
+			root.getChildren().add(volumeBar);
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
@@ -148,7 +180,7 @@ public class TV extends Equipement implements Serializable {
 		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				augmenterVolume();
+				augmenterVolumeFX(root);
 				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
 			}
 		});
@@ -156,7 +188,7 @@ public class TV extends Equipement implements Serializable {
 		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				diminuerVolume();
+				diminuerVolumeFX(root);
 				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
 			}
 		});
