@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -21,8 +22,10 @@ import main.Main;
 public class Frigo extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4392838038317445404L;
-	private int temperature;
+	private double temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
+	private static ProgressBar volumeBar = new ProgressBar(0);
+
 
 	public Frigo(String nom) {
 		super(nom);
@@ -33,12 +36,18 @@ public class Frigo extends Equipement implements Serializable {
 		dispo.put("tomates", 3);
 		this.setPositionHorizontale(0.25);
 		this.setPositionVerticale(0.3);
+		volumeBar.setLayoutX(215);
+		volumeBar.setLayoutY(250);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	protected Frigo(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
-			int temperature, Map<String, Integer> dispo) {
+			double temperature, Map<String, Integer> dispo) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		setTemperature(temperature);
+		volumeBar.setLayoutX(215);
+		volumeBar.setLayoutY(250);
+		volumeBar.setPrefSize(80, 15);
 	}
 
 	@Override
@@ -56,13 +65,42 @@ public class Frigo extends Equipement implements Serializable {
 		return getNom() + " (" + etat + ")";
 	}
 
-	public int getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(int temperature) {
+	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
+	
+	public void augmenterTemperatureFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getTemperature() < 10) {
+				temperature += 1;
+				volumeBar.setProgress(getTemperature() / 10);
+				try {
+					root.getChildren().add(volumeBar);
+				} catch (Exception e) {
+				}
+			}
+		}
+	}
+	
+	public void diminuerTemperatureFX(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getTemperature() > 0) {
+				temperature -= 1;
+				volumeBar.setProgress(getTemperature() / 10);
+			}
+			try {
+				root.getChildren().add(volumeBar);
+			} catch (Exception e) {
+			}
+		} else {
+			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
+		}
+	}
+	
 
 	public Map<String, Integer> getDispo() {
 		return dispo;
@@ -125,7 +163,7 @@ public class Frigo extends Equipement implements Serializable {
 		baisserTemperature.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				diminuerTemperature();
+				diminuerTemperatureFX(root);
 				System.out.println("La temperature du frigo " + getNom() + " est de " + getTemperature());
 			}
 		});
@@ -133,7 +171,7 @@ public class Frigo extends Equipement implements Serializable {
 		augmenterTemperature.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				augmenterTemperature();
+				augmenterTemperatureFX(root);
 				System.out.println("La temperature du frigo " + getNom() + " est de " + getTemperature());
 			}
 		});
