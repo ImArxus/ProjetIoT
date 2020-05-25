@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javafx.event.ActionEvent;
@@ -21,18 +22,20 @@ public class PS5 extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
-	private Map<String, String> jeux = new HashMap<String, String>();
+	private List<String> jeux = new LinkedList< String>();
 	private ImageView imageView = new ImageView();
+	private int indice;
 
 	public PS5(String nom) {
 		super(nom);
-		jeux.put("FIFA 2021", "It's in the game");
-		jeux.put("Call of Duty Modern Warfare V", "bam bam bam");
-		jeux.put("Mario Kart X", "Mariooooo");
-		jeux.put("Just Dance 8", "La la la la");
-		this.setJeu((String) getJeux().keySet().toArray()[0]);
+		jeux.add("/images/objets/equipements.PS5.jeu4.png");
+		jeux.add("/images/objets/equipements.PS5.jeu3.png");
+		jeux.add("/images/objets/equipements.PS5.jeu2.png");
+		jeux.add("/images/objets/equipements.PS5.jeu1.png");
+		this.setJeu(getJeux().get(0));
 		this.setPositionHorizontale(0.58);
 		this.setPositionVerticale(0.34);
+		indice=0;
 	}
 
 	public PS5(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, String jeu) {
@@ -50,11 +53,7 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	public void setJeu(String jeu) {
-		if (jeux.containsKey(jeu)) {
 			this.jeu = jeu;
-		} else {
-			System.out.println("Votre collection de jeux vidéos ne possède pas ce titre");
-		}
 	}
 
 	public void choisirJeu(String jeu) {
@@ -65,11 +64,11 @@ public class PS5 extends Equipement implements Serializable {
 		}
 	}
 
-	public Map<String, String> getJeux() {
+	public List<String> getJeux() {
 		return jeux;
 	}
 
-	public void setJeux(Map<String, String> jeux) {
+	public void setJeux(List<String> jeux) {
 		this.jeux = jeux;
 	}
 
@@ -92,7 +91,7 @@ public class PS5 extends Equipement implements Serializable {
 	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
 
-		MenuItem seConnecter = new MenuItem("Connecter à la télé");
+		MenuItem seConnecter = new MenuItem("Connexion à la télé");
 		seConnecter.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -120,8 +119,46 @@ public class PS5 extends Equipement implements Serializable {
 				}
 			}
 		});
+		MenuItem changerDisque = new MenuItem("Changer disque");
+		changerDisque.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				indice++;
+				if(indice==jeux.size()) {
+					indice=0;
+				}
+				setJeu(jeux.get(indice));
+			}
+		});
+		MenuItem lancerJeu = new MenuItem("Lancer Jeu");
+		lancerJeu.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
 
-		fonctionnalite.getItems().addAll(seConnecter);
+				LinkedList<Equipement> equip = Main.getPosition().getEquipements();
+				LinkedList<TV> listeTV = new LinkedList<TV>();
+				Iterator<Equipement> it = equip.iterator();
+				while (it.hasNext()) {
+					Equipement e = it.next();
+					String tmp = e.getClass().getSimpleName();
+					if (tmp.equals("TV")) {
+						listeTV.add((TV) e);
+					}
+				}
+				if (!listeTV.isEmpty()) {
+					Iterator<TV> it2 = listeTV.iterator();
+					while (it2.hasNext()) {
+						TV e = it2.next();
+						if (e.isEtatCourant()) {
+							e.setImage(jeux.get(indice));
+							root.getChildren().remove(e.afficher());
+							root.getChildren().add(e.afficher());
+						}
+					}
+				}
+			}
+		});
+		fonctionnalite.getItems().addAll(seConnecter,changerDisque,lancerJeu);
 		return fonctionnalite;
 	}
 }

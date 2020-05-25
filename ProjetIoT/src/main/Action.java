@@ -56,8 +56,6 @@ public class Action implements Serializable {
 				actionElectrolyseur((Electrolyseur) objet, requete, s);
 			} else if (objet instanceof Enceinte) {
 				actionEnceinte((Enceinte) objet, requete, s);
-			} else if (objet instanceof PS5) {
-				actionPS5((PS5) objet, requete, s);
 			} else if (objet instanceof Balance) {
 				actionBalance((Balance) objet, requete, s);
 			} else if (objet instanceof Thermostat) {
@@ -200,7 +198,7 @@ public class Action implements Serializable {
 		}
 	}
 
-	public static void actionPS5(PS5 c, int requete, Scanner s) {
+	/*public static void actionPS5(PS5 c, int requete, Scanner s) {
 		if (c.isEtatCourant()) {
 			switch (requete) {
 			case 4:
@@ -222,7 +220,7 @@ public class Action implements Serializable {
 			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
 		}
 
-	}
+	}_*/
 
 	public static void actionBalance(Balance b, int requete, Scanner s) {
 		if (b.isEtatCourant()) {
