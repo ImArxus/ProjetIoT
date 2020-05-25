@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -104,10 +105,16 @@ public class Enceinte extends Equipement implements Serializable {
 	@Override
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-		imageView.setImage(new Image("/images/objets/equipements.Enceinte.png"));
+		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(133);
 		imageView.setTranslateX(140);
 		return imageView;
 	}
-
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(600);
+		but.setTranslateY(450);
+		return but;
+	}
 }

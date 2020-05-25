@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -69,4 +70,19 @@ public class Balance extends Equipement implements Serializable {
 		i0.setImage(new Image("/images/objets/equipements.Balance.png"));
 		return i0;
 	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(300);
+		but.setTranslateY(450);
+		return but;
+	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(-105);
+		imageView.setTranslateX(-180);
+		return imageView;
+	}
+
 }

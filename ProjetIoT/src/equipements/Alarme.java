@@ -2,6 +2,7 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.Equipement;
@@ -29,6 +30,20 @@ public class Alarme extends Equipement implements Serializable {
 		ImageView i0 = new ImageView();
 		i0.setImage(new Image("/images/objets/equipements.Alarme.png"));
 		return i0;
+	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(100);
+		but.setTranslateY(450);
+		return but;
+	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(300);
+		imageView.setTranslateX(-180);
+		return imageView;
 	}
 
 }

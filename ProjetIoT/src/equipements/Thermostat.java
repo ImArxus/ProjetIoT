@@ -2,6 +2,9 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Equipement;
 
 public class Thermostat extends Equipement implements Serializable {
@@ -67,4 +70,19 @@ public class Thermostat extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la température");
 		}
 	}
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(400);
+		but.setTranslateY(500);
+		return but;
+	}
+	public ImageView afficher() {
+		ImageView imageView = new ImageView();
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(10);
+		imageView.setTranslateX(200);
+		return imageView;
+	}
+
 }

@@ -1,10 +1,18 @@
 package equipements;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import main.Equipement;
+import main.Main;
 
 public class Cheminee extends Equipement implements Serializable {
 
@@ -42,6 +50,7 @@ public class Cheminee extends Equipement implements Serializable {
 		if (super.isEtatCourant()) {
 			if (getIntensite() < 100) {
 				intensite += 10;
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l'intensité");
@@ -52,6 +61,7 @@ public class Cheminee extends Equipement implements Serializable {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 0) {
 				intensite -= 10;
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas baisser l'intensite");
@@ -62,6 +72,7 @@ public class Cheminee extends Equipement implements Serializable {
 		if (super.isEtatCourant()) {
 			if (intensite <= 100 && intensite >= 0) {
 				setIntensite(intensite);
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
 			} else {
 				System.out.println("Intensite non-valide");
 			}
@@ -69,13 +80,69 @@ public class Cheminee extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
 		}
 	}
-	
+
 	public ImageView afficher() {
 		ImageView imageView = new ImageView();
-        imageView.setImage(new Image("/images/objets/equipements.Cheminee.png"));
-        imageView.setTranslateY(105);
-        imageView.setTranslateX(-180);
-        return imageView;
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(105);
+		imageView.setTranslateX(-180);
+		return imageView;
 	}
 
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(400);
+		but.setTranslateY(450);
+		return but;
+	}
+
+	@Override
+	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+
+		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				intensite = (int) getIntensite();
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
+				augmenterIntensite();
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+			}
+		});
+		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				intensite = (int) getIntensite();
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
+				diminuerIntensite();
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+			}
+		});
+		MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
+		choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Quelle intensité (entre 0 et 100) ?");
+				intensite = Main.toInt(s.nextLine());
+				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
+				choisirIntensite(intensite);
+				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				s.close();
+				}
+		});
+		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité);
+		return fonctionnalite;
+	}
+	@Override
+	public String getImage() {
+		if (etatCourant) {
+			return ("/images/objets/equipements.Cheminee.png");
+		} else {
+			return ("/images/objets/equipements.Cheminee.desactive.png");
+		}
+	}
 }
