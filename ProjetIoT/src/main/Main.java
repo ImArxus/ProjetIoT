@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import equipements.Alarme;
 import equipements.Lumiere;
+import equipements.Radiateur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,9 +24,6 @@ public class Main extends Application implements Serializable {
 		Main.chargerCompte();
 
 		launch(args); // Lancement actions JavaFX
-
-		StdDraw.setCanvasSize(800, 600);
-		StdDraw.picture(0.5, 0.5, "images/chargement.png");
 
 		Scanner s = new Scanner(System.in); // Ouverture du scanner
 
@@ -264,6 +262,7 @@ public class Main extends Application implements Serializable {
 	private static String mdp;
 	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
+	private static double temperatureNaturelle = 0;
 	private static int heure = (int) (Math.random() * 24);
 
 	private static String couleur = "BLUE";
@@ -281,7 +280,7 @@ public class Main extends Application implements Serializable {
 	}
 
 	private static List<String> avatars = new LinkedList<String>();
-	
+
 	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
@@ -303,6 +302,7 @@ public class Main extends Application implements Serializable {
 	public static String getAvatar() {
 		return avatar;
 	}
+
 	public static void setAvatar(String avatar) {
 		Main.avatar = avatar;
 	}
@@ -331,6 +331,20 @@ public class Main extends Application implements Serializable {
 			}
 		}
 		return lumieres;
+	}
+
+	public static LinkedList<Equipement> getRadiateur() {
+		LinkedList<Equipement> radiateurs = new LinkedList<Equipement>();
+		LinkedList<Equipement> equip = getPosition().getEquipements();
+		Iterator<Equipement> it = equip.iterator();
+		while (it.hasNext()) {
+			Equipement e = it.next();
+			String tmp = e.getClass().getSimpleName();
+			if (tmp.equals("Radiateur")) {
+				radiateurs.add(e);
+			}
+		}
+		return radiateurs;
 	}
 
 	public static int toInt(String s) {
@@ -411,9 +425,34 @@ public class Main extends Application implements Serializable {
 			}
 		}
 		position.setIntensiteLumineuse(getIntensiteLumineuseNaturelle() + sommeILobjets);
-		System.out.println("L'intensité lumineuse de " + position.getNom() + " est de "
-				+ position.getIntensiteLumineuse() + "% (dont = " + getIntensiteLumineuseNaturelle() + "% naturelle et "
-				+ sommeILobjets + "% artificielle)");
+	}
+
+	public static void traitementTemperatureNaturelle() {
+		if ((heure == 8) || (heure == 21)) {
+			setTemperatureNaturelle(10);
+		} else if ((heure == 9) || (heure == 20)) {
+			setTemperatureNaturelle(12);
+		} else if ((heure == 10) || ((heure >= 18) && (heure < 20))) {
+			setTemperatureNaturelle(14);
+		} else if ((heure >= 11) && (heure < 18)) {
+			setTemperatureNaturelle(16);
+		} else {
+			setTemperatureNaturelle(6);
+		}
+	}
+
+	public static void traitementTemperature() {
+		LinkedList<Equipement> radiateurs = getRadiateur();
+		int sommeTempObjets = 0;
+		for (int i = 0; i < radiateurs.size(); i++) {
+			Equipement objet = radiateurs.get(i);
+			if (objet instanceof Radiateur) {
+				if (((Radiateur) objet).isEtatCourant()) {
+					sommeTempObjets += ((Radiateur) objet).getThermostat() * 5;
+				}
+			}
+		}
+		position.setTemperature(getTemperatureNaturelle() + sommeTempObjets);
 	}
 
 	public static void chargement(Scanner s) throws InterruptedException {
@@ -595,6 +634,14 @@ public class Main extends Application implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static double getTemperatureNaturelle() {
+		return temperatureNaturelle;
+	}
+
+	public static void setTemperatureNaturelle(double temperatureNaturelle) {
+		Main.temperatureNaturelle = temperatureNaturelle;
 	}
 
 }

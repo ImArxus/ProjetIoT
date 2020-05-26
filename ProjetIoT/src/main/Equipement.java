@@ -8,6 +8,8 @@ import java.util.Scanner;
 import equipements.Cheminee;
 import equipements.Enceinte;
 import equipements.Frigo;
+import equipements.Lumiere;
+import equipements.Radiateur;
 import equipements.TV;
 import equipements.Ventilateur;
 import javafx.event.ActionEvent;
@@ -150,7 +152,11 @@ public class Equipement implements Serializable {
 	}
 
 	public String getImage() {
-		return ("/images/objets/" + this.getClass().getName() + ".png");
+		if (isEtatCourant()) {
+			return "/images/objets/" + this.getClass().getName() + ".png";
+		} else {
+			return "/images/objets/" + this.getClass().getName() + "desactive.png";
+		}
 	}
 
 	public ImageView afficher() {
@@ -164,8 +170,8 @@ public class Equipement implements Serializable {
 		return but;
 	}
 
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalités");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
 		fonctionnalite.setLayoutY(100);
@@ -177,6 +183,10 @@ public class Equipement implements Serializable {
 				allumer();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
 			}
 		});
 		MenuItem eteindre = new MenuItem("Éteindre");
@@ -187,9 +197,22 @@ public class Equipement implements Serializable {
 				root.getChildren().remove(img);
 				root.getChildren().removeAll(indicateurs());
 				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
 			}
 		});
-		fonctionnalite.getItems().addAll(allumer, eteindre);
+		MenuItem quitter = new MenuItem("Quitter");
+		quitter.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().removeAll(indicateurs());
+			}
+		});
+
+		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);
 		return fonctionnalite;
 	}
 
@@ -197,20 +220,15 @@ public class Equipement implements Serializable {
 		LinkedList<Object> liste = new LinkedList<Object>();
 		if (this instanceof TV) {
 			liste.add(TV.getVolumeBar());
-		}
-		else if(this instanceof Enceinte) {
+		} else if (this instanceof Enceinte) {
 			liste.add(Enceinte.getVolumeBar());
-		}
-		else if(this instanceof Cheminee) {
+		} else if (this instanceof Cheminee) {
 			liste.add(Cheminee.getVolumeBar());
-		}
-		else if(this instanceof Frigo) {
+		} else if (this instanceof Frigo) {
 			liste.add(Frigo.getVolumeBar());
-		}
-		else if(this instanceof Ventilateur) {
+		} else if (this instanceof Ventilateur) {
 			liste.add(Ventilateur.getVolumeBar());
 		}
-		
 		return liste;
 	}
 }

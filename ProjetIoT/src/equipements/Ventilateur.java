@@ -19,6 +19,7 @@ public class Ventilateur extends Equipement implements Serializable {
 	private double intensite;
 	private static final long serialVersionUID = 8252594235507326423L;
 	private static ProgressBar volumeBar = new ProgressBar(0);
+	private ImageView imageView = new ImageView();
 
 	public Ventilateur(String nom) {
 		super(nom);
@@ -118,7 +119,6 @@ public class Ventilateur extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(170);
 		imageView.setTranslateX(-250);
@@ -126,9 +126,8 @@ public class Ventilateur extends Equipement implements Serializable {
 	}
 
 	public ImageView getImageView() {
-		ImageView i0 = new ImageView();
-		i0.setImage(new Image("/images/objets/equipements.Ventilateur.png"));
-		return i0;
+		imageView.setImage(new Image("/images/objets/equipements.Ventilateur.png"));
+		return imageView;
 	}
 
 	@Override
@@ -138,18 +137,19 @@ public class Ventilateur extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+
 	@Override
 	public String getImage() {
 		if (etatCourant) {
 			return ("/images/objets/equipements.Ventilateur.png");
 		} else {
 			return ("/images/objets/equipements.Ventilateur.desactive.png");
-		}}
+		}
+	}
 
-	
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem augmenterIntensité = new MenuItem("Augmenter intensité");
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
@@ -160,7 +160,8 @@ public class Ventilateur extends Equipement implements Serializable {
 				augmenterIntensiteFX(root);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
+				root.getChildren().add(afficher());
+			}
 		});
 		MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
@@ -174,7 +175,7 @@ public class Ventilateur extends Equipement implements Serializable {
 				root.getChildren().add(afficher());
 			}
 		});
-	
+
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité);
 		return fonctionnalite;
 	}

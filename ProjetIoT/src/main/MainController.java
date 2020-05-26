@@ -204,15 +204,12 @@ public class MainController {
 		Pane root = (Pane) getRoot("/main/Maison.fxml");
 		Scene scene = new Scene(root);
 
+		// Affichage du bandeau d'infos
+		root.getChildren().addAll(affichageBandeau());
+
 		// Affichage de la pièce
 		ImageView imageView = Piece.imageViewPiece();
 		root.getChildren().add(imageView);
-
-		// Affichage du bandeau d'infos
-		LinkedList<Label> liste = affichageBandeau(event);
-		for (int i = 0; i < liste.size(); i++) {
-			root.getChildren().add(liste.get(i));
-		}
 
 		// Affichage des équipements
 		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
@@ -222,16 +219,7 @@ public class MainController {
 				ImageView img = equip.get(i).afficher();
 				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
-						MenuButton fonct = current.getFonctionnalitées(root, img);
-						MenuItem quitter = new MenuItem("Quitter");
-						quitter.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent evt) {
-								root.getChildren().remove(fonct);
-								root.getChildren().removeAll(current.indicateurs());
-							}
-						});
-						fonct.getItems().add(quitter);
+						MenuButton fonct = current.getFonctionnalites(root, img);
 						root.getChildren().add(fonct);
 					}
 				}));
@@ -411,9 +399,9 @@ public class MainController {
 		return choiceBox;
 	}
 
-	public LinkedList<Label> affichageBandeau(ActionEvent event) {
+	public LinkedList<Label> affichageBandeau() {
 		LinkedList<Label> liste = new LinkedList<Label>();
-		double prochainLabel = 4; // LayoutX où insérer le prochain label
+		double prochainLabel = 4; // Début de la zone de placement des labels
 
 		Label pseudo = new Label();
 		pseudo.setText("Pseudo :");
@@ -466,40 +454,34 @@ public class MainController {
 		temperature.setUnderline(true);
 		temperature.setLayoutX(prochainLabel);
 		temperature.setLayoutY(68);
-		prochainLabel = prochainLabel + 137;
 		Label lbl4 = new Label();
 		lbl4.setText("" + Main.getPosition().getTemperature() + "°C");
 		lbl4.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl4.setLayoutX(prochainLabel);
+		lbl4.setLayoutX(148);
 		lbl4.setLayoutY(68);
-		prochainLabel = prochainLabel + 140;
 
 		Label luminosite = new Label();
 		luminosite.setText("Luminosité :");
 		luminosite.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		luminosite.setUnderline(true);
-		luminosite.setLayoutX(prochainLabel);
+		luminosite.setLayoutX(281);
 		luminosite.setLayoutY(68);
-		prochainLabel = prochainLabel + 130;
 		Label lbl5 = new Label();
 		lbl5.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lbl5.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl5.setLayoutX(prochainLabel);
-
+		lbl5.setLayoutX(411);
 		lbl5.setLayoutY(68);
-		prochainLabel = prochainLabel + 110;
 
 		Label heure = new Label();
 		heure.setText("Heure :");
 		heure.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
 		heure.setUnderline(true);
-		heure.setLayoutX(prochainLabel);
+		heure.setLayoutX(521);
 		heure.setLayoutY(68);
-		prochainLabel = prochainLabel + 77;
 		Label lbl6 = new Label();
 		lbl6.setText("" + Main.getHeure() + "h");
 		lbl6.setStyle("-fx-font: 20 arial; -fx-font-weight: bold");
-		lbl6.setLayoutX(prochainLabel);
+		lbl6.setLayoutX(598);
 		lbl6.setLayoutY(68);
 
 		liste.add(pseudo);

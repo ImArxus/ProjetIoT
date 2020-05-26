@@ -20,7 +20,7 @@ public class Cheminee extends Equipement implements Serializable {
 	private static final long serialVersionUID = 7169763608942128813L;
 	private double intensite;
 	private static ProgressBar volumeBar = new ProgressBar(0);
-
+	ImageView imageView = new ImageView();
 
 	public Cheminee(String nom, boolean etatCourant, double intensite, double positionHorizontale,
 			double positionVerticale) {
@@ -46,7 +46,7 @@ public class Cheminee extends Equipement implements Serializable {
 		return super.actionsPossibles()
 				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité";
 	}
-	
+
 	public static ProgressBar getVolumeBar() {
 		return volumeBar;
 	}
@@ -93,7 +93,7 @@ public class Cheminee extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
 		}
 	}
-	
+
 	public void augmenterIntensiteFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() <= 90) {
@@ -123,7 +123,6 @@ public class Cheminee extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(105);
 		imageView.setTranslateX(-180);
@@ -139,8 +138,8 @@ public class Cheminee extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
@@ -173,11 +172,12 @@ public class Cheminee extends Equipement implements Serializable {
 				choisirIntensite(intensite);
 				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				s.close();
-				}
+			}
 		});
 		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité);
 		return fonctionnalite;
 	}
+
 	@Override
 	public String getImage() {
 		if (etatCourant) {

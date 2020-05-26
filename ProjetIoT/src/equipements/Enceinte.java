@@ -22,6 +22,7 @@ public class Enceinte extends Equipement implements Serializable {
 	private Map<String, String> musiques = new HashMap<String, String>();
 	private String enEcoute;
 	private static ProgressBar volumeBar = new ProgressBar(0);
+	private ImageView imageView = new ImageView();
 
 	public Enceinte(String nom) {
 		super(nom);
@@ -54,7 +55,7 @@ public class Enceinte extends Equipement implements Serializable {
 	public String actionsPossibles() {
 		return super.actionsPossibles() + "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Jouer musique ";
 	}
-	
+
 	public static ProgressBar getVolumeBar() {
 		return volumeBar;
 	}
@@ -121,7 +122,6 @@ public class Enceinte extends Equipement implements Serializable {
 
 	@Override
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(133);
 		imageView.setTranslateX(140);
@@ -144,6 +144,7 @@ public class Enceinte extends Equipement implements Serializable {
 			return ("/images/objets/equipements.Enceinte.desactive.png");
 		}
 	}
+
 	public void augmenterVolumeFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getVolume() <= 90) {
@@ -173,8 +174,8 @@ public class Enceinte extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
 		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
@@ -182,7 +183,8 @@ public class Enceinte extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				augmenterVolumeFX(root);
 				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
+				root.getChildren().add(afficher());
+			}
 		});
 		MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
 		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
@@ -190,7 +192,8 @@ public class Enceinte extends Equipement implements Serializable {
 			public void handle(ActionEvent event) {
 				diminuerVolumeFX(root);
 				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
+				root.getChildren().add(afficher());
+			}
 		});
 		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume);
 		return fonctionnalite;

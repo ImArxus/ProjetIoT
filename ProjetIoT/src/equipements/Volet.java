@@ -2,12 +2,22 @@ package equipements;
 
 import java.io.Serializable;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import main.Equipement;
 
 public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
+	private ImageView imageView;
+	
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -66,4 +76,67 @@ public class Volet extends Equipement implements Serializable {
 		}
 	}
 
+	@Override
+	public ImageView afficher() {
+		imageView.setImage(new Image(getImage()));
+		imageView.setTranslateY(70);
+		imageView.setTranslateX(370);
+		return imageView;
+	}
+
+	public ImageView getImageView() {
+		imageView.setImage(new Image(getImage()));
+		return imageView;
+	}
+
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(700);
+		but.setTranslateY(500);
+		return but;
+	}
+
+	@Override
+	public String getImage() {
+		if (isEtatCourant()) {
+			if (getPosition() == 0) {
+				return "/images/objets/equipements.Volet.desactive.png";
+			} else if (getPosition() == 1) {
+				return "/images/objets/equipements.Volet.position1.png";
+			} else if (getPosition() == 2) {
+				return "/images/objets/equipements.Volet.position2.png";
+			} else if (getPosition() == 3) {
+				return "/images/objets/equipements.Volet.position3.png";
+			}
+		}
+		return "/images/objets/equipements.Volet.png";
+	}
+
+	@Override
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
+
+		MenuItem monterVolet = new MenuItem(" Monter Volet");
+		monterVolet.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				monterVolet();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem descendreVolet = new MenuItem(" Descendre Volet");
+		descendreVolet.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				descendreVolet();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
+			}
+		});
+
+		fonctionnalite.getItems().addAll(monterVolet, descendreVolet);
+		return fonctionnalite;
+	}
 }

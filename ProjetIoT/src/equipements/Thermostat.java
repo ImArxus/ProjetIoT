@@ -11,6 +11,7 @@ public class Thermostat extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 6630244045511449074L;
 	private int temperature;
+	private ImageView imageView = new ImageView();
 
 	public Thermostat(String nom) {
 		super(nom);
@@ -70,6 +71,7 @@ public class Thermostat extends Equipement implements Serializable {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la température");
 		}
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -77,8 +79,8 @@ public class Thermostat extends Equipement implements Serializable {
 		but.setTranslateY(500);
 		return but;
 	}
+
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(10);
 		imageView.setTranslateX(200);

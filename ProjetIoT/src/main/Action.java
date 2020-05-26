@@ -11,7 +11,6 @@ import equipements.Electrolyseur;
 import equipements.Enceinte;
 import equipements.Frigo;
 import equipements.Lumiere;
-import equipements.PS5;
 import equipements.Radiateur;
 import equipements.TV;
 import equipements.Thermostat;
@@ -56,8 +55,6 @@ public class Action implements Serializable {
 				actionElectrolyseur((Electrolyseur) objet, requete, s);
 			} else if (objet instanceof Enceinte) {
 				actionEnceinte((Enceinte) objet, requete, s);
-			} else if (objet instanceof PS5) {
-				actionPS5((PS5) objet, requete, s);
 			} else if (objet instanceof Balance) {
 				actionBalance((Balance) objet, requete, s);
 			} else if (objet instanceof Thermostat) {
@@ -200,30 +197,7 @@ public class Action implements Serializable {
 		}
 	}
 
-	public static void actionPS5(PS5 c, int requete, Scanner s) {
-		if (c.isEtatCourant()) {
-			switch (requete) {
-			case 4:
-				System.out.println("Quel jeu voulez vous lancer ?");
-				System.out.println("Votre collection : " + c.getJeux().keySet()); // Affiche la liste des jeux
-				String jeu = s.nextLine();
-				c.choisirJeu(jeu);
-				if (c.getJeux().containsKey(jeu)) {
-					System.out.println("Lancement de " + c.getJeu() + " sur votre " + c.getNom());
-					System.out.println("...");
-					System.out.println(c.getJeux().get(jeu));
-				}
-				break;
-			default:
-				System.out.println("Commande non-valide");
-				break;
-			}
-		} else {
-			System.out.println(c.getNom() + " est éteinte, on ne peut pas lancer un jeu");
-		}
-
-	}
-
+	
 	public static void actionBalance(Balance b, int requete, Scanner s) {
 		if (b.isEtatCourant()) {
 			switch (requete) {

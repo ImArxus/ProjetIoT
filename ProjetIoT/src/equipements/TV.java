@@ -19,6 +19,8 @@ public class TV extends Equipement implements Serializable {
 	private static ProgressBar volumeBar = new ProgressBar(0);
 	private double volume;
 	private int numeroChaine;
+	private String image;
+	private ImageView imageView = new ImageView();
 
 	public TV(String nom) {
 		super(nom);
@@ -29,6 +31,7 @@ public class TV extends Equipement implements Serializable {
 		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
+		image = "/images/objets/equipements.TV.desactive.png";
 	}
 
 	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
@@ -39,6 +42,7 @@ public class TV extends Equipement implements Serializable {
 		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
+		image = "/images/objets/equipements.TV.desactive.png";
 	}
 
 	@Override
@@ -65,6 +69,30 @@ public class TV extends Equipement implements Serializable {
 
 	public void setVolume(int volume) {
 		this.volume = volume;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImageChaine() {
+		if (isEtatCourant()) {
+			if (getNumeroChaine() == 1) {
+				image = "/images/objets/equipements.TV.chaine1.png";
+			} else if (getNumeroChaine() == 2) {
+				image = "/images/objets/equipements.TV.chaine2.png";
+			} else if (getNumeroChaine() == 3) {
+				image = "/images/objets/equipements.TV.chaine3.png";
+			} else {
+				image = "/images/objets/equipements.TV.chaine4.png";
+			}
+		} else {
+			image = "/images/objets/equipements.TV.desactive.png";
+		}
 	}
 
 	public void augmenterVolume() {
@@ -153,7 +181,6 @@ public class TV extends Equipement implements Serializable {
 
 	@Override
 	public ImageView afficher() {
-		ImageView imageView = new ImageView();
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(50);
 		imageView.setTranslateX(0);
@@ -169,71 +196,64 @@ public class TV extends Equipement implements Serializable {
 	}
 
 	@Override
-	public String getImage() {
-		if (isEtatCourant()) {
-			if (getNumeroChaine() == 1) {
-				return ("/images/objets/equipements.TV.chaine1.png");
-			} else if (getNumeroChaine() == 2) {
-				return ("/images/objets/equipements.TV.chaine2.png");
-			} else if (getNumeroChaine() == 3) {
-				return ("/images/objets/equipements.TV.chaine3.png");
-			} else {
-				return ("/images/objets/equipements.TV.chaine4.png");
-			}
-		} else {
-			return ("/images/objets/equipements.TV.desactive.png");
+	public void allumer() {
+		if (!isEtatCourant()) {
+			setEtatCourant(true);
+			image = "/images/objets/equipements.TV.demarrage.png";
 		}
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
-		MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
-		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				augmenterVolumeFX(root);
-				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
-			}
-		});
-		MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
-		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				diminuerVolumeFX(root);
-				System.out.println("Le volume de " + getNom() + " est de " + getVolume());
-			}
-		});
-		MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
-		augmenterChaine.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				augmenterChaine();
-				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
-		});
-		MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
-		diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				diminuerChaine();
-				root.getChildren().remove(img);
-				root.getChildren().add(afficher());			}
-		});
-		/*MenuItem choisirChaine = new MenuItem(" Choisir chaine");
-		choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle chaine (entre 1 et 4) ?");
-				int chaine = Main.toInt(s.nextLine());
-				mettreChaine(chaine);
-				System.out.println(getNom() + " est réglé sur la chaine " + getNumeroChaine());
-				s.close();
-			}
-		});*/
-		fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
+		if (isEtatCourant()) {
+			MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
+			augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					augmenterVolumeFX(root);
+				}
+			});
+			MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
+			diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					diminuerVolumeFX(root);
+				}
+			});
+			MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
+			augmenterChaine.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					augmenterChaine();
+					setImageChaine();
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
+			MenuItem diminuerChaine = new MenuItem(" Diminuer chaine");
+			diminuerChaine.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					diminuerChaine();
+					setImageChaine();
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
+			/*
+			 * MenuItem choisirChaine = new MenuItem(" Choisir chaine");
+			 * choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
+			 * 
+			 * @Override public void handle(ActionEvent event) { Scanner s = new
+			 * Scanner(System.in); System.out.println("Quelle chaine (entre 1 et 4) ?"); int
+			 * chaine = Main.toInt(s.nextLine()); mettreChaine(chaine);
+			 * System.out.println(getNom() + " est réglé sur la chaine " +
+			 * getNumeroChaine()); s.close(); } });
+			 */
+			fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
+		}
 		return fonctionnalite;
 	}
 }
