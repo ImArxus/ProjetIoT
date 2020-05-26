@@ -16,8 +16,7 @@ public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
-	private ImageView imageView;
-	
+	private ImageView imageView = new ImageView();
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -26,7 +25,7 @@ public class Volet extends Equipement implements Serializable {
 
 	public Volet(String nom) {
 		super(nom);
-		this.setPosition(position);
+		this.setPosition(0);
 		this.setPositionHorizontale(0.95);
 		this.setPositionVerticale(0.4);
 	}
@@ -46,8 +45,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() < 91) {
-				position += 10;
+			if (getPosition() <= 4) {
+				setPosition(getPosition() - 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
@@ -56,8 +55,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() > 9) {
-				position -= 10;
+			if (getPosition() >= 0) {
+				setPosition(getPosition() + 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
@@ -66,7 +65,7 @@ public class Volet extends Equipement implements Serializable {
 
 	public void choisirPosition(int position) {
 		if (super.isEtatCourant()) {
-			if (position <= 100 && position >= 0) {
+			if (position <= 4 && position >= 0) {
 				setPosition(position);
 			} else {
 				System.out.println("Position non-valide");
