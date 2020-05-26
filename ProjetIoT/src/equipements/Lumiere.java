@@ -145,6 +145,7 @@ public class Lumiere extends Equipement implements Serializable {
 				@Override
 				public void handle(ActionEvent event) {
 					augmenterIntensite();
+					boxIntensite(root);
 				}
 			});
 			MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
@@ -152,6 +153,7 @@ public class Lumiere extends Equipement implements Serializable {
 				@Override
 				public void handle(ActionEvent event) {
 					diminuerIntensite();
+					boxIntensite(root);
 				}
 			});
 			MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
@@ -164,6 +166,7 @@ public class Lumiere extends Equipement implements Serializable {
 					choisirIntensite(intensite);
 					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 					s.close();
+					boxIntensite(root);
 				}
 			});
 			MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
@@ -196,6 +199,20 @@ public class Lumiere extends Equipement implements Serializable {
 		} else {
 			return ("/images/objets/equipements.Lumiere.desactive.png");
 		}
+	}
+	
+	public static void boxIntensite(Pane root) {
+		Box box = new Box(100, 25, 0);
+		box.setLayoutX(450);
+		box.setLayoutY(80);
+		Label lblTemp = new Label();
+		lblTemp.setText("" + Main.getPosition().getIntensiteLumineuse() + " %");
+		lblTemp.setStyle("-fx-font: 20 arial; -fx-font-weight: bold;");
+		lblTemp.setLayoutX(410);
+		lblTemp.setLayoutY(68);
+
+		root.getChildren().add(box);
+		root.getChildren().add(lblTemp);
 	}
 
 	public void couleurLum(Pane root) {
