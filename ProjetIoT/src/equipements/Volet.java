@@ -11,13 +11,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
+import main.Main;
 
 public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
 	private ImageView imageView = new ImageView();
-	
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -26,7 +26,7 @@ public class Volet extends Equipement implements Serializable {
 
 	public Volet(String nom) {
 		super(nom);
-		this.setPosition(position);
+		this.setPosition(0);
 		this.setPositionHorizontale(0.95);
 		this.setPositionVerticale(0.4);
 	}
@@ -46,8 +46,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void monterVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() < 91) {
-				position += 10;
+			if (getPosition() <= 4) {
+				setPosition(getPosition() - 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
@@ -56,8 +56,8 @@ public class Volet extends Equipement implements Serializable {
 
 	public void descendreVolet() {
 		if (super.isEtatCourant()) {
-			if (getPosition() > 9) {
-				position -= 10;
+			if (getPosition() >= 0) {
+				setPosition(getPosition() + 1);
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
@@ -66,7 +66,7 @@ public class Volet extends Equipement implements Serializable {
 
 	public void choisirPosition(int position) {
 		if (super.isEtatCourant()) {
-			if (position <= 100 && position >= 0) {
+			if (position <= 4 && position >= 0) {
 				setPosition(position);
 			} else {
 				System.out.println("Position non-valide");
@@ -99,15 +99,37 @@ public class Volet extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
+		boolean nuit = false;
+		if (isEtatCourant()) {
+			if (Main.getHeure() >= 21 || Main.getHeure() <= 8) {
+				nuit = true;
+			}
+		}
 		if (isEtatCourant()) {
 			if (getPosition() == 0) {
-				return "/images/objets/equipements.Volet.desactive.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.desactive.png";
+				} else {
+					return "/images/objets/equipements.Volet.desactive.png";
+				}
 			} else if (getPosition() == 1) {
-				return "/images/objets/equipements.Volet.position1.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position1.png";
+				} else {
+					return "/images/objets/equipements.Volet.position1.png";
+				}
 			} else if (getPosition() == 2) {
-				return "/images/objets/equipements.Volet.position2.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position2.png";
+				} else {
+					return "/images/objets/equipements.Volet.position2.png";
+				}
 			} else if (getPosition() == 3) {
-				return "/images/objets/equipements.Volet.position3.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position3.png";
+				} else {
+					return "/images/objets/equipements.Volet.position3.png";
+				}
 			}
 		}
 		return "/images/objets/equipements.Volet.png";

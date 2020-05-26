@@ -15,7 +15,7 @@ public class Alarme extends Equipement implements Serializable {
 
 	public Alarme(String nom) {
 		super(nom);
-		this.setEtatCourant(true);
+		this.setEtatCourant(false);
 		this.setPositionHorizontale(0);
 		this.setPositionVerticale(0.5);
 	}
@@ -47,5 +47,12 @@ public class Alarme extends Equipement implements Serializable {
 		imageView.setTranslateX(-370);
 		return imageView;
 	}
-
+	@Override
+	public String getImage() {
+		if (!etatCourant) {
+			return ("/images/objets/equipements.Alarme.png");
+		} else {
+			return ("/images/objets/equipements.Alarme.desactive.png");
+		}
+	}
 }
