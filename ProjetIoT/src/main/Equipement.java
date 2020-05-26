@@ -152,7 +152,11 @@ public class Equipement implements Serializable {
 	}
 
 	public String getImage() {
-		return ("/images/objets/" + this.getClass().getName() + ".png");
+		if (isEtatCourant()) {
+			return "/images/objets/" + this.getClass().getName() + ".png";
+		} else {
+			return "/images/objets/" + this.getClass().getName() + "desactive.png";
+		}
 	}
 
 	public ImageView afficher() {
@@ -167,7 +171,7 @@ public class Equipement implements Serializable {
 	}
 
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
-		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalités");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
 		fonctionnalite.setLayoutY(100);
@@ -207,7 +211,7 @@ public class Equipement implements Serializable {
 				root.getChildren().removeAll(indicateurs());
 			}
 		});
-		
+
 		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);
 		return fonctionnalite;
 	}
@@ -225,7 +229,6 @@ public class Equipement implements Serializable {
 		} else if (this instanceof Ventilateur) {
 			liste.add(Ventilateur.getVolumeBar());
 		}
-
 		return liste;
 	}
 }

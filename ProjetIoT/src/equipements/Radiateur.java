@@ -85,13 +85,18 @@ public class Radiateur extends Equipement implements Serializable {
 	}
 
 	@Override
+	public String getImage() {
+		return "/images/objets/equipements.Radiateur.png";
+	}
+
+	@Override
 	public Button getButton() {
 		Button but = super.getButton();
 		but.setTranslateX(300);
 		but.setTranslateY(500);
 		return but;
 	}
-	
+
 	public static void boxTemperature(Pane root) {
 		Box box = new Box(100, 25, 0);
 		box.setLayoutX(190);
@@ -105,5 +110,5 @@ public class Radiateur extends Equipement implements Serializable {
 		root.getChildren().add(box);
 		root.getChildren().add(lblTemp);
 	}
-	
+
 }

@@ -20,7 +20,7 @@ public class PS5 extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
-	private List<String> jeux = new LinkedList< String>();
+	private List<String> jeux = new LinkedList<String>();
 	private ImageView imageView = new ImageView();
 	private int indice;
 
@@ -33,7 +33,7 @@ public class PS5 extends Equipement implements Serializable {
 		this.setJeu(getJeux().get(0));
 		this.setPositionHorizontale(0.58);
 		this.setPositionVerticale(0.34);
-		indice=0;
+		indice = 0;
 	}
 
 	public PS5(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, String jeu) {
@@ -51,7 +51,7 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	public void setJeu(String jeu) {
-			this.jeu = jeu;
+		this.jeu = jeu;
 	}
 
 	public List<String> getJeux() {
@@ -78,77 +78,80 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	@Override
+	public String getImage() {
+		return "/images/objets/equipements.PS5.png";
+	}
+
+	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
+		LinkedList<Equipement> equip = Main.getPosition().getEquipements();
+		LinkedList<TV> listeTV = new LinkedList<TV>();
 
-		MenuItem seConnecter = new MenuItem("Connexion à la télé");
-		seConnecter.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-
-				LinkedList<Equipement> equip = Main.getPosition().getEquipements();
-				LinkedList<TV> listeTV = new LinkedList<TV>();
-				Iterator<Equipement> it = equip.iterator();
-				while (it.hasNext()) {
-					Equipement e = it.next();
-					String tmp = e.getClass().getSimpleName();
-					if (tmp.equals("TV")) {
-						listeTV.add((TV) e);
+		if (isEtatCourant()) {
+			MenuItem seConnecter = new MenuItem("Connexion à la télé");
+			seConnecter.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					Iterator<Equipement> it = equip.iterator();
+					while (it.hasNext()) {
+						Equipement e = it.next();
+						String tmp = e.getClass().getSimpleName();
+						if (tmp.equals("TV")) {
+							listeTV.add((TV) e);
+						}
 					}
-				}
-				if (!listeTV.isEmpty()) {
-					Iterator<TV> it2 = listeTV.iterator();
-					while (it2.hasNext()) {
-						TV e = it2.next();
-						if (e.isEtatCourant()) {
-							e.setImage("/images/objets/equipements.TV.psn.png");
-							root.getChildren().remove(e.afficher());
-							root.getChildren().add(e.afficher());
+					if (!listeTV.isEmpty()) {
+						Iterator<TV> it2 = listeTV.iterator();
+						while (it2.hasNext()) {
+							TV e = it2.next();
+							if (e.isEtatCourant()) {
+								e.setImage("/images/objets/equipements.TV.psn.png");
+								root.getChildren().remove(e.afficher());
+								root.getChildren().add(e.afficher());
+							}
 						}
 					}
 				}
-			}
-		});
-		MenuItem changerDisque = new MenuItem("Changer disque");
-		changerDisque.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				indice++;
-				if(indice==jeux.size()) {
-					indice=0;
-				}
-				setJeu(jeux.get(indice));
-			}
-		});
-		MenuItem lancerJeu = new MenuItem("Lancer Jeu");
-		lancerJeu.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-
-				LinkedList<Equipement> equip = Main.getPosition().getEquipements();
-				LinkedList<TV> listeTV = new LinkedList<TV>();
-				Iterator<Equipement> it = equip.iterator();
-				while (it.hasNext()) {
-					Equipement e = it.next();
-					String tmp = e.getClass().getSimpleName();
-					if (tmp.equals("TV")) {
-						listeTV.add((TV) e);
+			});
+			MenuItem changerDisque = new MenuItem("Changer disque");
+			changerDisque.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					indice++;
+					if (indice == jeux.size()) {
+						indice = 0;
 					}
+					setJeu(jeux.get(indice));
 				}
-				if (!listeTV.isEmpty()) {
-					Iterator<TV> it2 = listeTV.iterator();
-					while (it2.hasNext()) {
-						TV e = it2.next();
-						if (e.isEtatCourant()) {
-							e.setImage(jeux.get(indice));
-							root.getChildren().remove(e.afficher());
-							root.getChildren().add(e.afficher());
+			});
+			MenuItem lancerJeu = new MenuItem("Lancer Jeu");
+			lancerJeu.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					Iterator<Equipement> it = equip.iterator();
+					while (it.hasNext()) {
+						Equipement e = it.next();
+						String tmp = e.getClass().getSimpleName();
+						if (tmp.equals("TV")) {
+							listeTV.add((TV) e);
+						}
+					}
+					if (!listeTV.isEmpty()) {
+						Iterator<TV> it2 = listeTV.iterator();
+						while (it2.hasNext()) {
+							TV e = it2.next();
+							if (e.isEtatCourant()) {
+								e.setImage(jeux.get(indice));
+								root.getChildren().remove(e.afficher());
+								root.getChildren().add(e.afficher());
+							}
 						}
 					}
 				}
-			}
-		});
-		fonctionnalite.getItems().addAll(seConnecter,changerDisque,lancerJeu);
+			});
+			fonctionnalite.getItems().addAll(seConnecter, changerDisque, lancerJeu);
+		}
 		return fonctionnalite;
 	}
 }
