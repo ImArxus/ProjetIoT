@@ -3,10 +3,7 @@ package main;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
-import equipements.Alarme;
 import equipements.Cheminee;
 import equipements.Lumiere;
 import equipements.Radiateur;
@@ -14,7 +11,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pieces.Salon;
 
 public class Main extends Application implements Serializable {
 
@@ -25,249 +21,17 @@ public class Main extends Application implements Serializable {
 		Main.chargerCompte();
 
 		launch(args); // Lancement actions JavaFX
-
-		Scanner s = new Scanner(System.in); // Ouverture du scanner
-
-		chargement(s); // Choix de la maison et de l'utilisateur
-		boolean stop = false; // Fin de parcours
-
-		LinkedList<Equipement> lumieres = getLumiere();
-		if (getIntensiteLumineuseNaturelle() == 0) {
-			if (lumieres.isEmpty()) {
-				System.out.println("Il n'y a pas de lumière dans cette pièce\n");
-			}
-			for (Equipement lum : lumieres) { // Allumer
-				System.out.println("Il fait nuit, les lumières s'allument automatiquement dans cette pièce\n");
-				lum.allumer();
-			}
-		}
-		avatars.add("fille1");
-		avatars.add("fille2");
-		avatars.add("fille3");
-		avatars.add("fille4");
-		avatars.add("fille5");
-		avatars.add("fille6");
-		avatars.add("fille7");
-		avatars.add("homme1");
-		avatars.add("homme2");
-		avatars.add("homme3");
-		avatars.add("homme4");
-		avatars.add("homme5");
-		avatars.add("homme6");
-		avatars.add("homme7");
-		avatars.add("homme8");
-		avatars.add("homme9");
-
-		while (!stop && !alarme(s)) { // Boucle d'intervention utilisateur
-			calculHoraires(); // Calcul heure du jour
-			affichageTemperature(); // Affichage temperature pièce
-			traitementIntensiteLumineuseNaturelle(); // Traitement ILN
-			traitementIntensiteLumineuse(); // Traitement & affichage IL totale
-			miseNiveauGraphique();
-			Thread.sleep(2000);
-
-			System.out.println("\nVous êtes dans " + getPosition() + "\n");
-			System.out.println("Tapez le numéro correspondant à l'action souhaitée ");
-			System.out.println(Equipement.actionsPossibles(pseudo));
-
-			int requete = toInt(s.nextLine());
-
-			/***************************************************************
-			 ************************* Déplacement *************************
-			 ***************************************************************/
-			if (requete == 1) {
-				LinkedList<Piece> piecesAdj = getPosition().getPiecesAdj();
-				if (piecesAdj.isEmpty()) {
-					System.out.println("\nIl n'y a pas de pièces dans laquelle se déplacer\n");
-				} else {
-					System.out.println("Tapez la commande correspondant à la destination souhaitée");
-					for (int i = 0; i < piecesAdj.size(); i++) {
-						System.out.println("➡️ " + (i + 1) + " : " + piecesAdj.get(i)); // Liste des pièces adjacentes
-					}
-					int req = toInt(s.nextLine()) - 1;
-					if (req >= 0 && req < piecesAdj.size()) {
-						setPosition(piecesAdj.get(req));
-						if (getIntensiteLumineuseNaturelle() == 0) {
-							lumieres = getLumiere();
-							if (lumieres.isEmpty()) {
-								System.out.println("Il n'y a pas de lumières");
-							}
-							for (Equipement lum : lumieres) { // Allumer
-								System.out.println(
-										"Il fait nuit, les lumières s'allument automatiquement dans cette pièce");
-								lum.allumer();
-							}
-						}
-					} else {
-						System.out.println("Mauvaise commande");
-					}
-				}
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 ************************* Utilisation *************************
-			 ***************************************************************/
-			else if (requete == 2) {
-				LinkedList<Equipement> equip = getPosition().getEquipements();
-				if (equip.isEmpty()) {
-					System.out.println("\nIl n'y a pas d'équipement à utiliser ici\n");
-				} else {
-					System.out.println("\nTapez la commande correspondant à l'équipement souhaité");
-					for (int i = 0; i < equip.size(); i++) {
-						System.out.println("➡️ " + (i + 1) + " : " + equip.get(i)); // Liste des equipements
-					}
-					System.out.println();
-					int req = toInt(s.nextLine()) - 1;
-					boolean exit = false;
-					if (req >= 0 && req < equip.size()) {
-						Equipement objet = equip.get(req);
-						while (!exit) {
-							System.out.println("\nTapez la commande correspondant à l'action souhaitée pour " + objet);
-							System.out.println(objet.actionsPossibles() + "\n"); // Liste toutes les actions possibles
-							exit = Action.actionEquipement(objet, s); // Commandes d'action dans la class Action
-						}
-					} else {
-						System.out.println("Mauvaise Commande");
-					}
-				}
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 **************************** Arrêt ****************************
-			 ***************************************************************/
-			else if (requete == 3) {
-				choixSauvegarde(s);
-				System.out.println("\nAu revoir !");
-				stop = true;
-			}
-			/***************************************************************
-			 ************************** Sauvegarde *************************
-			 ***************************************************************/
-			else if (requete == 4) {
-				choixSauvegarde(s);
-				Thread.sleep(3000); // Délai de 3 secondes
-			}
-			/***************************************************************
-			 ********************* Création d'une pièce ********************
-			 ***************************************************************/
-			else if (requete == 5 && droits) {
-				Piece.creerPiece(getMaison(), s);
-				Thread.sleep(3000); // Délai de 3 secondes
-			}
-
-			/***************************************************************
-			 ******************* Suppression d'une pièce *******************
-			 ***************************************************************/
-			else if (requete == 6 && droits) {
-				Piece.supprimerPiece(getMaison(), s);
-				Thread.sleep(3000); // Délai de 3 secondes
-			}
-
-			/***************************************************************
-			 ******************** Création d'un équipement *****************
-			 ***************************************************************/
-			else if (requete == 7 && droits) {
-				Equipement.creerEquipement(getPosition(), s);
-				Thread.sleep(3000); // Délai de 3 secondes
-			}
-
-			/***************************************************************
-			 ***************** Suppression d'un équipement *****************
-			 ***************************************************************/
-			else if (requete == 8 && droits) {
-				Equipement.supprimerEquipement(getPosition(), s);
-				Thread.sleep(3000); // Délai de 3 secondes
-			}
-
-			/***************************************************************
-			 ******* Suppression de tous les equipements de la pièce *******
-			 ***************************************************************/
-			else if (requete == 9 && droits) {
-				getPosition().getEquipements().clear();// suppression de tous les équipements de la pièce
-				System.out.println("Suppression effectuée");
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 ******** Affichage de toutes les pièces et équipements ********
-			 ***************************************************************/
-			else if (requete == 10 && droits) {
-				LinkedList<Piece> pieces = getMaison().getPieces();
-				for (int i = 0; i < pieces.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + pieces.get(i)); // Affiche la liste des pièces
-				}
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 *************** Choix couleur des paramètres ******************
-			 ***************************************************************/
-			else if (requete == 11 && droits) {
-				LinkedList<String> couleurs = new LinkedList<String>();
-				couleurs.add("GREEN");
-				couleurs.add("ORANGE");
-				couleurs.add("RED");
-				couleurs.add("WHITE");
-				couleurs.add("GRAY");
-				couleurs.add("YELLOW");
-				couleurs.add("PINK");
-				couleurs.add("BLUE");
-				System.out.println("Tapez la commande correspondant à la couleur souhaitée");
-				for (int i = 0; i < couleurs.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + couleurs.get(i));
-				}
-				int req = Main.toInt(s.nextLine());
-				if (req > 0 && req <= couleurs.size()) {
-					couleur = couleurs.get(req - 1);
-					System.out.println("\nNouvelle couleur validée\n");
-				} else {
-					System.out.println("Mauvaise commande");
-				}
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 ******************* Changement de l'avatar ********************
-			 ***************************************************************/
-			else if (requete == 12 && droits) {
-				System.out.println("Tapez la commande correspondant à votre avatar désiré");
-				for (int i = 0; i < avatars.size(); i++) {
-					System.out.println("➡️ " + (i + 1) + " : " + avatars.get(i)); // Affiche la liste des pièces
-				}
-				int req = Main.toInt(s.nextLine());
-				if (req > 0 && req <= avatars.size()) {
-					avatar = avatars.get(req - 1);
-					System.out.println("Nouvel avatar validé");
-				} else {
-					System.out.println("Mauvaise commande");
-				}
-				Thread.sleep(3000); // Delai de 3 secondes
-			}
-
-			/***************************************************************
-			 ********************* Commande non valide *********************
-			 ***************************************************************/
-			else {
-				System.out.println("Cette commande n'est pas disponible\n");
-			}
-
-		}
-		s.close(); // Fermeture du scanner
+		
 	}
 
 	private static Maison maison; // Maison définie dans la classe BarryHouse
 	private static Piece position; // Position initiale dans la premère pièce ajoutée
 	private static String pseudo;
-	private static String mdp;
-	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
 	private static double temperatureNaturelle = 0;
 	//private static int heure = 4;
 	private static int heure = (int) (Math.random() * 24);
 
-	private static String couleur = "BLUE";
 	private static ListeUtilisateurs listeUtilisateur = new ListeUtilisateurs();
 
 	public static void chargerCompte() {
@@ -280,9 +44,7 @@ public class Main extends Application implements Serializable {
 	public static ListeUtilisateurs getListeUtilisateur() {
 		return listeUtilisateur;
 	}
-
-	private static List<String> avatars = new LinkedList<String>();
-
+	
 	private static String avatar = "homme1";
 
 	public static Maison getMaison() {
@@ -347,37 +109,6 @@ public class Main extends Application implements Serializable {
 			}
 		}
 		return chauffants;
-	}
-
-	public static int toInt(String s) {
-		int res;
-		try {
-			res = Integer.parseInt(s);
-		} catch (NumberFormatException e) {
-			System.out.println("La commande entrée n'est pas un entier\n");
-			res = -1;
-		}
-		return res;
-	}
-
-	public static boolean alarme(Scanner s) {
-		LinkedList<Equipement> equip = getPosition().getEquipements();
-		for (int i = 0; i < equip.size(); i++) {
-			Equipement objet = equip.get(i);
-			if (objet instanceof Alarme) {
-				if (((Alarme) objet).isEtatCourant()) {
-					System.out.println("Désactiver l'alarme (oui/non) ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
-					int requete = toInt(s.nextLine());
-					if (requete == 1) {
-						objet.eteindre();
-					} else {
-						((Alarme) objet).sonner();
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	public static void calculHoraires() {
@@ -466,166 +197,6 @@ public class Main extends Application implements Serializable {
 		position.setTemperature(getTemperatureNaturelle() + sommeTempObjets);
 	}
 
-	public static void chargement(Scanner s) throws InterruptedException {
-
-		/***************************************************************
-		 ************************** Connexion **************************
-		 ***************************************************************/
-		boolean connecte = false;
-		while (!connecte) {
-			System.out.print("Identifiant : ");
-			pseudo = s.nextLine();
-			if (listeUtilisateur.comptes.containsKey(pseudo)) {
-				System.out.print("Mot de passe : ");
-				mdp = s.nextLine();
-				if (listeUtilisateur.comptes.get(pseudo).equals(mdp)) {
-					System.out.println("Mot de passe correct");
-					connecte = true;
-				} else {
-					System.out.println("Mot de passe incorrect");
-					System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Réessayer");
-					int requete = toInt(s.nextLine());
-					if (requete == 1) {
-						pseudo = "guest";
-						mdp = listeUtilisateur.comptes.get(pseudo);
-						System.out.println("Connexion automatique en tant qu'invité");
-						connecte = true;
-					}
-				}
-			} else {
-				System.out.println("Identifiant inconnu");
-				System.out.println("➡️ 1 : Continuer en tant qu'invité\n➡️ 2 : Créer un compte\n➡️ 3 : Réessayer");
-				int requete = toInt(s.nextLine());
-				if (requete == 1) {
-					pseudo = "guest";
-					mdp = listeUtilisateur.comptes.get(pseudo);
-					System.out.println("Connexion automatique en tant qu'invité");
-					connecte = true;
-				} else if (requete == 2) {
-					System.out.println("Identifiant : " + pseudo);
-					System.out.print("Veuillez choisir un mot de passe : ");
-					mdp = s.nextLine();
-					listeUtilisateur.comptes.put(pseudo, mdp);
-					Sauvegarde.sauvegarderCompte();
-
-					System.out.println("Féliciations, vous avez maintenant un compte utilisateur !");
-					connecte = true;
-				}
-			}
-			System.out.println("------------------------------------------------------------------");
-		}
-
-		/***************************************************************
-		 ********************* Choix de la maison **********************
-		 ***************************************************************/
-		System.out.println("Identifiant : " + pseudo);
-		droits = ListeUtilisateurs.getAdmin().contains(getPseudo());
-		System.out.println("Activation du mode administrateur : " + droits);
-		System.out.println("------------------------------------------------------------------");
-		Thread.sleep(1000);
-		System.out.println("\nBienvenue " + pseudo + " ! Quelle maison voulez-vous charger ?");
-		boolean maisonChoisie = false;
-		while (!maisonChoisie) {
-			System.out.println("➡️ 1 : Barry's House");
-			System.out.println("➡️ 2 : Maison Vide");
-			System.out.println("➡️ 3 : Charger Maison\n");
-			int requete = toInt(s.nextLine());
-			if (requete == 1) {
-				maison = BarryHouse.creerMaison();
-				System.out.println("\nBienvenue dans la maison de Barry !\n");
-				maisonChoisie = true;
-			} else if (requete == 2) {
-				System.out.println("\nQuel nom voulez vous donner à votre maison?");
-				String name = s.nextLine();
-				maison = new Maison(name, new Salon("Salon"));
-				System.out.println("\nVotre maison de rêve n'attend que vous !\n");
-				System.out.println(maison.toString());
-				maisonChoisie = true;
-			} else if (requete == 3) {
-				maison = Sauvegarde.chargerMaison();
-				if (maison != null) {
-					maisonChoisie = true;
-				}
-			}
-
-		}
-		setPosition(getMaison().getPieces().get(0)); // Place l'utilisateur dans la première pièce de la maison choisie
-		Thread.sleep(2000);
-	}
-
-	public static void choixSauvegarde(Scanner s) throws InterruptedException {
-		System.out.println("Voulez vous sauvegarder votre progression ?\n➡️ 1 : Oui\n➡️ 2 : Non\n");
-		int req = toInt(s.nextLine());
-		if (req == 1) {
-			Sauvegarde.sauvegarder();
-			System.out.println("\nSauvegarde effectuée");
-		} else {
-			System.out.println("\nMaison non-sauvegardée");
-		}
-	}
-
-	public static void miseNiveauGraphique() {
-		Piece position = getPosition();
-		StdDraw.clear();
-		StdDraw.picture(0.5, 0.5, "images/couleurs/" + couleur + ".png");
-		StdDraw.picture(0.5, 0.5, position.imagePiece());
-		StdDraw.text(0.15, 0.96, getPseudo());
-		StdDraw.text(0.46, 0.96, getMaison().getNom());
-		StdDraw.text(0.78, 0.96, position.getNom());
-		StdDraw.text(0.29, 0.9, String.valueOf(position.getTemperature()));
-		StdDraw.text(0.76, 0.9, String.valueOf(position.getIntensiteLumineuse()));
-		StdDraw.text(0.9, 0.9, String.valueOf(getHeure()) + "h");
-		miseNiveauGraphiqueObjets();
-		StdDraw.picture(0.5, 0.2, "images/avatar/" + avatar + ".png");
-	}
-
-	public static void choixCouleurLegende() {
-		switch (couleur) {
-		case "GREEN":
-			StdDraw.setPenColor(StdDraw.GREEN);
-			break;
-		case "PINK":
-			StdDraw.setPenColor(StdDraw.PINK);
-			break;
-		case "GRAY":
-			StdDraw.setPenColor(StdDraw.GRAY);
-			break;
-		case "RED":
-			StdDraw.setPenColor(StdDraw.RED);
-			break;
-		case "ORANGE":
-			StdDraw.setPenColor(StdDraw.ORANGE);
-			break;
-		case "YELLOW":
-			StdDraw.setPenColor(StdDraw.YELLOW);
-			break;
-		case "WHITE":
-			StdDraw.setPenColor(StdDraw.WHITE);
-			break;
-		default:
-			StdDraw.setPenColor(StdDraw.BLUE);
-			break;
-		}
-	}
-
-	public static String getCouleur() {
-		return couleur;
-	}
-
-	public static void miseNiveauGraphiqueObjets() {
-		choixCouleurLegende();
-		String nameClass;
-		LinkedList<Equipement> equip = getPosition().getEquipements();
-		for (int i = 0; i < equip.size(); i++) {
-			nameClass = equip.get(i).getClass().getName();
-			StdDraw.picture(equip.get(i).getPositionHorizontale(), equip.get(i).getPositionVerticale(),
-					"images/objets/" + nameClass + ".png");
-			StdDraw.text(equip.get(i).getPositionHorizontale(), equip.get(i).getPositionVerticale(),
-					equip.get(i).getNom());
-		}
-		StdDraw.setPenColor(StdDraw.BLACK);
-	}
-
 	public static int getIntensiteLumineuseNaturelle() {
 		return intensiteLumineuseNaturelle;
 	}
@@ -636,14 +207,13 @@ public class Main extends Application implements Serializable {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// https://www.youtube.com/watch?v=cgv63JD7pfc
 		try {
 			primaryStage.setTitle("Login");
 			Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/main/Login.fxml")));
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Erreur lors de la création de l'interface");
 		}
 	}
 

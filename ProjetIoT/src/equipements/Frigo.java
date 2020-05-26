@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
-import main.Main;
 
 public class Frigo extends Equipement implements Serializable {
 
@@ -34,8 +32,6 @@ public class Frigo extends Equipement implements Serializable {
 		dispo.put("Yaourt", 1);
 		dispo.put("Salade", 1);
 		dispo.put("tomates", 3);
-		this.setPositionHorizontale(0.25);
-		this.setPositionVerticale(0.3);
 		volumeBar.setLayoutX(215);
 		volumeBar.setLayoutY(250);
 		volumeBar.setPrefSize(80, 15);
@@ -48,12 +44,6 @@ public class Frigo extends Equipement implements Serializable {
 		volumeBar.setLayoutX(215);
 		volumeBar.setLayoutY(250);
 		volumeBar.setPrefSize(80, 15);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Baisser temperature\n➡️ 5 : Augmenter temperature\n➡️ 6 : Lister produits\n➡️ 7 : Commander";
 	}
 
 	@Override
@@ -175,19 +165,18 @@ public class Frigo extends Equipement implements Serializable {
 				System.out.println("La temperature du frigo " + getNom() + " est de " + getTemperature());
 			}
 		});
+		// TODO
 		MenuItem commander = new MenuItem(" Commander");
 		commander.setOnAction(new EventHandler<ActionEvent>() {
-
 			@Override
 			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Que voulez vous commander ?");
-				String requete1 = s.nextLine();
-				System.out.println("En quelle quantitée ?");
-				int requete2 = Main.toInt(s.nextLine());
-				commander(requete1, requete2);
-				System.out.println("Dans " + getNom() + ", il y a maintenant " + getDispo());
-				s.close();
+				/**
+				 * Scanner s = new Scanner(System.in); System.out.println("Que voulez vous
+				 * commander ?"); String requete1 = s.nextLine(); System.out.println("En quelle
+				 * quantitée ?"); int requete2 = Main.toInt(s.nextLine()); commander(requete1,
+				 * requete2); System.out.println("Dans " + getNom() + ", il y a maintenant " +
+				 * getDispo()); s.close();
+				 */
 			}
 		});
 		MenuItem listerProduits = new MenuItem(" Lister produits");

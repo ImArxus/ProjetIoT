@@ -25,19 +25,11 @@ public class Alexa extends Equipement implements Serializable {
 	public Alexa(String nom) {
 		super(nom);
 		pseudo = Main.getPseudo();
-		this.setPositionHorizontale(0.23);
-		this.setPositionVerticale(0.46);
 	}
 
 	public Alexa(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		pseudo = Main.getPseudo();
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Alexa je souhaite connaitre l'heure\n➡️ 5 : Alexa je souhaite connaitre la temperature d'une pièce\n➡️ 6 : Alexa je souhaite connaitre les équipements d'une pièce\n";
 	}
 
 	public void reponseHeure() {
@@ -139,7 +131,6 @@ public class Alexa extends Equipement implements Serializable {
 				reponseEquipement();
 			}
 		});
-
 
 		fonctionnalite.getItems().addAll(reponseHeure, reponseTemperature, reponseEquipement);
 		return fonctionnalite;

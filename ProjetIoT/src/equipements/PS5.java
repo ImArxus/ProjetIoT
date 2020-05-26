@@ -31,19 +31,12 @@ public class PS5 extends Equipement implements Serializable {
 		jeux.add("/images/objets/equipements.PS5.jeu2.png");
 		jeux.add("/images/objets/equipements.PS5.jeu1.png");
 		this.setJeu(getJeux().get(0));
-		this.setPositionHorizontale(0.58);
-		this.setPositionVerticale(0.34);
 		indice = 0;
 	}
 
 	public PS5(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, String jeu) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setJeu(jeu);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n➡️ 4 : Lancer jeu";
 	}
 
 	public String getJeu() {

@@ -25,20 +25,12 @@ public class Radiateur extends Equipement implements Serializable {
 		super(nom);
 		setThermostat(1);
 		super.setEtatCourant(false);
-		this.setPositionHorizontale(0.8);
-		this.setPositionVerticale(0.32);
 	}
 
 	public Radiateur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
 			int thermostat) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setThermostat(thermostat);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir thermostat";
 	}
 
 	public int getThermostat() {

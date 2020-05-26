@@ -16,20 +16,12 @@ public class Thermostat extends Equipement implements Serializable {
 	public Thermostat(String nom) {
 		super(nom);
 		this.setTemperature(21);
-		this.setPositionHorizontale(0.8);
-		this.setPositionVerticale(0.52);
 	}
 
 	public Thermostat(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
 			int temperature) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setTemperature(temperature);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter température\n➡️ 5 : Diminuer température\n➡️ 6 : Choisir température ";
 	}
 
 	public int getTemperature() {

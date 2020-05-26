@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,20 +26,12 @@ public class Lumiere extends Equipement implements Serializable {
 		super(nom);
 		setIntensite(100);
 		setCouleur("blanc");
-		this.setPositionVerticale(0.75);
-		this.setPositionHorizontale(0.5);
 	}
 
 	public Lumiere(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		super(nom, etatCourant, positionHorizontale, positionVerticale);
 		setIntensite(intensite);
 		setCouleur(couleur);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité\n➡️ 7 : Choisir couleur";
 	}
 
 	public int getIntensite() {
@@ -141,15 +132,15 @@ public class Lumiere extends Equipement implements Serializable {
 			});
 			MenuItem choisirIntensité = new MenuItem("Choisir intensité");
 			choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
+				// TODO
 				@Override
 				public void handle(ActionEvent event) {
-					Scanner s = new Scanner(System.in);
-					System.out.println("Quelle intensité (entre 0 et 100) ?");
-					int intensite = Main.toInt(s.nextLine());
-					choisirIntensite(intensite);
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-					s.close();
-					boxIntensite(root);
+					/**
+					 * Scanner s = new Scanner(System.in); System.out.println("Quelle intensité
+					 * (entre 0 et 100) ?"); int intensite = Main.toInt(s.nextLine());
+					 * choisirIntensite(intensite); System.out.println("L'intensité de " + getNom()
+					 * + " est réglé sur " + getIntensite()); s.close(); boxIntensite(root);
+					 */
 				}
 			});
 			MenuItem choisirCouleur = new MenuItem("Choisir couleur");
@@ -183,7 +174,7 @@ public class Lumiere extends Equipement implements Serializable {
 			return ("/images/objets/equipements.Lumiere.desactive.png");
 		}
 	}
-	
+
 	public static void boxIntensite(Pane root) {
 		Box box = new Box(100, 22, 0);
 		box.setLayoutX(458);

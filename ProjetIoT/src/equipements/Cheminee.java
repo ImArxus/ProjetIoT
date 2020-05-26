@@ -33,17 +33,9 @@ public class Cheminee extends Equipement implements Serializable {
 	public Cheminee(String nom) {
 		super(nom);
 		this.setIntensite(50);
-		this.setPositionHorizontale(0.26);
-		this.setPositionVerticale(0.34);
 		volumeBar.setLayoutX(170);
 		volumeBar.setLayoutY(350);
 		volumeBar.setPrefSize(80, 15);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité";
 	}
 
 	public static ProgressBar getVolumeBar() {

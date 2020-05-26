@@ -27,23 +27,13 @@ public class Maison implements Serializable {
 
 	public void ajouterPiece(Piece p) {
 		getPieces().add(p);
-	}
-
-	public void ajouterPieceFX(Piece p) {
-		getPieces().add(p);
-		sontAdjacents(p, Main.getPosition());
+		if (getPieces().size() > 1) {
+			sontAdjacents(p, Main.getPosition());
+		}
 		Main.setPosition(p);
 	}
 
 	public void suppressionPiece(Piece p) {
-		if (Main.getMaison().getPieces().size() > 1) {
-			getPieces().remove(p);
-		} else {
-			System.err.println("Suppression impossible");
-		}
-	}
-
-	public void suppressionPieceFX(Piece p) {
 		if (Main.getMaison().getPieces().size() > 1) {
 			if (Main.getPosition().equals(p)) {
 				Main.setPosition(Main.getMaison().getPieces().getFirst());
@@ -101,13 +91,6 @@ public class Maison implements Serializable {
 
 	public void setPieces(LinkedList<Piece> pieces) {
 		this.pieces = pieces;
-	}
-
-	public static void main(String[] args) {
-		Maison house = new Maison("MyHouse");
-		Piece cuisine = new Piece("Cuisine");
-		house.ajouterPiece(cuisine);
-		System.out.println(house.toString());
 	}
 
 }

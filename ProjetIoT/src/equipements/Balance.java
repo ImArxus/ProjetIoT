@@ -32,11 +32,6 @@ public class Balance extends Equipement implements Serializable {
 		setPoids();
 	}
 
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n➡️ 4 : Peser ";
-	}
-
 	public int getPoids() {
 		return poids;
 	}

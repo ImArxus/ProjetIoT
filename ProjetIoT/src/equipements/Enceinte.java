@@ -33,8 +33,6 @@ public class Enceinte extends Equipement implements Serializable {
 				"Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
 		musiques.put("Allumer le feu - Johnny Hallyday", "Il suffira d'une étincelle");
 		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
-		this.setPositionHorizontale(0.68);
-		this.setPositionVerticale(0.28);
 		volumeBar.setLayoutX(485);
 		volumeBar.setLayoutY(370);
 		volumeBar.setPrefSize(80, 15);
@@ -49,11 +47,6 @@ public class Enceinte extends Equipement implements Serializable {
 		volumeBar.setLayoutX(485);
 		volumeBar.setLayoutY(370);
 		volumeBar.setPrefSize(80, 15);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Jouer musique ";
 	}
 
 	public static ProgressBar getVolumeBar() {

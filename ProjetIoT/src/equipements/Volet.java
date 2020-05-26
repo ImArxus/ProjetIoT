@@ -28,13 +28,6 @@ public class Volet extends Equipement implements Serializable {
 		super(nom);
 		this.setEtatCourant(false);
 		this.setPosition(0); // Ouvert = position haute
-		this.setPositionHorizontale(0.95);
-		this.setPositionVerticale(0.4);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles() + "\n➡️ 4 : Monter volet\n➡️ 5 : Descendre volet\n➡️ 6 : Choisir position";
 	}
 
 	public int getPosition() {

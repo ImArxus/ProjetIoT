@@ -24,8 +24,6 @@ public class Ventilateur extends Equipement implements Serializable {
 	public Ventilateur(String nom) {
 		super(nom);
 		this.setIntensite(3);
-		this.setPositionHorizontale(0.2);
-		this.setPositionVerticale(0.21);
 		volumeBar.setLayoutX(120);
 		volumeBar.setLayoutY(500);
 		volumeBar.setPrefSize(80, 15);
@@ -38,12 +36,6 @@ public class Ventilateur extends Equipement implements Serializable {
 		volumeBar.setLayoutX(120);
 		volumeBar.setLayoutY(500);
 		volumeBar.setPrefSize(80, 15);
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter intensité\n➡️ 5 : Diminuer intensité\n➡️ 6 : Choisir intensité ";
 	}
 
 	public double getIntensite() {
@@ -61,7 +53,7 @@ public class Ventilateur extends Equipement implements Serializable {
 	public void augmenterIntensiteFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() < 5) {
-				intensite += 1;
+				setIntensite(getIntensite() + 1);
 				volumeBar.setProgress(getIntensite() / 5);
 				try {
 					root.getChildren().add(volumeBar);
@@ -74,7 +66,7 @@ public class Ventilateur extends Equipement implements Serializable {
 	public void diminuerIntensiteFX(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 0) {
-				intensite -= 1;
+				setIntensite(getIntensite() - 1);
 				volumeBar.setProgress(getIntensite() / 5);
 			}
 			try {
@@ -83,26 +75,6 @@ public class Ventilateur extends Equipement implements Serializable {
 			}
 		} else {
 			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
-		}
-	}
-
-	public void augmenterIntensite() {
-		if (super.isEtatCourant()) {
-			if (getIntensite() < 5) {
-				intensite++;
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas augmenter l'intensité");
-		}
-	}
-
-	public void diminuerIntensite() {
-		if (super.isEtatCourant()) {
-			if (getIntensite() > 0) {
-				intensite--;
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas diminuer l'intensite");
 		}
 	}
 

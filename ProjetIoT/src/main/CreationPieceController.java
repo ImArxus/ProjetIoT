@@ -20,67 +20,67 @@ public class CreationPieceController {
 	MainController mainController = new MainController();
 
 	public void creerBuanderie(ActionEvent event) {
-		maison.ajouterPieceFX(new Buanderie("Buanderie"));
+		maison.ajouterPiece(new Buanderie("Buanderie"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerBureau(ActionEvent event) {
-		maison.ajouterPieceFX(new Bureau("Bureau"));
+		maison.ajouterPiece(new Bureau("Bureau"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerChambre(ActionEvent event) {
-		maison.ajouterPieceFX(new Chambre("Chambre"));
+		maison.ajouterPiece(new Chambre("Chambre"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerCuisine(ActionEvent event) {
-		maison.ajouterPieceFX(new Cuisine("Cuisine"));
+		maison.ajouterPiece(new Cuisine("Cuisine"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerDressing(ActionEvent event) {
-		maison.ajouterPieceFX(new Dressing("Dressing"));
+		maison.ajouterPiece(new Dressing("Dressing"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerEscalier(ActionEvent event) {
-		maison.ajouterPieceFX(new Escalier("Escalier"));
+		maison.ajouterPiece(new Escalier("Escalier"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerJardin(ActionEvent event) {
-		maison.ajouterPieceFX(new Jardin("Jardin"));
+		maison.ajouterPiece(new Jardin("Jardin"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerMezzanine(ActionEvent event) {
-		maison.ajouterPieceFX(new Mezzanine("Mezzanine"));
+		maison.ajouterPiece(new Mezzanine("Mezzanine"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerPalier(ActionEvent event) {
-		maison.ajouterPieceFX(new Palier("Palier"));
+		maison.ajouterPiece(new Palier("Palier"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerPiscine(ActionEvent event) {
-		maison.ajouterPieceFX(new Piscine("Piscine"));
+		maison.ajouterPiece(new Piscine("Piscine"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerSalleAManger(ActionEvent event) {
-		maison.ajouterPieceFX(new Buanderie("Buanderie"));
+		maison.ajouterPiece(new Buanderie("Buanderie"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerSalleDeBain(ActionEvent event) {
-		maison.ajouterPieceFX(new SalleDeBain("Salle de bain"));
+		maison.ajouterPiece(new SalleDeBain("Salle de bain"));
 		mainController.scenePiece(event);
 	}
 	
 	public void creerSalon(ActionEvent event) {
-		maison.ajouterPieceFX(new Salon("Salon"));
+		maison.ajouterPiece(new Salon("Salon"));
 		mainController.scenePiece(event);
 	}
 

@@ -26,8 +26,6 @@ public class TV extends Equipement implements Serializable {
 		super(nom);
 		setVolume(50);
 		setNumeroChaine(1);
-		this.setPositionHorizontale(0.49);
-		this.setPositionVerticale(0.4);
 		volumeBar.setLayoutX(360);
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
@@ -43,12 +41,6 @@ public class TV extends Equipement implements Serializable {
 		volumeBar.setLayoutY(275);
 		volumeBar.setPrefSize(80, 15);
 		image = "/images/objets/equipements.TV.desactive.png";
-	}
-
-	@Override
-	public String actionsPossibles() {
-		return super.actionsPossibles()
-				+ "\n➡️ 4 : Augmenter volume\n➡️ 5 : Diminuer volume\n➡️ 6 : Augmenter chaine\n➡️ 7 : Diminuer chaine\n➡️ 8 : Mettre chaine";
 	}
 
 	public static ProgressBar getVolumeBar() {
