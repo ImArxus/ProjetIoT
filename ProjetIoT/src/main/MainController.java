@@ -315,7 +315,6 @@ public class MainController {
 			}
 		});
 
-		// TODO
 		MenuItem choix4 = new MenuItem("Supprimer un équipement");
 		choix4.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -341,13 +340,15 @@ public class MainController {
 			}
 		});
 
-		// TODO
 		MenuItem choix5 = new MenuItem("Supprimer tous les équipement de la pièce");
 		choix5.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				LinkedList<Equipement> liste = Main.getPosition().getEquipements();
+				for (int i = 0; i < liste.size(); i++) {
+					root.getChildren().remove(liste.get(i).afficher());
+				}
 				Main.getPosition().getEquipements().clear();
-				System.out.println("Suppression effectuée, page à rafraichir");
 			}
 		});
 

@@ -96,10 +96,12 @@ public class Electrolyseur extends Equipement implements Serializable {
 					"L'électrolyseur de " + this.getNom() + " est éteint, on ne peut pas changer de température");
 		}
 	}
+
 	public ImageView getImageView() {
 		imageView.setImage(new Image("/images/objets/equipements.Electrolyseur.png"));
 		return imageView;
 	}
+
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
@@ -107,6 +109,12 @@ public class Electrolyseur extends Equipement implements Serializable {
 		but.setTranslateY(450);
 		return but;
 	}
+
+	@Override
+	public String getImage() {
+		return "/images/objets/" + this.getClass().getName() + ".png";
+	}
+
 	public ImageView afficher() {
 		imageView.setImage(new Image(getImage()));
 		imageView.setTranslateY(105);
