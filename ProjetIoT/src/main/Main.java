@@ -20,8 +20,20 @@ public class Main extends Application implements Serializable {
 
 		Main.chargerCompte();
 
-		launch(args); // Lancement actions JavaFX
+		launch(args); // Lancement interface graphique sous JavaFX
 		
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		try {
+			primaryStage.setTitle("Login");
+			Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/main/Login.fxml")));
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e) {
+			System.err.println("Erreur lors de la création de l'interface");
+		}
 	}
 
 	private static Maison maison; // Maison définie dans la classe BarryHouse
@@ -31,22 +43,13 @@ public class Main extends Application implements Serializable {
 	private static double temperatureNaturelle = 0;
 	//private static int heure = 4;
 	private static int heure = (int) (Math.random() * 24);
-
+	private static String avatar = "homme1";
 	private static ListeUtilisateurs listeUtilisateur = new ListeUtilisateurs();
-
-	public static void chargerCompte() {
-		ListeUtilisateurs listeUserTmp = Sauvegarde.chargerComptes();
-		if (listeUserTmp != null) {
-			listeUtilisateur = listeUserTmp;
-		}
-	}
 
 	public static ListeUtilisateurs getListeUtilisateur() {
 		return listeUtilisateur;
 	}
 	
-	private static String avatar = "homme1";
-
 	public static Maison getMaison() {
 		return maison;
 	}
@@ -82,7 +85,30 @@ public class Main extends Application implements Serializable {
 	public static int getHeure() {
 		return heure;
 	}
+	
+	public static int getIntensiteLumineuseNaturelle() {
+		return intensiteLumineuseNaturelle;
+	}
 
+	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
+		intensiteLumineuseNaturelle = newIntensite;
+	}
+	
+	public static double getTemperatureNaturelle() {
+		return temperatureNaturelle;
+	}
+
+	public static void setTemperatureNaturelle(double temperatureNaturelle) {
+		Main.temperatureNaturelle = temperatureNaturelle;
+	}
+
+	public static void chargerCompte() {
+		ListeUtilisateurs listeUserTmp = Sauvegarde.chargerComptes();
+		if (listeUserTmp != null) {
+			listeUtilisateur = listeUserTmp;
+		}
+	}
+	
 	public static LinkedList<Equipement> getLumiere() {
 		LinkedList<Equipement> lumieres = new LinkedList<Equipement>();
 		LinkedList<Equipement> equip = getPosition().getEquipements();
@@ -125,11 +151,6 @@ public class Main extends Application implements Serializable {
 		} else {
 			System.out.println("C'est actuellement le jour, il est " + heure + "h !");
 		}
-	}
-
-	public static void affichageTemperature() {
-		System.out.println(
-				"La temperature ambiante de " + position.getNom() + " est de " + position.getTemperature() + "°C");
 	}
 
 	public static void traitementIntensiteLumineuseNaturelle() {
@@ -195,34 +216,6 @@ public class Main extends Application implements Serializable {
 			}
 		}
 		position.setTemperature(getTemperatureNaturelle() + sommeTempObjets);
-	}
-
-	public static int getIntensiteLumineuseNaturelle() {
-		return intensiteLumineuseNaturelle;
-	}
-
-	public static void setIntensiteLumineuseNaturelle(int newIntensite) {
-		intensiteLumineuseNaturelle = newIntensite;
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		try {
-			primaryStage.setTitle("Login");
-			Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/main/Login.fxml")));
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (Exception e) {
-			System.err.println("Erreur lors de la création de l'interface");
-		}
-	}
-
-	public static double getTemperatureNaturelle() {
-		return temperatureNaturelle;
-	}
-
-	public static void setTemperatureNaturelle(double temperatureNaturelle) {
-		Main.temperatureNaturelle = temperatureNaturelle;
 	}
 
 }

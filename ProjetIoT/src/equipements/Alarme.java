@@ -10,8 +10,6 @@ import main.Equipement;
 public class Alarme extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -1828693427527124467L;
-	private transient static ImageView imageView = new ImageView();
-
 
 	public Alarme(String nom) {
 		super(nom);
@@ -26,10 +24,12 @@ public class Alarme extends Equipement implements Serializable {
 		System.out.println("\nBip !!! Bip !!! Bip !!!");
 		System.out.println("Vous devez sortir de la maison...");
 	}
-
-	public ImageView getImageView() {
-		imageView.setImage(new Image("/images/objets/equipements.Alarme.png"));
-		return imageView;
+	
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateX(-370);
+		return getImageView();
 	}
 
 	@Override
@@ -40,17 +40,4 @@ public class Alarme extends Equipement implements Serializable {
 		return but;
 	}
 
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateX(-370);
-		return imageView;
-	}
-	@Override
-	public String getImage() {
-		if (!etatCourant) {
-			return ("/images/objets/equipements.Alarme.png");
-		} else {
-			return ("/images/objets/equipements.Alarme.desactive.png");
-		}
-	}
 }

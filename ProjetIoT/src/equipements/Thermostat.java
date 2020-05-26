@@ -11,7 +11,6 @@ public class Thermostat extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 6630244045511449074L;
 	private int temperature;
-	private transient ImageView imageView = new ImageView();
 
 	public Thermostat(String nom) {
 		super(nom);
@@ -35,20 +34,16 @@ public class Thermostat extends Equipement implements Serializable {
 	public void augmenterTemperature() {
 		if (super.isEtatCourant()) {
 			if (getTemperature() < 30) {
-				temperature++;
+				setTemperature(getTemperature() + 1);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter la température");
 		}
 	}
 
 	public void diminuerTemperature() {
 		if (super.isEtatCourant()) {
 			if (getTemperature() > 15) {
-				temperature--;
+				setTemperature(getTemperature() - 1);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas diminuer la température");
 		}
 	}
 
@@ -57,11 +52,22 @@ public class Thermostat extends Equipement implements Serializable {
 			if (temperature <= 30 && temperature >= 15) {
 				setTemperature(temperature);
 			} else {
-				System.out.println("Température non-valide");
+				System.err.println("Température non-valide");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer la température");
 		}
+	}
+
+	@Override
+	public String getImage() {
+		return "/images/objets/equipements.Thermostat.png";
+	}
+
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(10);
+		getImageView().setTranslateX(200);
+		return getImageView();
 	}
 
 	@Override
@@ -70,18 +76,6 @@ public class Thermostat extends Equipement implements Serializable {
 		but.setTranslateX(400);
 		but.setTranslateY(500);
 		return but;
-	}
-
-	@Override
-	public String getImage() {
-		return "/images/objets/" + this.getClass().getName() + ".png";
-	}
-
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(10);
-		imageView.setTranslateX(200);
-		return imageView;
 	}
 
 }

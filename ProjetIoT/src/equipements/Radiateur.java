@@ -19,7 +19,6 @@ public class Radiateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
-	private transient ImageView imageView = new ImageView();
 
 	public Radiateur(String nom) {
 		super(nom);
@@ -44,20 +43,16 @@ public class Radiateur extends Equipement implements Serializable {
 	public void augmenterTemperature() {
 		if (super.isEtatCourant()) {
 			if (getThermostat() < 5) {
-				thermostat++;
+				setThermostat(getThermostat() + 1);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas changer le thermostat");
 		}
 	}
 
 	public void diminuerTemperature() {
 		if (super.isEtatCourant()) {
 			if (getThermostat() > 0) {
-				thermostat--;
+				setThermostat(getThermostat() - 1);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
@@ -66,23 +61,22 @@ public class Radiateur extends Equipement implements Serializable {
 			if (thermostat <= 5 && thermostat >= 0) {
 				setThermostat(thermostat);
 			} else {
-				System.out.println("Thermostat non-valide");
+				System.err.println("Thermostat non-valide");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas changer le thermostat");
 		}
-	}
-
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(110);
-		imageView.setTranslateX(240);
-		return imageView;
 	}
 
 	@Override
 	public String getImage() {
 		return "/images/objets/equipements.Radiateur.png";
+	}
+
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(110);
+		getImageView().setTranslateX(240);
+		return getImageView();
 	}
 
 	@Override
@@ -106,7 +100,7 @@ public class Radiateur extends Equipement implements Serializable {
 		root.getChildren().add(box);
 		root.getChildren().add(lblTemp);
 	}
-	
+
 	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);

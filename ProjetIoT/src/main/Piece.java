@@ -62,16 +62,6 @@ public class Piece implements Serializable {
 		return getClass().getSimpleName() + " (" + getNom() + ") qui est équipé(e) de " + afficher(equipements);
 	}
 
-	public String afficher(LinkedList<Equipement> a) {
-		Iterator<Equipement> it = a.iterator();
-		String fin = "\n";
-		while (it.hasNext()) {
-			Equipement b = it.next();
-			fin = fin + "       ->️ " + b.toString() + "\n";
-		}
-		return fin;
-	}
-
 	public String getNom() {
 		return nom;
 	}
@@ -125,6 +115,34 @@ public class Piece implements Serializable {
 	public String imagePiece() {
 		return ("images/piece.png");
 	}
+	
+	public static ImageView getImageView() {
+		ImageView imageView = new ImageView();
+		imageView.setFitWidth(800);
+		imageView.setFitHeight(600);
+		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
+			imageView.setImage(new Image("/images/cuisine.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
+			imageView.setImage(new Image("/images/escalier.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
+			imageView.setImage(new Image("/images/jardin.png"));
+		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
+			imageView.setImage(new Image("/images/piscine.png"));
+		} else {
+			imageView.setImage(new Image("/images/piece.png"));
+		}
+		return imageView;
+	}
+	
+	public String afficher(LinkedList<Equipement> a) {
+		Iterator<Equipement> it = a.iterator();
+		String fin = "\n";
+		while (it.hasNext()) {
+			Equipement b = it.next();
+			fin = fin + "       ->️ " + b.toString() + "\n";
+		}
+		return fin;
+	}
 
 	public Equipement creationEquipement(String name, int nb) {
 		return new Alarme(name);
@@ -158,24 +176,6 @@ public class Piece implements Serializable {
 		Button but = new Button();
 		but.setText(getNom());
 		return but;
-	}
-
-	public static ImageView imageViewPiece() {
-		ImageView imageView = new ImageView();
-		imageView.setFitWidth(800);
-		imageView.setFitHeight(600);
-		if (Main.getPosition().getClass().getName() == "pieces.Cuisine") {
-			imageView.setImage(new Image("/images/cuisine.png"));
-		} else if (Main.getPosition().getClass().getName() == "pieces.Escalier") {
-			imageView.setImage(new Image("/images/escalier.png"));
-		} else if (Main.getPosition().getClass().getName() == "pieces.Jardin") {
-			imageView.setImage(new Image("/images/jardin.png"));
-		} else if (Main.getPosition().getClass().getName() == "pieces.Piscine") {
-			imageView.setImage(new Image("/images/piscine.png"));
-		} else {
-			imageView.setImage(new Image("/images/piece.png"));
-		}
-		return imageView;
 	}
 
 }

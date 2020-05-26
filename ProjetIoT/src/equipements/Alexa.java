@@ -20,7 +20,6 @@ public class Alexa extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 8308711409297886419L;
 	private static String pseudo;
-	private transient ImageView imageView = new ImageView();
 
 	public Alexa(String nom) {
 		super(nom);
@@ -82,20 +81,12 @@ public class Alexa extends Equipement implements Serializable {
 		s.close();
 	}
 
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(25);
-		imageView.setTranslateX(-200);
-		return imageView;
-	}
-
 	@Override
-	public String getImage() {
-		if (etatCourant) {
-			return ("/images/objets/equipements.Alexa.png");
-		} else {
-			return ("/images/objets/equipements.Alexa.desactive.png");
-		}
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(25);
+		getImageView().setTranslateX(-200);
+		return getImageView();
 	}
 
 	@Override

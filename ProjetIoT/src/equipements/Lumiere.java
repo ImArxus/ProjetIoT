@@ -20,7 +20,6 @@ public class Lumiere extends Equipement implements Serializable {
 	private static final long serialVersionUID = 3377862988501403504L;
 	private int intensite;
 	private String couleur;
-	private transient ImageView imageView = new ImageView();
 
 	public Lumiere(String nom) {
 		super(nom);
@@ -51,35 +50,29 @@ public class Lumiere extends Equipement implements Serializable {
 				|| (couleur.equals("jaune")) || (couleur.equals("vert"))) {
 			this.couleur = couleur;
 		} else {
-			System.out.println("Couleur non-valide");
+			System.err.println("Couleur non-valide");
 		}
 	}
 
 	public void changerCouleur(String couleur) {
 		if (super.isEtatCourant()) {
 			setCouleur(couleur);
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de couleur");
 		}
 	}
 
 	public void augmenterIntensite() {
 		if (super.isEtatCourant()) {
 			if (getIntensite() < 100) {
-				intensite += 10;
+				setIntensite(getIntensite() + 10);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l'intensité");
 		}
 	}
 
 	public void diminuerIntensite() {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 0) {
-				intensite -= 10;
+				setIntensite(getIntensite() - 10);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas diminuer l'intensité");
 		}
 	}
 
@@ -88,17 +81,35 @@ public class Lumiere extends Equipement implements Serializable {
 			if (intensite <= 100 && intensite >= 0) {
 				setIntensite(intensite);
 			} else {
-				System.out.println("Intensité non-valide");
+				System.err.println("Intensité non-valide");
+			}
+		}
+	}
+	
+	@Override
+	public String getImage() {
+		if (isEtatCourant()) {
+			if (getCouleur().equals("bleu")) {
+				return ("/images/objets/equipements.Lumiere.bleu.png");
+			} else if (getCouleur().equals("rouge")) {
+				return ("/images/objets/equipements.Lumiere.rouge.png");
+			} else if (getCouleur().equals("jaune")) {
+				return ("/images/objets/equipements.Lumiere.jaune.png");
+			} else if (getCouleur().equals("vert")) {
+				return ("/images/objets/equipements.Lumiere.vert.png");
+			} else {
+				return ("/images/objets/equipements.Lumiere.png");
 			}
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer d'intensité");
+			return ("/images/objets/equipements.Lumiere.desactive.png");
 		}
 	}
 
+	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(-120);
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(-120);
+		return getImageView();
 	}
 
 	@Override
@@ -135,12 +146,7 @@ public class Lumiere extends Equipement implements Serializable {
 				// TODO
 				@Override
 				public void handle(ActionEvent event) {
-					/**
-					 * Scanner s = new Scanner(System.in); System.out.println("Quelle intensité
-					 * (entre 0 et 100) ?"); int intensite = Main.toInt(s.nextLine());
-					 * choisirIntensite(intensite); System.out.println("L'intensité de " + getNom()
-					 * + " est réglé sur " + getIntensite()); s.close(); boxIntensite(root);
-					 */
+
 				}
 			});
 			MenuItem choisirCouleur = new MenuItem("Choisir couleur");
@@ -154,25 +160,6 @@ public class Lumiere extends Equipement implements Serializable {
 			fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);
 		}
 		return fonctionnalite;
-	}
-
-	@Override
-	public String getImage() {
-		if (etatCourant) {
-			if (getCouleur().equals("bleu")) {
-				return ("/images/objets/equipements.Lumiere.bleu.png");
-			} else if (getCouleur().equals("rouge")) {
-				return ("/images/objets/equipements.Lumiere.rouge.png");
-			} else if (getCouleur().equals("jaune")) {
-				return ("/images/objets/equipements.Lumiere.jaune.png");
-			} else if (getCouleur().equals("vert")) {
-				return ("/images/objets/equipements.Lumiere.vert.png");
-			} else {
-				return ("/images/objets/equipements.Lumiere.png");
-			}
-		} else {
-			return ("/images/objets/equipements.Lumiere.desactive.png");
-		}
 	}
 
 	public static void boxIntensite(Pane root) {
@@ -200,7 +187,7 @@ public class Lumiere extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				changerCouleur("blanc");
-				root.getChildren().remove(imageView);
+				root.getChildren().remove(getImageView());
 				root.getChildren().add(afficher());
 			}
 		});
@@ -209,7 +196,7 @@ public class Lumiere extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				changerCouleur("bleu");
-				root.getChildren().remove(imageView);
+				root.getChildren().remove(getImageView());
 				root.getChildren().add(afficher());
 			}
 		});
@@ -218,7 +205,7 @@ public class Lumiere extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				changerCouleur("rouge");
-				root.getChildren().remove(imageView);
+				root.getChildren().remove(getImageView());
 				root.getChildren().add(afficher());
 			}
 		});
@@ -227,7 +214,7 @@ public class Lumiere extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				changerCouleur("jaune");
-				root.getChildren().remove(imageView);
+				root.getChildren().remove(getImageView());
 				root.getChildren().add(afficher());
 			}
 		});
@@ -236,7 +223,7 @@ public class Lumiere extends Equipement implements Serializable {
 			@Override
 			public void handle(ActionEvent event) {
 				changerCouleur("vert");
-				root.getChildren().remove(imageView);
+				root.getChildren().remove(getImageView());
 				root.getChildren().add(afficher());
 			}
 		});

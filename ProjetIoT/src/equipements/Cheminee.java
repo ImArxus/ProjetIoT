@@ -18,28 +18,27 @@ public class Cheminee extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 7169763608942128813L;
 	private double intensite;
-	private static ProgressBar volumeBar = new ProgressBar(0);
-	private transient ImageView imageView = new ImageView();
+	private static ProgressBar intensiteBar = new ProgressBar(0);
 
 	public Cheminee(String nom, boolean etatCourant, double intensite, double positionHorizontale,
 			double positionVerticale) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
-		volumeBar.setLayoutX(170);
-		volumeBar.setLayoutY(350);
-		volumeBar.setPrefSize(80, 15);
+		getIntensiteBar().setLayoutX(170);
+		getIntensiteBar().setLayoutY(350);
+		getIntensiteBar().setPrefSize(80, 15);
 	}
 
 	public Cheminee(String nom) {
 		super(nom);
 		this.setIntensite(50);
-		volumeBar.setLayoutX(170);
-		volumeBar.setLayoutY(350);
-		volumeBar.setPrefSize(80, 15);
+		getIntensiteBar().setLayoutX(170);
+		getIntensiteBar().setLayoutY(350);
+		getIntensiteBar().setPrefSize(80, 15);
 	}
 
-	public static ProgressBar getVolumeBar() {
-		return volumeBar;
+	public static ProgressBar getIntensiteBar() {
+		return intensiteBar;
 	}
 
 	public double getIntensite() {
@@ -47,77 +46,54 @@ public class Cheminee extends Equipement implements Serializable {
 	}
 
 	public void setIntensite(double intensite) {
-		this.intensite = intensite;
-	}
-
-	public void augmenterIntensite() {
-		if (super.isEtatCourant()) {
-			if (getIntensite() < 100) {
-				intensite += 10;
-				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter l'intensité");
+		if (intensite <= 100 && intensite >= 0) {
+			this.intensite = intensite;
 		}
 	}
 
-	public void diminuerIntensite() {
+	public void choisirIntensite(double intensite) {
 		if (super.isEtatCourant()) {
-			if (getIntensite() > 0) {
-				intensite -= 10;
+			if (intensite <= 100 && intensite >= 0) {
+				setIntensite(intensite);
 				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas baisser l'intensite");
-		}
-	}
-
-	public void choisirIntensite(double intensite2) {
-		if (super.isEtatCourant()) {
-			if (intensite2 <= 100 && intensite2 >= 0) {
-				setIntensite(intensite2);
-				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite2 * 0.05)));
 			} else {
-				System.out.println("Intensite non-valide");
+				System.err.println("Intensité non-valide");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer l'intensité");
 		}
 	}
 
-	public void augmenterIntensiteFX(Pane root) {
+	public void augmenterIntensite(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() <= 90) {
-				intensite += 10;
-				volumeBar.setProgress(getIntensite() / 100);
+				setIntensite(getIntensite() + 10);
+				getIntensiteBar().setProgress(getIntensite() / 100);
 				try {
-					root.getChildren().add(volumeBar);
+					root.getChildren().add(getIntensiteBar());
 				} catch (Exception e) {
 				}
 			}
 		}
 	}
 
-	public void diminuerIntensiteFX(Pane root) {
+	public void diminuerIntensite(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 10) {
-				intensite -= 10;
-				volumeBar.setProgress(getIntensite() / 100);
+				setIntensite(getIntensite() - 10);
+				getIntensiteBar().setProgress(getIntensite() / 100);
 			}
 			try {
-				root.getChildren().add(volumeBar);
+				root.getChildren().add(getIntensiteBar());
 			} catch (Exception e) {
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
+	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(105);
-		imageView.setTranslateX(-180);
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(105);
+		getImageView().setTranslateX(-180);
+		return getImageView();
 	}
 
 	@Override
@@ -137,7 +113,7 @@ public class Cheminee extends Equipement implements Serializable {
 			augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					augmenterIntensite();
+					augmenterIntensite(root);
 					Lumiere.boxIntensite(root);
 					Radiateur.boxTemperature(root);
 				}
@@ -146,7 +122,7 @@ public class Cheminee extends Equipement implements Serializable {
 			diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					diminuerIntensite();
+					diminuerIntensite(root);
 					Lumiere.boxIntensite(root);
 					Radiateur.boxTemperature(root);
 				}
@@ -154,15 +130,6 @@ public class Cheminee extends Equipement implements Serializable {
 			fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité);
 		}
 		return fonctionnalite;
-	}
-
-	@Override
-	public String getImage() {
-		if (etatCourant) {
-			return ("/images/objets/equipements.Cheminee.png");
-		} else {
-			return ("/images/objets/equipements.Cheminee.desactive.png");
-		}
 	}
 
 }

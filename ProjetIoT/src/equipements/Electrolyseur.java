@@ -13,7 +13,6 @@ public class Electrolyseur extends Equipement implements Serializable {
 	private double sel;
 	private double ph;
 	private double temperature;
-	private transient ImageView imageView = new ImageView();
 
 	public Electrolyseur(String nom) {
 		super(nom);
@@ -56,23 +55,17 @@ public class Electrolyseur extends Equipement implements Serializable {
 
 	public void augmenterTemperature() {
 		if (super.isEtatCourant()) {
-			if (getTemperature() < 100) {
-				temperature++;
+			if (getTemperature() < 40) {
+				setTemperature(getTemperature() + 1);
 			}
-		} else {
-			System.out.println(
-					"L'électrolyseur de " + this.getNom() + " est éteint, on ne peut pas changer de température");
 		}
 	}
 
 	public void diminuerTemperature() {
 		if (super.isEtatCourant()) {
 			if (getTemperature() > 0) {
-				temperature--;
+				setTemperature(getTemperature() - 1);
 			}
-		} else {
-			System.out.println(
-					"L'électrolyseur de " + this.getNom() + " est éteint, on ne peut pas changer de température");
 		}
 	}
 
@@ -81,17 +74,22 @@ public class Electrolyseur extends Equipement implements Serializable {
 			if (temperature <= 100 && temperature >= 0) {
 				setTemperature(temperature);
 			} else {
-				System.out.println("Température non-valide");
+				System.err.println("Température non-valide");
 			}
-		} else {
-			System.out.println(
-					"L'électrolyseur de " + this.getNom() + " est éteint, on ne peut pas changer de température");
 		}
 	}
 
-	public ImageView getImageView() {
-		imageView.setImage(new Image("/images/objets/equipements.Electrolyseur.png"));
-		return imageView;
+	@Override
+	public String getImage() {
+		return "/images/objets/equipements.Electrolyseur.png";
+	}
+
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(105);
+		getImageView().setTranslateX(300);
+		return getImageView();
 	}
 
 	@Override
@@ -100,18 +98,6 @@ public class Electrolyseur extends Equipement implements Serializable {
 		but.setTranslateX(500);
 		but.setTranslateY(450);
 		return but;
-	}
-
-	@Override
-	public String getImage() {
-		return "/images/objets/" + this.getClass().getName() + ".png";
-	}
-
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(105);
-		imageView.setTranslateX(300);
-		return imageView;
 	}
 
 }

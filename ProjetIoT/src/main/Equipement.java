@@ -22,16 +22,16 @@ import javafx.scene.layout.Pane;
 public class Equipement implements Serializable {
 
 	private static final long serialVersionUID = 3L;
-	protected boolean etatCourant;
-	protected String nom;
+	private boolean etatCourant;
+	private String nom;
 	private transient ImageView imageView = new ImageView();
 
-	protected Equipement(String nom) {
+	public Equipement(String nom) {
 		setNom(nom);
 		setEtatCourant(false);
 	}
 
-	protected Equipement(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
+	public Equipement(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
 	}
@@ -76,13 +76,17 @@ public class Equipement implements Serializable {
 		if (isEtatCourant()) {
 			return "/images/objets/" + this.getClass().getName() + ".png";
 		} else {
-			return "/images/objets/" + this.getClass().getName() + "desactive.png";
+			return "/images/objets/" + this.getClass().getName() + ".desactive.png";
 		}
 	}
 
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
+	public ImageView getImageView() {
 		return imageView;
+	}
+
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		return getImageView();
 	}
 
 	public Button getButton() {
@@ -144,11 +148,11 @@ public class Equipement implements Serializable {
 		} else if (this instanceof Enceinte) {
 			liste.add(Enceinte.getVolumeBar());
 		} else if (this instanceof Cheminee) {
-			liste.add(Cheminee.getVolumeBar());
+			liste.add(Cheminee.getIntensiteBar());
 		} else if (this instanceof Frigo) {
-			liste.add(Frigo.getVolumeBar());
+			liste.add(Frigo.getTempBar());
 		} else if (this instanceof Ventilateur) {
-			liste.add(Ventilateur.getVolumeBar());
+			liste.add(Ventilateur.getIntensiteBar());
 		}
 		return liste;
 	}

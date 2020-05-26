@@ -17,7 +17,6 @@ public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
-	private transient ImageView imageView = new ImageView();
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -59,27 +58,6 @@ public class Volet extends Equipement implements Serializable {
 	}
 
 	@Override
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(70);
-		imageView.setTranslateX(370);
-		return imageView;
-	}
-
-	public ImageView getImageView() {
-		imageView.setImage(new Image(getImage()));
-		return imageView;
-	}
-
-	@Override
-	public Button getButton() {
-		Button but = super.getButton();
-		but.setTranslateX(700);
-		but.setTranslateY(500);
-		return but;
-	}
-
-	@Override
 	public String getImage() {
 		boolean nuit = false;
 		if (Main.getHeure() >= 21 || Main.getHeure() <= 8) {
@@ -111,6 +89,22 @@ public class Volet extends Equipement implements Serializable {
 			}
 		}
 		return "/images/objets/equipements.Volet.png";
+	}
+
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(70);
+		getImageView().setTranslateX(370);
+		return getImageView();
+	}
+
+	@Override
+	public Button getButton() {
+		Button but = super.getButton();
+		but.setTranslateX(700);
+		but.setTranslateY(500);
+		return but;
 	}
 
 	@Override

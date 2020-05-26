@@ -14,14 +14,13 @@ public class Balance extends Equipement implements Serializable {
 	private static final long serialVersionUID = -8591722619347662110L;
 	private int poids;
 	List<Integer> listePoids = new LinkedList<Integer>();
-	private transient ImageView imageView = new ImageView();
 
 	public Balance(String nom) {
 		super(nom);
-		listePoids.add(80);
-		listePoids.add(60);
-		listePoids.add(100);
-		listePoids.add(110);
+		getListePoids().add(80);
+		getListePoids().add(60);
+		getListePoids().add(100);
+		getListePoids().add(110);
 		this.setPoids();
 	}
 
@@ -42,15 +41,13 @@ public class Balance extends Equipement implements Serializable {
 		if (getListePoids().contains(valeur)) {
 			this.poids = valeur;
 		} else {
-			System.out.println("Erreur de calcul");
+			System.err.println("Erreur de calcul");
 		}
 	}
 
 	public void peser() {
 		if (super.isEtatCourant()) {
 			setPoids();
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas effectuer de mesures");
 		}
 	}
 
@@ -61,22 +58,26 @@ public class Balance extends Equipement implements Serializable {
 	public void setListePoids(List<Integer> listePoids) {
 		this.listePoids = listePoids;
 	}
-	public ImageView getImageView() {
-		imageView.setImage(new Image("/images/objets/equipements.Balance.png"));
-		return imageView;
+
+	@Override
+	public String getImage() {
+		return "/images/objets/equipements.Balance.png";
 	}
+
+	@Override
+	public ImageView afficher() {
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(185);
+		getImageView().setTranslateX(160);
+		return getImageView();
+	}
+	
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
 		but.setTranslateX(300);
 		but.setTranslateY(450);
 		return but;
-	}
-	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(185);
-		imageView.setTranslateX(160);
-		return imageView;
 	}
 
 }

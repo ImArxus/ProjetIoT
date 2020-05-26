@@ -18,63 +18,62 @@ public class Ventilateur extends Equipement implements Serializable {
 
 	private double intensite;
 	private static final long serialVersionUID = 8252594235507326423L;
-	private static ProgressBar volumeBar = new ProgressBar(0);
-	private transient ImageView imageView = new ImageView();
+	private static ProgressBar intensiteBar = new ProgressBar(0);
 
 	public Ventilateur(String nom) {
 		super(nom);
 		this.setIntensite(3);
-		volumeBar.setLayoutX(120);
-		volumeBar.setLayoutY(500);
-		volumeBar.setPrefSize(80, 15);
+		getIntensiteBar().setLayoutX(120);
+		getIntensiteBar().setLayoutY(500);
+		getIntensiteBar().setPrefSize(80, 15);
 	}
 
 	public Ventilateur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
 			double intensite) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setIntensite(intensite);
-		volumeBar.setLayoutX(120);
-		volumeBar.setLayoutY(500);
-		volumeBar.setPrefSize(80, 15);
+		getIntensiteBar().setLayoutX(120);
+		getIntensiteBar().setLayoutY(500);
+		getIntensiteBar().setPrefSize(80, 15);
 	}
 
 	public double getIntensite() {
 		return intensite;
 	}
 
-	public static ProgressBar getVolumeBar() {
-		return volumeBar;
+	public static ProgressBar getIntensiteBar() {
+		return intensiteBar;
 	}
 
-	public void setIntensite(double intensite2) {
-		this.intensite = intensite2;
+	public void setIntensite(double intensite) {
+		this.intensite = intensite;
 	}
 
-	public void augmenterIntensiteFX(Pane root) {
+	public void augmenterIntensite(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() < 5) {
 				setIntensite(getIntensite() + 1);
-				volumeBar.setProgress(getIntensite() / 5);
+				getIntensiteBar().setProgress(getIntensite() / 5);
 				try {
-					root.getChildren().add(volumeBar);
+					root.getChildren().add(getIntensiteBar());
 				} catch (Exception e) {
+					System.err.println("Erreur lors de l'ajout de la barre d'intensité");
 				}
 			}
 		}
 	}
 
-	public void diminuerIntensiteFX(Pane root) {
+	public void diminuerIntensite(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getIntensite() > 0) {
 				setIntensite(getIntensite() - 1);
-				volumeBar.setProgress(getIntensite() / 5);
+				getIntensiteBar().setProgress(getIntensite() / 5);
 			}
 			try {
-				root.getChildren().add(volumeBar);
+				root.getChildren().add(getIntensiteBar());
 			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre d'intensité");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
@@ -83,23 +82,17 @@ public class Ventilateur extends Equipement implements Serializable {
 			if (intensite <= 5 && intensite >= 0) {
 				setIntensite(intensite);
 			} else {
-				System.out.println("Intensité non-valide");
+				System.err.println("Intensité non-valide");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas changer l'intensité");
 		}
 	}
 
+	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(170);
-		imageView.setTranslateX(-250);
-		return imageView;
-	}
-
-	public ImageView getImageView() {
-		imageView.setImage(new Image("/images/objets/equipements.Ventilateur.png"));
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(170);
+		getImageView().setTranslateX(-250);
+		return getImageView();
 	}
 
 	@Override
@@ -111,15 +104,6 @@ public class Ventilateur extends Equipement implements Serializable {
 	}
 
 	@Override
-	public String getImage() {
-		if (etatCourant) {
-			return ("/images/objets/equipements.Ventilateur.png");
-		} else {
-			return ("/images/objets/equipements.Ventilateur.desactive.png");
-		}
-	}
-
-	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
@@ -127,10 +111,9 @@ public class Ventilateur extends Equipement implements Serializable {
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				intensite = (int) getIntensite();
-				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-				augmenterIntensiteFX(root);
-				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				Main.getPosition()
+						.setTemperature((int) (Main.getPosition().getTemperature() + (getIntensite() * 0.05)));
+				augmenterIntensite(root);
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}
@@ -139,10 +122,9 @@ public class Ventilateur extends Equipement implements Serializable {
 		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				intensite = (int) getIntensite();
-				Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-				diminuerIntensiteFX(root);
-				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				Main.getPosition()
+						.setTemperature((int) (Main.getPosition().getTemperature() + (getIntensite() * 0.05)));
+				diminuerIntensite(root);
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}

@@ -26,7 +26,9 @@ import pieces.Salon;
 
 public class MainController {
 
-	ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
+	private ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
+	private ImageView imageViewAvatar = new ImageView();
+
 
 	/**
 	 * Champs page Login
@@ -76,6 +78,22 @@ public class MainController {
 			versChoixMaison(event);
 		} else {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
+		}
+	}
+	
+	public void creerCompte() {
+		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
+			if (newUserTxt.getText().isEmpty()) {
+				creationTxt.setText("Veuillez entrer un identifiant");
+			} else if (newPasswordTxt.getText().isEmpty()) {
+				creationTxt.setText("Veuillez entrer un mot de passe");
+			} else {
+				listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
+				Sauvegarde.sauvegarderCompte();
+				creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
+			}
+		} else {
+			creationTxt.setText("Identifiant déjà existant");
 		}
 	}
 
@@ -172,12 +190,7 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
-
-	public void quitter(ActionEvent event) {
-		Platform.exit();
-		System.exit(1);
-	}
-
+	
 	public void sauvegarder() {
 		Sauvegarde.sauvegarder();
 		Label lbl = new Label();
@@ -187,7 +200,10 @@ public class MainController {
 		lbl.setLayoutY(550);
 	}
 
-	private ImageView imageViewAvatar = new ImageView();
+	public void quitter(ActionEvent event) {
+		Platform.exit();
+		System.exit(1);
+	}
 
 	public void afficherAvatar(Pane root) {
 		if (root.getChildren().contains(imageViewAvatar)) {
@@ -210,7 +226,7 @@ public class MainController {
 		root.getChildren().addAll(affichageBandeau());
 
 		// Affichage de la pièce
-		ImageView imageView = Piece.imageViewPiece();
+		ImageView imageView = Piece.getImageView();
 		root.getChildren().add(imageView);
 
 		// Affichage des équipements
@@ -240,22 +256,6 @@ public class MainController {
 		window.setTitle(Main.getMaison().getNom());
 		window.setScene(scene);
 		window.show();
-	}
-
-	public void creerCompte() {
-		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
-			if (newUserTxt.getText().isEmpty()) {
-				creationTxt.setText("Veuillez entrer un identifiant");
-			} else if (newPasswordTxt.getText().isEmpty()) {
-				creationTxt.setText("Veuillez entrer un mot de passe");
-			} else {
-				listeUtilisateur.comptes.put(newUserTxt.getText(), newPasswordTxt.getText());
-				Sauvegarde.sauvegarderCompte();
-				creationTxt.setText("Féliciations, vous avez maintenant un compte utilisateur !");
-			}
-		} else {
-			creationTxt.setText("Identifiant déjà existant");
-		}
 	}
 
 	public MenuButton actionsAdmin(ActionEvent event, Pane root) {

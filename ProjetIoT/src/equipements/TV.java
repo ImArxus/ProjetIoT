@@ -20,16 +20,15 @@ public class TV extends Equipement implements Serializable {
 	private double volume;
 	private int numeroChaine;
 	private String image;
-	private transient ImageView imageView = new ImageView();
 
 	public TV(String nom) {
 		super(nom);
 		setVolume(50);
 		setNumeroChaine(1);
-		volumeBar.setLayoutX(360);
-		volumeBar.setLayoutY(275);
-		volumeBar.setPrefSize(80, 15);
-		image = "/images/objets/equipements.TV.desactive.png";
+		getVolumeBar().setLayoutX(360);
+		getVolumeBar().setLayoutY(275);
+		getVolumeBar().setPrefSize(80, 15);
+		setImage("/images/objets/equipements.TV.desactive.png");
 	}
 
 	public TV(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int volume,
@@ -37,10 +36,10 @@ public class TV extends Equipement implements Serializable {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setVolume(volume);
 		this.numeroChaine = numeroChaine;
-		volumeBar.setLayoutX(360);
-		volumeBar.setLayoutY(275);
-		volumeBar.setPrefSize(80, 15);
-		image = "/images/objets/equipements.TV.desactive.png";
+		getVolumeBar().setLayoutX(360);
+		getVolumeBar().setLayoutY(275);
+		getVolumeBar().setPrefSize(80, 15);
+		setImage("/images/objets/equipements.TV.desactive.png");
 	}
 
 	public static ProgressBar getVolumeBar() {
@@ -59,7 +58,7 @@ public class TV extends Equipement implements Serializable {
 		return volume;
 	}
 
-	public void setVolume(int volume) {
+	public void setVolume(double volume) {
 		this.volume = volume;
 	}
 
@@ -67,6 +66,7 @@ public class TV extends Equipement implements Serializable {
 		this.image = image;
 	}
 
+	@Override
 	public String getImage() {
 		return image;
 	}
@@ -74,88 +74,64 @@ public class TV extends Equipement implements Serializable {
 	public void setImageChaine() {
 		if (isEtatCourant()) {
 			if (getNumeroChaine() == 1) {
-				image = "/images/objets/equipements.TV.chaine1.png";
+				setImage("/images/objets/equipements.TV.chaine1.png");
 			} else if (getNumeroChaine() == 2) {
-				image = "/images/objets/equipements.TV.chaine2.png";
+				setImage("/images/objets/equipements.TV.chaine2.png");
 			} else if (getNumeroChaine() == 3) {
-				image = "/images/objets/equipements.TV.chaine3.png";
+				setImage("/images/objets/equipements.TV.chaine3.png");
 			} else {
-				image = "/images/objets/equipements.TV.chaine4.png";
+				setImage("/images/objets/equipements.TV.chaine4.png");
 			}
 		} else {
-			image = "/images/objets/equipements.TV.desactive.png";
+			setImage("/images/objets/equipements.TV.desactive.png");
 		}
 	}
 
-	public void augmenterVolume() {
+	public void augmenterVolume(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getVolume() <= 100) {
-				volume++;
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
-		}
-	}
-
-	public void augmenterVolumeFX(Pane root) {
-		if (super.isEtatCourant()) {
-			if (getVolume() <= 100) {
-				volume += 10;
-				volumeBar.setProgress(getVolume() / 100);
+				setVolume(getVolume() + 10);
+				getVolumeBar().setProgress(getVolume() / 100);
 			}
 			try {
-				root.getChildren().add(volumeBar);
+				root.getChildren().add(getVolumeBar());
 			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
 			}
 		}
 	}
 
-	public void diminuerVolume() {
+	public void diminuerVolume(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getVolume() >= 0) {
-				volume--;
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
-		}
-	}
-
-	public void diminuerVolumeFX(Pane root) {
-		if (super.isEtatCourant()) {
-			if (getVolume() >= 0) {
-				volume -= 10;
-				volumeBar.setProgress(getVolume() / 100);
+				setVolume(getVolume() - 10);
+				getVolumeBar().setProgress(getVolume() / 100);
 			}
 			try {
-				root.getChildren().add(volumeBar);
+				root.getChildren().add(getVolumeBar());
 			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
 	public void augmenterChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() < 4) {
-				numeroChaine++;
+				setNumeroChaine(getNumeroChaine() + 1);
 			} else {
-				numeroChaine = 4;
+				setNumeroChaine(4);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
 	public void diminuerChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() > 1) {
-				numeroChaine--;
+				setNumeroChaine(getNumeroChaine() - 1);
 			} else {
-				numeroChaine = 1;
+				setNumeroChaine(1);
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
@@ -164,19 +140,17 @@ public class TV extends Equipement implements Serializable {
 			if (chaine <= 4 && chaine >= 1) {
 				setNumeroChaine(chaine);
 			} else {
-				System.out.println("Chaine non-valide");
+				System.err.println("Chaine non-valide");
 			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
 		}
 	}
 
 	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(50);
-		imageView.setTranslateX(0);
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(50);
+		getImageView().setTranslateX(0);
+		return getImageView();
 	}
 
 	@Override
@@ -191,13 +165,12 @@ public class TV extends Equipement implements Serializable {
 	public void allumer() {
 		if (!isEtatCourant()) {
 			setEtatCourant(true);
-			image = "/images/objets/equipements.TV.demarrage.png";
+			setImage("/images/objets/equipements.TV.demarrage.png");
 		}
 	}
 
 	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
-
 		MenuButton fonctionnalite = new MenuButton("Fonctionnalités");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
@@ -240,21 +213,21 @@ public class TV extends Equipement implements Serializable {
 			}
 		});
 
-		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);		
-		
+		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);
+
 		if (isEtatCourant()) {
 			MenuItem augmenterVolume = new MenuItem("Augmenter volume");
 			augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					augmenterVolumeFX(root);
+					augmenterVolume(root);
 				}
 			});
 			MenuItem diminuerVolume = new MenuItem("Diminuer Volume");
 			diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					diminuerVolumeFX(root);
+					diminuerVolume(root);
 				}
 			});
 			MenuItem augmenterChaine = new MenuItem("Augmenter chaine");
@@ -295,17 +268,17 @@ public class TV extends Equipement implements Serializable {
 					root.getChildren().add(afficher());
 				}
 			});
-			/*
-			 * MenuItem choisirChaine = new MenuItem(" Choisir chaine");
-			 * choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
-			 * 
-			 * @Override public void handle(ActionEvent event) { Scanner s = new
-			 * Scanner(System.in); System.out.println("Quelle chaine (entre 1 et 4) ?"); int
-			 * chaine = Main.toInt(s.nextLine()); mettreChaine(chaine);
-			 * System.out.println(getNom() + " est réglé sur la chaine " +
-			 * getNumeroChaine()); s.close(); } });
-			 */
-			fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine,netflix,youtube);
+			MenuItem choisirChaine = new MenuItem(" Choisir chaine");
+			choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
+				// TODO
+				@Override
+				public void handle(ActionEvent event) {
+
+				}
+			});
+
+			fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine, netflix,
+					youtube);
 		}
 		return fonctionnalite;
 	}

@@ -6,9 +6,8 @@ import java.util.LinkedList;
 public class Maison implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 	private String nom;
-	protected LinkedList<Piece> pieces = new LinkedList<Piece>();
+	private LinkedList<Piece> pieces = new LinkedList<Piece>();
 
 	public Maison(String nom) {
 		this.setNom(nom);

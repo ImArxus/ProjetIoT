@@ -22,20 +22,19 @@ public class Enceinte extends Equipement implements Serializable {
 	private Map<String, String> musiques = new HashMap<String, String>();
 	private String enEcoute;
 	private static ProgressBar volumeBar = new ProgressBar(0);
-	private transient ImageView imageView = new ImageView();
 
 	public Enceinte(String nom) {
 		super(nom);
 		this.setVolume(50);
-		musiques.put("Bim Bam Toi - Carla", "Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
-		musiques.put("Dance Monkey - Tones and I", "Dance for me, dance for me, dance for me, oh, oh, oh");
-		musiques.put("Allez les gros - Marwa Loud ft Naza",
+		getMusiques().put("Bim Bam Toi - Carla", "Et ça fait bim-bam-boum, ça fait -pschhht!- et ça fait vroum");
+		getMusiques().put("Dance Monkey - Tones and I", "Dance for me, dance for me, dance for me, oh, oh, oh");
+		getMusiques().put("Allez les gros - Marwa Loud ft Naza",
 				"Mes poignées d'amour, ouais, c'est pour toi, mon amour, ouais");
-		musiques.put("Allumer le feu - Johnny Hallyday", "Il suffira d'une étincelle");
+		getMusiques().put("Allumer le feu - Johnny Hallyday", "Il suffira d'une étincelle");
 		this.setEnEcoute((String) getMusiques().keySet().toArray()[0]);
-		volumeBar.setLayoutX(485);
-		volumeBar.setLayoutY(370);
-		volumeBar.setPrefSize(80, 15);
+		getVolumeBar().setLayoutX(485);
+		getVolumeBar().setLayoutY(370);
+		getVolumeBar().setPrefSize(80, 15);
 	}
 
 	public Enceinte(String nom, boolean etatCourant, double volume, double positionHorizontale,
@@ -44,9 +43,9 @@ public class Enceinte extends Equipement implements Serializable {
 		this.setVolume(volume);
 		this.setMusiques(musiques);
 		this.setEnEcoute(enEcoute);
-		volumeBar.setLayoutX(485);
-		volumeBar.setLayoutY(370);
-		volumeBar.setPrefSize(80, 15);
+		getVolumeBar().setLayoutX(485);
+		getVolumeBar().setLayoutY(370);
+		getVolumeBar().setPrefSize(80, 15);
 	}
 
 	public static ProgressBar getVolumeBar() {
@@ -61,47 +60,15 @@ public class Enceinte extends Equipement implements Serializable {
 		this.volume = volume;
 	}
 
-	public void setEnEcoute(String enEcoute) {
-		if (getMusiques().containsKey(enEcoute)) {
-			this.enEcoute = enEcoute;
-		} else {
-			System.out.println("Votre collection musicale ne possède pas ce titre");
-		}
-	}
-
 	public String getEnEcoute() {
 		return enEcoute;
 	}
 
-	public void augmenterVolume() {
-		if (super.isEtatCourant()) {
-			if (getVolume() < 91) {
-				volume += 10;
-			} else {
-				setVolume(100);
-			}
+	public void setEnEcoute(String enEcoute) {
+		if (getMusiques().containsKey(enEcoute)) {
+			this.enEcoute = enEcoute;
 		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas augmenter le volume");
-		}
-	}
-
-	public void diminuerVolume() {
-		if (super.isEtatCourant()) {
-			if (getVolume() > 9) {
-				volume -= 10;
-			} else {
-				setVolume(0);
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas diminuer le volume");
-		}
-	}
-
-	public void jouerMusique(String musique) {
-		if (super.isEtatCourant()) {
-			setEnEcoute(musique);
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de musique");
+			System.err.println("Votre collection musicale ne possède pas ce titre");
 		}
 	}
 
@@ -113,12 +80,59 @@ public class Enceinte extends Equipement implements Serializable {
 		this.musiques = musiques;
 	}
 
+	public void augmenterVolume(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getVolume() <= 90) {
+				setVolume(getVolume() + 10);
+				getVolumeBar().setProgress(getVolume() / 100);
+			} else {
+				setVolume(100);
+			}
+			try {
+				root.getChildren().add(getVolumeBar());
+			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
+			}
+		}
+	}
+
+	public void diminuerVolume(Pane root) {
+		if (super.isEtatCourant()) {
+			if (getVolume() > 10) {
+				setVolume(getVolume() - 10);
+				getVolumeBar().setProgress(getVolume() / 100);
+			} else {
+				setVolume(0);
+			}
+			try {
+				root.getChildren().add(getVolumeBar());
+			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
+			}
+		}
+	}
+
+	public void jouerMusique(String musique) {
+		if (super.isEtatCourant()) {
+			setEnEcoute(musique);
+		}
+	}
+
+	@Override
+	public String getImage() {
+		if (isEtatCourant()) {
+			return ("/images/objets/equipements.Enceinte.png");
+		} else {
+			return ("/images/objets/equipements.Enceinte.desactive.png");
+		}
+	}
+
 	@Override
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(133);
-		imageView.setTranslateX(140);
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(133);
+		getImageView().setTranslateX(140);
+		return getImageView();
 	}
 
 	@Override
@@ -130,43 +144,6 @@ public class Enceinte extends Equipement implements Serializable {
 	}
 
 	@Override
-	public String getImage() {
-		if (etatCourant) {
-			return ("/images/objets/equipements.Enceinte.png");
-		} else {
-			return ("/images/objets/equipements.Enceinte.desactive.png");
-		}
-	}
-
-	public void augmenterVolumeFX(Pane root) {
-		if (super.isEtatCourant()) {
-			if (getVolume() <= 90) {
-				volume += 10;
-				volumeBar.setProgress(getVolume() / 100);
-				try {
-					root.getChildren().add(volumeBar);
-				} catch (Exception e) {
-				}
-			}
-		}
-	}
-
-	public void diminuerVolumeFX(Pane root) {
-		if (super.isEtatCourant()) {
-			if (getVolume() > 10) {
-				volume -= 10;
-				volumeBar.setProgress(getVolume() / 100);
-			}
-			try {
-				root.getChildren().add(volumeBar);
-			} catch (Exception e) {
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteinte, on ne peut pas changer de chaine");
-		}
-	}
-
-	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
@@ -174,7 +151,7 @@ public class Enceinte extends Equipement implements Serializable {
 		augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				augmenterVolumeFX(root);
+				augmenterVolume(root);
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}
@@ -183,7 +160,7 @@ public class Enceinte extends Equipement implements Serializable {
 		diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				diminuerVolumeFX(root);
+				diminuerVolume(root);
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
 			}

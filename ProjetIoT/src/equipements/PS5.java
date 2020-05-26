@@ -21,15 +21,14 @@ public class PS5 extends Equipement implements Serializable {
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
 	private List<String> jeux = new LinkedList<String>();
-	private transient ImageView imageView = new ImageView();
 	private int indice;
 
 	public PS5(String nom) {
 		super(nom);
-		jeux.add("/images/objets/equipements.PS5.jeu4.png");
-		jeux.add("/images/objets/equipements.PS5.jeu3.png");
-		jeux.add("/images/objets/equipements.PS5.jeu2.png");
-		jeux.add("/images/objets/equipements.PS5.jeu1.png");
+		getJeux().add("/images/objets/equipements.PS5.jeu4.png");
+		getJeux().add("/images/objets/equipements.PS5.jeu3.png");
+		getJeux().add("/images/objets/equipements.PS5.jeu2.png");
+		getJeux().add("/images/objets/equipements.PS5.jeu1.png");
 		this.setJeu(getJeux().get(0));
 		indice = 0;
 	}
@@ -56,10 +55,10 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	public ImageView afficher() {
-		imageView.setImage(new Image(getImage()));
-		imageView.setTranslateY(90);
-		imageView.setTranslateX(40);
-		return imageView;
+		getImageView().setImage(new Image(getImage()));
+		getImageView().setTranslateY(90);
+		getImageView().setTranslateX(40);
+		return getImageView();
 	}
 
 	@Override
@@ -112,10 +111,10 @@ public class PS5 extends Equipement implements Serializable {
 				@Override
 				public void handle(ActionEvent event) {
 					indice++;
-					if (indice == jeux.size()) {
+					if (indice == getJeux().size()) {
 						indice = 0;
 					}
-					setJeu(jeux.get(indice));
+					setJeu(getJeux().get(indice));
 				}
 			});
 			MenuItem lancerJeu = new MenuItem("Lancer Jeu");
@@ -135,7 +134,7 @@ public class PS5 extends Equipement implements Serializable {
 						while (it2.hasNext()) {
 							TV e = it2.next();
 							if (e.isEtatCourant()) {
-								e.setImage(jeux.get(indice));
+								e.setImage(getJeux().get(indice));
 								root.getChildren().remove(e.afficher());
 								root.getChildren().add(e.afficher());
 							}
