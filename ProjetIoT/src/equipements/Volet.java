@@ -16,7 +16,7 @@ public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
-	private ImageView imageView;
+	private ImageView imageView = new ImageView();
 	
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {

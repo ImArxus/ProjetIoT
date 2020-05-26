@@ -448,7 +448,7 @@ public class Main extends Application implements Serializable {
 			Equipement objet = radiateurs.get(i);
 			if (objet instanceof Radiateur) {
 				if (((Radiateur) objet).isEtatCourant()) {
-					sommeTempObjets += ((Radiateur) objet).getThermostat() * 5;
+					sommeTempObjets += ((Radiateur) objet).getThermostat()*3;
 				}
 			}
 		}
