@@ -1,9 +1,14 @@
 package equipements;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -109,6 +114,35 @@ public class Radiateur extends Equipement implements Serializable {
 
 		root.getChildren().add(box);
 		root.getChildren().add(lblTemp);
+	}
+	
+	@Override
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
+
+		if (isEtatCourant()) {
+			MenuItem augmenterTemperature = new MenuItem(" Augmenter temperature");
+			augmenterTemperature.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					augmenterTemperature();
+					boxTemperature(root);
+					System.out.println(Main.getPosition().getTemperature());
+				}
+			});
+			MenuItem diminuerTemperature = new MenuItem(" Diminuer temperature");
+			diminuerTemperature.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					diminuerTemperature();
+					boxTemperature(root);
+					System.out.println("La temperature de" +getNom() + "est de" + Main.getPosition().getTemperature());
+				}
+			});
+
+			fonctionnalite.getItems().addAll(augmenterTemperature, diminuerTemperature);
+		}
+		return fonctionnalite;
 	}
 
 }
