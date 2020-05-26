@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
-import main.Main;
 
 public class TV extends Equipement implements Serializable {
 
@@ -52,7 +50,7 @@ public class TV extends Equipement implements Serializable {
 	public static ProgressBar getVolumeBar() {
 		return volumeBar;
 	}
-	
+
 	public int getNumeroChaine() {
 		return numeroChaine;
 	}
@@ -120,7 +118,6 @@ public class TV extends Equipement implements Serializable {
 	public void augmenterChaine() {
 		if (super.isEtatCourant()) {
 			if (getNumeroChaine() < 4) {
-
 				numeroChaine++;
 			} else {
 				numeroChaine = 4;
@@ -173,17 +170,16 @@ public class TV extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
-		if (etatCourant) {
-			if (getNumeroChaine()==1) {
+		if (isEtatCourant()) {
+			if (getNumeroChaine() == 1) {
 				return ("/images/objets/equipements.TV.chaine1.png");
-			} else if (getNumeroChaine()==2) {
+			} else if (getNumeroChaine() == 2) {
 				return ("/images/objets/equipements.TV.chaine2.png");
-			} else if (getNumeroChaine()==3) {
+			} else if (getNumeroChaine() == 3) {
 				return ("/images/objets/equipements.TV.chaine3.png");
 			} else {
 				return ("/images/objets/equipements.TV.chaine4.png");
 			}
-
 		} else {
 			return ("/images/objets/equipements.TV.desactive.png");
 		}
