@@ -118,23 +118,6 @@ public class Lumiere extends Equipement implements Serializable {
 		return but;
 	}
 
-	public static void boxIntensiteLum(Pane root) {
-		Main.traitementIntensiteLumineuseNaturelle();
-		Main.traitementIntensiteLumineuse();
-
-		Box box = new Box(100, 25, 0);
-		box.setLayoutX(458);
-		box.setLayoutY(80);
-		Label lblLum = new Label();
-		lblLum.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
-		lblLum.setStyle("-fx-font: 20 arial; -fx-font-weight: bold;");
-		lblLum.setLayoutX(411);
-		lblLum.setLayoutY(68);
-
-		root.getChildren().add(box);
-		root.getChildren().add(lblLum);
-	}
-
 	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
@@ -203,12 +186,12 @@ public class Lumiere extends Equipement implements Serializable {
 	
 	public static void boxIntensite(Pane root) {
 		Box box = new Box(100, 25, 0);
-		box.setLayoutX(450);
+		box.setLayoutX(458);
 		box.setLayoutY(80);
 		Label lblTemp = new Label();
-		lblTemp.setText("" + Main.getPosition().getIntensiteLumineuse() + " %");
+		lblTemp.setText("" + Main.getPosition().getIntensiteLumineuse() + "%");
 		lblTemp.setStyle("-fx-font: 20 arial; -fx-font-weight: bold;");
-		lblTemp.setLayoutX(410);
+		lblTemp.setLayoutX(411);
 		lblTemp.setLayoutY(68);
 
 		root.getChildren().add(box);

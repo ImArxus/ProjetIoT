@@ -183,7 +183,7 @@ public class Equipement implements Serializable {
 				allumer();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
-				Lumiere.boxIntensiteLum(root);
+				Lumiere.boxIntensite(root);
 				Radiateur.boxTemperature(root);
 				root.getChildren().remove(fonctionnalite);
 				root.getChildren().add(getFonctionnalites(root, img));
@@ -197,7 +197,7 @@ public class Equipement implements Serializable {
 				root.getChildren().remove(img);
 				root.getChildren().removeAll(indicateurs());
 				root.getChildren().add(afficher());
-				Lumiere.boxIntensiteLum(root);
+				Lumiere.boxIntensite(root);
 				Radiateur.boxTemperature(root);
 				root.getChildren().remove(fonctionnalite);
 				root.getChildren().add(getFonctionnalites(root, img));

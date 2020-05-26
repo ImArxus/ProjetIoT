@@ -218,7 +218,7 @@ public class TV extends Equipement implements Serializable {
 				allumer();
 				root.getChildren().remove(img);
 				root.getChildren().add(afficher());
-				Lumiere.boxIntensiteLum(root);
+				Lumiere.boxIntensite(root);
 				Radiateur.boxTemperature(root);
 				root.getChildren().remove(fonctionnalite);
 				root.getChildren().add(getFonctionnalites(root, img));
@@ -233,7 +233,7 @@ public class TV extends Equipement implements Serializable {
 				root.getChildren().removeAll(indicateurs());
 				setImageChaine();
 				root.getChildren().add(afficher());
-				Lumiere.boxIntensiteLum(root);
+				Lumiere.boxIntensite(root);
 				Radiateur.boxTemperature(root);
 				root.getChildren().remove(fonctionnalite);
 				root.getChildren().add(getFonctionnalites(root, img));

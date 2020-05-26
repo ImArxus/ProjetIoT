@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -146,36 +145,21 @@ public class Cheminee extends Equipement implements Serializable {
 			augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					intensite = (int) getIntensite();
-					Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-					augmenterIntensiteFX(root);
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+					augmenterIntensite();
+					Lumiere.boxIntensite(root);
+					Radiateur.boxTemperature(root);
 				}
 			});
 			MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 			diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					intensite = (int) getIntensite();
-					Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-					diminuerIntensiteFX(root);
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+					diminuerIntensite();
+					Lumiere.boxIntensite(root);
+					Radiateur.boxTemperature(root);
 				}
 			});
-			MenuItem choisirIntensité = new MenuItem("Choisir intensité");
-			choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					Scanner s = new Scanner(System.in);
-					System.out.println("Quelle intensité (entre 0 et 100) ?");
-					intensite = Main.toInt(s.nextLine());
-					Main.getPosition().setTemperature((int) (Main.getPosition().getTemperature() + (intensite * 0.05)));
-					choisirIntensite(intensite);
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-					s.close();
-				}
-			});
-			fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité);
+			fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité);
 		}
 		return fonctionnalite;
 	}
