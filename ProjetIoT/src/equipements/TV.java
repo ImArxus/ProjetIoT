@@ -285,6 +285,24 @@ public class TV extends Equipement implements Serializable {
 					root.getChildren().add(afficher());
 				}
 			});
+			MenuItem netflix = new MenuItem("Netflix & Chill");
+			netflix.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					setImage("/images/objets/equipements.TV.netflix.png");
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
+			MenuItem youtube = new MenuItem("Youtube");
+			youtube.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					setImage("/images/objets/equipements.TV.youtube.png");
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
 			/*
 			 * MenuItem choisirChaine = new MenuItem(" Choisir chaine");
 			 * choisirChaine.setOnAction(new EventHandler<ActionEvent>() {
@@ -295,7 +313,7 @@ public class TV extends Equipement implements Serializable {
 			 * System.out.println(getNom() + " est réglé sur la chaine " +
 			 * getNumeroChaine()); s.close(); } });
 			 */
-			fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine);
+			fonctionnalite.getItems().addAll(augmenterVolume, diminuerVolume, augmenterChaine, diminuerChaine,netflix,youtube);
 		}
 		return fonctionnalite;
 	}
