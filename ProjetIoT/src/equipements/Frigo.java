@@ -147,11 +147,6 @@ public class Frigo extends Equipement implements Serializable {
 		}
 	}
 
-	public ImageView getImageView() {
-		imageView.setImage(new Image(getImage()));
-		return imageView;
-	}
-
 	@Override
 	public Button getButton() {
 		Button but = super.getButton();
