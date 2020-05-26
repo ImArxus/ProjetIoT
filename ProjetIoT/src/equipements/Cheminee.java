@@ -138,8 +138,8 @@ public class Cheminee extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
 		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {

@@ -166,7 +166,7 @@ public class Equipement implements Serializable {
 		return but;
 	}
 
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
@@ -181,6 +181,8 @@ public class Equipement implements Serializable {
 				root.getChildren().add(afficher());
 				Lumiere.boxIntensiteLum(root);
 				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
 			}
 		});
 		MenuItem eteindre = new MenuItem("Éteindre");
@@ -193,9 +195,20 @@ public class Equipement implements Serializable {
 				root.getChildren().add(afficher());
 				Lumiere.boxIntensiteLum(root);
 				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
 			}
 		});
-		fonctionnalite.getItems().addAll(allumer, eteindre);
+		MenuItem quitter = new MenuItem("Quitter");
+		quitter.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().removeAll(indicateurs());
+			}
+		});
+		
+		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);
 		return fonctionnalite;
 	}
 

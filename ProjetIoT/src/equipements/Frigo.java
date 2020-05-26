@@ -161,8 +161,8 @@ public class Frigo extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView imv) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, imv);
+	public MenuButton getFonctionnalites(Pane root, ImageView imv) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, imv);
 
 		MenuItem baisserTemperature = new MenuItem(" Baisser temperature");
 		baisserTemperature.setOnAction(new EventHandler<ActionEvent>() {

@@ -136,63 +136,61 @@ public class Lumiere extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
-		MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
-		augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				augmenterIntensite();
-				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-			}
-		});
-		MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
-		diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				diminuerIntensite();
-				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-			}
-		});
-		MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
-		choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle intensité (entre 0 et 100) ?");
-				int intensite = Main.toInt(s.nextLine());
-				choisirIntensite(intensite);
-				System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
-				s.close();
-			}
-		});
-		MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
-		choisirCouleur.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				Scanner s = new Scanner(System.in);
-				System.out.println("Quelle couleur parmis les suivantes : blanc, bleu, rouge, jaune, vert");
-				String couleur = s.nextLine();
-				changerCouleur(couleur);
-				System.out.println("La couleur de " + getNom() + " est réglé sur " + getCouleur());
-				s.close();
-			}
-		});
-		fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);
+		if (isEtatCourant()) {
+			MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+			augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					augmenterIntensite();
+					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				}
+			});
+			MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+			diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					diminuerIntensite();
+					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+				}
+			});
+			MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
+			choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					Scanner s = new Scanner(System.in);
+					System.out.println("Quelle intensité (entre 0 et 100) ?");
+					int intensite = Main.toInt(s.nextLine());
+					choisirIntensite(intensite);
+					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
+					s.close();
+				}
+			});
+			MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
+			choisirCouleur.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					couleurLum(root);
+				}
+			});
+
+			fonctionnalite.getItems().addAll(augmenterIntensité, diminuerIntensité, choisirIntensité, choisirCouleur);
+		}
 		return fonctionnalite;
 	}
 
 	@Override
 	public String getImage() {
 		if (etatCourant) {
-			if (getCouleur() == "bleu") {
+			if (getCouleur().equals("bleu")) {
 				return ("/images/objets/equipements.Lumiere.bleu.png");
-			} else if (getCouleur() == "rouge") {
+			} else if (getCouleur().equals("rouge")) {
 				return ("/images/objets/equipements.Lumiere.rouge.png");
-			} else if (getCouleur() == "jaune") {
+			} else if (getCouleur().equals("jaune")) {
 				return ("/images/objets/equipements.Lumiere.jaune.png");
-			} else if (getCouleur() == "vert") {
+			} else if (getCouleur().equals("vert")) {
 				return ("/images/objets/equipements.Lumiere.vert.png");
 			} else {
 				return ("/images/objets/equipements.Lumiere.png");
@@ -201,4 +199,68 @@ public class Lumiere extends Equipement implements Serializable {
 			return ("/images/objets/equipements.Lumiere.desactive.png");
 		}
 	}
+
+	public void couleurLum(Pane root) {
+		MenuButton couleurs = new MenuButton("Quelle couleur de lumière ?");
+		couleurs.setPrefSize(220, 30);
+		couleurs.setLayoutX(300);
+		couleurs.setLayoutY(220);
+
+		MenuItem choix1 = new MenuItem("Blanc");
+		choix1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				changerCouleur("blanc");
+				root.getChildren().remove(imageView);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem choix2 = new MenuItem("Bleu");
+		choix2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				changerCouleur("bleu");
+				root.getChildren().remove(imageView);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem choix3 = new MenuItem("Rouge");
+		choix3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				changerCouleur("rouge");
+				root.getChildren().remove(imageView);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem choix4 = new MenuItem("Jaune");
+		choix4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				changerCouleur("jaune");
+				root.getChildren().remove(imageView);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem choix5 = new MenuItem("Vert");
+		choix5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				changerCouleur("vert");
+				root.getChildren().remove(imageView);
+				root.getChildren().add(afficher());
+			}
+		});
+		MenuItem choix6 = new MenuItem("Cette couleur est parfaite pour moi !");
+		choix6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				root.getChildren().remove(couleurs);
+			}
+		});
+
+		couleurs.getItems().addAll(choix1, choix2, choix3, choix4, choix5, choix6);
+		root.getChildren().add(couleurs);
+	}
+
 }

@@ -115,8 +115,8 @@ public class Alexa extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem reponseHeure = new MenuItem(" Connaitre l'heure");
 		reponseHeure.setOnAction(new EventHandler<ActionEvent>() {

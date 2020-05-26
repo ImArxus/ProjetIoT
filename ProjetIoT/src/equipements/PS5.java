@@ -78,8 +78,8 @@ public class PS5 extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem seConnecter = new MenuItem("Connexion à la télé");
 		seConnecter.setOnAction(new EventHandler<ActionEvent>() {

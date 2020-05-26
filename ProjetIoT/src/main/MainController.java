@@ -219,16 +219,7 @@ public class MainController {
 				ImageView img = equip.get(i).afficher();
 				img.setOnMouseClicked((new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
-						MenuButton fonct = current.getFonctionnalitées(root, img);
-						MenuItem quitter = new MenuItem("Quitter");
-						quitter.setOnAction(new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent evt) {
-								root.getChildren().remove(fonct);
-								root.getChildren().removeAll(current.indicateurs());
-							}
-						});
-						fonct.getItems().add(quitter);
+						MenuButton fonct = current.getFonctionnalites(root, img);
 						root.getChildren().add(fonct);
 					}
 				}));

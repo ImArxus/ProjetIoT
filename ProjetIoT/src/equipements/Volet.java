@@ -113,8 +113,8 @@ public class Volet extends Equipement implements Serializable {
 	}
 
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalitées(root, img);
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
+		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		MenuItem monterVolet = new MenuItem(" Monter Volet");
 		monterVolet.setOnAction(new EventHandler<ActionEvent>() {

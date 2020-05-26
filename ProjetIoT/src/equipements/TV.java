@@ -200,9 +200,9 @@ public class TV extends Equipement implements Serializable {
 		}
 	}
 	@Override
-	public MenuButton getFonctionnalitées(Pane root, ImageView img) {
+	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 
-		MenuButton fonctionnalite = new MenuButton("Fonctionnalites");
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalités");
 		fonctionnalite.setPrefSize(220, 30);
 		fonctionnalite.setLayoutX(570);
 		fonctionnalite.setLayoutY(100);
