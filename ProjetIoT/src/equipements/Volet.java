@@ -17,7 +17,7 @@ public class Volet extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 4803149899705207022L;
 	private int position;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Volet(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale, int position) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
@@ -45,22 +45,14 @@ public class Volet extends Equipement implements Serializable {
 	}
 
 	public void monterVolet() {
-		if (super.isEtatCourant()) {
-			if (getPosition() <= 4) {
-				setPosition(getPosition() - 1);
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas monter le volet");
+		if (getPosition() <= 4) {
+			setPosition(getPosition() - 1);
 		}
 	}
 
 	public void descendreVolet() {
-		if (super.isEtatCourant()) {
-			if (getPosition() >= 0) {
-				setPosition(getPosition() + 1);
-			}
-		} else {
-			System.out.println(this.getNom() + " est éteint, on ne peut pas baisser le volet");
+		if (getPosition() >= 0) {
+			setPosition(getPosition() + 1);
 		}
 	}
 
@@ -139,26 +131,27 @@ public class Volet extends Equipement implements Serializable {
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
-		MenuItem monterVolet = new MenuItem(" Monter Volet");
-		monterVolet.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				monterVolet();
-				root.getChildren().remove(img);
-				root.getChildren().add(afficher());
-			}
-		});
-		MenuItem descendreVolet = new MenuItem(" Descendre Volet");
-		descendreVolet.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				descendreVolet();
-				root.getChildren().remove(img);
-				root.getChildren().add(afficher());
-			}
-		});
-
-		fonctionnalite.getItems().addAll(monterVolet, descendreVolet);
+		if (isEtatCourant()) {
+			MenuItem monterVolet = new MenuItem(" Monter Volet");
+			monterVolet.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					monterVolet();
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
+			MenuItem descendreVolet = new MenuItem(" Descendre Volet");
+			descendreVolet.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					descendreVolet();
+					root.getChildren().remove(img);
+					root.getChildren().add(afficher());
+				}
+			});
+			fonctionnalite.getItems().addAll(monterVolet, descendreVolet);
+		}
 		return fonctionnalite;
 	}
 }

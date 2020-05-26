@@ -20,7 +20,7 @@ public class TV extends Equipement implements Serializable {
 	private double volume;
 	private int numeroChaine;
 	private String image;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public TV(String nom) {
 		super(nom);

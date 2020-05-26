@@ -19,7 +19,7 @@ public class Radiateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Radiateur(String nom) {
 		super(nom);
@@ -102,7 +102,7 @@ public class Radiateur extends Equipement implements Serializable {
 	}
 
 	public static void boxTemperature(Pane root) {
-		Box box = new Box(100, 25, 0);
+		Box box = new Box(100, 22, 0);
 		box.setLayoutX(190);
 		box.setLayoutY(80);
 		Label lblTemp = new Label();

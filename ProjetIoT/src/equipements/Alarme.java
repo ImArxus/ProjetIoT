@@ -10,7 +10,7 @@ import main.Equipement;
 public class Alarme extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -1828693427527124467L;
-	private static ImageView imageView = new ImageView();
+	private transient static ImageView imageView = new ImageView();
 
 
 	public Alarme(String nom) {

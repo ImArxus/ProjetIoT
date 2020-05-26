@@ -28,7 +28,7 @@ public class Equipement implements Serializable {
 	protected String nom;
 	protected double positionHorizontale;
 	protected double positionVerticale;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	protected Equipement(String nom) {
 		setNom(nom);

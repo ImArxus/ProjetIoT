@@ -193,10 +193,12 @@ public class MainController {
 		if (root.getChildren().contains(imageViewAvatar)) {
 			root.getChildren().remove(imageViewAvatar);
 		}
-		imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
-		imageViewAvatar.setTranslateX(50);
-		imageViewAvatar.setTranslateY(200);
-		root.getChildren().add(imageViewAvatar);
+		if (Main.getAvatar() != null) {
+			imageViewAvatar.setImage(new Image("/images/avatar/" + Main.getAvatar() + ".png"));
+			imageViewAvatar.setTranslateX(50);
+			imageViewAvatar.setTranslateY(200);
+			root.getChildren().add(imageViewAvatar);
+		}
 	}
 
 	public void scenePiece(ActionEvent event) {
@@ -349,6 +351,8 @@ public class MainController {
 					root.getChildren().remove(liste.get(i).afficher());
 				}
 				Main.getPosition().getEquipements().clear();
+				Main.traitementIntensiteLumineuse();
+				Main.traitementTemperature();
 			}
 		});
 
@@ -730,6 +734,7 @@ public class MainController {
 			public void handle(ActionEvent event) {
 				if (root.getChildren().contains(imageViewAvatar)) {
 					root.getChildren().remove(imageViewAvatar);
+					Main.setAvatar(null);
 				}
 			}
 		});

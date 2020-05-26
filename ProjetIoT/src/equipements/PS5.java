@@ -21,7 +21,7 @@ public class PS5 extends Equipement implements Serializable {
 	private static final long serialVersionUID = -8852582871510136171L;
 	private String jeu;
 	private List<String> jeux = new LinkedList<String>();
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 	private int indice;
 
 	public PS5(String nom) {
@@ -89,7 +89,7 @@ public class PS5 extends Equipement implements Serializable {
 		LinkedList<TV> listeTV = new LinkedList<TV>();
 
 		if (isEtatCourant()) {
-			MenuItem seConnecter = new MenuItem("Connexion à la télé");
+			MenuItem seConnecter = new MenuItem("Connecter à la télé");
 			seConnecter.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

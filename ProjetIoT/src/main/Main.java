@@ -264,6 +264,7 @@ public class Main extends Application implements Serializable {
 	private static Boolean droits;
 	private static int intensiteLumineuseNaturelle = 0;
 	private static double temperatureNaturelle = 0;
+	//private static int heure = 4;
 	private static int heure = (int) (Math.random() * 24);
 
 	private static String couleur = "BLUE";

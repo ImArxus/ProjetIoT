@@ -25,7 +25,7 @@ public class Frigo extends Equipement implements Serializable {
 	private double temperature;
 	private Map<String, Integer> dispo = new HashMap<String, Integer>();
 	private static ProgressBar volumeBar = new ProgressBar(0);
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Frigo(String nom) {
 		super(nom);

@@ -19,7 +19,7 @@ public class Cheminee extends Equipement implements Serializable {
 	private static final long serialVersionUID = 7169763608942128813L;
 	private double intensite;
 	private static ProgressBar volumeBar = new ProgressBar(0);
-	ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Cheminee(String nom, boolean etatCourant, double intensite, double positionHorizontale,
 			double positionVerticale) {

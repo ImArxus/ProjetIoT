@@ -19,7 +19,7 @@ public class Ventilateur extends Equipement implements Serializable {
 	private double intensite;
 	private static final long serialVersionUID = 8252594235507326423L;
 	private static ProgressBar volumeBar = new ProgressBar(0);
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Ventilateur(String nom) {
 		super(nom);

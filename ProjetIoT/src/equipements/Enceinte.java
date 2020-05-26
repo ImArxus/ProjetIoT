@@ -22,7 +22,7 @@ public class Enceinte extends Equipement implements Serializable {
 	private Map<String, String> musiques = new HashMap<String, String>();
 	private String enEcoute;
 	private static ProgressBar volumeBar = new ProgressBar(0);
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Enceinte(String nom) {
 		super(nom);

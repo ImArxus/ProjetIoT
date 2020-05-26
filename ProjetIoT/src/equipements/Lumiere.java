@@ -21,7 +21,7 @@ public class Lumiere extends Equipement implements Serializable {
 	private static final long serialVersionUID = 3377862988501403504L;
 	private int intensite;
 	private String couleur;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Lumiere(String nom) {
 		super(nom);
@@ -185,7 +185,7 @@ public class Lumiere extends Equipement implements Serializable {
 	}
 	
 	public static void boxIntensite(Pane root) {
-		Box box = new Box(100, 25, 0);
+		Box box = new Box(100, 22, 0);
 		box.setLayoutX(458);
 		box.setLayoutY(80);
 		Label lblTemp = new Label();

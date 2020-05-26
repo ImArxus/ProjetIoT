@@ -13,7 +13,7 @@ public class Electrolyseur extends Equipement implements Serializable {
 	private double sel;
 	private double ph;
 	private double temperature;
-	ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Electrolyseur(String nom) {
 		super(nom);

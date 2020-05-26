@@ -20,7 +20,7 @@ public class Alexa extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = 8308711409297886419L;
 	private static String pseudo;
-	private ImageView imageView = new ImageView();
+	private transient ImageView imageView = new ImageView();
 
 	public Alexa(String nom) {
 		super(nom);
