@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.Equipement;
+import main.Main;
 
 public class Volet extends Equipement implements Serializable {
 
@@ -98,15 +99,37 @@ public class Volet extends Equipement implements Serializable {
 
 	@Override
 	public String getImage() {
+		boolean nuit = false;
+		if (isEtatCourant()) {
+			if (Main.getHeure() >= 21 || Main.getHeure() <= 8) {
+				nuit = true;
+			}
+		}
 		if (isEtatCourant()) {
 			if (getPosition() == 0) {
-				return "/images/objets/equipements.Volet.desactive.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.desactive.png";
+				} else {
+					return "/images/objets/equipements.Volet.desactive.png";
+				}
 			} else if (getPosition() == 1) {
-				return "/images/objets/equipements.Volet.position1.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position1.png";
+				} else {
+					return "/images/objets/equipements.Volet.position1.png";
+				}
 			} else if (getPosition() == 2) {
-				return "/images/objets/equipements.Volet.position2.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position2.png";
+				} else {
+					return "/images/objets/equipements.Volet.position2.png";
+				}
 			} else if (getPosition() == 3) {
-				return "/images/objets/equipements.Volet.position3.png";
+				if (nuit) {
+					return "/images/objets/equipements.Volet.nuit.position3.png";
+				} else {
+					return "/images/objets/equipements.Volet.position3.png";
+				}
 			}
 		}
 		return "/images/objets/equipements.Volet.png";
