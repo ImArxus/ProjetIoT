@@ -145,7 +145,6 @@ public class Lumiere extends Equipement implements Serializable {
 				@Override
 				public void handle(ActionEvent event) {
 					augmenterIntensite();
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				}
 			});
 			MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
@@ -153,7 +152,6 @@ public class Lumiere extends Equipement implements Serializable {
 				@Override
 				public void handle(ActionEvent event) {
 					diminuerIntensite();
-					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				}
 			});
 			MenuItem choisirIntensité = new MenuItem(" Choisir intensité");

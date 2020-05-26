@@ -1,7 +1,6 @@
 package equipements;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -127,7 +126,6 @@ public class Radiateur extends Equipement implements Serializable {
 				public void handle(ActionEvent event) {
 					augmenterTemperature();
 					boxTemperature(root);
-					System.out.println(Main.getPosition().getTemperature());
 				}
 			});
 			MenuItem diminuerTemperature = new MenuItem(" Diminuer temperature");
@@ -136,7 +134,6 @@ public class Radiateur extends Equipement implements Serializable {
 				public void handle(ActionEvent event) {
 					diminuerTemperature();
 					boxTemperature(root);
-					System.out.println("La temperature de" +getNom() + "est de" + Main.getPosition().getTemperature());
 				}
 			});
 
