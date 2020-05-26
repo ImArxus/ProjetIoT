@@ -251,21 +251,21 @@ public class TV extends Equipement implements Serializable {
 		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);		
 		
 		if (isEtatCourant()) {
-			MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
+			MenuItem augmenterVolume = new MenuItem("Augmenter volume");
 			augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
 					augmenterVolumeFX(root);
 				}
 			});
-			MenuItem diminuerVolume = new MenuItem(" Diminuer Volume");
+			MenuItem diminuerVolume = new MenuItem("Diminuer Volume");
 			diminuerVolume.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
 					diminuerVolumeFX(root);
 				}
 			});
-			MenuItem augmenterChaine = new MenuItem(" Augmenter chaine");
+			MenuItem augmenterChaine = new MenuItem("Augmenter chaine");
 			augmenterChaine.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

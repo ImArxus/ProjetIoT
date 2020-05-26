@@ -140,7 +140,7 @@ public class Lumiere extends Equipement implements Serializable {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		if (isEtatCourant()) {
-			MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+			MenuItem augmenterIntensité = new MenuItem("Augmenter intensité");
 			augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -148,7 +148,7 @@ public class Lumiere extends Equipement implements Serializable {
 					boxIntensite(root);
 				}
 			});
-			MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+			MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 			diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -156,7 +156,7 @@ public class Lumiere extends Equipement implements Serializable {
 					boxIntensite(root);
 				}
 			});
-			MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
+			MenuItem choisirIntensité = new MenuItem("Choisir intensité");
 			choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -169,7 +169,7 @@ public class Lumiere extends Equipement implements Serializable {
 					boxIntensite(root);
 				}
 			});
-			MenuItem choisirCouleur = new MenuItem(" Choisir couleur");
+			MenuItem choisirCouleur = new MenuItem("Choisir couleur");
 			choisirCouleur.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

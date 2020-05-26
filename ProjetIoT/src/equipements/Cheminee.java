@@ -33,7 +33,7 @@ public class Cheminee extends Equipement implements Serializable {
 
 	public Cheminee(String nom) {
 		super(nom);
-		this.setIntensite(intensite);
+		this.setIntensite(50);
 		this.setPositionHorizontale(0.26);
 		this.setPositionVerticale(0.34);
 		volumeBar.setLayoutX(170);
@@ -142,7 +142,7 @@ public class Cheminee extends Equipement implements Serializable {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		if (isEtatCourant()) {
-			MenuItem augmenterIntensité = new MenuItem(" Augmenter intensité");
+			MenuItem augmenterIntensité = new MenuItem("Augmenter intensité");
 			augmenterIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -152,7 +152,7 @@ public class Cheminee extends Equipement implements Serializable {
 					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				}
 			});
-			MenuItem diminuerIntensité = new MenuItem(" Diminuer l'intensité");
+			MenuItem diminuerIntensité = new MenuItem("Diminuer l'intensité");
 			diminuerIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -162,7 +162,7 @@ public class Cheminee extends Equipement implements Serializable {
 					System.out.println("L'intensité de " + getNom() + " est réglé sur " + getIntensite());
 				}
 			});
-			MenuItem choisirIntensité = new MenuItem(" Choisir intensité");
+			MenuItem choisirIntensité = new MenuItem("Choisir intensité");
 			choisirIntensité.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

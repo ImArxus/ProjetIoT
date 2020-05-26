@@ -120,7 +120,7 @@ public class Radiateur extends Equipement implements Serializable {
 		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
 		if (isEtatCourant()) {
-			MenuItem augmenterTemperature = new MenuItem(" Augmenter temperature");
+			MenuItem augmenterTemperature = new MenuItem("Augmenter temperature");
 			augmenterTemperature.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -128,7 +128,7 @@ public class Radiateur extends Equipement implements Serializable {
 					boxTemperature(root);
 				}
 			});
-			MenuItem diminuerTemperature = new MenuItem(" Diminuer temperature");
+			MenuItem diminuerTemperature = new MenuItem("Diminuer temperature");
 			diminuerTemperature.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {

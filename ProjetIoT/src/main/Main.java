@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import equipements.Alarme;
+import equipements.Cheminee;
 import equipements.Lumiere;
 import equipements.Radiateur;
 import javafx.application.Application;
@@ -326,25 +327,25 @@ public class Main extends Application implements Serializable {
 		while (it.hasNext()) {
 			Equipement e = it.next();
 			String tmp = e.getClass().getSimpleName();
-			if (tmp.equals("Lumiere")) {
+			if (tmp.equals("Lumiere") || tmp.equals("Cheminee")) {
 				lumieres.add(e);
 			}
 		}
 		return lumieres;
 	}
 
-	public static LinkedList<Equipement> getRadiateur() {
-		LinkedList<Equipement> radiateurs = new LinkedList<Equipement>();
+	public static LinkedList<Equipement> getChauffants() {
+		LinkedList<Equipement> chauffants = new LinkedList<Equipement>();
 		LinkedList<Equipement> equip = getPosition().getEquipements();
 		Iterator<Equipement> it = equip.iterator();
 		while (it.hasNext()) {
 			Equipement e = it.next();
 			String tmp = e.getClass().getSimpleName();
-			if (tmp.equals("Radiateur")) {
-				radiateurs.add(e);
+			if (tmp.equals("Radiateur") || tmp.equals("Cheminee")) {
+				chauffants.add(e);
 			}
 		}
-		return radiateurs;
+		return chauffants;
 	}
 
 	public static int toInt(String s) {
@@ -423,6 +424,11 @@ public class Main extends Application implements Serializable {
 					sommeILobjets += ((Lumiere) objet).getIntensite();
 				}
 			}
+			if (objet instanceof Cheminee) {
+				if (((Cheminee) objet).isEtatCourant()) {
+					sommeILobjets += ((Cheminee) objet).getIntensite() / 3;
+				}
+			}
 		}
 		position.setIntensiteLumineuse(getIntensiteLumineuseNaturelle() + sommeILobjets);
 	}
@@ -442,13 +448,17 @@ public class Main extends Application implements Serializable {
 	}
 
 	public static void traitementTemperature() {
-		LinkedList<Equipement> radiateurs = getRadiateur();
+		LinkedList<Equipement> objetChaud = getChauffants();
 		int sommeTempObjets = 0;
-		for (int i = 0; i < radiateurs.size(); i++) {
-			Equipement objet = radiateurs.get(i);
+		for (int i = 0; i < objetChaud.size(); i++) {
+			Equipement objet = objetChaud.get(i);
 			if (objet instanceof Radiateur) {
 				if (((Radiateur) objet).isEtatCourant()) {
-					sommeTempObjets += ((Radiateur) objet).getThermostat()*3;
+					sommeTempObjets += ((Radiateur) objet).getThermostat() * 3;
+				}
+			} else if (objet instanceof Cheminee) {
+				if (((Cheminee) objet).isEtatCourant()) {
+					sommeTempObjets += ((Cheminee) objet).getIntensite() / 20;
 				}
 			}
 		}
