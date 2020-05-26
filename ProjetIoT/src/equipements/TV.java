@@ -205,8 +205,51 @@ public class TV extends Equipement implements Serializable {
 
 	@Override
 	public MenuButton getFonctionnalites(Pane root, ImageView img) {
-		MenuButton fonctionnalite = super.getFonctionnalites(root, img);
 
+		MenuButton fonctionnalite = new MenuButton("Fonctionnalités");
+		fonctionnalite.setPrefSize(220, 30);
+		fonctionnalite.setLayoutX(570);
+		fonctionnalite.setLayoutY(100);
+
+		MenuItem allumer = new MenuItem("Allumer");
+		allumer.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				allumer();
+				root.getChildren().remove(img);
+				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
+			}
+		});
+		MenuItem eteindre = new MenuItem("Éteindre");
+		eteindre.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				eteindre();
+				root.getChildren().remove(img);
+				root.getChildren().removeAll(indicateurs());
+				setImageChaine();
+				root.getChildren().add(afficher());
+				Lumiere.boxIntensiteLum(root);
+				Radiateur.boxTemperature(root);
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().add(getFonctionnalites(root, img));
+			}
+		});
+		MenuItem quitter = new MenuItem("Quitter");
+		quitter.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent evt) {
+				root.getChildren().remove(fonctionnalite);
+				root.getChildren().removeAll(indicateurs());
+			}
+		});
+
+		fonctionnalite.getItems().addAll(allumer, eteindre, quitter);		
+		
 		if (isEtatCourant()) {
 			MenuItem augmenterVolume = new MenuItem(" Augmenter volume");
 			augmenterVolume.setOnAction(new EventHandler<ActionEvent>() {
