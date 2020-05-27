@@ -12,13 +12,16 @@ v3: Affichage et interaction graphique avec Java FX
 
 Notre version actuelle, allie un système d'interface graphique, de sauvegarde, d'un mode administrateur et d'un système d'intéractions avec l'environnement.
 
+
 Notre projet nécessite que son utilisateur possède l'IDE Eclipse, et le package Java FX.
 Afin d'utiliser notre programme, veuillez lancer la class Main et vous aurez ensuite accès à de nombreuses fonctionnalités. 
 Tout d'abord vous accedez à la phase de connexion, où vous pouvez vous connecter, créer un compte ou jouer en mode invité.
 Passé cette étape, vous accédez au choix de la maison, vous avez de nouveau 3 possibilités, vous pouvez soit entrez dans une maison par défaut (Barry House) soit créer une maison ou soit charger votre dernière maison sauvegardée.
 Après cette sélection, vous accédez à l'écran de jeu, qui se décompose en un bandeau d'informations juxtaposé à la représentation de notre pièce actuelle.
 
+
 Dans Barry House, vous pouvez effectuer de nombreuses manipulations:
+
 -Vous pouvez observer votre pseudo, le nom de votre maison, celui de la pièce actuelle, l'heure, la luminosité et la température de la pièce grâce au bandeau d'information;
 
 -Vous pouvez vous déplacer de pièces en piéces avec le bouton "Se déplacer" situé dans la bande d'informations;
@@ -30,6 +33,7 @@ Dans Barry House, vous pouvez effectuer de nombreuses manipulations:
 -Vous pouvez quitter le jeu avec le bouton "Quitter" situé dans la bande d'informations;
 
 -Vous pouvez utiliser un équipement, en cliquant dessus, vous aurez ainsi accès à toutes ses techniques d'utilisations.
+
 
 Si vous avez le mode administrateur enclenché vous avez accès à de nombreuses fonctionnalités en cliquant sur le bouton "Modes admin", voici ces fonctionnalités:
 
@@ -48,6 +52,8 @@ Si vous avez le mode administrateur enclenché vous avez accès à de nombreuses
 -Changer la couleur du bandeau, qui permet de modifier la couleur du bandeau d'information;
 
 -Changer l'avatar, qui permet de sélectionner un nouvel avatar.
+
+
 
 Nous espèrons que notre projet satisfiera vos attentes !
 En cas de questions n'hésitez pas à nous contacter via les adresses mail suivantes.
