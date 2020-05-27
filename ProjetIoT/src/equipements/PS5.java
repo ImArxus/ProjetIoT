@@ -54,6 +54,7 @@ public class PS5 extends Equipement implements Serializable {
 		this.jeux = jeux;
 	}
 
+	@Override
 	public ImageView afficher() {
 		getImageView().setImage(new Image(getImage()));
 		getImageView().setTranslateY(90);
