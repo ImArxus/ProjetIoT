@@ -10,6 +10,8 @@ v2: affichage graphique sans interaction objet, sérialisation
 
 v3: affichage et interaction graphique avec Java FX
 
+Notre version actuelle, 
+
 Afin d'utiliser notre code, veuillez lancer la class Main et vous aurez ensuite accès à de nombreuses fonctionnalités. 
 Tout d'abord vous accedez à la phase de connexion, où vous pouvez vous connecter, créer un compte ou jouer en mode invité.
 Passé cette étape, vous accédez au choix de la maison, vous avez de nouveau 3 possibilités, vous pouvez soit entrez dans une maison par défaut (Barry House) soit créer une maison ou soit charger votre dernière maison sauvegardée.
