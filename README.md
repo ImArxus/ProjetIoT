@@ -6,13 +6,14 @@ Nous avons découpé notre projet en différents sprints, réprésentant des ver
 
 v1: Back end et affichage sur la console
 
-v2: affichage graphique sans interaction objet, sérialisation
+v2: Affichage graphique sans interactions avec les objets, sérialisation
 
-v3: affichage et interaction graphique avec Java FX
+v3: Affichage et interaction graphique avec Java FX
 
-Notre version actuelle, 
+Notre version actuelle, allie un système d'interface graphique, de sauvegarde, d'un mode administrateur et d'un système d'intéractions avec l'environnement.
 
-Afin d'utiliser notre code, veuillez lancer la class Main et vous aurez ensuite accès à de nombreuses fonctionnalités. 
+Notre projet nécessite que son utilisateur possède l'IDE Eclipse, et le package Java FX.
+Afin d'utiliser notre programme, veuillez lancer la class Main et vous aurez ensuite accès à de nombreuses fonctionnalités. 
 Tout d'abord vous accedez à la phase de connexion, où vous pouvez vous connecter, créer un compte ou jouer en mode invité.
 Passé cette étape, vous accédez au choix de la maison, vous avez de nouveau 3 possibilités, vous pouvez soit entrez dans une maison par défaut (Barry House) soit créer une maison ou soit charger votre dernière maison sauvegardée.
 Après cette sélection, vous accédez à l'écran de jeu, qui se décompose en un bandeau d'informations juxtaposé à la représentation de notre pièce actuelle.
@@ -35,5 +36,6 @@ Si vous avez le mode administrateur enclenché vous avez accès à de nombreuses
 -Changer la couleur du bandeau, qui permet de modifier la couleur du bandeau d'information;
 -Changer l'avatar, qui permet de sélectionner un nouvel avatar.
 
+Nous espèrons que notre projet satisfiera vos attentes !
 En cas de questions n'hésitez pas à nous contacter via les adresses mail suivantes.
 Contact: meziane.khodja@etudiant.univ-rennes1.fr, alexandre.lebalanger@etudiant.univ-rennes1.fr, vincent.dollo@etudiant.univ-rennes1.fr et eloy.martinez@etudiant.univ-rennes1.fr
