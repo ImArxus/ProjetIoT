@@ -151,6 +151,7 @@ public class Equipement implements Serializable {
 			liste.add(Cheminee.getIntensiteBar());
 		} else if (this instanceof Frigo) {
 			liste.add(Frigo.getTempBar());
+			liste.add(Frigo.getListeDispo());
 		} else if (this instanceof Ventilateur) {
 			liste.add(Ventilateur.getIntensiteBar());
 		}
