@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,17 +20,24 @@ public class Radiateur extends Equipement implements Serializable {
 
 	private static final long serialVersionUID = -4663697483416985328L;
 	private int thermostat;
+	private static ProgressBar thermostatBar = new ProgressBar(0);
 
 	public Radiateur(String nom) {
 		super(nom);
 		setThermostat(1);
 		super.setEtatCourant(false);
+		getThermostatBar().setLayoutX(598);
+		getThermostatBar().setLayoutY(345);
+		getThermostatBar().setPrefSize(80, 15);
 	}
 
 	public Radiateur(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale,
 			int thermostat) {
 		super(nom, etatCourant, positionVerticale, positionVerticale);
 		this.setThermostat(thermostat);
+		getThermostatBar().setLayoutX(598);
+		getThermostatBar().setLayoutY(345);
+		getThermostatBar().setPrefSize(80, 15);
 	}
 
 	public int getThermostat() {
@@ -40,18 +48,38 @@ public class Radiateur extends Equipement implements Serializable {
 		this.thermostat = thermostat;
 	}
 
-	public void augmenterTemperature() {
+	public static ProgressBar getThermostatBar() {
+		return thermostatBar;
+	}
+
+	public static void setThermostatBar(ProgressBar thermostatBar) {
+		Radiateur.thermostatBar = thermostatBar;
+	}
+
+	public void augmenterTemperature(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getThermostat() < 5) {
 				setThermostat(getThermostat() + 1);
+				getThermostatBar().setProgress((double) getThermostat() / 5);
+			}
+			try {
+				root.getChildren().add(getThermostatBar());
+			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
 			}
 		}
 	}
 
-	public void diminuerTemperature() {
+	public void diminuerTemperature(Pane root) {
 		if (super.isEtatCourant()) {
 			if (getThermostat() > 0) {
 				setThermostat(getThermostat() - 1);
+				getThermostatBar().setProgress((double) getThermostat() / 5);
+			}
+			try {
+				root.getChildren().add(getThermostatBar());
+			} catch (Exception e) {
+				System.err.println("Erreur lors de l'ajout de la barre de volume");
 			}
 		}
 	}
@@ -110,7 +138,7 @@ public class Radiateur extends Equipement implements Serializable {
 			augmenterTemperature.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					augmenterTemperature();
+					augmenterTemperature(root);
 					boxTemperature(root);
 				}
 			});
@@ -118,7 +146,7 @@ public class Radiateur extends Equipement implements Serializable {
 			diminuerTemperature.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					diminuerTemperature();
+					diminuerTemperature(root);
 					boxTemperature(root);
 				}
 			});

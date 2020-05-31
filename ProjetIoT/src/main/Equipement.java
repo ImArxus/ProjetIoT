@@ -161,6 +161,8 @@ public class Equipement implements Serializable {
 			liste.add(Frigo.getListeDispo());
 		} else if (this instanceof Ventilateur) {
 			liste.add(Ventilateur.getIntensiteBar());
+		} else if (this instanceof Radiateur) {
+			liste.add(Radiateur.getThermostatBar());
 		}
 		return liste;
 	}
