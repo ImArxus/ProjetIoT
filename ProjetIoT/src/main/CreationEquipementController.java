@@ -21,6 +21,10 @@ public class CreationEquipementController {
 	Piece position = Main.getPosition();
 	MainController mainController = new MainController();
 
+	public void annuler(ActionEvent event) {
+		mainController.scenePiece(event);
+	}
+	
 	public void creerAlarme(ActionEvent event) {
 		position.ajouterEquipement(new Alarme("Alarme"));
 		mainController.scenePiece(event);

@@ -29,7 +29,6 @@ public class MainController {
 	private ListeUtilisateurs listeUtilisateur = Main.getListeUtilisateur();
 	private ImageView imageViewAvatar = new ImageView();
 
-
 	/**
 	 * Champs page Login
 	 */
@@ -80,7 +79,7 @@ public class MainController {
 			loginTxt.setText("Identifiant ou mot de passe incorrect");
 		}
 	}
-	
+
 	public void creerCompte() {
 		if (!listeUtilisateur.comptes.containsKey(newUserTxt.getText())) {
 			if (newUserTxt.getText().isEmpty()) {
@@ -190,7 +189,7 @@ public class MainController {
 		window.setScene(scene);
 		window.show();
 	}
-	
+
 	public void sauvegarder() {
 		Sauvegarde.sauvegarder();
 		Label lbl = new Label();

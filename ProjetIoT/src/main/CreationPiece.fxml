@@ -32,5 +32,6 @@
       <Button layoutX="245.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalleAManger" prefHeight="22.0" prefWidth="130.0" text="Salle à manger" />
       <Button layoutX="435.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalleDeBain" prefHeight="22.0" prefWidth="130.0" text="Salle de bain" />
       <Button layoutX="625.0" layoutY="487.0" mnemonicParsing="false" onAction="#creerSalon" prefHeight="22.0" prefWidth="130.0" text="Salon" />
+      <Button layoutX="350.0" layoutY="560.0" mnemonicParsing="false" onAction="#annuler" prefHeight="22.0" prefWidth="130.0" text="Annuler" />
    </children>
 </AnchorPane>
