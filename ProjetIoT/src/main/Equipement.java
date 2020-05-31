@@ -24,6 +24,7 @@ public class Equipement implements Serializable {
 	private static final long serialVersionUID = 3L;
 	private boolean etatCourant;
 	private String nom;
+	private transient EquipementImageView imageView = new EquipementImageView();
 
 	public Equipement(String nom) {
 		setNom(nom);
@@ -80,7 +81,7 @@ public class Equipement implements Serializable {
 	}
 
 	public ImageView getImageView() {
-		return EquipementImageView.getImageView();
+		return imageView.getImageView();
 	}
 
 	public ImageView afficher() {
