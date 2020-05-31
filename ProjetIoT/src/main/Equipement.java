@@ -24,16 +24,18 @@ public class Equipement implements Serializable {
 	private static final long serialVersionUID = 3L;
 	private boolean etatCourant;
 	private String nom;
-	private transient EquipementImageView imageView = new EquipementImageView();
+	private transient EquipementImageView imageView;
 
 	public Equipement(String nom) {
 		setNom(nom);
 		setEtatCourant(false);
+		imageView = new EquipementImageView();
 	}
 
 	public Equipement(String nom, boolean etatCourant, double positionHorizontale, double positionVerticale) {
 		this.setNom(nom);
 		this.setEtatCourant(etatCourant);
+		imageView = new EquipementImageView();
 	}
 
 	public String toString() {
@@ -81,11 +83,16 @@ public class Equipement implements Serializable {
 	}
 
 	public ImageView getImageView() {
+		try {
+			return imageView.getImageView();
+		} catch (Exception e) {
+			imageView = new EquipementImageView();
+		}
 		return imageView.getImageView();
 	}
 
 	public ImageView afficher() {
-		getImageView().setImage(new Image(getImage()));
+		imageView.getImageView().setImage(new Image(getImage()));
 		return getImageView();
 	}
 
